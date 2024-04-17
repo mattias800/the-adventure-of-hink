@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://baosx1eskl7rg"]
+
+[ext_resource type="PackedScene" uid="uid://kpafow5480ry" path="res://Hink.ldtk" id="1_400ha"]
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
+[ext_resource type="PackedScene" uid="uid://8t1aimjy44n6" path="res://Player.tscn" id="2_vmdn5"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(200, 155)
+texture = ExtResource("1_i7f7c")
+
+[node name="Hink" parent="." instance=ExtResource("1_400ha")]
+
+[node name="Player" parent="." instance=ExtResource("2_vmdn5")]
+position = Vector2(116, 220)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 165)
+zoom = Vector2(3.6, 3.6)
