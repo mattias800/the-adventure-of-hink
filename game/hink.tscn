@@ -1,9 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwbi1i6mgus6r"]
+[gd_scene load_steps=2 format=3 uid="uid://dwbi1i6mgus6r"]
 
 [ext_resource type="PackedScene" uid="uid://kpafow5480ry" path="res://Hink.ldtk" id="1_3neq4"]
-[ext_resource type="TileSet" uid="uid://ceeyy2lntf8au" path="res://tilesets/tileset8x8.res" id="2_4t33m"]
 
 [node name="Hink" instance=ExtResource("1_3neq4")]
-
-[node name="AutoLayer" parent="Level_1" index="0"]
-tile_set = ExtResource("2_4t33m")
