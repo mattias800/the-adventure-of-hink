@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
+size = Vector2(8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywi3p"]
 atlas = ExtResource("1_tii7m")

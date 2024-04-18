@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="The-adventure-of-hink"
+run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/amano-ldtk-importer/plugin.cfg")

@@ -1,34 +1,32 @@
 [remap]
 
-importer="ldtk.import"
+importer="LDtk_world.import"
 type="PackedScene"
-uid="uid://kpafow5480ry"
+uid="uid://d36ybixfeid2i"
 path="res://.godot/imported/Hink.ldtk-043bc072234dd789f07354fe9ab842a2.scn"
 
 [deps]
 
-files=["res:///tilesets/tileset16x16.res", "res:///tilesets/tileset8x8.res"]
+files=["res:///Hink/tilesets/Hink-tileset-16x16.res", "res:///Hink/tilesets/Hink-tileset-8x8.res"]
 
 source_file="res://Hink.ldtk"
-dest_files=["res://.godot/imported/Hink.ldtk-043bc072234dd789f07354fe9ab842a2.scn", "res:///tilesets/tileset16x16.res", "res:///tilesets/tileset8x8.res"]
+dest_files=["res://.godot/imported/Hink.ldtk-043bc072234dd789f07354fe9ab842a2.scn", "res:///Hink/tilesets/Hink-tileset-16x16.res", "res:///Hink/tilesets/Hink-tileset-8x8.res"]
 
 [params]
 
-World=""
-separate_world_layers=false
-Level=""
-Tileset=""
-force_tileset_reimport=false
-tileset_custom_data=false
-allow_overlapping_tiles=true
-atlas_texture_type=0
-Entity=""
-use_entity_placeholders=false
-Post Import=""
-tileset_post_import=""
-entities_post_import=""
-level_post_import=""
-world_post_import=""
-Debug=""
-verbose_output=false
-verbose_post_import=false
+world_add_metadata=false
+world_post_import_script=""
+Tilesets=""
+tileset_add_metadata=true
+import_tileset_custom_data=true
+tileset_post_import_script="res://scripts/post-import-tileset-add-collisions-by-enum.gd"
+Levels=""
+level_add_metadata=true
+import_all_levels=true
+levels_to_import="0,1"
+pack_levels=false
+level_post_import_script=""
+Entities=""
+import_entities=true
+entity_add_metadata=true
+entity_post_import_script=""
