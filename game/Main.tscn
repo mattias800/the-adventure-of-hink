@@ -14,6 +14,7 @@ texture = ExtResource("1_i7f7c")
 
 [node name="Player" parent="." instance=ExtResource("2_vmdn5")]
 position = Vector2(115, 144)
+safe_margin = 0.01
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(160, 165)

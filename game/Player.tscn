@@ -10,6 +10,10 @@ size = Vector2(8, 8)
 atlas = ExtResource("1_tii7m")
 region = Rect2(48, 72, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp7di"]
+atlas = ExtResource("1_tii7m")
+region = Rect2(47, 104, 8, 8)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rw471"]
 atlas = ExtResource("1_tii7m")
 region = Rect2(16, 24, 8, 8)
@@ -25,10 +29,6 @@ region = Rect2(48, 24, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mctcy"]
 atlas = ExtResource("1_tii7m")
 region = Rect2(64, 24, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hahji"]
-atlas = ExtResource("1_tii7m")
-region = Rect2(16, 72, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2rj7"]
 atlas = ExtResource("1_tii7m")
@@ -66,6 +66,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hp7di")
+}],
+"loop": true,
+"name": &"grabbing_wall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rw471")
 }, {
 "duration": 1.0,
@@ -82,9 +90,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hahji")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t2rj7")
 }],
@@ -127,4 +132,5 @@ shape = SubResource("RectangleShape2D_8w7pu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_asvce")
-animation = &"land"
+animation = &"jump"
+frame_progress = 0.955599
