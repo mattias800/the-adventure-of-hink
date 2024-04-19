@@ -7,18 +7,20 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(200, 155)
-texture = ExtResource("1_i7f7c")
-
-[node name="Hink" parent="." instance=ExtResource("1_400ha")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(201, 96)
 anchor_mode = 0
 zoom = Vector2(3.6, 3.6)
 script = ExtResource("4_d68cp")
 
+[node name="Background" type="Sprite2D" parent="Camera2D"]
+position = Vector2(202, 104)
+scale = Vector2(1.0375, 1.09)
+texture = ExtResource("1_i7f7c")
+
+[node name="Hink" parent="." instance=ExtResource("1_400ha")]
+
 [node name="Player" parent="." instance=ExtResource("2_vmdn5")]
+unique_name_in_owner = true
 position = Vector2(316, 185)
 safe_margin = 0.01

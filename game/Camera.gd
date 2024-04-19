@@ -7,6 +7,8 @@ var acceleration = 10
 var max_speed = 20
 var velocity: Vector2 = Vector2.ZERO
 
+@onready var player: CharacterBody2D = %Player
+
 enum {
 	CONTROLLED,
 	FOLLOWING_TARGET
@@ -21,16 +23,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(position)
 	match state:
 		FOLLOWING_TARGET:
-			pass
+			var focus = player.get_global_transform().get_origin() - Vector2(200, 120) # TODO Calculate this
+			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
 			
 		CONTROLLED:
 			# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
 			var target_vector = get_vector_from_center_to_player()
 			calculate_velocity(delta, target_vector)
 			update_global_position(delta)
+			
+	clamp_camera_to_limits()
 
 
 func get_vector_from_center_to_player() -> Vector2:
@@ -62,9 +66,6 @@ func apply_camera_limits(tilemap: TileMap):
 	var level_size = Vector2i(tilemap_info.tile_size * tilemap_info.size)
 	var levelOffsetX = tilemap.get_parent().position.x
 	var levelOffsetY = tilemap.get_parent().position.y
-	print("OK")
-	print(tilemap_info)
-	print(level_size)
 	set_limit(SIDE_LEFT, levelOffsetX)
 	set_limit(SIDE_TOP, levelOffsetY)
 	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
@@ -77,6 +78,8 @@ func update_global_position(delta: float):
 		pow(2, -32 * delta)
 	)
 	
+func clamp_camera_to_limits():
+	# Camera limits must be set first.
 	var zoomed_viewport_size = get_viewport_to_zoom_scale()
 	
 	var left_limit = get_limit(SIDE_LEFT)
@@ -86,7 +89,7 @@ func update_global_position(delta: float):
 	
 	global_position.x = clamp(global_position.x, left_limit, right_limit)
 	global_position.y = clamp(global_position.y, top_limit, bottom_limit)
-
+	
 func get_viewport_to_zoom_scale():
 	var zoom_vector = get_zoom()
 	var zoomed_viewport_size = Vector2i(
