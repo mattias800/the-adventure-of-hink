@@ -17,7 +17,7 @@ var state
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
 	connect_to_level("Level_1")
-	state = FOLLOWING_PLAYER
+	state = CONTROLLED
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

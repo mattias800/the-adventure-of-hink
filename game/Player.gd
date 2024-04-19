@@ -30,7 +30,10 @@ var num_double_jumps := 1
 
 func _physics_process(delta):
 	var a := $AnimatedSprite2D
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("walk_left", "walk_right")
+	
+	if Input.is_action_just_pressed("exit_game"):
+		get_tree().quit()
 
 	match state:
 		
@@ -39,7 +42,7 @@ func _physics_process(delta):
 			
 			if time_since_wall_grab > 1.0:
 				start_state(WALL_SLIDING)	
-			elif Input.is_action_just_pressed("ui_accept"):
+			elif Input.is_action_just_pressed("jump"):
 				start_state(JUMPING)
 				jumps_left = num_double_jumps
 				time_until_wall_grab_possible = 0.1
@@ -58,7 +61,7 @@ func _physics_process(delta):
 			if not is_on_wall():
 				start_state(FALLING)
 			
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("jump"):
 				start_state(IDLE)
 				jumps_left = num_double_jumps
 				velocity.y = -JUMP_VELOCITY
@@ -76,11 +79,11 @@ func _physics_process(delta):
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 
 			# Dampen jump if jump button is released
-			if not Input.is_action_pressed("ui_accept") and velocity.y < JUMP_RELEASE_VELOCITY:
+			if not Input.is_action_pressed("jump") and velocity.y < JUMP_RELEASE_VELOCITY:
 				velocity.y = -50
 				start_state(FALLING)
 
-			if Input.is_action_just_pressed("ui_accept") and jumps_left > 0:
+			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				velocity.y = -JUMP_VELOCITY
 				
@@ -101,7 +104,7 @@ func _physics_process(delta):
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 			velocity.y += gravity * delta
 
-			if Input.is_action_just_pressed("ui_accept") and jumps_left > 0:
+			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				velocity.y = -JUMP_VELOCITY
 
@@ -123,7 +126,7 @@ func _physics_process(delta):
 				var is_jump_allowed = is_on_floor() or time_since_no_ground < 0.1
 				
 				# Handle jump.
-				if Input.is_action_just_pressed("ui_accept") and is_jump_allowed:
+				if Input.is_action_just_pressed("jump") and is_jump_allowed:
 					time_since_no_ground = 0.0
 					jumps_left = num_double_jumps
 					velocity.y = -JUMP_VELOCITY
