@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 
 const SPEED = 80.0
+const MAX_FALL_SPEED = 150 # TODO
 const JUMP_HORIZONTAL_SPEED = 7.0
 const MAX_HORIZONTAL_SPEED = 80.0
 
-const JUMP_VELOCITY = 250.0
+const JUMP_VELOCITY = 150.0
 const JUMP_RELEASE_VELOCITY = 100.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,6 +25,7 @@ var state := IDLE
 var time_since_no_ground := 0.0
 var time_since_wall_grab := 0.0
 var time_until_wall_grab_possible := 0.0
+var wall_grab_time_left := 0.0 # TODO
 
 var jumps_left := 0
 var num_double_jumps := 1

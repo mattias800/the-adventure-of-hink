@@ -7,9 +7,13 @@ var acceleration = 10
 var max_speed = 20
 var velocity: Vector2 = Vector2.ZERO
 
+const VIEWPORT = Vector2(320, 180)
+const HALF_VIEWPORT = VIEWPORT / 2
+
 @onready var player: CharacterBody2D = %Player
 
 enum {
+	IDLE,
 	CONTROLLED,
 	FOLLOWING_TARGET
 }
@@ -25,7 +29,7 @@ func _ready():
 func _process(delta):
 	match state:
 		FOLLOWING_TARGET:
-			var focus = player.get_global_transform().get_origin() - Vector2(200, 120) # TODO Calculate this
+			var focus = clamp_vec2_to_limits(player.get_global_transform().get_origin() - HALF_VIEWPORT)
 			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
 			
 		CONTROLLED:
@@ -36,6 +40,8 @@ func _process(delta):
 			
 	clamp_camera_to_limits()
 
+func _physics_process(delta):
+	clamp_camera_to_limits()
 
 func get_vector_from_center_to_player() -> Vector2:
 	var player = get_tree().root.get_node("Main").get_node("Player")
@@ -54,8 +60,8 @@ func connect_to_level(level_name: String):
 		print("Found TileMap")
 		tilemap = level_tilemap
 		print(tilemap.name)
-		var zoom_vector = get_camera_zoom_to_tilemap(tilemap)
-		set_zoom(zoom_vector)
+		# set_zoom(get_camera_zoom_to_tilemap(tilemap))
+		set_zoom(Vector2.ONE)
 		apply_camera_limits(tilemap)
 	else:
 		print("Found no TileMap")
@@ -66,10 +72,17 @@ func apply_camera_limits(tilemap: TileMap):
 	var level_size = Vector2i(tilemap_info.tile_size * tilemap_info.size)
 	var levelOffsetX = tilemap.get_parent().position.x
 	var levelOffsetY = tilemap.get_parent().position.y
-	set_limit(SIDE_LEFT, levelOffsetX)
 	set_limit(SIDE_TOP, levelOffsetY)
-	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
 	set_limit(SIDE_BOTTOM, levelOffsetY + level_size.y)
+	set_limit(SIDE_LEFT, levelOffsetX)
+	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
+	
+	print("Top bpttom left right")
+	print(limit_top)
+	print(limit_bottom)
+	print(limit_left)
+	print(get_limit(SIDE_LEFT))
+	print(limit_right)
 	
 func update_global_position(delta: float):
 	global_position += lerp(
@@ -83,12 +96,26 @@ func clamp_camera_to_limits():
 	var zoomed_viewport_size = get_viewport_to_zoom_scale()
 	
 	var left_limit = get_limit(SIDE_LEFT)
-	var right_limit = get_limit(SIDE_RIGHT) - zoomed_viewport_size.x
+	var right_limit = get_limit(SIDE_RIGHT) + zoomed_viewport_size.x
 	var top_limit = get_limit(SIDE_TOP)
-	var bottom_limit = get_limit(SIDE_BOTTOM) - zoomed_viewport_size.y
+	var bottom_limit = get_limit(SIDE_BOTTOM) + zoomed_viewport_size.y
 	
 	global_position.x = clamp(global_position.x, left_limit, right_limit)
 	global_position.y = clamp(global_position.y, top_limit, bottom_limit)
+
+func clamp_vec2_to_limits(val: Vector2) -> Vector2:
+	# Camera limits must be set first.
+	var zoomed_viewport_size = get_viewport_to_zoom_scale()
+	
+	var left_limit = get_limit(SIDE_LEFT)
+	var right_limit = get_limit(SIDE_RIGHT) + zoomed_viewport_size.x
+	var top_limit = get_limit(SIDE_TOP)
+	var bottom_limit = get_limit(SIDE_BOTTOM) + zoomed_viewport_size.y
+	
+	return Vector2(
+		clamp(val.x, left_limit, right_limit),
+		clamp(val.y, top_limit, bottom_limit)
+	)
 	
 func get_viewport_to_zoom_scale():
 	var zoom_vector = get_zoom()
