@@ -3,20 +3,40 @@ extends Camera2D
 @export var tilemap: TileMap
 
 var release_falloff = 35
-var acceleration = 100
+var acceleration = 10
 var max_speed = 20
 var velocity: Vector2 = Vector2.ZERO
 
+enum {
+	CONTROLLED,
+	FOLLOWING_TARGET
+}
+
+var state
+
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
-	connect_to_level("Level_0")
+	connect_to_level("Level_1")
+	state = FOLLOWING_PLAYER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
-	# calculate_velocity(input_vector)
-	update_global_position(delta)
-	pass
+	print(position)
+	match state:
+		FOLLOWING_TARGET:
+			pass
+			
+		CONTROLLED:
+			# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
+			var target_vector = get_vector_from_center_to_player()
+			calculate_velocity(delta, target_vector)
+			update_global_position(delta)
+
+
+func get_vector_from_center_to_player() -> Vector2:
+	var player = get_tree().root.get_node("Main").get_node("Player")
+	var x : Vector2 = player.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
+	return x.normalized()
 	
 func connect_to_level(level_name: String):
 	var level = get_tree().root.get_node("Main").get_node("Hink").get_node(level_name)
@@ -75,9 +95,8 @@ func get_viewport_to_zoom_scale():
 	)
 	
 	return zoomed_viewport_size
-func calculate_velocity(direction):
-	var delta = get_process_delta_time()
 	
+func calculate_velocity(delta: float, direction: Vector2):
 	velocity += direction * acceleration * delta
 	
 	if direction.x == 0:
@@ -112,6 +131,8 @@ func get_camera_zoom_to_tilemap(tilemap: TileMap):
 		new_zoom = float(viewport_size[1]) / level_size.y
 	else:
 		new_zoom = float(viewport_size[0]) / level_size.x
+	
+	new_zoom = clamp(new_zoom, 3.4, 3.6)
 	
 	return Vector2(new_zoom, new_zoom)
 	
