@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://8t1aimjy44n6"]
+[gd_scene load_steps=18 format=3 uid="uid://8t1aimjy44n6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
+[ext_resource type="AudioStream" uid="uid://dpdegvjaqckip" path="res://assets/audio/sounds/jump.wav" id="3_ohafe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
@@ -134,3 +135,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_asvce")
 animation = &"jump"
 frame_progress = 0.955599
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ohafe")
+volume_db = -23.117

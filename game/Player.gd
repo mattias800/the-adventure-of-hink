@@ -30,6 +30,8 @@ var num_double_jumps := 1
 
 func _physics_process(delta):
 	var a := $AnimatedSprite2D
+	var jumpSound := $JumpSound
+
 	var direction := Input.get_axis("walk_left", "walk_right")
 	
 	if Input.is_action_just_pressed("exit_game"):
@@ -44,6 +46,7 @@ func _physics_process(delta):
 				start_state(WALL_SLIDING)	
 			elif Input.is_action_just_pressed("jump"):
 				start_state(JUMPING)
+				jumpSound.play()
 				jumps_left = num_double_jumps
 				time_until_wall_grab_possible = 0.1
 				var jump_direction = Vector2(get_wall_normal().x, -1)
@@ -86,6 +89,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				velocity.y = -JUMP_VELOCITY
+				jumpSound.play()
 				
 			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
@@ -107,6 +111,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				velocity.y = -JUMP_VELOCITY
+				jumpSound.play()
 
 			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 				
@@ -132,6 +137,8 @@ func _physics_process(delta):
 					velocity.y = -JUMP_VELOCITY
 					velocity.x = direction * SPEED
 					start_state(JUMPING)
+					jumpSound.play()
+
 				else:
 					# Get the input direction and handle the movement/deceleration.
 					# As good practice, you should replace UI actions with custom gameplay actions.
