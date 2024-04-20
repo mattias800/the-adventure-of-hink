@@ -37,8 +37,8 @@ func _process(delta):
 	
 		FOLLOWING_PLAYER:
 			look_ahead = lerp(look_ahead, look_ahead_target, 0.005)
-			var focus = clamp_vec2_to_limits(player.get_global_transform().get_origin() - HALF_VIEWPORT + look_ahead)
-			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
+			var focus = clamp_vec2_to_limits(player.position - HALF_VIEWPORT + look_ahead)
+			position = lerp(position, focus, 0.1)
 				
 		CONTROLLED:
 			# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
@@ -88,17 +88,11 @@ func apply_camera_limits(tilemap: TileMap):
 	var level_size = Vector2i(tilemap_info.tile_size * tilemap_info.size)
 	var levelOffsetX = tilemap.get_parent().position.x
 	var levelOffsetY = tilemap.get_parent().position.y
+	
 	set_limit(SIDE_TOP, levelOffsetY)
 	set_limit(SIDE_BOTTOM, levelOffsetY + level_size.y)
 	set_limit(SIDE_LEFT, levelOffsetX)
 	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
-	
-	print("Top bpttom left right")
-	print(limit_top)
-	print(limit_bottom)
-	print(limit_left)
-	print(get_limit(SIDE_LEFT))
-	print(limit_right)
 	
 func update_global_position(delta: float):
 	global_position += lerp(
@@ -109,15 +103,15 @@ func update_global_position(delta: float):
 	
 func clamp_camera_to_limits():
 	# Camera limits must be set first.
-	var zoomed_viewport_size = get_viewport_to_zoom_scale()
+	# var zoomed_viewport_size = get_viewport_to_zoom_scale()
+	var zoomed_viewport_size = Vector2(320, 180)
+	var left_limit = get_limit(SIDE_LEFT) 
+	var right_limit = get_limit(SIDE_RIGHT) - zoomed_viewport_size.x
+	var top_limit = get_limit(SIDE_TOP) 
+	var bottom_limit = get_limit(SIDE_BOTTOM) - zoomed_viewport_size.y
 	
-	var left_limit = get_limit(SIDE_LEFT)
-	var right_limit = get_limit(SIDE_RIGHT) + zoomed_viewport_size.x
-	var top_limit = get_limit(SIDE_TOP)
-	var bottom_limit = get_limit(SIDE_BOTTOM) + zoomed_viewport_size.y
-	
-	global_position.x = clamp(global_position.x, left_limit, right_limit)
-	global_position.y = clamp(global_position.y, top_limit, bottom_limit)
+	position.x = clamp(position.x, left_limit, right_limit)
+	position.y = clamp(position.y, top_limit, bottom_limit)
 
 func clamp_vec2_to_limits(val: Vector2) -> Vector2:
 	# Camera limits must be set first.

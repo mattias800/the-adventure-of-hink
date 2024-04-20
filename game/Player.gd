@@ -1,21 +1,23 @@
 extends CharacterBody2D
 
 signal player_turned
-
-const SPEED = 80.0
-const MAX_FALL_SPEED = 150 # TODO
-const JUMP_HORIZONTAL_SPEED = 7.0
-const MAX_HORIZONTAL_SPEED = 80.0
-
-const JUMP_VELOCITY = 150.0
-const JUMP_RELEASE_VELOCITY = 100.0
-
-@export var coyote_time_limit = 0.05
+const SPEED: float                 = 80.0
+const MAX_FALL_SPEED: float        = 250.0
+const JUMP_HORIZONTAL_SPEED: float = 7.0
+const MAX_HORIZONTAL_SPEED: float  = 80.0
+const JUMP_VELOCITY: float         = 150.0
+const JUMP_RELEASE_VELOCITY: float = 100.0
+const WALL_GRAB_TIME_LIMIT: float  = 1.0
+@export var coyote_time_limit: float = 0.05
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var gravity = 600
-
+var gravity: float = 600.0
+enum JumpSource {
+	GROUND,
+	WALL,
+	AIR
+}
 enum {
 	IDLE,
 	JUMPING,
@@ -23,72 +25,73 @@ enum {
 	GRABBING_WALL,
 	WALL_SLIDING
 }
-
 enum PlayerDirection {
 	LEFT,
 	RIGHT
 }
-
-var state := IDLE
-var player_direction := PlayerDirection.RIGHT
-
-var time_since_no_ground := 0.0
-var time_since_wall_grab := 0.0
+var state                         := IDLE
+var player_direction              := PlayerDirection.RIGHT
+var time_since_no_ground          := 0.0
 var time_until_wall_grab_possible := 0.0
-var wall_grab_time_left := 0.0 # TODO
+var wall_grab_time_left           := 0.0
+var jumps_left                    := 0
+var num_double_jumps              := 1
+var coyote_time_left              := 0.0
 
-var jumps_left := 0
-var num_double_jumps := 1
-var coyote_time_left := 0.0
 
 func _physics_process(delta):
-	var a := $AnimatedSprite2D
+	var a         := $AnimatedSprite2D
 	var jumpSound := $JumpSound
 
 	var direction := Input.get_axis("walk_left", "walk_right")
-	
+
 	if Input.is_action_just_pressed("exit_game"):
 		get_tree().quit()
 
+	if coyote_time_left >= 0.0:
+		coyote_time_left -= delta
+
 	match state:
-		
+
 		GRABBING_WALL:
-			time_since_wall_grab = time_since_wall_grab + delta
-			
-			if time_since_wall_grab > 1.0:
-				start_state(WALL_SLIDING)	
+			wall_grab_time_left -= delta
+
+			if wall_grab_time_left <= 0.0:
+				start_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
-				start_state(JUMPING)
-				jumpSound.play()
-				jumps_left = num_double_jumps
-				time_until_wall_grab_possible = 0.1
-				var jump_direction = Vector2(get_wall_normal().x, -1)
+				trigger_jump(JumpSource.WALL)
+				var jump_direction := Vector2(get_wall_normal().x, -1)
 				velocity = jump_direction.normalized() * JUMP_VELOCITY
-			
-			if get_wall_normal().x * direction > 0:
+
+			if (get_wall_normal().x * direction) > 0:
 				# User pressed away from wall
 				start_state(FALLING)
-				
-			move_and_slide()
-		
-		WALL_SLIDING:
-			velocity.y = lerp(velocity.y, 50.0, 0.2)
 
-			if not is_on_wall():
-				start_state(FALLING)
-			
-			if Input.is_action_just_pressed("jump"):
-				start_state(IDLE)
-				jumps_left = num_double_jumps
-				velocity.y = -JUMP_VELOCITY
-				time_until_wall_grab_possible = 0.1
-				velocity.x = get_wall_normal().x * JUMP_VELOCITY
-				
-			if is_on_floor():
-				start_state(IDLE)
-				
 			move_and_slide()
-		
+
+		WALL_SLIDING:
+			velocity.y = lerp(velocity.y, 50.0, 0.1)
+			velocity.x = 0.0
+
+			move_and_slide()
+
+			if is_on_wall():
+				if (get_wall_normal().x * direction) > 0:
+					# User pressed away from wall
+					start_state(FALLING)
+
+				if Input.is_action_just_pressed("jump"):
+					trigger_jump(JumpSource.WALL)
+					var jump_direction := Vector2(get_wall_normal().x, -1)
+					velocity = jump_direction.normalized() * JUMP_VELOCITY
+
+				if is_on_floor():
+					start_state(IDLE)
+			else:
+				print("wall sliding is not on wall!")
+				start_state(FALLING)
+
+
 		JUMPING:
 			velocity.y += gravity * delta
 			time_since_no_ground += delta
@@ -100,29 +103,34 @@ func _physics_process(delta):
 				start_state(FALLING)
 
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
-				jumps_left -= 1
+				trigger_jump(JumpSource.AIR)
 				velocity.y = -JUMP_VELOCITY
-				jumpSound.play()
-				
+
 			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
 			move_and_slide()
 
 			if velocity.y > 0:
 				start_state(FALLING)
-				
+
 			if is_on_floor():
 				start_state(IDLE)
-				if is_on_wall() and time_until_wall_grab_possible:
+
+			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
+				if wall_grab_time_left >= 0.0:
 					start_state(GRABBING_WALL)
-					
+				else:
+					start_state(WALL_SLIDING)
+
 		FALLING:
 			time_since_no_ground += delta
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
-			velocity.y += gravity * delta
+			velocity.y = minf(velocity.y + gravity * delta, MAX_FALL_SPEED)
 
 			if Input.is_action_just_pressed("jump") and coyote_time_left > 0.0:
-				trigger_first_jump(direction)
+				trigger_jump(JumpSource.AIR)
+				velocity.y = -JUMP_VELOCITY
+				velocity.x = direction * SPEED # TODO Always * SPEED here?
 
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
@@ -130,36 +138,41 @@ func _physics_process(delta):
 				jumpSound.play()
 
 			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
-				
+
 			move_and_slide()
 
 			if is_on_floor():
 				start_state(IDLE)
-			
+
 			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
-				start_state(GRABBING_WALL)
-				
-		IDLE:			
+				if wall_grab_time_left >= 0.0:
+					start_state(GRABBING_WALL)
+				else:
+					start_state(WALL_SLIDING)
+
+		IDLE:
 			if not is_on_floor():
 				jumps_left = 0
 				coyote_time_left = coyote_time_limit
 				start_state(FALLING)
 			else:
-				var is_jump_allowed = is_on_floor() or time_since_no_ground < 0.1
-				
+				var is_jump_allowed := is_on_floor() or time_since_no_ground < 0.1
+
 				# Handle jump.
 				if Input.is_action_just_pressed("jump") and is_jump_allowed:
-					trigger_first_jump(direction)
+					trigger_jump(JumpSource.GROUND)
+					velocity.y = -JUMP_VELOCITY
+					velocity.x = direction * SPEED
 
 				else:
 					# Get the input direction and handle the movement/deceleration.
 					# As good practice, you should replace UI actions with custom gameplay actions.
-					
+
 					if direction != 0.0:
 						a.play("walk")
 					else:
 						a.play("idle")
-						
+
 					if direction:
 						velocity.x = lerp(velocity.x, direction * SPEED, 0.3)
 					else:
@@ -167,7 +180,7 @@ func _physics_process(delta):
 						velocity.x = move_toward(velocity.x, 0, SPEED)
 
 					move_and_slide()
-	
+
 	if velocity.x > 0:
 		a.flip_h = false
 		if player_direction == PlayerDirection.LEFT:
@@ -179,35 +192,39 @@ func _physics_process(delta):
 			player_turned.emit("left")
 		player_direction = PlayerDirection.LEFT
 
+
 func start_state(next_state):
 	print("Start state: ", state_to_string(next_state))
 	var a := $AnimatedSprite2D
 
 	match next_state:
 		IDLE:
+			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
 			a.play("idle")
-			
+
 		JUMPING:
 			a.play("jump")
-			
+
 		FALLING:
 			a.play("fall")
-			
+
 		GRABBING_WALL:
 			a.play("grabbing_wall")
 			velocity.x = 0
 			velocity.y = 0
-			time_since_wall_grab = 0.0
-			
+			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
+
 		WALL_SLIDING:
+			a.play("grabbing_wall")
 			velocity.x = 0
 
-	print(a.animation)
 	state = next_state
+
 
 func add_velocity_x(val: float):
 	velocity.x = clamp(velocity.x + val, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
-		
+
+
 func state_to_string(s) -> String:
 	match s:
 		IDLE:
@@ -223,13 +240,22 @@ func state_to_string(s) -> String:
 		_:
 			return ""
 
-func trigger_first_jump(direction: float):
+
+func trigger_jump(jump_source: JumpSource):
 	var jumpSound := $JumpSound
-	
-	time_since_no_ground = 0.0
-	jumps_left = num_double_jumps
-	velocity.y = -JUMP_VELOCITY
-	velocity.x = direction * SPEED
+	match jump_source:
+		JumpSource.GROUND:
+			time_since_no_ground = 0.0
+			time_until_wall_grab_possible = 0.1
+			jumps_left = num_double_jumps
+
+		JumpSource.AIR:
+			jumps_left -= 1
+
+		JumpSource.WALL:
+			time_until_wall_grab_possible = 0.1
+			jumps_left = num_double_jumps
+
 	start_state(JUMPING)
 	jumpSound.play()
-	
+
