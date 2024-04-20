@@ -10,6 +10,8 @@ const MAX_HORIZONTAL_SPEED = 80.0
 const JUMP_VELOCITY = 150.0
 const JUMP_RELEASE_VELOCITY = 100.0
 
+@export var coyote_time_limit = 0.05
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 600
@@ -37,6 +39,7 @@ var wall_grab_time_left := 0.0 # TODO
 
 var jumps_left := 0
 var num_double_jumps := 1
+var coyote_time_left := 0.0
 
 func _physics_process(delta):
 	var a := $AnimatedSprite2D
@@ -118,6 +121,9 @@ func _physics_process(delta):
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 			velocity.y += gravity * delta
 
+			if Input.is_action_just_pressed("jump") and coyote_time_left > 0.0:
+				trigger_first_jump(direction)
+
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				velocity.y = -JUMP_VELOCITY
@@ -136,18 +142,14 @@ func _physics_process(delta):
 		IDLE:			
 			if not is_on_floor():
 				jumps_left = 0
+				coyote_time_left = coyote_time_limit
 				start_state(FALLING)
 			else:
 				var is_jump_allowed = is_on_floor() or time_since_no_ground < 0.1
 				
 				# Handle jump.
 				if Input.is_action_just_pressed("jump") and is_jump_allowed:
-					time_since_no_ground = 0.0
-					jumps_left = num_double_jumps
-					velocity.y = -JUMP_VELOCITY
-					velocity.x = direction * SPEED
-					start_state(JUMPING)
-					jumpSound.play()
+					trigger_first_jump(direction)
 
 				else:
 					# Get the input direction and handle the movement/deceleration.
@@ -220,3 +222,14 @@ func state_to_string(s) -> String:
 			return "WALL_SLIDING"
 		_:
 			return ""
+
+func trigger_first_jump(direction: float):
+	var jumpSound := $JumpSound
+	
+	time_since_no_ground = 0.0
+	jumps_left = num_double_jumps
+	velocity.y = -JUMP_VELOCITY
+	velocity.x = direction * SPEED
+	start_state(JUMPING)
+	jumpSound.play()
+	
