@@ -37,7 +37,7 @@ var wall_grab_time_left           := 0.0
 var jumps_left                    := 0
 var num_double_jumps              := 1
 var coyote_time_left              := 0.0
-
+var velocity_into_wall             := 0.0 # The character velocity when hitting the wall. Need to reuse when calculating is_on_wall()
 
 func _physics_process(delta):
 	var a         := $AnimatedSprite2D
@@ -55,7 +55,6 @@ func _physics_process(delta):
 
 		GRABBING_WALL:
 			wall_grab_time_left -= delta
-
 			if wall_grab_time_left <= 0.0:
 				start_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
@@ -71,7 +70,7 @@ func _physics_process(delta):
 
 		WALL_SLIDING:
 			velocity.y = lerp(velocity.y, 50.0, 0.1)
-			velocity.x = 0.0
+			velocity.x = velocity_into_wall
 
 			move_and_slide()
 
@@ -88,7 +87,6 @@ func _physics_process(delta):
 				if is_on_floor():
 					start_state(IDLE)
 			else:
-				print("wall sliding is not on wall!")
 				start_state(FALLING)
 
 
@@ -117,6 +115,7 @@ func _physics_process(delta):
 				start_state(IDLE)
 
 			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
+				velocity_into_wall = get_wall_normal().x * -1
 				if wall_grab_time_left >= 0.0:
 					start_state(GRABBING_WALL)
 				else:
@@ -145,6 +144,7 @@ func _physics_process(delta):
 				start_state(IDLE)
 
 			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
+				velocity_into_wall = get_wall_normal().x * -1
 				if wall_grab_time_left >= 0.0:
 					start_state(GRABBING_WALL)
 				else:
@@ -210,13 +210,11 @@ func start_state(next_state):
 
 		GRABBING_WALL:
 			a.play("grabbing_wall")
-			velocity.x = 0
 			velocity.y = 0
 			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
 
 		WALL_SLIDING:
 			a.play("grabbing_wall")
-			velocity.x = 0
 
 	state = next_state
 
