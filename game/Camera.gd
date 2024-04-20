@@ -6,6 +6,8 @@ var release_falloff = 35
 var acceleration = 10
 var max_speed = 20
 var velocity: Vector2 = Vector2.ZERO
+var look_ahead: Vector2 = Vector2.ZERO
+var look_ahead_target: Vector2 = Vector2.ZERO
 
 const VIEWPORT = Vector2(320, 180)
 const HALF_VIEWPORT = VIEWPORT / 2
@@ -15,7 +17,8 @@ const HALF_VIEWPORT = VIEWPORT / 2
 enum {
 	IDLE,
 	CONTROLLED,
-	FOLLOWING_TARGET
+	FOLLOWING_TARGET,
+	FOLLOWING_PLAYER
 }
 
 var state
@@ -23,7 +26,7 @@ var state
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
 	connect_to_level("Level_1")
-	state = FOLLOWING_TARGET
+	state = FOLLOWING_PLAYER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -31,7 +34,12 @@ func _process(delta):
 		FOLLOWING_TARGET:
 			var focus = clamp_vec2_to_limits(player.get_global_transform().get_origin() - HALF_VIEWPORT)
 			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
-			
+	
+		FOLLOWING_PLAYER:
+			look_ahead = lerp(look_ahead, look_ahead_target, 0.005)
+			var focus = clamp_vec2_to_limits(player.get_global_transform().get_origin() - HALF_VIEWPORT + look_ahead)
+			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
+				
 		CONTROLLED:
 			# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
 			var target_vector = get_vector_from_center_to_player()
@@ -42,6 +50,14 @@ func _process(delta):
 
 func _physics_process(delta):
 	clamp_camera_to_limits()
+
+func _on_player_turned(direction):
+	print("player turned: " + direction)
+	match direction:
+		"right":
+			look_ahead_target = Vector2(50, 0)
+		"left":
+			look_ahead_target = Vector2(-50, 0)
 
 func get_vector_from_center_to_player() -> Vector2:
 	var player = get_tree().root.get_node("Main").get_node("Player")

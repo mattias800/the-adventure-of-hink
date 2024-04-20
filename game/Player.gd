@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal player_turned
 
 const SPEED = 80.0
 const MAX_FALL_SPEED = 150 # TODO
@@ -21,7 +22,14 @@ enum {
 	WALL_SLIDING
 }
 
+enum PlayerDirection {
+	LEFT,
+	RIGHT
+}
+
 var state := IDLE
+var player_direction := PlayerDirection.RIGHT
+
 var time_since_no_ground := 0.0
 var time_since_wall_grab := 0.0
 var time_until_wall_grab_possible := 0.0
@@ -160,8 +168,14 @@ func _physics_process(delta):
 	
 	if velocity.x > 0:
 		a.flip_h = false
+		if player_direction == PlayerDirection.LEFT:
+			player_turned.emit("right")
+		player_direction = PlayerDirection.RIGHT
 	elif velocity.x < 0:
 		a.flip_h = true
+		if player_direction == PlayerDirection.RIGHT:
+			player_turned.emit("left")
+		player_direction = PlayerDirection.LEFT
 
 func start_state(next_state):
 	print("Start state: ", state_to_string(next_state))
