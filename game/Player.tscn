@@ -138,4 +138,4 @@ frame_progress = 0.955599
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ohafe")
-volume_db = -23.117
+volume_db = -34.36

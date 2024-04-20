@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://boggjljdj3kil"
+path="res://.godot/imported/Early morning guitar.mp3-bafe53a84cbf7d314d9786ef86c1e760.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/Early morning guitar.mp3"
+dest_files=["res://.godot/imported/Early morning guitar.mp3-bafe53a84cbf7d314d9786ef86c1e760.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

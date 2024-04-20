@@ -26,7 +26,8 @@ enum {
 	JUMPING,
 	FALLING,
 	GRABBING_WALL,
-	WALL_SLIDING
+	WALL_SLIDING,
+	DISABLE_INPUT
 }
 enum PlayerDirection {
 	LEFT,
@@ -55,8 +56,11 @@ func _physics_process(delta):
 	if coyote_time_left >= 0.0:
 		coyote_time_left -= delta
 
-	match state:
+	check_for_level_change()
 
+	match state:
+		DISABLE_INPUT:
+			return
 		GRABBING_WALL:
 			wall_grab_time_left -= delta
 			if wall_grab_time_left <= 0.0:
@@ -196,8 +200,6 @@ func _physics_process(delta):
 			player_turned.emit("left")
 		player_direction = PlayerDirection.LEFT
 
-	check_for_level_change()
-
 
 func start_state(next_state):
 	print("Start state: ", state_to_string(next_state))
@@ -276,3 +278,12 @@ func check_for_level_change():
 		[false, _]:
 			print("Could not find tilemap containing player.")
 
+
+
+func _on_main_cutscene_started():
+	state = DISABLE_INPUT
+
+
+
+func _on_main_cutscene_ended():
+	state = IDLE
