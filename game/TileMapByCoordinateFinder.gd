@@ -1,0 +1,31 @@
+static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: Vector2) -> Array:
+	var hink   := root.get_node("Main").get_node("Hink")
+	var levels := hink.get_children()
+
+	for level in levels:
+		var tilemaps := level.get_children()
+		for tilemap in tilemaps:
+			if is_world_coordinate_within_tilemap(tilemap, world_coordinates):
+				return [true, tilemap]
+
+	return [false, null]
+
+
+static func is_world_coordinate_within_tilemap(tilemap: TileMap, world_coordinate: Vector2) -> bool:
+	return get_tilemap_world_rect(tilemap).has_point(world_coordinate)
+
+static func get_tilemap_world_rect(tilemap: TileMap) -> Rect2:
+	var tile_size    := tilemap.get_tileset().tile_size
+	var tilemap_size := get_tilemap_size(tilemap)
+	var level_size   := Vector2i(tile_size * tilemap_size)
+	var level_offset_x: float =  tilemap.get_parent().position.x
+	var level_offset_y: float = tilemap.get_parent().position.y
+
+	return Rect2(level_offset_x, level_offset_y, level_size.x, level_size.y)
+
+static func get_tilemap_size(tilemap: TileMap) -> Vector2i:
+	var tilemap_rect := tilemap.get_used_rect()
+	return Vector2i(
+		tilemap_rect.end.x - tilemap_rect.position.x,
+		tilemap_rect.end.y - tilemap_rect.position.y
+	)

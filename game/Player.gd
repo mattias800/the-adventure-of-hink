@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal player_entered_tilemap
+
+const TileMapByCoordinateFinder = preload("res://TileMapByCoordinateFinder.gd")
 signal player_turned
 const SPEED: float                 = 80.0
 const MAX_FALL_SPEED: float        = 250.0
@@ -37,7 +40,8 @@ var wall_grab_time_left           := 0.0
 var jumps_left                    := 0
 var num_double_jumps              := 1
 var coyote_time_left              := 0.0
-var velocity_into_wall             := 0.0 # The character velocity when hitting the wall. Need to reuse when calculating is_on_wall()
+var velocity_into_wall            := 0.0 # The character velocity when hitting the wall. Need to reuse when calculating is_on_wall()
+var active_tile_map: TileMap      =  null # Reference to active TileMap, used to check if player has entered new TileMap
 
 func _physics_process(delta):
 	var a         := $AnimatedSprite2D
@@ -192,6 +196,8 @@ func _physics_process(delta):
 			player_turned.emit("left")
 		player_direction = PlayerDirection.LEFT
 
+	check_for_level_change()
+
 
 func start_state(next_state):
 	print("Start state: ", state_to_string(next_state))
@@ -256,4 +262,17 @@ func trigger_jump(jump_source: JumpSource):
 
 	start_state(JUMPING)
 	jumpSound.play()
+
+
+func check_for_level_change():
+
+	var result := TileMapByCoordinateFinder.find_tilemap_by_world_coordinates(get_tree().root, position)
+	match result:
+		[true, var tilemap]:
+			if (tilemap != active_tile_map):
+				player_entered_tilemap.emit(tilemap.get_parent().name)
+
+			active_tile_map = tilemap
+		[false, _]:
+			print("Could not find tilemap containing player.")
 
