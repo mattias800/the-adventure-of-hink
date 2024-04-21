@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=10 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
 [ext_resource type="Script" path="res://world/LevelManager.gd" id="7_5vt73"]
 [ext_resource type="Script" path="res://world/Level_0/Level_0.gd" id="7_n0qyo"]
+[ext_resource type="Script" path="res://world/Level_1/Level_1.gd" id="9_ijev4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
@@ -32,9 +33,9 @@ centered = false
 
 [node name="Hink" parent="." instance=ExtResource("1_400ha")]
 
-[node name="Player" parent="." instance=ExtResource("2_vmdn5")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
-position = Vector2(358, 175)
+position = Vector2(119, 206)
 safe_margin = 0.001
 
 [node name="LevelManager" type="Node" parent="."]
@@ -43,6 +44,9 @@ script = ExtResource("7_5vt73")
 
 [node name="Level_0" type="Node" parent="LevelManager"]
 script = ExtResource("7_n0qyo")
+
+[node name="Level_1" type="Node" parent="LevelManager"]
+script = ExtResource("9_ijev4")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
 [connection signal="cutscene_ended" from="LevelManager" to="Player" method="_enable_player_input"]

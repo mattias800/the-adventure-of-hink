@@ -26,7 +26,8 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "intro": "res://dialog/intro.dtl",
-"level0exit": "res://world/Level_0/level0exit.dtl"
+"level0exit": "res://world/Level_0/level0exit.dtl",
+"level0start": "res://world/Level_0/level0start.dtl"
 }
 variables={}
 glossary/default_case_sensitive=true

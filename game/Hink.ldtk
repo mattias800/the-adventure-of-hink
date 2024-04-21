@@ -2309,7 +2309,7 @@
 			"uid": 617,
 			"doc": null,
 			"uiColor": null,
-			"gridSize": 16,
+			"gridSize": 8,
 			"guideGridWid": 0,
 			"guideGridHei": 0,
 			"displayOpacity": 1,
@@ -3114,9 +3114,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 20,
-					"__cHei": 13,
-					"__gridSize": 16,
+					"__cWid": 40,
+					"__cHei": 25,
+					"__gridSize": 8,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
@@ -3137,16 +3137,16 @@
 					"entityInstances": [
 						{
 							"__identifier": "OnPlayerEnter",
-							"__grid": [17,0],
+							"__grid": [35,0],
 							"__pivot": [0,0],
 							"__tags": ["region"],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
 							"iid": "16238d60-fec0-11ee-98ac-6755f0ddb9a3",
-							"width": 48,
-							"height": 160,
+							"width": 40,
+							"height": 152,
 							"defUid": 616,
-							"px": [272,0],
+							"px": [280,0],
 							"fieldInstances": [
 								{ "__identifier": "Name", "__type": "String", "__value": null, "__tile": null, "defUid": 618, "realEditorValues": [null] },
 								{ "__identifier": "Timeline", "__type": "String", "__value": "level0exit", "__tile": null, "defUid": 619, "realEditorValues": [{
@@ -3154,12 +3154,12 @@
 									"params": ["level0exit"]
 								}] }
 							],
-							"__worldX": 272,
+							"__worldX": 280,
 							"__worldY": 56
 						},
 						{
 							"__identifier": "PlayerSpawn",
-							"__grid": [7,9],
+							"__grid": [13,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3168,9 +3168,9 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 615,
-							"px": [112,144],
+							"px": [104,144],
 							"fieldInstances": [],
-							"__worldX": 112,
+							"__worldX": 104,
 							"__worldY": 200
 						}
 					]
@@ -4195,9 +4195,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 33,
-					"__cHei": 20,
-					"__gridSize": 16,
+					"__cWid": 66,
+					"__cHei": 40,
+					"__gridSize": 8,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
