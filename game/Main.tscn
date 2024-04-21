@@ -45,4 +45,6 @@ script = ExtResource("7_5vt73")
 script = ExtResource("7_n0qyo")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
+[connection signal="cutscene_ended" from="LevelManager" to="Player" method="_enable_player_input"]
+[connection signal="cutscene_started" from="LevelManager" to="Player" method="_disable_player_input"]
 [connection signal="player_entered_tilemap" from="LevelManager" to="Camera" method="_on_player_player_entered_tilemap"]

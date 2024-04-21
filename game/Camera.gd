@@ -2,31 +2,29 @@ extends Camera2D
 
 @export var tilemap: TileMap
 
-var release_falloff   := 35
-var acceleration      := 10
-var max_speed         := 20
-var velocity: Vector2 =  Vector2.ZERO
-var look_ahead: Vector2 = Vector2.ZERO
-var look_ahead_target: Vector2 = Vector2.ZERO
-
+var release_falloff            := 35
+var acceleration               := 10
+var max_speed                  := 20
+var velocity: Vector2          =  Vector2.ZERO
+var look_ahead: Vector2        =  Vector2.ZERO
+var look_ahead_target: Vector2 =  Vector2.ZERO
 const VIEWPORT      := Vector2(320, 180)
 const HALF_VIEWPORT := VIEWPORT / 2
-
 @onready var player: CharacterBody2D = %Player
-
 enum {
 	IDLE,
 	CONTROLLED,
 	FOLLOWING_TARGET,
 	FOLLOWING_PLAYER
 }
-
 var state
+
 
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
 	connect_to_level("Level_1")
 	state = FOLLOWING_PLAYER
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -48,8 +46,10 @@ func _process(delta):
 
 	clamp_camera_to_limits()
 
+
 func _physics_process(delta):
 	clamp_camera_to_limits()
+
 
 func _on_player_turned(direction):
 	match direction:
@@ -58,12 +58,14 @@ func _on_player_turned(direction):
 		"left":
 			look_ahead_target = Vector2(-50, 0)
 
+
 func get_vector_from_center_to_player() -> Vector2:
-	var player      := get_tree().root.get_node("Main").get_node("Player")
+	var player     := get_tree().root.get_node("Main").get_node("Player")
 	var x: Vector2 =  player.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
-func connect_to_level(level_name: String):
+
+func connect_to_level(level_name: String) -> void:
 	var level := get_tree().root.get_node("Main").get_node("Hink").get_node(level_name)
 	if not level:
 		printerr("Could not find level: ", level_name)
@@ -83,16 +85,17 @@ func connect_to_level(level_name: String):
 
 
 func apply_camera_limits(tilemap: TileMap):
-	var tile_size    := tilemap.get_tileset().tile_size
-	var tilemap_size := get_tilemap_size(tilemap)
-	var level_size   := Vector2i(tile_size * tilemap_size)
+	var tile_size           := tilemap.get_tileset().tile_size
+	var tilemap_size        := get_tilemap_size(tilemap)
+	var level_size          := Vector2i(tile_size * tilemap_size)
 	var levelOffsetX: float =  tilemap.get_parent().position.x
-	var levelOffsetY: float = tilemap.get_parent().position.y
+	var levelOffsetY: float =  tilemap.get_parent().position.y
 
 	set_limit(SIDE_TOP, levelOffsetY)
 	set_limit(SIDE_BOTTOM, levelOffsetY + level_size.y)
 	set_limit(SIDE_LEFT, levelOffsetX)
 	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
+
 
 func update_global_position(delta: float):
 	global_position += lerp(
@@ -101,23 +104,25 @@ func update_global_position(delta: float):
 		pow(2, -32 * delta)
 	)
 
+
 func clamp_camera_to_limits():
 	# Camera limits must be set first.
 	# var zoomed_viewport_size = get_viewport_to_zoom_scale()
 	var zoomed_viewport_size := Vector2(320, 180)
-	var left_limit  := get_limit(SIDE_LEFT)
-	var right_limit  := get_limit(SIDE_RIGHT) - zoomed_viewport_size.x
-	var top_limit    := get_limit(SIDE_TOP)
-	var bottom_limit := get_limit(SIDE_BOTTOM) - zoomed_viewport_size.y
+	var left_limit           := get_limit(SIDE_LEFT)
+	var right_limit          := get_limit(SIDE_RIGHT) - zoomed_viewport_size.x
+	var top_limit            := get_limit(SIDE_TOP)
+	var bottom_limit         := get_limit(SIDE_BOTTOM) - zoomed_viewport_size.y
 
 	position.x = clamp(position.x, left_limit, right_limit)
 	position.y = clamp(position.y, top_limit, bottom_limit)
+
 
 func clamp_vec2_to_limits(val: Vector2) -> Vector2:
 	# Camera limits must be set first.
 	var zoomed_viewport_size := get_viewport_to_zoom_scale()
 
-	var left_limit  := get_limit(SIDE_LEFT)
+	var left_limit   := get_limit(SIDE_LEFT)
 	var right_limit  := get_limit(SIDE_RIGHT) + zoomed_viewport_size.x
 	var top_limit    := get_limit(SIDE_TOP)
 	var bottom_limit := get_limit(SIDE_BOTTOM) + zoomed_viewport_size.y
@@ -127,14 +132,16 @@ func clamp_vec2_to_limits(val: Vector2) -> Vector2:
 		clamp(val.y, top_limit, bottom_limit)
 	)
 
+
 func get_viewport_to_zoom_scale() -> Vector2i:
 	var zoom_vector          := get_zoom()
 	var zoomed_viewport_size := Vector2i(
-		get_viewport().size[0] / zoom_vector.x,
-		get_viewport().size[1] / zoom_vector.y,
-	)
+									get_viewport().size[0] / zoom_vector.x,
+									get_viewport().size[1] / zoom_vector.y,
+								)
 
 	return zoomed_viewport_size
+
 
 func calculate_velocity(delta: float, direction: Vector2):
 	velocity += direction * acceleration * delta

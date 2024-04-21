@@ -261,11 +261,8 @@ func trigger_jump(jump_source: JumpSource):
 	enter_state(JUMPING)
 	jumpSound.play()
 
-
-func _on_main_cutscene_started():
+func _disable_player_input():
 	state = DISABLE_INPUT
 
-
-
-func _on_main_cutscene_ended():
+func _enable_player_input():
 	state = IDLE

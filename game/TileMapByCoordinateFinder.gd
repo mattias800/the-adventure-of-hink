@@ -1,8 +1,20 @@
-static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: Vector2) -> Array:
-	var hink   := root.get_node("Main").get_node("Hink")
-	var levels := hink.get_children()
+static func find_levels_parent(root: Window) -> Node2D:
+	return root.get_node("Main").get_node("Hink");
 
-	for level in levels:
+static func find_level_node(root: Window, level_name: String) -> Node2D:
+	return find_levels_parent(root).get_node(level_name);
+
+static func find_all_level_nodes(root: Window) -> Array[Node]:
+	return find_levels_parent(root).get_children();
+	
+static func find_entities_node_for_level(root: Window, level_name: String) -> Node2D:
+	return find_level_node(root, level_name).get_node("Entities")
+
+static func find_entities_meta_for_level(root: Window, level_name: String) -> Array:
+	return find_entities_node_for_level(root, level_name).get_meta("LDtk_entity_instances")
+
+static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: Vector2) -> Array:
+	for level in find_all_level_nodes(root):
 		var tilemaps := level.get_children()
 		for tilemap in tilemaps:
 			if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
