@@ -51,9 +51,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("exit_game"):
 		get_tree().quit()
 
-	if coyote_time_left >= 0.0:
-		coyote_time_left -= delta
-
 	match state:
 		DISABLE_INPUT:
 			return
@@ -68,6 +65,7 @@ func _physics_process(delta):
 
 			if (get_wall_normal().x * direction) > 0:
 				# User pressed away from wall
+				coyote_time_left = COYOTE_TIME_LIMIT
 				enter_state(FALLING)
 
 			move_and_slide()
@@ -81,6 +79,7 @@ func _physics_process(delta):
 			if is_on_wall():
 				if (get_wall_normal().x * direction) > 0:
 					# User pressed away from wall
+					coyote_time_left = COYOTE_TIME_LIMIT
 					enter_state(FALLING)
 
 				if Input.is_action_just_pressed("jump"):
@@ -91,6 +90,7 @@ func _physics_process(delta):
 				if is_on_floor():
 					enter_state(IDLE)
 			else:
+				coyote_time_left = COYOTE_TIME_LIMIT
 				enter_state(FALLING)
 
 
@@ -126,6 +126,9 @@ func _physics_process(delta):
 					enter_state(WALL_SLIDING)
 
 		FALLING:
+			if coyote_time_left >= 0.0:
+				coyote_time_left -= delta
+
 			time_since_no_ground += delta
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 			velocity.y = minf(velocity.y + gravity * delta, MAX_FALL_SPEED)
@@ -204,7 +207,7 @@ func enter_state(next_state):
 	match next_state:
 		DISABLE_INPUT:
 			a.play("idle")
-			
+
 		IDLE:
 			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
 			a.play("idle")
