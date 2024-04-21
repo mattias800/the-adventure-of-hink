@@ -3148,11 +3148,11 @@
 							"defUid": 616,
 							"px": [280,0],
 							"fieldInstances": [
-								{ "__identifier": "Name", "__type": "String", "__value": null, "__tile": null, "defUid": 618, "realEditorValues": [null] },
-								{ "__identifier": "Timeline", "__type": "String", "__value": "level0exit", "__tile": null, "defUid": 619, "realEditorValues": [{
+								{ "__identifier": "Name", "__type": "String", "__value": "level0exit", "__tile": null, "defUid": 618, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["level0exit"]
-								}] }
+								}] },
+								{ "__identifier": "Timeline", "__type": "String", "__value": null, "__tile": null, "defUid": 619, "realEditorValues": [null] }
 							],
 							"__worldX": 280,
 							"__worldY": 56

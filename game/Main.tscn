@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
 [ext_resource type="Script" path="res://Main.gd" id="1_tyb3q"]
 [ext_resource type="PackedScene" uid="uid://8t1aimjy44n6" path="res://Player.tscn" id="2_vmdn5"]
-[ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://assets/audio/music/Early morning guitar.mp3" id="3_r1vjs"]
+[ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://assets/audio/music/early_morning_guitar.mp3" id="3_r1vjs"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
 [ext_resource type="Script" path="res://Background3D.gd" id="5_cvr4m"]
 [ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]

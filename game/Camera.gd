@@ -47,7 +47,7 @@ func _process(delta):
 	clamp_camera_to_limits()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	clamp_camera_to_limits()
 
 
@@ -60,7 +60,6 @@ func _on_player_turned(direction):
 
 
 func get_vector_from_center_to_player() -> Vector2:
-	var player     := get_tree().root.get_node("Main").get_node("Player")
 	var x: Vector2 =  player.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
@@ -84,17 +83,17 @@ func connect_to_level(level_name: String) -> void:
 		print("Found no TileMap")
 
 
-func apply_camera_limits(tilemap: TileMap):
-	var tile_size           := tilemap.get_tileset().tile_size
-	var tilemap_size        := get_tilemap_size(tilemap)
+func apply_camera_limits(source_tilemap: TileMap):
+	var tile_size           := source_tilemap.get_tileset().tile_size
+	var tilemap_size        := get_tilemap_size(source_tilemap)
 	var level_size          := Vector2i(tile_size * tilemap_size)
-	var levelOffsetX: float =  tilemap.get_parent().position.x
-	var levelOffsetY: float =  tilemap.get_parent().position.y
+	var levelOffsetX: float =  source_tilemap.get_parent().position.x
+	var levelOffsetY: float =  source_tilemap.get_parent().position.y
 
-	set_limit(SIDE_TOP, levelOffsetY)
-	set_limit(SIDE_BOTTOM, levelOffsetY + level_size.y)
-	set_limit(SIDE_LEFT, levelOffsetX)
-	set_limit(SIDE_RIGHT, levelOffsetX + level_size.x)
+	set_limit(SIDE_TOP, int(levelOffsetY))
+	set_limit(SIDE_BOTTOM, int(levelOffsetY) + level_size.y)
+	set_limit(SIDE_LEFT, int(levelOffsetX))
+	set_limit(SIDE_RIGHT, int(levelOffsetX) + level_size.x)
 
 
 func update_global_position(delta: float):
@@ -164,8 +163,8 @@ func calculate_velocity(delta: float, direction: Vector2):
 	)
 
 
-func get_tilemap_size(tilemap: TileMap) -> Vector2i:
-	var tilemap_rect := tilemap.get_used_rect()
+func get_tilemap_size(source_tilemap: TileMap) -> Vector2i:
+	var tilemap_rect := source_tilemap.get_used_rect()
 	return Vector2i(
 		tilemap_rect.end.x - tilemap_rect.position.x,
 		tilemap_rect.end.y - tilemap_rect.position.y

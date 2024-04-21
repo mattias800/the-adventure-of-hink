@@ -27,8 +27,9 @@ overrides = {
 script = ExtResource("10_ird64")
 name = "dialog_style"
 base_overrides = {
-"global_bg_color": "Color(1, 1, 1, 1)",
+"global_bg_color": "Color(1, 1, 1, 0.67451)",
+"global_font_color": "Color(0, 0, 0, 1)",
 "global_font_size": "6.0"
 }
 layers = Array[ExtResource("2_lg08i")]([SubResource("Resource_u7pih"), SubResource("Resource_h3ylm")])
-metadata/_latest_layer = 0
+metadata/_latest_layer = -1

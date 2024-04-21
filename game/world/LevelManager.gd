@@ -16,7 +16,7 @@ func _ready():
 	pass
 
 
-func _process(delta):
+func _process(_delta):
 	check_for_level_change(player.global_position)
 
 
@@ -65,9 +65,9 @@ func load_mp3(path) -> AudioStreamMP3:
 	return sound
 
 
-func start_timeline(name: String):
+func start_timeline(timeline_name: String):
 	cutscene_started.emit()
-	Dialogic.start(name)
+	Dialogic.start(timeline_name)
 	await Dialogic.timeline_ended
 	await get_tree().create_timer(0.1).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()
