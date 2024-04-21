@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=18 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://8t1aimjy44n6" path="res://Player.tscn" id="2_vmdn5"]
 [ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://assets/audio/music/early_morning_guitar.mp3" id="3_r1vjs"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
+[ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://assets/audio/music/hink_the_game.mp3" id="4_dvji8"]
+[ext_resource type="Script" path="res://Music.gd" id="4_fuicu"]
 [ext_resource type="Script" path="res://Background3D.gd" id="5_cvr4m"]
 [ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://mountain_background.tscn" id="6_jjcl5"]
@@ -45,6 +47,15 @@ unique_name_in_owner = true
 position = Vector2(-201, -96)
 stream = ExtResource("3_r1vjs")
 max_polyphony = 2
+panning_strength = 0.0
+script = ExtResource("4_fuicu")
+
+[node name="EarlyMorningMusic" type="AudioStreamPlayer2D" parent="Camera/Music"]
+stream = ExtResource("3_r1vjs")
+panning_strength = 0.0
+
+[node name="HinkTheGameMusic" type="AudioStreamPlayer2D" parent="Camera/Music"]
+stream = ExtResource("4_dvji8")
 panning_strength = 0.0
 
 [node name="Background" type="Sprite2D" parent="Camera"]

@@ -9,11 +9,13 @@ var watched = {
 
 @onready var level_manager := %LevelManager
 @onready var m : AudioStreamPlayer2D = %Music
+@onready var music := %Music
 
 func on_player_enter_map():
 
 	if watched["level0start"] == false:
-		level_manager.play_music("res://assets/audio/music/early_morning_guitar.mp3")
+		music.play_music(music.songs.early_morning)
+		# level_manager.play_music("res://assets/audio/music/early_morning_guitar.mp3")
 		level_manager.start_timeline("level0start")		
 	watched["level0start"] = true
 
