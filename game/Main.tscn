@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=16 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -6,9 +6,29 @@
 [ext_resource type="PackedScene" uid="uid://8t1aimjy44n6" path="res://Player.tscn" id="2_vmdn5"]
 [ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://assets/audio/music/Early morning guitar.mp3" id="3_r1vjs"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
+[ext_resource type="Script" path="res://Background3D.gd" id="5_cvr4m"]
+[ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]
+[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://mountain_background.tscn" id="6_jjcl5"]
 [ext_resource type="Script" path="res://world/LevelManager.gd" id="7_5vt73"]
 [ext_resource type="Script" path="res://world/Level_0/Level_0.gd" id="7_n0qyo"]
 [ext_resource type="Script" path="res://world/Level_1/Level_1.gd" id="9_ijev4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
+frequency = 0.0075
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x3cnk"]
+width = 320
+height = 180
+seamless = true
+seamless_blend_skirt = 0.75
+noise = SubResource("FastNoiseLite_ix55e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vflwp"]
+shader = ExtResource("5_ys6gx")
+shader_parameter/opacity = 0.072
+shader_parameter/density = 0.0
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_x3cnk")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
@@ -30,6 +50,28 @@ panning_strength = 0.0
 [node name="Background" type="Sprite2D" parent="Camera"]
 texture = ExtResource("1_i7f7c")
 centered = false
+
+[node name="Background3D" type="Sprite2D" parent="Camera"]
+texture = ExtResource("1_i7f7c")
+centered = false
+script = ExtResource("5_cvr4m")
+
+[node name="SubViewport" type="SubViewport" parent="Camera/Background3D"]
+transparent_bg = true
+size = Vector2i(320, 180)
+
+[node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("6_jjcl5")]
+
+[node name="Fog" type="ParallaxBackground" parent="Camera"]
+layer = 2
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera/Fog"]
+motion_mirroring = Vector2(320, 180)
+
+[node name="ColorRect" type="ColorRect" parent="Camera/Fog/ParallaxLayer"]
+material = SubResource("ShaderMaterial_vflwp")
+offset_right = 320.0
+offset_bottom = 180.0
 
 [node name="Hink" parent="." instance=ExtResource("1_400ha")]
 
