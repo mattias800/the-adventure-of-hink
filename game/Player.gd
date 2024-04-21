@@ -202,6 +202,9 @@ func enter_state(next_state):
 	var a := $AnimatedSprite2D
 
 	match next_state:
+		DISABLE_INPUT:
+			a.play("idle")
+			
 		IDLE:
 			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
 			a.play("idle")
@@ -262,7 +265,7 @@ func trigger_jump(jump_source: JumpSource):
 	jumpSound.play()
 
 func _disable_player_input():
-	state = DISABLE_INPUT
+	enter_state(DISABLE_INPUT)
 
 func _enable_player_input():
-	state = IDLE
+	enter_state(IDLE)

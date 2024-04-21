@@ -34,7 +34,7 @@ centered = false
 
 [node name="Player" parent="." instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
-position = Vector2(67, 220)
+position = Vector2(358, 175)
 safe_margin = 0.001
 
 [node name="LevelManager" type="Node" parent="."]

@@ -40,13 +40,17 @@ func check_for_level_change(player_world_position: Vector2):
 func player_enter_map(level_name: String, tilemap: TileMap):
 	print("player_enter_map", level_name)
 	load_entities(level_name)
-	get_node(level_name).on_player_enter_map()
+	var level_controller = get_node(level_name)
+	if level_controller:
+		level_controller.on_player_enter_map()
 	player_entered_tilemap.emit(tilemap.get_parent().name)
 
 func player_leave_map(level_name: String, tilemap: TileMap):
 	print("player_leave_map", level_name)
 	# unload_entities(level_name)
-	get_node(level_name).on_player_enter_map()
+	var level_controller = get_node(level_name)
+	if level_controller:
+		level_controller.on_player_enter_map()
 	player_left_tilemap.emit(tilemap.get_parent().name)
 
 
@@ -66,6 +70,7 @@ func start_timeline(name: String):
 	cutscene_started.emit()
 	Dialogic.start("intro")
 	await Dialogic.timeline_ended
+	await get_tree().create_timer(0.1).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()
 
 
