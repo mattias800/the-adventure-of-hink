@@ -1,9 +1,7 @@
 extends CharacterBody2D
 
-signal player_entered_tilemap
-
-const TileMapByCoordinateFinder = preload("res://TileMapByCoordinateFinder.gd")
 signal player_turned
+
 const SPEED: float                 = 80.0
 const MAX_FALL_SPEED: float        = 250.0
 const JUMP_HORIZONTAL_SPEED: float = 7.0
@@ -11,7 +9,7 @@ const MAX_HORIZONTAL_SPEED: float  = 80.0
 const JUMP_VELOCITY: float         = 150.0
 const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 1.0
-@export var coyote_time_limit: float = 0.05
+const COYOTE_TIME_LIMIT: float = 0.05
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -56,15 +54,13 @@ func _physics_process(delta):
 	if coyote_time_left >= 0.0:
 		coyote_time_left -= delta
 
-	check_for_level_change()
-
 	match state:
 		DISABLE_INPUT:
 			return
 		GRABBING_WALL:
 			wall_grab_time_left -= delta
 			if wall_grab_time_left <= 0.0:
-				start_state(WALL_SLIDING)
+				enter_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
 				trigger_jump(JumpSource.WALL)
 				var jump_direction := Vector2(get_wall_normal().x, -1)
@@ -72,7 +68,7 @@ func _physics_process(delta):
 
 			if (get_wall_normal().x * direction) > 0:
 				# User pressed away from wall
-				start_state(FALLING)
+				enter_state(FALLING)
 
 			move_and_slide()
 
@@ -85,7 +81,7 @@ func _physics_process(delta):
 			if is_on_wall():
 				if (get_wall_normal().x * direction) > 0:
 					# User pressed away from wall
-					start_state(FALLING)
+					enter_state(FALLING)
 
 				if Input.is_action_just_pressed("jump"):
 					trigger_jump(JumpSource.WALL)
@@ -93,9 +89,9 @@ func _physics_process(delta):
 					velocity = jump_direction.normalized() * JUMP_VELOCITY
 
 				if is_on_floor():
-					start_state(IDLE)
+					enter_state(IDLE)
 			else:
-				start_state(FALLING)
+				enter_state(FALLING)
 
 
 		JUMPING:
@@ -106,7 +102,7 @@ func _physics_process(delta):
 			# Dampen jump if jump button is released
 			if not Input.is_action_pressed("jump") and velocity.y < JUMP_RELEASE_VELOCITY:
 				velocity.y = -50
-				start_state(FALLING)
+				enter_state(FALLING)
 
 			if Input.is_action_just_pressed("jump") and jumps_left > 0:
 				trigger_jump(JumpSource.AIR)
@@ -117,17 +113,17 @@ func _physics_process(delta):
 			move_and_slide()
 
 			if velocity.y > 0:
-				start_state(FALLING)
+				enter_state(FALLING)
 
 			if is_on_floor():
-				start_state(IDLE)
+				enter_state(IDLE)
 
 			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
 				velocity_into_wall = get_wall_normal().x * -1
 				if wall_grab_time_left >= 0.0:
-					start_state(GRABBING_WALL)
+					enter_state(GRABBING_WALL)
 				else:
-					start_state(WALL_SLIDING)
+					enter_state(WALL_SLIDING)
 
 		FALLING:
 			time_since_no_ground += delta
@@ -149,20 +145,20 @@ func _physics_process(delta):
 			move_and_slide()
 
 			if is_on_floor():
-				start_state(IDLE)
+				enter_state(IDLE)
 
 			if is_on_wall() and time_until_wall_grab_possible <= 0.0:
 				velocity_into_wall = get_wall_normal().x * -1
 				if wall_grab_time_left >= 0.0:
-					start_state(GRABBING_WALL)
+					enter_state(GRABBING_WALL)
 				else:
-					start_state(WALL_SLIDING)
+					enter_state(WALL_SLIDING)
 
 		IDLE:
 			if not is_on_floor():
 				jumps_left = 0
-				coyote_time_left = coyote_time_limit
-				start_state(FALLING)
+				coyote_time_left = COYOTE_TIME_LIMIT
+				enter_state(FALLING)
 			else:
 				var is_jump_allowed := is_on_floor() or time_since_no_ground < 0.1
 
@@ -201,8 +197,8 @@ func _physics_process(delta):
 		player_direction = PlayerDirection.LEFT
 
 
-func start_state(next_state):
-	print("Start state: ", state_to_string(next_state))
+func enter_state(next_state):
+	# print("Enter state: ", state_to_string(next_state))
 	var a := $AnimatedSprite2D
 
 	match next_state:
@@ -262,22 +258,8 @@ func trigger_jump(jump_source: JumpSource):
 			time_until_wall_grab_possible = 0.1
 			jumps_left = num_double_jumps
 
-	start_state(JUMPING)
+	enter_state(JUMPING)
 	jumpSound.play()
-
-
-func check_for_level_change():
-
-	var result := TileMapByCoordinateFinder.find_tilemap_by_world_coordinates(get_tree().root, position)
-	match result:
-		[true, var tilemap]:
-			if (tilemap != active_tile_map):
-				player_entered_tilemap.emit(tilemap.get_parent().name)
-
-			active_tile_map = tilemap
-		[false, _]:
-			print("Could not find tilemap containing player.")
-
 
 
 func _on_main_cutscene_started():

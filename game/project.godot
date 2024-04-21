@@ -25,7 +25,8 @@ directories/dch_directory={
 "hink_characters": "res://dialog/characters/hink/hink_characters.dch"
 }
 directories/dtl_directory={
-"intro": "res://dialog/intro.dtl"
+"intro": "res://dialog/intro.dtl",
+"level0exit": "res://world/Level_0/level0exit.dtl"
 }
 variables={}
 glossary/default_case_sensitive=true

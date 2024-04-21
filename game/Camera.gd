@@ -52,7 +52,6 @@ func _physics_process(delta):
 	clamp_camera_to_limits()
 
 func _on_player_turned(direction):
-	print("player turned: " + direction)
 	match direction:
 		"right":
 			look_ahead_target = Vector2(50, 0)

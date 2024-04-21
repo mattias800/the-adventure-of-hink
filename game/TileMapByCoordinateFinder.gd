@@ -5,10 +5,10 @@ static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: V
 	for level in levels:
 		var tilemaps := level.get_children()
 		for tilemap in tilemaps:
-			if is_world_coordinate_within_tilemap(tilemap, world_coordinates):
-				return [true, tilemap]
+			if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
+				return [true, tilemap, level.name]
 
-	return [false, null]
+	return [false, null, null]
 
 
 static func is_world_coordinate_within_tilemap(tilemap: TileMap, world_coordinate: Vector2) -> bool:
