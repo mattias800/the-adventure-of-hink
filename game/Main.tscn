@@ -54,13 +54,19 @@ noise = SubResource("FastNoiseLite_6mr41")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_luc64"]
 shader = ExtResource("15_jp4qx")
-shader_parameter/scroll1 = Vector2(0.05, 0.05)
-shader_parameter/scroll2 = Vector2(-0.05, -0.05)
+shader_parameter/scroll1 = Vector2(0.02, 0.02)
+shader_parameter/scroll2 = Vector2(-0.02, -0.02)
 shader_parameter/tone_color = Color(0.356863, 0.376471, 0.760784, 1)
 shader_parameter/top_color = Color(1, 1, 1, 1)
-shader_parameter/light_start = 0.49
-shader_parameter/light_end = 0.526
+shader_parameter/light_start = 0.6
+shader_parameter/light_end = 0.652
 shader_parameter/distortion_length = -0.02
+shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
+shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
+shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
+shader_parameter/distortion_speed = 1.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/offset = Vector2(0, 0)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_e33tf")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
 
@@ -134,11 +140,12 @@ script = ExtResource("7_n0qyo")
 script = ExtResource("9_ijev4")
 
 [node name="Water" type="Node2D" parent="."]
+position = Vector2(100, 100)
 
 [node name="Sprite" type="Sprite2D" parent="Water"]
 material = SubResource("ShaderMaterial_luc64")
-position = Vector2(534, 551)
-scale = Vector2(2.51172, 2.1875)
+position = Vector2(66.7813, 472.875)
+scale = Vector2(2.70654, 2.2207)
 texture = ExtResource("16_esuix")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
