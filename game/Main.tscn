@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=31 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -14,8 +14,9 @@
 [ext_resource type="Script" path="res://world/LevelManager.gd" id="7_5vt73"]
 [ext_resource type="Script" path="res://world/Level_0/Level_0.gd" id="7_n0qyo"]
 [ext_resource type="Script" path="res://world/Level_1/Level_1.gd" id="9_ijev4"]
+[ext_resource type="Shader" path="res://assets/OverworldClouds.gdshader" id="10_aafx2"]
+[ext_resource type="Texture2D" uid="uid://bhp4opv054whl" path="res://assets/overworld_tileset_grass_original.png" id="10_mhbpn"]
 [ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="15_jp4qx"]
-[ext_resource type="Texture2D" uid="uid://qqspit21qviw" path="res://icon.svg" id="16_esuix"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -33,6 +34,222 @@ shader_parameter/opacity = 0.072
 shader_parameter/density = 0.0
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_x3cnk")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7sund"]
+texture = ExtResource("10_mhbpn")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+11:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+11:15/0 = 0
+0:16/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+3:16/0 = 0
+4:16/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+11:16/0 = 0
+0:17/0 = 0
+1:17/0 = 0
+2:17/0 = 0
+3:17/0 = 0
+4:17/0 = 0
+11:17/0 = 0
+0:18/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+3:18/0 = 0
+4:18/0 = 0
+0:19/0 = 0
+1:19/0 = 0
+2:19/0 = 0
+0:20/0 = 0
+1:20/0 = 0
+2:20/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_l2l2g"]
+sources/0 = SubResource("TileSetAtlasSource_7sund")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qjiiu"]
 frequency = 0.1237
@@ -56,19 +273,33 @@ noise = SubResource("FastNoiseLite_6mr41")
 shader = ExtResource("15_jp4qx")
 shader_parameter/scroll1 = Vector2(0.02, 0.02)
 shader_parameter/scroll2 = Vector2(-0.02, -0.02)
-shader_parameter/tone_color = Color(0.356863, 0.376471, 0.760784, 1)
-shader_parameter/top_color = Color(1, 1, 1, 1)
-shader_parameter/light_start = 0.6
-shader_parameter/light_end = 0.652
-shader_parameter/distortion_length = -0.02
-shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
-shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
-shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
-shader_parameter/distortion_speed = 1.0
+shader_parameter/tone_color = Color(0.380392, 0.215686, 0.87451, 1)
+shader_parameter/distortion_length = 0.01
+shader_parameter/WATER_COL = Color(0.133333, 0.188235, 0.721569, 1)
+shader_parameter/WATER2_COL = Color(0.282353, 0.282353, 0.878431, 1)
+shader_parameter/FOAM_COL = Color(1, 1, 1, 1)
+shader_parameter/distortion_speed = 2.0
 shader_parameter/tile = Vector2(5, 5)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_e33tf")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2gsj"]
+noise_type = 3
+frequency = 0.0312
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qprc5"]
+width = 320
+height = 180
+seamless = true
+noise = SubResource("FastNoiseLite_i2gsj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8x4m"]
+shader = ExtResource("10_aafx2")
+shader_parameter/opacity = 0.382
+shader_parameter/density = 0.0
+shader_parameter/speed = Vector2(0.01, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_qprc5")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
@@ -122,7 +353,37 @@ material = SubResource("ShaderMaterial_vflwp")
 offset_right = 320.0
 offset_bottom = 180.0
 
+[node name="Underwater" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_l2l2g")
+format = 2
+layer_0/tile_data = PackedInt32Array(3014647, 0, 0, 3080183, 0, 1, 3145719, 0, 2, 3211255, 0, 3, 3014648, 65536, 0, 3080184, 65536, 1, 3145720, 65536, 2, 3211256, 65536, 3, 3014649, 131072, 0, 3080185, 131072, 1, 3145721, 131072, 2, 3211257, 131072, 3, 3014650, 0, 0, 3080186, 0, 1, 3145722, 0, 2, 3211258, 0, 3, 3014651, 65536, 0, 3080187, 65536, 1, 3145723, 65536, 2, 3211259, 65536, 3, 3014652, 131072, 0, 3080188, 131072, 1, 3145724, 131072, 2, 3211260, 131072, 3, 3014653, 0, 0, 3080189, 0, 1, 3145725, 0, 2, 3211261, 0, 3, 3014654, 65536, 0, 3080190, 65536, 1, 3145726, 65536, 2, 3211262, 65536, 3, 3014655, 131072, 0, 3080191, 131072, 1, 3145727, 131072, 2, 3211263, 131072, 3, 2752509, 0, 0, 2818045, 0, 1, 2883581, 0, 2, 2949117, 0, 3, 2752510, 65536, 0, 2818046, 65536, 1, 2883582, 65536, 2, 2949118, 65536, 3, 2752511, 131072, 0, 2818047, 131072, 1, 2883583, 131072, 2, 2949119, 131072, 3, 2752506, 0, 0, 2818042, 0, 1, 2883578, 0, 2, 2949114, 0, 3, 2752507, 65536, 0, 2818043, 65536, 1, 2883579, 65536, 2, 2949115, 65536, 3, 2752508, 131072, 0, 2818044, 131072, 1, 2883580, 131072, 2, 2949116, 131072, 3, 2752503, 0, 0, 2818039, 0, 1, 2883575, 0, 2, 2949111, 0, 3, 2752504, 65536, 0, 2818040, 65536, 1, 2883576, 65536, 2, 2949112, 65536, 3, 2752505, 131072, 0, 2818041, 131072, 1, 2883577, 131072, 2, 2949113, 131072, 3)
+
+[node name="Water" type="Node2D" parent="."]
+position = Vector2(100, 100)
+
+[node name="Sprite" type="Sprite2D" parent="Water"]
+material = SubResource("ShaderMaterial_luc64")
+position = Vector2(209.346, 524.965)
+scale = Vector2(2.72827, 2.60035)
+texture = ExtResource("1_i7f7c")
+
 [node name="Hink" parent="." instance=ExtResource("1_400ha")]
+
+[node name="OverworldClouds" type="ParallaxBackground" parent="."]
+layer = 2
+offset = Vector2(-250, 360)
+transform = Transform2D(1, 0, 0, 1, -250, 360)
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="OverworldClouds"]
+motion_mirroring = Vector2(320, 180)
+
+[node name="ColorRect" type="ColorRect" parent="OverworldClouds/ParallaxLayer"]
+material = SubResource("ShaderMaterial_u8x4m")
+offset_left = -127.0
+offset_top = -63.0
+offset_right = 193.0
+offset_bottom = 117.0
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
@@ -138,15 +399,6 @@ script = ExtResource("7_n0qyo")
 
 [node name="Level_1" type="Node" parent="LevelManager"]
 script = ExtResource("9_ijev4")
-
-[node name="Water" type="Node2D" parent="."]
-position = Vector2(100, 100)
-
-[node name="Sprite" type="Sprite2D" parent="Water"]
-material = SubResource("ShaderMaterial_luc64")
-position = Vector2(66.7813, 472.875)
-scale = Vector2(2.70654, 2.2207)
-texture = ExtResource("16_esuix")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
 [connection signal="cutscene_ended" from="LevelManager" to="Player" method="_enable_player_input"]

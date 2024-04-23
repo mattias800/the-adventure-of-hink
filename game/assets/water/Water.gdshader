@@ -5,9 +5,6 @@ uniform sampler2D noise2 : repeat_enable;
 uniform vec2 scroll1 = vec2(0.05, 0.05);
 uniform vec2 scroll2 = vec2(-0.05, -0.05);
 uniform vec4 tone_color : source_color;
-uniform vec4 top_color : source_color;
-uniform float light_start : hint_range(0.0, 1.0) = 0.275;
-uniform float light_end : hint_range(0.0, 1.0) = 0.4;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform float distortion_length : hint_range(-1, 1) = 0.2;
@@ -149,23 +146,31 @@ void vertex(){
 	globalposition = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
 }
 
-vec2 pixelate(vec2 ab) {
-	return round(ab * 24.0) / 24.0;
+vec2 pixelate(vec2 ab, float amount) {
+	return round(ab * amount) / amount;
 }
 
 void fragment() {
+	vec2 pixelated_uv = pixelate(UV, 512);
 	
 	float depth = texture(noise1, UV + scroll1 * TIME).r * texture(noise2, UV + scroll2 * TIME).r;
 	
+	float depth_pixelated = texture(noise1, pixelated_uv + scroll1 * TIME).r * texture(noise2, pixelated_uv + scroll2 * TIME).r;
+	
 	vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_length * vec2(depth));
 	
-	vec2 uv = pixelate(globalposition / 32.0);
+	vec2 uv = pixelate(globalposition / 32.0, 28);
 
-	vec4 top_light = smoothstep(light_start, light_end, depth) * top_color;
 	vec3 cartoon = vec3(water(uv * tile + offset, vec3(0,1,0), TIME * distortion_speed));
-	vec4 water_color = screen_color * tone_color + top_light;
 	
-	COLOR.rgb = water_color.rgb * cartoon;
+	float underwater_blue = 0.4;
+	
+	vec4 underwater_color = vec4(screen_color.r * underwater_blue, screen_color.g * underwater_blue, screen_color.b, 1.0);
+	vec4 water_color = (tone_color * 0.5) + (underwater_color * 2.0);
+	
+	vec3 final_color = water_color.rgb * cartoon;
+	
+	COLOR.rgb = final_color;
 }
 
 //void light() {
