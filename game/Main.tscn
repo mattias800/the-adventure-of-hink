@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=32 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -11,12 +11,31 @@
 [ext_resource type="Script" path="res://Background3D.gd" id="5_cvr4m"]
 [ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://mountain_background.tscn" id="6_jjcl5"]
-[ext_resource type="Script" path="res://world/LevelManager.gd" id="7_5vt73"]
-[ext_resource type="Script" path="res://world/Level_0/Level_0.gd" id="7_n0qyo"]
-[ext_resource type="Script" path="res://world/Level_1/Level_1.gd" id="9_ijev4"]
+[ext_resource type="Script" path="res://world/level_manager.gd" id="7_5vt73"]
+[ext_resource type="Script" path="res://world/Level_0/level_0.gd" id="7_n0qyo"]
+[ext_resource type="Script" path="res://world/Level_1/level_1.gd" id="9_ijev4"]
 [ext_resource type="Shader" path="res://assets/OverworldClouds.gdshader" id="10_aafx2"]
 [ext_resource type="Texture2D" uid="uid://bhp4opv054whl" path="res://assets/overworld_tileset_grass_original.png" id="10_mhbpn"]
 [ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="15_jp4qx"]
+[ext_resource type="PackedScene" uid="uid://b4tdwkgmcyjfx" path="res://overworld_player.tscn" id="18_ltafo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2gsj"]
+noise_type = 3
+frequency = 0.0312
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qprc5"]
+width = 320
+height = 180
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_i2gsj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8x4m"]
+shader = ExtResource("10_aafx2")
+shader_parameter/opacity = 0.382
+shader_parameter/density = 0.0
+shader_parameter/speed = Vector2(0.01, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_qprc5")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -284,23 +303,6 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_e33tf")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2gsj"]
-noise_type = 3
-frequency = 0.0312
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qprc5"]
-width = 320
-height = 180
-seamless = true
-noise = SubResource("FastNoiseLite_i2gsj")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8x4m"]
-shader = ExtResource("10_aafx2")
-shader_parameter/opacity = 0.382
-shader_parameter/density = 0.0
-shader_parameter/speed = Vector2(0.01, 0.01)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_qprc5")
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
 
@@ -342,6 +344,22 @@ size = Vector2i(320, 180)
 
 [node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("6_jjcl5")]
 
+[node name="OverworldClouds" type="ParallaxBackground" parent="Camera"]
+layer = 2
+offset = Vector2(-250, 360)
+transform = Transform2D(1, 0, 0, 1, -250, 360)
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera/OverworldClouds"]
+motion_mirroring = Vector2(320, 180)
+
+[node name="ColorRect" type="ColorRect" parent="Camera/OverworldClouds/ParallaxLayer"]
+material = SubResource("ShaderMaterial_u8x4m")
+offset_left = 320.0
+offset_top = 112.0
+offset_right = 640.0
+offset_bottom = 292.0
+
 [node name="Fog" type="ParallaxBackground" parent="Camera"]
 layer = 2
 
@@ -369,22 +387,6 @@ texture = ExtResource("1_i7f7c")
 
 [node name="Hink" parent="." instance=ExtResource("1_400ha")]
 
-[node name="OverworldClouds" type="ParallaxBackground" parent="."]
-layer = 2
-offset = Vector2(-250, 360)
-transform = Transform2D(1, 0, 0, 1, -250, 360)
-follow_viewport_enabled = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="OverworldClouds"]
-motion_mirroring = Vector2(320, 180)
-
-[node name="ColorRect" type="ColorRect" parent="OverworldClouds/ParallaxLayer"]
-material = SubResource("ShaderMaterial_u8x4m")
-offset_left = -127.0
-offset_top = -63.0
-offset_right = 193.0
-offset_bottom = 117.0
-
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
 position = Vector2(119, 206)
@@ -399,6 +401,10 @@ script = ExtResource("7_n0qyo")
 
 [node name="Level_1" type="Node" parent="LevelManager"]
 script = ExtResource("9_ijev4")
+
+[node name="OverworldPlayer" parent="." instance=ExtResource("18_ltafo")]
+unique_name_in_owner = true
+position = Vector2(100, 568)
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
 [connection signal="cutscene_ended" from="LevelManager" to="Player" method="_enable_player_input"]

@@ -2,14 +2,15 @@ extends Node
 
 signal player_left_tilemap
 signal player_entered_tilemap
-const TileMapByCoordinateFinder = preload("res://TileMapByCoordinateFinder.gd")
+const tile_map_by_coordinate_finder = preload("res://tile_map_by_coordinate_finder.gd")
 var active_tile_map: TileMap
 var active_level_name: String
 
-@onready var player := %Player
 signal cutscene_started
 signal cutscene_ended
 @onready var m: AudioStreamPlayer2D = %Music
+
+var player
 
 
 func _ready():
@@ -17,11 +18,14 @@ func _ready():
 
 
 func _process(_delta):
-	check_for_level_change(player.global_position)
+	if player:
+		check_for_level_change(player.global_position)
 
+func set_current_player(p: Node2D):
+	player = p
 
 func check_for_level_change(player_world_position: Vector2):
-	var result := TileMapByCoordinateFinder.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
+	var result := tile_map_by_coordinate_finder.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
 	match result:
 		[true, var tilemap, var level_name]:
 			if (tilemap != active_tile_map):
@@ -31,12 +35,12 @@ func check_for_level_change(player_world_position: Vector2):
 				active_level_name = level_name
 				player_enter_map(active_level_name, active_tile_map)
 
-		[false, _]:
+		[false, _, _]:
 			print("Could not find tilemap containing player.")
 
 
 func player_enter_map(level_name: String, tilemap: TileMap):
-	print("player_enter_map", level_name)
+	print("player_enter_map: ", level_name, tilemap.name)
 	load_entities(level_name)
 	var level_controller = get_node(level_name)
 	if level_controller and level_controller.has_method("on_player_enter_map"):
@@ -74,8 +78,8 @@ func start_timeline(timeline_name: String):
 
 
 func load_entities(level_name: String) -> void:
-	var entities   := TileMapByCoordinateFinder.find_entities_meta_for_level(get_tree().root, level_name)
-	var level_node := TileMapByCoordinateFinder.find_level_node(get_tree().root, level_name)
+	var entities   := tile_map_by_coordinate_finder.find_entities_meta_for_level(get_tree().root, level_name)
+	var level_node := tile_map_by_coordinate_finder.find_level_node(get_tree().root, level_name)
 	for entity in entities:
 		load_entity(entity, level_name, level_node)
 
@@ -100,18 +104,18 @@ func create_on_player_enter_area(entity: Dictionary, level_name: String, level_n
 	collisionShape.name = "CollisionShape2D"
 	collisionShape.set_shape(rectangleShape)
 	area.add_child(collisionShape)
-	
+
 	collisionShape.global_position = Vector2(
-		level_node.global_position.x + entity.px.x + entity.width / 2, 
+		level_node.global_position.x + entity.px.x + entity.width / 2,
 		level_node.global_position.y + entity.px.y + entity.height /2)
-	
+
 	rectangleShape.size = Vector2(entity.width, entity.height)
 
 	var trigger_name = entity.fields.Name
 	var timeline_name = entity.fields.Timeline
 
 	area.set_monitoring(true)
-	
+
 	if trigger_name or timeline_name:
 		area.body_entered.connect(func (body): on_enter_area(body, level_name, trigger_name, timeline_name))
 

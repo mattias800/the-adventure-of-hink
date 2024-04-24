@@ -14,11 +14,13 @@ const COYOTE_TIME_LIMIT: float = 0.05
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = 600.0
+
 enum JumpSource {
 	GROUND,
 	WALL,
 	AIR
 }
+
 enum {
 	IDLE,
 	JUMPING,
@@ -27,10 +29,12 @@ enum {
 	WALL_SLIDING,
 	DISABLE_INPUT
 }
+
 enum PlayerDirection {
 	LEFT,
 	RIGHT
 }
+
 var state                         := IDLE
 var player_direction              := PlayerDirection.RIGHT
 var time_since_no_ground          := 0.0
@@ -47,9 +51,6 @@ func _physics_process(delta):
 	var jumpSound := $JumpSound
 
 	var direction := Input.get_axis("walk_left", "walk_right")
-
-	if Input.is_action_just_pressed("exit_game"):
-		get_tree().quit()
 
 	match state:
 		DISABLE_INPUT:

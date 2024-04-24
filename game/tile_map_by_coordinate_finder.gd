@@ -6,7 +6,7 @@ static func find_level_node(root: Window, level_name: String) -> Node2D:
 
 static func find_all_level_nodes(root: Window) -> Array[Node]:
 	return find_levels_parent(root).get_children();
-	
+
 static func find_entities_node_for_level(root: Window, level_name: String) -> Node2D:
 	return find_level_node(root, level_name).get_node("Entities")
 

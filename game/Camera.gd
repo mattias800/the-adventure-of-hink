@@ -10,39 +10,42 @@ var look_ahead: Vector2        =  Vector2.ZERO
 var look_ahead_target: Vector2 =  Vector2.ZERO
 const VIEWPORT      := Vector2(320, 180)
 const HALF_VIEWPORT := VIEWPORT / 2
-@onready var player: CharacterBody2D = %Player
+
+var target
+
 enum {
 	IDLE,
 	CONTROLLED,
 	FOLLOWING_TARGET,
 	FOLLOWING_PLAYER
 }
+
 var state
 
 
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
-	connect_to_level("Level_1")
 	state = FOLLOWING_PLAYER
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	match state:
-		FOLLOWING_TARGET:
-			var focus := clamp_vec2_to_limits(player.get_global_transform().get_origin() - HALF_VIEWPORT)
-			global_transform.origin = lerp(global_transform.origin, focus, 0.1)
+	if target != null:
+		match state:
+			FOLLOWING_TARGET:
+				var focus := clamp_vec2_to_limits(target.get_global_transform().get_origin() - HALF_VIEWPORT)
+				global_transform.origin = lerp(global_transform.origin, focus, 0.1)
 
-		FOLLOWING_PLAYER:
-			look_ahead = lerp(look_ahead, look_ahead_target, 0.005)
-			var focus := clamp_vec2_to_limits(player.position - HALF_VIEWPORT + look_ahead)
-			position = lerp(position, focus, 0.1)
+			FOLLOWING_PLAYER:
+				look_ahead = lerp(look_ahead, look_ahead_target, 0.005)
+				var focus := clamp_vec2_to_limits(target.position - HALF_VIEWPORT + look_ahead)
+				position = lerp(position, focus, 0.1)
 
-		CONTROLLED:
-			# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
-			var target_vector := get_vector_from_center_to_player()
-			calculate_velocity(delta, target_vector)
-			update_global_position(delta)
+			CONTROLLED:
+				# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
+				var target_vector := get_vector_from_center_to_player()
+				calculate_velocity(delta, target_vector)
+				update_global_position(delta)
 
 	clamp_camera_to_limits()
 
@@ -51,26 +54,40 @@ func _physics_process(_delta):
 	clamp_camera_to_limits()
 
 
+func set_camera_target(t: Node2D):
+	target = t
+	look_ahead_target = Vector2(0, 0)
+
 func _on_player_turned(direction):
 	match direction:
 		"right":
 			look_ahead_target = Vector2(50, 0)
 		"left":
 			look_ahead_target = Vector2(-50, 0)
+		"up":
+			look_ahead_target = Vector2(0, -50)
+		"down":
+			look_ahead_target = Vector2(0, 50)
 
 
 func get_vector_from_center_to_player() -> Vector2:
-	var x: Vector2 =  player.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
+	var x: Vector2 =  target.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
 
-func connect_to_level(level_name: String) -> void:
+func connect_to_platform_level(level_name: String) -> void:
+	connect_to_level(level_name, level_name + "-tilemap-8x8")
+	
+func connect_to_overworld_level(level_name: String) -> void:
+	connect_to_level(level_name, level_name + "-tilemap-16x16")
+
+func connect_to_level(level_name: String, tilemap_name: String) -> void:
 	var level := get_tree().root.get_node("Main").get_node("Hink").get_node(level_name)
 	if not level:
 		printerr("Could not find level: ", level_name)
 		return
 
-	var level_tilemap := level.get_node(level_name + "-tilemap-8x8")
+	var level_tilemap := level.get_node(tilemap_name)
 
 	if level_tilemap:
 		print("Found TileMap")
@@ -171,5 +188,5 @@ func get_tilemap_size(source_tilemap: TileMap) -> Vector2i:
 	)
 
 
-func _on_player_player_entered_tilemap(level_name: String):
-	connect_to_level(level_name)
+func _on_player_player_entered_tilemap(level_name: String, tilemap: TileMap):
+	connect_to_platform_level(level_name)
