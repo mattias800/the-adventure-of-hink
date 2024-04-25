@@ -3514,7 +3514,7 @@
 			"padding": 0,
 			"tags": [],
 			"tagsSourceEnumUid": 587,
-			"enumTags": [ { "enumValueId": "Wall", "tileIds": [156,157,158,159,160,161,162,168,169,171,172,173,174,180,181,183,185,192,193,194,195,198,199,200,201,204,205,206,207,216,217,218,219] }, { "enumValueId": "Destructible", "tileIds": [] } ],
+			"enumTags": [ { "enumValueId": "Wall", "tileIds": [70,156,157,158,159,160,161,162,168,169,171,172,173,174,180,181,183,185,192,193,194,195,198,199,200,201,204,205,206,207,216,217,218,219] }, { "enumValueId": "Destructible", "tileIds": [] } ],
 			"customData": [],
 			"savedSelections": [],
 			"cachedPixelData": {

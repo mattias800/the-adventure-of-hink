@@ -47,11 +47,12 @@ func _process(delta):
 				calculate_velocity(delta, target_vector)
 				update_global_position(delta)
 
-	clamp_camera_to_limits()
+	# clamp_camera_to_limits()
 
 
 func _physics_process(_delta):
-	clamp_camera_to_limits()
+	pass
+	# clamp_camera_to_limits()
 
 
 func set_camera_target(t: Node2D):
@@ -77,7 +78,7 @@ func get_vector_from_center_to_player() -> Vector2:
 
 func connect_to_platform_level(level_name: String) -> void:
 	connect_to_level(level_name, level_name + "-tilemap-8x8")
-	
+
 func connect_to_overworld_level(level_name: String) -> void:
 	connect_to_level(level_name, level_name + "-tilemap-16x16")
 
