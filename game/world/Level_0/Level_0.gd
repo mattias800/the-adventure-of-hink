@@ -12,12 +12,11 @@ var watched = {
 @onready var music := %Music
 
 func on_player_enter_map():
-	pass
-	#if watched["level0start"] == false:
-#		music.play_music(music.songs.early_morning)
-#		# level_manager.play_music("res://assets/audio/music/early_morning_guitar.mp3")
-#		level_manager.start_timeline("level0start")		
-#	watched["level0start"] = true
+	if watched["level0start"] == false:
+		music.play_music(music.songs.early_morning)
+		# level_manager.play_music("res://assets/audio/music/early_morning_guitar.mp3")
+		level_manager.start_timeline("level0start")		
+	watched["level0start"] = true
 
 func on_player_enter(trigger_name: String):
 	match trigger_name:
