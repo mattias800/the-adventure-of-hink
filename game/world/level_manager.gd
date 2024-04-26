@@ -133,30 +133,13 @@ func create_portal_entity(entity: Dictionary, level_name: String, level_node: No
 
 func on_player_enter_portal(body, target: Dictionary):
 	if body.is_in_group("Player"):
-		print("Player entered portal: ")
-		print("target:")
-		print(target)
 		var target_level = ldtk_util.find_level_node_by_level_iid(get_tree().root, target["levelIid"])
 		var target_portal = ldtk_util.find_entity_by_iid(get_tree().root, target["entityIid"])
-		print("target_level:")
-		print(target_level.name)
 		if target_portal:
-			print("target_portal:")
-			print(target_portal)
 			var arrival_offset = ldtk_util.get_vector_from_direction(target_portal.fields["ArrivalPlacement"])
-			print("arrival_offset")
-			print(arrival_offset)
 			var world_x = target_portal.px[0]
 			var world_y = target_portal.px[1]
 			var next_position_for_player = target_level.global_position + Vector2(world_x, world_y) + arrival_offset
-			print("target_level.global_position")
-			print(target_level.global_position)
-			print("position in map")
-			print(Vector2(world_x, world_y))
-			print("arrival_offset")
-			print(arrival_offset)
-			print("next_position_for_player")
-			print(next_position_for_player)
 			teleport_player_to_level(target_level.name, next_position_for_player)
 		else:
 			push_error("Found no portal entity.")

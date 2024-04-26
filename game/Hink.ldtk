@@ -4351,33 +4351,6 @@
 							"fieldInstances": [],
 							"__worldX": 104,
 							"__worldY": 200
-						},
-						{
-							"__identifier": "Portal",
-							"__grid": [4,20],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#D77643",
-							"iid": "92edb5f0-fec0-11ee-98ac-614139221ba5",
-							"width": 16,
-							"height": 16,
-							"defUid": 679,
-							"px": [32,160],
-							"fieldInstances": [
-								{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-									"entityIid": "828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e",
-									"layerIid": "c24bc6d1-fec0-11ee-98ac-09a15cbdce39",
-									"levelIid": "44dc40d0-d7b0-11ee-9a0c-1da35f469cbc",
-									"worldIid": "e841ae51-d7b0-11ee-9de4-f1109f325cde"
-								}, "__tile": null, "defUid": 680, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e"]
-								}] },
-								{ "__identifier": "ArrivalPlacement", "__type": "LocalEnum.Direction", "__value": "Right", "__tile": null, "defUid": 688, "realEditorValues": [] }
-							],
-							"__worldX": 32,
-							"__worldY": 216
 						}
 					]
 				},
@@ -7266,7 +7239,54 @@
 					"seed": 9517963,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Portal",
+							"__grid": [38,0],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "2204b330-fec0-11ee-bd2b-5128f4b81db9",
+							"width": 16,
+							"height": 136,
+							"defUid": 679,
+							"px": [304,0],
+							"fieldInstances": [
+								{ "__identifier": "Target", "__type": "EntityRef", "__value": {
+									"entityIid": "828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e",
+									"layerIid": "c24bc6d1-fec0-11ee-98ac-09a15cbdce39",
+									"levelIid": "44dc40d0-d7b0-11ee-9a0c-1da35f469cbc",
+									"worldIid": "e841ae51-d7b0-11ee-9de4-f1109f325cde"
+								}, "__tile": null, "defUid": 680, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e"]
+								}] },
+								{ "__identifier": "ArrivalPlacement", "__type": "LocalEnum.Direction", "__value": "Right", "__tile": null, "defUid": 688, "realEditorValues": [] }
+							],
+							"__worldX": 1792,
+							"__worldY": 56
+						},
+						{
+							"__identifier": "Portal",
+							"__grid": [33,15],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "3527d6e0-fec0-11ee-bd2b-136f461dda06",
+							"width": 16,
+							"height": 16,
+							"defUid": 679,
+							"px": [264,120],
+							"fieldInstances": [
+								{ "__identifier": "Target", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 680, "realEditorValues": [] },
+								{ "__identifier": "ArrivalPlacement", "__type": "LocalEnum.Direction", "__value": "Right", "__tile": null, "defUid": 688, "realEditorValues": [] }
+							],
+							"__worldX": 1752,
+							"__worldY": 176
+						}
+					]
 				},
 				{
 					"__identifier": "OverworldDoors",
@@ -7614,13 +7634,13 @@
 							"px": [88,136],
 							"fieldInstances": [
 								{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-									"entityIid": "92edb5f0-fec0-11ee-98ac-614139221ba5",
-									"layerIid": "c24b2a90-fec0-11ee-98ac-99ae0f3d5b60",
-									"levelIid": "e841d560-d7b0-11ee-9de4-bf6d8ebc4ce4",
+									"entityIid": "3527d6e0-fec0-11ee-bd2b-136f461dda06",
+									"layerIid": "c24bc6d0-fec0-11ee-98ac-33515bfc6aba",
+									"levelIid": "e5f978c0-d7b0-11ee-9de4-5911cf59cfa1",
 									"worldIid": "e841ae51-d7b0-11ee-9de4-f1109f325cde"
 								}, "__tile": null, "defUid": 680, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["92edb5f0-fec0-11ee-98ac-614139221ba5"]
+									"params": ["3527d6e0-fec0-11ee-bd2b-136f461dda06"]
 								}] },
 								{ "__identifier": "ArrivalPlacement", "__type": "LocalEnum.Direction", "__value": "Right", "__tile": null, "defUid": 688, "realEditorValues": [] }
 							],
