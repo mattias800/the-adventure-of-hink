@@ -11,7 +11,7 @@
 	"iid": "e841ae50-d7b0-11ee-9de4-41d149ebf50c",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 679,
+	"nextUid": 687,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -3476,6 +3476,79 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "Portal",
+			"uid": 679,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 16,
+			"height": 16,
+			"resizableX": true,
+			"resizableY": true,
+			"minWidth": 16,
+			"maxWidth": null,
+			"minHeight": 16,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#D77643",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "Target",
+					"doc": null,
+					"__type": "EntityRef",
+					"uid": 680,
+					"type": "F_EntityRef",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "RefLinkBetweenCenters",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "CurvedArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -3544,12 +3617,89 @@
 				"averageColors": "f732f732f742665875a687798a8400000000000000007cbbe694f784e694f785f683f794c6a675acc69631a454846795f684f744f784f784f743f794f6a7f5ccf6a761a463847586e6a4f683e694f794f684f784f777f4adf77741a444844774f784f784f794f694f873f873f768f39ef76741a453846685f783f694f784f78475947694f756f47bf64531a444845773f694f774f784f874e594f5a4b6b485b485b4a633e6b4e5b4f784f864f694f874f5a4f594b5a4d5b4d5b4a743f5b4f5b4f5a4f594f594f5a4e594f59478435673567397438843967341a441a441a431a441a431a421a441a441a441a431a431a4a65656562545765635553544686878676a647a648a749743e889e888e889e889e964e964e964e964eba9eba9eba9eba9"
 			}
 		}
-	], "enums": [{ "identifier": "Collisions", "uid": 587, "values": [ { "id": "Wall", "tileRect": null, "color": 12470831 }, { "id": "Destructible", "tileRect": null, "color": 2171135 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [
+	], "enums": [
+		{ "identifier": "Collisions", "uid": 587, "values": [ { "id": "Wall", "tileRect": null, "color": 12470831 }, { "id": "Destructible", "tileRect": null, "color": 2171135 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "LevelType", "uid": 684, "values": [ { "id": "Platform", "tileRect": null, "color": 12470831 }, { "id": "Overworld", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+	], "externalEnums": [], "levelFields": [
 		{
 			"identifier": "FogEnabled",
 			"doc": null,
 			"__type": "Bool",
 			"uid": 678,
+			"type": "F_Bool",
+			"isArray": false,
+			"canBeNull": false,
+			"arrayMinLength": null,
+			"arrayMaxLength": null,
+			"editorDisplayMode": "Hidden",
+			"editorDisplayScale": 1,
+			"editorDisplayPos": "Above",
+			"editorLinkStyle": "StraightArrow",
+			"editorDisplayColor": null,
+			"editorAlwaysShow": false,
+			"editorShowInWorld": true,
+			"editorCutLongValues": true,
+			"editorTextSuffix": null,
+			"editorTextPrefix": null,
+			"useForSmartColor": false,
+			"exportToToc": false,
+			"searchable": false,
+			"min": null,
+			"max": null,
+			"regex": null,
+			"acceptFileTypes": null,
+			"defaultOverride": null,
+			"textLanguageMode": null,
+			"symmetricalRef": false,
+			"autoChainRef": true,
+			"allowOutOfLevelRef": true,
+			"allowedRefs": "OnlySame",
+			"allowedRefsEntityUid": null,
+			"allowedRefTags": [],
+			"tilesetUid": null
+		},
+		{
+			"identifier": "LevelType",
+			"doc": null,
+			"__type": "LocalEnum.LevelType",
+			"uid": 685,
+			"type": "F_Enum(684)",
+			"isArray": false,
+			"canBeNull": false,
+			"arrayMinLength": null,
+			"arrayMaxLength": null,
+			"editorDisplayMode": "Hidden",
+			"editorDisplayScale": 1,
+			"editorDisplayPos": "Above",
+			"editorLinkStyle": "StraightArrow",
+			"editorDisplayColor": null,
+			"editorAlwaysShow": false,
+			"editorShowInWorld": true,
+			"editorCutLongValues": true,
+			"editorTextSuffix": null,
+			"editorTextPrefix": null,
+			"useForSmartColor": false,
+			"exportToToc": false,
+			"searchable": false,
+			"min": null,
+			"max": null,
+			"regex": null,
+			"acceptFileTypes": null,
+			"defaultOverride": null,
+			"textLanguageMode": null,
+			"symmetricalRef": false,
+			"autoChainRef": true,
+			"allowOutOfLevelRef": true,
+			"allowedRefs": "OnlySame",
+			"allowedRefsEntityUid": null,
+			"allowedRefTags": [],
+			"tilesetUid": null
+		},
+		{
+			"identifier": "OverheadCloudsEnabled",
+			"doc": null,
+			"__type": "Bool",
+			"uid": 686,
 			"type": "F_Bool",
 			"isArray": false,
 			"canBeNull": false,
@@ -3603,10 +3753,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Platform", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Platform"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 686, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -4148,6 +4305,30 @@
 							"fieldInstances": [],
 							"__worldX": 104,
 							"__worldY": 200
+						},
+						{
+							"__identifier": "Portal",
+							"__grid": [4,20],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "92edb5f0-fec0-11ee-98ac-614139221ba5",
+							"width": 16,
+							"height": 16,
+							"defUid": 679,
+							"px": [32,160],
+							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
+								"entityIid": "828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e",
+								"layerIid": "c24bc6d1-fec0-11ee-98ac-09a15cbdce39",
+								"levelIid": "44dc40d0-d7b0-11ee-9a0c-1da35f469cbc",
+								"worldIid": "e841ae51-d7b0-11ee-9de4-f1109f325cde"
+							}, "__tile": null, "defUid": 680, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e"]
+							}] }],
+							"__worldX": 32,
+							"__worldY": 216
 						}
 					]
 				},
@@ -4282,10 +4463,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 678, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ false ]
+				}] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Platform", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Platform"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 686, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -5368,10 +5556,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Platform", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Platform"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 686, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -5839,10 +6034,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Platform", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Platform"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 686, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -6458,10 +6660,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
-				"id": "V_Bool",
-				"params": [ true ]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 678, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Platform", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Platform"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 686, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -7141,7 +7350,17 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "FogEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 678, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "FogEnabled", "__type": "Bool", "__value": false, "__tile": null, "defUid": 678, "realEditorValues": [] },
+				{ "__identifier": "LevelType", "__type": "LocalEnum.LevelType", "__value": "Overworld", "__tile": null, "defUid": 685, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["Overworld"]
+				}] },
+				{ "__identifier": "OverheadCloudsEnabled", "__type": "Bool", "__value": true, "__tile": null, "defUid": 686, "realEditorValues": [{
+					"id": "V_Bool",
+					"params": [ true ]
+				}] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "PlatformIntGrid",
@@ -7331,7 +7550,32 @@
 					"seed": 1348901,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{
+							"__identifier": "Portal",
+							"__grid": [11,17],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "828fccc0-fec0-11ee-98ac-e9a4b6e8fb6e",
+							"width": 16,
+							"height": 16,
+							"defUid": 679,
+							"px": [88,136],
+							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
+								"entityIid": "92edb5f0-fec0-11ee-98ac-614139221ba5",
+								"layerIid": "c24b2a90-fec0-11ee-98ac-99ae0f3d5b60",
+								"levelIid": "e841d560-d7b0-11ee-9de4-bf6d8ebc4ce4",
+								"worldIid": "e841ae51-d7b0-11ee-9de4-f1109f325cde"
+							}, "__tile": null, "defUid": 680, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["92edb5f0-fec0-11ee-98ac-614139221ba5"]
+							}] }],
+							"__worldX": 96,
+							"__worldY": 568
+						}
+					]
 				},
 				{
 					"__identifier": "OverworldDoors",

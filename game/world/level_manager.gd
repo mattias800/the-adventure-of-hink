@@ -10,6 +10,11 @@ signal cutscene_started
 signal cutscene_ended
 @onready var m: AudioStreamPlayer2D = %Music
 
+enum LevelType {
+	PLATFORM,
+	OVERWORLD
+}
+
 var player
 
 
@@ -45,16 +50,22 @@ func player_enter_map(level_name: String, tilemap: TileMap):
 	var level_controller = get_node(level_name)
 	if level_controller and level_controller.has_method("on_player_enter_map"):
 		level_controller.on_player_enter_map()
-	player_entered_tilemap.emit(tilemap.get_parent().name)
+		
+	var level_node = tilemap.get_parent()	
+	player_entered_tilemap.emit(level_node.name, tilemap, get_level_metadata(level_node))
 
-
+func get_level_metadata(level_node: Node2D):
+	return level_node.get_meta("LDtk_level_fields")
+	
 func player_leave_map(level_name: String, tilemap: TileMap):
 	print("player_leave_map", level_name)
 	# unload_entities(level_name)
 	var level_controller = get_node(level_name)
 	if level_controller and level_controller.has_method("on_player_leave_map"):
 		level_controller.on_player_leave_map()
-	player_left_tilemap.emit(tilemap.get_parent().name)
+		
+	var level_node = tilemap.get_parent()
+	player_left_tilemap.emit(level_node.name, tilemap, get_level_metadata(level_node))
 
 
 func play_music(path):

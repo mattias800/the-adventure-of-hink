@@ -12,6 +12,8 @@ const VIEWPORT      := Vector2(320, 180)
 const HALF_VIEWPORT := VIEWPORT / 2
 
 var target
+@onready var fog = $Fog
+@onready var overheadClouds = $OverworldClouds
 
 enum {
 	IDLE,
@@ -47,12 +49,11 @@ func _process(delta):
 				calculate_velocity(delta, target_vector)
 				update_global_position(delta)
 
-	# clamp_camera_to_limits()
+	clamp_camera_to_limits()
 
 
 func _physics_process(_delta):
-	pass
-	# clamp_camera_to_limits()
+	clamp_camera_to_limits()
 
 
 func set_camera_target(t: Node2D):
@@ -83,6 +84,7 @@ func connect_to_overworld_level(level_name: String) -> void:
 	connect_to_level(level_name, level_name + "-tilemap-16x16")
 
 func connect_to_level(level_name: String, tilemap_name: String) -> void:
+	print("connect_to_level: " + level_name + " " + tilemap_name)
 	var level := get_tree().root.get_node("Main").get_node("Hink").get_node(level_name)
 	if not level:
 		printerr("Could not find level: ", level_name)
@@ -188,6 +190,17 @@ func get_tilemap_size(source_tilemap: TileMap) -> Vector2i:
 		tilemap_rect.end.y - tilemap_rect.position.y
 	)
 
-
-func _on_player_player_entered_tilemap(level_name: String, tilemap: TileMap):
-	connect_to_platform_level(level_name)
+func _on_level_manager_player_entered_tilemap(level_name: String, tilemap: TileMap, metadata: Dictionary):
+	# TODO Check if tilemap is overworld or platform
+	print(metadata)
+	fog.visible = metadata["FogEnabled"]
+	overheadClouds.visible = metadata["OverheadCloudsEnabled"]
+	
+	match metadata["LevelType"]:
+		"Overworld":
+			connect_to_platform_level(level_name)
+		"Platform":
+			connect_to_platform_level(level_name)
+		_:
+			push_error("Missing LevelType metadata set on level.")
+			

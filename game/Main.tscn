@@ -337,12 +337,10 @@ stream = ExtResource("4_dvji8")
 panning_strength = 0.0
 
 [node name="Background" type="Sprite2D" parent="Camera"]
-visible = false
 texture = ExtResource("1_i7f7c")
 centered = false
 
 [node name="Background3D" type="Sprite2D" parent="Camera"]
-visible = false
 texture = ExtResource("1_i7f7c")
 centered = false
 script = ExtResource("5_cvr4m")
@@ -355,7 +353,6 @@ size = Vector2i(320, 180)
 
 [node name="Fog" type="ParallaxBackground" parent="Camera"]
 layer = 2
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Camera/Fog"]
 motion_mirroring = Vector2(320, 180)
@@ -366,6 +363,7 @@ offset_right = 320.0
 offset_bottom = 180.0
 
 [node name="OverworldClouds" type="ColorRect" parent="Camera"]
+visible = false
 z_index = 100
 texture_filter = 1
 material = SubResource("ShaderMaterial_u8x4m")
@@ -407,9 +405,9 @@ script = ExtResource("9_ijev4")
 
 [node name="OverworldPlayer" parent="." instance=ExtResource("18_ltafo")]
 unique_name_in_owner = true
-position = Vector2(100, 568)
+position = Vector2(141, 567)
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
 [connection signal="cutscene_ended" from="LevelManager" to="Player" method="_enable_player_input"]
 [connection signal="cutscene_started" from="LevelManager" to="Player" method="_disable_player_input"]
-[connection signal="player_entered_tilemap" from="LevelManager" to="Camera" method="_on_player_player_entered_tilemap"]
+[connection signal="player_entered_tilemap" from="LevelManager" to="Camera" method="_on_level_manager_player_entered_tilemap"]
