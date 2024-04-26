@@ -7,12 +7,18 @@ extends Node2D
 
 func _ready():
 	print("Starting the game.")
-	camera.connect_to_platform_level("Level_0")
-	level_manager.set_current_player(platform_player)
-	camera.set_camera_target(platform_player)
-	#camera.connect_to_overworld_level("Level_5")
-	#level_manager.set_current_player(overworld_player)
-	#camera.set_camera_target(overworld_player)
+	overworld_player.disable()
+	platform_player.disable()
+	
+	#camera.connect_to_platform_level("Level_0")
+	#level_manager.set_current_player(platform_player)
+	#camera.set_camera_target(platform_player)
+	#platform_player.enable()
+	
+	camera.connect_to_overworld_level("Level_5")
+	level_manager.set_current_player(overworld_player)
+	camera.set_camera_target(overworld_player)
+	overworld_player.enable()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("exit_game"):

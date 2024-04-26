@@ -403,7 +403,7 @@ script = ExtResource("7_n0qyo")
 [node name="Level_1" type="Node" parent="LevelManager"]
 script = ExtResource("9_ijev4")
 
-[node name="OverworldPlayer" parent="." instance=ExtResource("18_ltafo")]
+[node name="OverworldPlayer" parent="." groups=["Player"] instance=ExtResource("18_ltafo")]
 unique_name_in_owner = true
 position = Vector2(141, 567)
 

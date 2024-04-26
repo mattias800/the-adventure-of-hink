@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 enum {
-	INACTIVE,
+	DISABLED,
 	IDLE
 }
 
@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	var direction = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
 	
 	match state:
-		INACTIVE:
+		DISABLED:
 			pass
 		IDLE:
 			if direction.length() > 0.0:
@@ -59,7 +59,7 @@ func enter_state(next_state):
 	var a := $AnimatedSprite2D
 	
 	match state:
-		INACTIVE:
+		DISABLED:
 			a.play("idle")
 		IDLE:
 			a.play("idle")
@@ -70,8 +70,13 @@ func state_to_string(s) -> String:
 	match s:
 		IDLE:
 			return "IDLE"
-		INACTIVE:
-			return "INACTIVE"
+		DISABLED:
+			return "DISABLED"
 		_:
 			return ""
 
+func enable():
+	enter_state(IDLE)
+	
+func disable():
+	enter_state(DISABLED)

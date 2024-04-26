@@ -191,14 +191,12 @@ func get_tilemap_size(source_tilemap: TileMap) -> Vector2i:
 	)
 
 func _on_level_manager_player_entered_tilemap(level_name: String, tilemap: TileMap, metadata: Dictionary):
-	# TODO Check if tilemap is overworld or platform
-	print(metadata)
 	fog.visible = metadata["FogEnabled"]
 	overheadClouds.visible = metadata["OverheadCloudsEnabled"]
 	
 	match metadata["LevelType"]:
 		"Overworld":
-			connect_to_platform_level(level_name)
+			connect_to_overworld_level(level_name)
 		"Platform":
 			connect_to_platform_level(level_name)
 		_:

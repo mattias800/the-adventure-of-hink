@@ -27,7 +27,8 @@ enum {
 	FALLING,
 	GRABBING_WALL,
 	WALL_SLIDING,
-	DISABLE_INPUT
+	DISABLE_INPUT,
+	DISABLED
 }
 
 enum PlayerDirection {
@@ -53,6 +54,8 @@ func _physics_process(delta):
 	var direction := Input.get_axis("walk_left", "walk_right")
 
 	match state:
+		DISABLED:
+			return
 		DISABLE_INPUT:
 			return
 		GRABBING_WALL:
@@ -273,3 +276,9 @@ func _disable_player_input():
 
 func _enable_player_input():
 	enter_state(IDLE)
+
+func enable():
+	enter_state(IDLE)
+	
+func disable():
+	enter_state(DISABLED)

@@ -2,13 +2,17 @@ extends Node
 
 signal player_left_tilemap
 signal player_entered_tilemap
-const tile_map_by_coordinate_finder = preload("res://tile_map_by_coordinate_finder.gd")
+const ldtk_util = preload("res://ldtk_util.gd")
 var active_tile_map: TileMap
 var active_level_name: String
 
 signal cutscene_started
 signal cutscene_ended
+
 @onready var m: AudioStreamPlayer2D = %Music
+@onready var camera: Camera2D = %Camera
+@onready var platform_player := %Player
+@onready var overworld_player := %OverworldPlayer
 
 enum LevelType {
 	PLATFORM,
@@ -30,7 +34,7 @@ func set_current_player(p: Node2D):
 	player = p
 
 func check_for_level_change(player_world_position: Vector2):
-	var result := tile_map_by_coordinate_finder.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
+	var result := ldtk_util.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
 	match result:
 		[true, var tilemap, var level_name]:
 			if (tilemap != active_tile_map):
@@ -50,20 +54,20 @@ func player_enter_map(level_name: String, tilemap: TileMap):
 	var level_controller = get_node(level_name)
 	if level_controller and level_controller.has_method("on_player_enter_map"):
 		level_controller.on_player_enter_map()
-		
-	var level_node = tilemap.get_parent()	
+
+	var level_node = tilemap.get_parent()
 	player_entered_tilemap.emit(level_node.name, tilemap, get_level_metadata(level_node))
 
 func get_level_metadata(level_node: Node2D):
 	return level_node.get_meta("LDtk_level_fields")
-	
+
 func player_leave_map(level_name: String, tilemap: TileMap):
 	print("player_leave_map", level_name)
 	# unload_entities(level_name)
 	var level_controller = get_node(level_name)
 	if level_controller and level_controller.has_method("on_player_leave_map"):
 		level_controller.on_player_leave_map()
-		
+
 	var level_node = tilemap.get_parent()
 	player_left_tilemap.emit(level_node.name, tilemap, get_level_metadata(level_node))
 
@@ -71,7 +75,6 @@ func player_leave_map(level_name: String, tilemap: TileMap):
 func play_music(path):
 	m.stream = load_mp3(path)
 	m.play()
-
 
 func load_mp3(path) -> AudioStreamMP3:
 	var file  := FileAccess.open(path, FileAccess.READ)
@@ -89,8 +92,8 @@ func start_timeline(timeline_name: String):
 
 
 func load_entities(level_name: String) -> void:
-	var entities   := tile_map_by_coordinate_finder.find_entities_meta_for_level(get_tree().root, level_name)
-	var level_node := tile_map_by_coordinate_finder.find_level_node(get_tree().root, level_name)
+	var entities   := ldtk_util.find_entities_meta_for_level(get_tree().root, level_name)
+	var level_node := ldtk_util.find_level_node(get_tree().root, level_name)
 	for entity in entities:
 		load_entity(entity, level_name, level_node)
 
@@ -99,12 +102,67 @@ func load_entity(entity: Dictionary, level_name: String, level_node: Node2D):
 	print("load entity: " + entity.identifier)
 	match entity.identifier:
 		"OnPlayerEnter":
-			create_on_player_enter_area(entity, level_name, level_node)
+			create_on_player_enter_entity(entity, level_name, level_node)
+		"Portal":
+			create_portal_entity(entity, level_name, level_node)
 		"SpawnPlayer":
 			pass
 
 
-func create_on_player_enter_area(entity: Dictionary, level_name: String, level_node: Node2D):
+func create_on_player_enter_entity(entity: Dictionary, level_name: String, level_node: Node2D):
+	var trigger_name = entity.fields.Name
+	var timeline_name = entity.fields.Timeline
+	if trigger_name or timeline_name:
+		create_on_player_enter_area2d(entity, level_name, level_node, func (body): on_player_enter_entity(body, level_name, trigger_name, timeline_name))
+
+func on_player_enter_entity(body, level_name: String, trigger_name, timeline_name):
+	if body.is_in_group("Player"):
+		if trigger_name:
+			var level_controller = get_node(level_name)
+			if (level_controller and level_controller.has_method("on_player_enter")):
+				level_controller.on_player_enter(trigger_name)
+		if timeline_name:
+			start_timeline(timeline_name)
+
+
+func create_portal_entity(entity: Dictionary, level_name: String, level_node: Node2D):
+	var target = entity.fields["Target"]
+
+	if target:
+		create_on_player_enter_area2d(entity, level_name, level_node, func (body): on_player_enter_portal(body, target))
+
+func on_player_enter_portal(body, target: Dictionary):
+	if body.is_in_group("Player"):
+		print("Player entered portal: ")
+		print("target:")
+		print(target)
+		var target_level = ldtk_util.find_level_node_by_level_iid(get_tree().root, target["levelIid"])
+		var target_portal = ldtk_util.find_entity_by_iid(get_tree().root, target["entityIid"])
+		print("target_level:")
+		print(target_level.name)
+		if target_portal:
+			print("target_portal:")
+			print(target_portal)
+			var arrival_offset = ldtk_util.get_vector_from_direction(target_portal.fields["ArrivalPlacement"])
+			print("arrival_offset")
+			print(arrival_offset)
+			var world_x = target_portal.px[0]
+			var world_y = target_portal.px[1]
+			var next_position_for_player = target_level.global_position + Vector2(world_x, world_y) + arrival_offset
+			print("target_level.global_position")
+			print(target_level.global_position)
+			print("position in map")
+			print(Vector2(world_x, world_y))
+			print("arrival_offset")
+			print(arrival_offset)
+			print("next_position_for_player")
+			print(next_position_for_player)
+			teleport_player_to_level(target_level.name, next_position_for_player)
+		else:
+			push_error("Found no portal entity.")
+
+# Create Area2D which triggers when player enters.
+func create_on_player_enter_area2d(entity: Dictionary, level_name: String, level_node: Node2D, on_player_enter):
 	var area           := Area2D.new()
 	var collisionShape := CollisionShape2D.new()
 	var rectangleShape := RectangleShape2D.new()
@@ -122,22 +180,29 @@ func create_on_player_enter_area(entity: Dictionary, level_name: String, level_n
 
 	rectangleShape.size = Vector2(entity.width, entity.height)
 
-	var trigger_name = entity.fields.Name
-	var timeline_name = entity.fields.Timeline
-
 	area.set_monitoring(true)
 
-	if trigger_name or timeline_name:
-		area.body_entered.connect(func (body): on_enter_area(body, level_name, trigger_name, timeline_name))
+	area.body_entered.connect(on_player_enter)
 
 	get_tree().root.get_node("Main").add_child(area)
 
-func on_enter_area(body, level_name: String, trigger_name, timeline_name):
-	if body.is_in_group("Player"):
-		if trigger_name:
-			var level_controller = get_node(level_name)
-			if (level_controller and level_controller.has_method("on_player_enter")):
-				level_controller.on_player_enter(trigger_name)
-		if timeline_name:
-			start_timeline(timeline_name)
-
+func teleport_player_to_level(level_name: String, next_global_position_for_player: Vector2):
+	print("teleport_player_to_level")
+	var level_node = ldtk_util.find_level_node(get_tree().root, level_name)
+	var settings = ldtk_util.get_level_settings(level_node)
+	print(level_node)
+	print(settings)
+	camera.connect_to_platform_level(level_name)
+	if settings["LevelType"] == "Overworld":
+		overworld_player.global_position = next_global_position_for_player
+		set_current_player(overworld_player)
+		camera.set_camera_target(overworld_player)
+		overworld_player.enable()
+		platform_player.disable()
+	if settings["LevelType"] == "Platform":
+		platform_player.global_position = next_global_position_for_player
+		set_current_player(platform_player)
+		camera.set_camera_target(platform_player)
+		overworld_player.disable()
+		platform_player.enable()
+			
