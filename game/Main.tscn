@@ -317,10 +317,10 @@ shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjbc1"]
 shader = ExtResource("9_h3k37")
-shader_parameter/circle_size = 0.295
+shader_parameter/circle_size = 1.499
 shader_parameter/screen_width = 320.0
 shader_parameter/screen_height = 180.0
-shader_parameter/focus_pos = Vector2(320, 90)
+shader_parameter/focus_pos = Vector2(180, 100)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
@@ -428,9 +428,10 @@ layer = 100
 z_index = 200
 z_as_relative = false
 material = SubResource("ShaderMaterial_wjbc1")
-offset_top = -1.0
-offset_right = 320.0
-offset_bottom = 179.0
+offset_left = -45.0
+offset_top = -42.0
+offset_right = 464.0
+offset_bottom = 255.0
 color = Color(0, 0, 0, 1)
 
 [node name="EnvironmentManager" type="Node" parent="."]
