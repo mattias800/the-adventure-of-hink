@@ -1,6 +1,6 @@
 extends Node
 
-const LdtkUtil = preload("res://src/LdtkUtil.gd")
+const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
 @onready var platform_player := %Player
 @onready var overworld_player := %OverworldPlayer

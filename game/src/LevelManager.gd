@@ -1,6 +1,6 @@
 extends Node
 
-const LdtkUtil = preload("res://src/LdtkUtil.gd")
+const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
 signal player_left_tilemap
 signal player_entered_tilemap
