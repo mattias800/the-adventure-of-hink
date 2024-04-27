@@ -232,10 +232,8 @@ func enter_state(next_state):
 
 	state = next_state
 
-
 func add_velocity_x(val: float):
 	velocity.x = clamp(velocity.x + val, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
-
 
 func state_to_string(s) -> String:
 	match s:

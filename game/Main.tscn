@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=38 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" path="res://music/Tracks.gd" id="18_2mgg1"]
 [ext_resource type="PackedScene" uid="uid://b4tdwkgmcyjfx" path="res://entities/overworld_player.tscn" id="18_ltafo"]
 [ext_resource type="Script" path="res://src/CutsceneManager.gd" id="20_muooe"]
+[ext_resource type="Script" path="res://src/EnvironmentManager.gd" id="22_4y78a"]
+[ext_resource type="Script" path="res://src/GameManager.gd" id="23_uanml"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -338,6 +340,7 @@ size = Vector2i(320, 180)
 [node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("6_jjcl5")]
 
 [node name="Fog" type="ParallaxBackground" parent="Camera"]
+unique_name_in_owner = true
 layer = 2
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Camera/Fog"]
@@ -349,7 +352,7 @@ offset_right = 320.0
 offset_bottom = 180.0
 
 [node name="OverworldClouds" type="ColorRect" parent="Camera"]
-visible = false
+unique_name_in_owner = true
 z_index = 100
 texture_filter = 1
 material = SubResource("ShaderMaterial_u8x4m")
@@ -363,10 +366,10 @@ tile_set = SubResource("TileSet_l2l2g")
 format = 2
 layer_0/tile_data = PackedInt32Array(3014647, 0, 0, 3080183, 0, 1, 3145719, 0, 2, 3211255, 0, 3, 3014648, 65536, 0, 3080184, 65536, 1, 3145720, 65536, 2, 3211256, 65536, 3, 3014649, 131072, 0, 3080185, 131072, 1, 3145721, 131072, 2, 3211257, 131072, 3, 3014650, 0, 0, 3080186, 0, 1, 3145722, 0, 2, 3211258, 0, 3, 3014651, 65536, 0, 3080187, 65536, 1, 3145723, 65536, 2, 3211259, 65536, 3, 3014652, 131072, 0, 3080188, 131072, 1, 3145724, 131072, 2, 3211260, 131072, 3, 3014653, 0, 0, 3080189, 0, 1, 3145725, 0, 2, 3211261, 0, 3, 3014654, 65536, 0, 3080190, 65536, 1, 3145726, 65536, 2, 3211262, 65536, 3, 3014655, 131072, 0, 3080191, 131072, 1, 3145727, 131072, 2, 3211263, 131072, 3, 2752509, 0, 0, 2818045, 0, 1, 2883581, 0, 2, 2949117, 0, 3, 2752510, 65536, 0, 2818046, 65536, 1, 2883582, 65536, 2, 2949118, 65536, 3, 2752511, 131072, 0, 2818047, 131072, 1, 2883583, 131072, 2, 2949119, 131072, 3, 2752506, 0, 0, 2818042, 0, 1, 2883578, 0, 2, 2949114, 0, 3, 2752507, 65536, 0, 2818043, 65536, 1, 2883579, 65536, 2, 2949115, 65536, 3, 2752508, 131072, 0, 2818044, 131072, 1, 2883580, 131072, 2, 2949116, 131072, 3, 2752503, 0, 0, 2818039, 0, 1, 2883575, 0, 2, 2949111, 0, 3, 2752504, 65536, 0, 2818040, 65536, 1, 2883576, 65536, 2, 2949112, 65536, 3, 2752505, 131072, 0, 2818041, 131072, 1, 2883577, 131072, 2, 2949113, 131072, 3)
 
-[node name="Water" type="Node2D" parent="."]
+[node name="OverworldWater" type="Node2D" parent="."]
 position = Vector2(100, 100)
 
-[node name="Sprite" type="Sprite2D" parent="Water"]
+[node name="Sprite" type="Sprite2D" parent="OverworldWater"]
 material = SubResource("ShaderMaterial_luc64")
 position = Vector2(209.346, 524.965)
 scale = Vector2(2.72827, 2.60035)
@@ -379,6 +382,10 @@ unique_name_in_owner = true
 position = Vector2(119, 206)
 safe_margin = 0.001
 
+[node name="OverworldPlayer" parent="." groups=["Player"] instance=ExtResource("18_ltafo")]
+unique_name_in_owner = true
+position = Vector2(141, 567)
+
 [node name="LevelManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_5vt73")
@@ -388,10 +395,6 @@ script = ExtResource("7_n0qyo")
 
 [node name="Level_1" type="Node" parent="LevelManager"]
 script = ExtResource("9_ijev4")
-
-[node name="OverworldPlayer" parent="." groups=["Player"] instance=ExtResource("18_ltafo")]
-unique_name_in_owner = true
-position = Vector2(141, 567)
 
 [node name="MusicManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -411,5 +414,13 @@ stream = ExtResource("4_dvji8")
 [node name="CutsceneManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("20_muooe")
+
+[node name="EnvironmentManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("22_4y78a")
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("23_uanml")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]

@@ -8,29 +8,13 @@ signal player_entered_tilemap
 var active_tile_map: TileMap
 var active_level_name: String
 
-@onready var camera: Camera2D = %Camera
-@onready var platform_player := %Player
-@onready var overworld_player := %OverworldPlayer
 @onready var cutscene_manager := %CutsceneManager
+@onready var game_manager := %GameManager
 
 enum LevelType {
 	PLATFORM,
 	OVERWORLD
 }
-
-var player
-
-
-func _ready():
-	pass
-
-
-func _process(_delta):
-	if player:
-		check_for_level_change(player.global_position)
-
-func set_current_player(p: Node2D):
-	player = p
 
 func check_for_level_change(player_world_position: Vector2):
 	var result := LdtkUtil.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
@@ -119,7 +103,7 @@ func on_player_enter_portal(body, target: Dictionary):
 			var world_x = target_portal.px[0]
 			var world_y = target_portal.px[1]
 			var next_position_for_player = target_level.global_position + Vector2(world_x, world_y) + arrival_offset
-			teleport_player_to_level(target_level.name, next_position_for_player)
+			game_manager.teleport_player_to_level(target_level.name, next_position_for_player)
 		else:
 			push_error("Found no portal entity.")
 
@@ -148,23 +132,4 @@ func create_on_player_enter_area2d(entity: Dictionary, level_name: String, level
 
 	get_tree().root.get_node("Main").add_child(area)
 
-func teleport_player_to_level(level_name: String, next_global_position_for_player: Vector2):
-	print("teleport_player_to_level")
-	var level_node = LdtkUtil.find_level_node(get_tree().root, level_name)
-	var settings = LdtkUtil.get_level_settings(level_node)
-	print(level_node)
-	print(settings)
-	camera.connect_to_platform_level(level_name)
-	if settings["LevelType"] == "Overworld":
-		overworld_player.global_position = next_global_position_for_player
-		set_current_player(overworld_player)
-		camera.set_camera_target(overworld_player)
-		overworld_player.enable()
-		platform_player.disable()
-	if settings["LevelType"] == "Platform":
-		platform_player.global_position = next_global_position_for_player
-		set_current_player(platform_player)
-		camera.set_camera_target(platform_player)
-		overworld_player.disable()
-		platform_player.enable()
 
