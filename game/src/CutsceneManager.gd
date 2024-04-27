@@ -3,6 +3,15 @@ extends Node
 signal cutscene_started
 signal cutscene_ended
 
+@onready var camera = %Camera
+@onready var player = %Player
+@onready var transition_rect = $"CanvasLayer/TransitionRect"
+@onready var animation_player = $"CanvasLayer/TransitionRect/AnimationPlayer"
+
+func _physics_process(_delta):
+	var focus = player.global_position - camera.global_position
+	transition_rect.material.set_shader_parameter("focus_pos", focus)
+	
 func start_timeline(timeline_name: String):
 	cutscene_started.emit()
 	Dialogic.start(timeline_name)
@@ -11,7 +20,8 @@ func start_timeline(timeline_name: String):
 	cutscene_ended.emit()
 
 func transition_in():
-	pass
+	animation_player.play("Transition")
 	
 func transition_out():
-	pass
+	animation_player.play_backwards("Transition")
+	await animation_player.animation_finished

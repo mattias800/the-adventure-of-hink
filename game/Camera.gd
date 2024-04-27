@@ -60,6 +60,9 @@ func set_camera_target(t: Node2D):
 	target = t
 	look_ahead_target = Vector2(0, 0)
 
+func jump_to_target() -> void:
+	position = clamp_vec2_to_limits(target.position - HALF_VIEWPORT)
+
 func _on_player_turned(direction):
 	match direction:
 		"right":

@@ -4,6 +4,7 @@ const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
 signal player_exited_level
 signal player_entered_level
+signal player_entered_portal
 
 var active_tile_map: TileMap
 var active_level_node: Node2D
@@ -35,9 +36,10 @@ func player_enter_map(level_node: Node2D, tilemap: TileMap):
 	print("player_enter_map: ", level_node.name, tilemap.name)
 	load_entities(level_node)
 	var controller_name: String = level_node.name
-	var level_controller = get_node(controller_name)
-	if level_controller and level_controller.has_method("on_player_enter_map"):
-		level_controller.on_player_enter_map()
+	if has_node(controller_name):
+		var level_controller = get_node(controller_name)
+		if level_controller and level_controller.has_method("on_player_enter_map"):
+			level_controller.on_player_enter_map()
 
 	print("player_entered_tilemap.emit")
 	player_entered_level.emit(level_node, tilemap, get_level_metadata(level_node))
@@ -49,9 +51,10 @@ func player_leave_map(level_node: Node2D, tilemap: TileMap):
 	print("player_leave_map", level_node.name)
 	# unload_entities(level_name)
 	var controller_name: String = level_node.name
-	var level_controller = get_node(controller_name)
-	if level_controller and level_controller.has_method("on_player_leave_map"):
-		level_controller.on_player_leave_map()
+	if has_node(controller_name):
+		var level_controller = get_node(controller_name)
+		if level_controller and level_controller.has_method("on_player_leave_map"):
+			level_controller.on_player_leave_map()
 
 	player_exited_level.emit(level_node, tilemap, get_level_metadata(level_node))
 
@@ -106,7 +109,7 @@ func on_player_enter_portal(body, target: Dictionary):
 			var world_x = target_portal.px[0]
 			var world_y = target_portal.px[1]
 			var next_position_for_player = target_level.global_position + Vector2(world_x, world_y) + arrival_offset
-			game_manager.teleport_player_to_level(target_level.name, next_position_for_player)
+			player_entered_portal.emit(target_level, next_position_for_player)
 		else:
 			push_error("Found no portal entity.")
 

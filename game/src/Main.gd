@@ -3,6 +3,7 @@ extends Node2D
 @onready var player := %Player
 @onready var level_manager := %LevelManager
 @onready var game_manager := %GameManager
+@onready var cutscene_manager := %CutsceneManager
 @onready var camera := %Camera
 
 func _ready():
@@ -10,8 +11,9 @@ func _ready():
 	
 	camera.set_camera_target(player)
 	player.switch_to_platform()
-	player.enable()
 
+	cutscene_manager.transition_in()
+	player.enable()
 	# camera.connect_to_platform_level("Level_0")
 	#camera.connect_to_overworld_level("Level_5")
 	#player.switch_to_overworld()
