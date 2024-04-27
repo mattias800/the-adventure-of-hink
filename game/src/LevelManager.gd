@@ -8,13 +8,10 @@ signal player_entered_tilemap
 var active_tile_map: TileMap
 var active_level_name: String
 
-signal cutscene_started
-signal cutscene_ended
-
-@onready var m: AudioStreamPlayer2D = %Music
 @onready var camera: Camera2D = %Camera
 @onready var platform_player := %Player
 @onready var overworld_player := %OverworldPlayer
+@onready var cutscene_manager := %CutsceneManager
 
 enum LevelType {
 	PLATFORM,
@@ -73,26 +70,6 @@ func player_leave_map(level_name: String, tilemap: TileMap):
 	var level_node = tilemap.get_parent()
 	player_left_tilemap.emit(level_node.name, tilemap, get_level_metadata(level_node))
 
-
-func play_music(path):
-	m.stream = load_mp3(path)
-	m.play()
-
-func load_mp3(path) -> AudioStreamMP3:
-	var file  := FileAccess.open(path, FileAccess.READ)
-	var sound := AudioStreamMP3.new()
-	sound.data = file.get_buffer(file.get_length())
-	return sound
-
-
-func start_timeline(timeline_name: String):
-	cutscene_started.emit()
-	Dialogic.start(timeline_name)
-	await Dialogic.timeline_ended
-	await get_tree().create_timer(0.25).timeout # Prevent last input to be sent to player.
-	cutscene_ended.emit()
-
-
 func load_entities(level_name: String) -> void:
 	var entities   := LdtkUtil.find_entities_meta_for_level(get_tree().root, level_name)
 	var level_node := LdtkUtil.find_level_node(get_tree().root, level_name)
@@ -124,7 +101,7 @@ func on_player_enter_entity(body, level_name: String, trigger_name, timeline_nam
 			if (level_controller and level_controller.has_method("on_player_enter")):
 				level_controller.on_player_enter(trigger_name)
 		if timeline_name:
-			start_timeline(timeline_name)
+			cutscene_manager.start_timeline(timeline_name)
 
 
 func create_portal_entity(entity: Dictionary, level_name: String, level_node: Node2D):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=36 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://music/tracks/early_morning_guitar.mp3" id="3_r1vjs"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
 [ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://music/tracks/hink_the_game.mp3" id="4_dvji8"]
-[ext_resource type="Script" path="res://music/Music.gd" id="4_fuicu"]
 [ext_resource type="Script" path="res://backgrounds/Background3D.gd" id="5_cvr4m"]
 [ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="6_jjcl5"]
@@ -18,7 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://bhp4opv054whl" path="res://assets/overworld_tileset_grass_original.png" id="10_mhbpn"]
 [ext_resource type="Script" path="res://assets/OverworldClouds.gd" id="11_odwai"]
 [ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="15_jp4qx"]
+[ext_resource type="Script" path="res://src/MusicManager.gd" id="17_4302p"]
+[ext_resource type="Script" path="res://music/Tracks.gd" id="18_2mgg1"]
 [ext_resource type="PackedScene" uid="uid://b4tdwkgmcyjfx" path="res://entities/overworld_player.tscn" id="18_ltafo"]
+[ext_resource type="Script" path="res://src/CutsceneManager.gd" id="20_muooe"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -320,22 +322,6 @@ offset = Vector2(2.08165e-12, 2.08165e-12)
 anchor_mode = 0
 script = ExtResource("4_d68cp")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="Camera"]
-unique_name_in_owner = true
-position = Vector2(-201, -96)
-stream = ExtResource("3_r1vjs")
-max_polyphony = 2
-panning_strength = 0.0
-script = ExtResource("4_fuicu")
-
-[node name="EarlyMorningMusic" type="AudioStreamPlayer2D" parent="Camera/Music"]
-stream = ExtResource("3_r1vjs")
-panning_strength = 0.0
-
-[node name="HinkTheGameMusic" type="AudioStreamPlayer2D" parent="Camera/Music"]
-stream = ExtResource("4_dvji8")
-panning_strength = 0.0
-
 [node name="Background" type="Sprite2D" parent="Camera"]
 texture = ExtResource("1_i7f7c")
 centered = false
@@ -406,5 +392,24 @@ script = ExtResource("9_ijev4")
 [node name="OverworldPlayer" parent="." groups=["Player"] instance=ExtResource("18_ltafo")]
 unique_name_in_owner = true
 position = Vector2(141, 567)
+
+[node name="MusicManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("17_4302p")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
+
+[node name="Tracks" type="Node" parent="MusicManager"]
+script = ExtResource("18_2mgg1")
+
+[node name="EarlyMorningMusic" type="AudioStreamPlayer" parent="MusicManager/Tracks"]
+stream = ExtResource("3_r1vjs")
+
+[node name="HinkTheGameMusic" type="AudioStreamPlayer" parent="MusicManager/Tracks"]
+stream = ExtResource("4_dvji8")
+
+[node name="CutsceneManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("20_muooe")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
