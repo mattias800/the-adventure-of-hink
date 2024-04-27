@@ -7,14 +7,11 @@ static func find_level_node(root: Window, level_name: String) -> Node2D:
 static func find_all_level_nodes(root: Window) -> Array[Node]:
 	return find_levels_parent(root).get_children();
 
-static func find_entities_node_for_level(root: Window, level_name: String) -> Node2D:
-	return find_level_node(root, level_name).get_node("Entities")
-
-static func find_entities_node_for_level_node(level_node: Node2D) -> Node2D:
+static func find_entities_node_for_level(level_node: Node2D) -> Node2D:
 	return level_node.get_node("Entities")
 
-static func find_entities_meta_for_level(root: Window, level_name: String) -> Array:
-	return find_entities_node_for_level(root, level_name).get_meta("LDtk_entity_instances")
+static func find_entities_meta_for_level(level_node: Node2D) -> Array:
+	return find_entities_node_for_level(level_node).get_meta("LDtk_entity_instances")
 
 static func get_level_settings(level_node: Node2D):
 	return level_node.get_meta("LDtk_level_fields")
@@ -24,7 +21,7 @@ static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: V
 		var tilemaps := level.get_children()
 		for tilemap in tilemaps:
 			if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
-				return [true, tilemap, level.name]
+				return [true, tilemap, level]
 
 	return [false, null, null]
 
@@ -40,7 +37,7 @@ static func find_level_node_by_level_iid(root: Window, iid: String):
 static func find_entity_by_iid(root: Window, iid: String):
 	print("find_entity_by_iid")
 	for n in find_all_level_nodes(root):
-		var entities = find_entities_node_for_level_node(n)
+		var entities = find_entities_node_for_level(n)
 		
 		var entity_instances = entities.get_meta("LDtk_entity_instances")
 		for e in entity_instances:

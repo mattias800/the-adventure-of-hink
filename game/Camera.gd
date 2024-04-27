@@ -76,32 +76,13 @@ func get_vector_from_center_to_player() -> Vector2:
 	var x: Vector2 =  target.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
-
-func connect_to_platform_level(level_name: String) -> void:
-	connect_to_level(level_name, level_name + "-tilemap-8x8")
-
-func connect_to_overworld_level(level_name: String) -> void:
-	connect_to_level(level_name, level_name + "-tilemap-16x16")
-
-func connect_to_level(level_name: String, tilemap_name: String) -> void:
-	print("connect_to_level: " + level_name + " " + tilemap_name)
-	var level := get_tree().root.get_node("Main").get_node("Hink").get_node(level_name)
-	if not level:
-		printerr("Could not find level: ", level_name)
-		return
-
-	var level_tilemap := level.get_node(tilemap_name)
-
-	if level_tilemap:
-		print("Found TileMap")
-		tilemap = level_tilemap
-		print(tilemap.name)
-		# set_zoom(get_camera_zoom_to_tilemap(tilemap))
-		set_zoom(Vector2.ONE)
-		apply_camera_limits(tilemap)
-	else:
-		print("Found no TileMap")
-
+func connect_to_level(level_node: Node2D, next_tilemap: TileMap) -> void:
+	print("connect_to_level: " + level_node.name + " " + next_tilemap.name)
+	tilemap = next_tilemap
+	print(tilemap.name)
+	# set_zoom(get_camera_zoom_to_tilemap(tilemap))
+	set_zoom(Vector2.ONE)
+	apply_camera_limits(tilemap)
 
 func apply_camera_limits(source_tilemap: TileMap):
 	var tile_size           := source_tilemap.get_tileset().tile_size
@@ -189,16 +170,3 @@ func get_tilemap_size(source_tilemap: TileMap) -> Vector2i:
 		tilemap_rect.end.x - tilemap_rect.position.x,
 		tilemap_rect.end.y - tilemap_rect.position.y
 	)
-
-func _on_level_manager_player_entered_tilemap(level_name: String, tilemap: TileMap, metadata: Dictionary):
-	fog.visible = metadata["FogEnabled"]
-	overheadClouds.visible = metadata["OverheadCloudsEnabled"]
-	
-	match metadata["LevelType"]:
-		"Overworld":
-			connect_to_overworld_level(level_name)
-		"Platform":
-			connect_to_platform_level(level_name)
-		_:
-			push_error("Missing LevelType metadata set on level.")
-			

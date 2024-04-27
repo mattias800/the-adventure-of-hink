@@ -211,10 +211,6 @@ func physics_process(delta):
 
 
 func enter_state(next_state):
-	# print("Enter state: ", state_to_string(next_state))
-	print("animated_sprite")
-	print(animated_sprite)
-	
 	match next_state:
 		DISABLE_INPUT:
 			animated_sprite.play("idle")
@@ -274,15 +270,3 @@ func trigger_jump(jump_source: JumpSource):
 
 	enter_state(JUMPING)
 	jump_sound.play()
-
-func _disable_player_input():
-	enter_state(DISABLE_INPUT)
-
-func _enable_player_input():
-	enter_state(IDLE)
-
-func enable():
-	enter_state(IDLE)
-	
-func disable():
-	enter_state(DISABLED)

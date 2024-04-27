@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=39 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://src/CutsceneManager.gd" id="20_muooe"]
 [ext_resource type="Script" path="res://src/EnvironmentManager.gd" id="22_4y78a"]
 [ext_resource type="Script" path="res://src/GameManager.gd" id="23_uanml"]
+[ext_resource type="Script" path="res://src/CameraManager.gd" id="24_yry34"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -423,4 +424,9 @@ script = ExtResource("22_4y78a")
 unique_name_in_owner = true
 script = ExtResource("23_uanml")
 
+[node name="CameraManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("24_yry34")
+
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
+[connection signal="player_entered_tilemap" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_tilemap"]

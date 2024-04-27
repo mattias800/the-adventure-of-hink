@@ -2,19 +2,14 @@ extends Node
 
 const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
-@onready var platform_player := %Player
-@onready var overworld_player := %OverworldPlayer
+@onready var player := %Player
 @onready var camera := %Camera
 @onready var level_manager := %LevelManager
-
-var player
-
-func set_current_player(p: Node2D):
-	player = p
+@onready var camera_manager := %CameraManager
+@onready var environment_manager = %EnvironmentManager
 
 func _process(_delta):
-	if player:
-		level_manager.check_for_level_change(player.global_position)
+	level_manager.check_for_level_change(player.global_position)
 
 func teleport_player_to_level(level_name: String, next_global_position_for_player: Vector2):
 	print("teleport_player_to_level")
@@ -23,15 +18,17 @@ func teleport_player_to_level(level_name: String, next_global_position_for_playe
 	print(level_node)
 	print(settings)
 	camera.connect_to_platform_level(level_name)
-	if settings["LevelType"] == "Overworld":
-		overworld_player.global_position = next_global_position_for_player
-		set_current_player(overworld_player)
-		camera.set_camera_target(overworld_player)
-		overworld_player.enable()
-		platform_player.disable()
-	if settings["LevelType"] == "Platform":
-		platform_player.global_position = next_global_position_for_player
-		set_current_player(platform_player)
-		camera.set_camera_target(platform_player)
-		overworld_player.disable()
-		platform_player.enable()
+	player.global_position = next_global_position_for_player
+
+
+func _on_level_manager_player_entered_tilemap(level_name: String, tilemap: TileMap, metadata: Dictionary):
+	print("_on_level_manager_player_entered_tilemap")
+	environment_manager.fog(metadata["FogEnabled"])
+	environment_manager.overworld_clouds(metadata["OverheadCloudsEnabled"])
+	camera_manager.connect_to_level(level_name, tilemap)
+
+	match metadata["LevelType"]:
+		"Overworld":
+			player.switch_to_overworld()
+		"Platform":
+			player.switch_to_platform()
