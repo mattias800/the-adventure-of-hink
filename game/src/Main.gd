@@ -9,10 +9,10 @@ func _ready():
 	print("Starting the game.")
 	
 	camera.set_camera_target(player)
+	player.switch_to_platform()
 	player.enable()
 
 	# camera.connect_to_platform_level("Level_0")
-	player.switch_to_platform()	
 	#camera.connect_to_overworld_level("Level_5")
 	#player.switch_to_overworld()
 

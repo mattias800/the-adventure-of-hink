@@ -9,3 +9,9 @@ func start_timeline(timeline_name: String):
 	await Dialogic.timeline_ended
 	await get_tree().create_timer(0.25).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()
+
+func transition_in():
+	pass
+	
+func transition_out():
+	pass
