@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=38 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
@@ -19,7 +19,6 @@
 [ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="15_jp4qx"]
 [ext_resource type="Script" path="res://src/MusicManager.gd" id="17_4302p"]
 [ext_resource type="Script" path="res://music/Tracks.gd" id="18_2mgg1"]
-[ext_resource type="PackedScene" uid="uid://b4tdwkgmcyjfx" path="res://entities/overworld_player.tscn" id="18_ltafo"]
 [ext_resource type="Script" path="res://src/CutsceneManager.gd" id="20_muooe"]
 [ext_resource type="Script" path="res://src/EnvironmentManager.gd" id="22_4y78a"]
 [ext_resource type="Script" path="res://src/GameManager.gd" id="23_uanml"]
@@ -326,10 +325,12 @@ anchor_mode = 0
 script = ExtResource("4_d68cp")
 
 [node name="Background" type="Sprite2D" parent="Camera"]
+unique_name_in_owner = true
 texture = ExtResource("1_i7f7c")
 centered = false
 
 [node name="Background3D" type="Sprite2D" parent="Camera"]
+unique_name_in_owner = true
 texture = ExtResource("1_i7f7c")
 centered = false
 script = ExtResource("5_cvr4m")
@@ -380,12 +381,8 @@ texture = ExtResource("1_i7f7c")
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
-position = Vector2(119, 206)
+position = Vector2(1732, 180)
 safe_margin = 0.001
-
-[node name="OverworldPlayer" parent="." groups=["Player"] instance=ExtResource("18_ltafo")]
-unique_name_in_owner = true
-position = Vector2(141, 567)
 
 [node name="LevelManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -429,4 +426,7 @@ unique_name_in_owner = true
 script = ExtResource("24_yry34")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
-[connection signal="player_entered_tilemap" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_tilemap"]
+[connection signal="player_entered_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_level"]
+[connection signal="player_exited_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_exited_level"]
+[connection signal="cutscene_ended" from="CutsceneManager" to="GameManager" method="_on_cutscene_manager_cutscene_ended"]
+[connection signal="cutscene_started" from="CutsceneManager" to="GameManager" method="_on_cutscene_manager_cutscene_started"]

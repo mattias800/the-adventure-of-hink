@@ -270,3 +270,9 @@ func trigger_jump(jump_source: JumpSource):
 
 	enter_state(JUMPING)
 	jump_sound.play()
+
+func enable():
+	enter_state(IDLE)
+	
+func disable():
+	enter_state(DISABLE_INPUT)

@@ -2,8 +2,8 @@ extends Node
 
 const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
-signal player_left_tilemap
-signal player_entered_tilemap
+signal player_exited_level
+signal player_entered_level
 
 var active_tile_map: TileMap
 var active_level_node: Node2D
@@ -39,20 +39,21 @@ func player_enter_map(level_node: Node2D, tilemap: TileMap):
 	if level_controller and level_controller.has_method("on_player_enter_map"):
 		level_controller.on_player_enter_map()
 
-	player_entered_tilemap.emit(level_node, tilemap, get_level_metadata(level_node))
+	print("player_entered_tilemap.emit")
+	player_entered_level.emit(level_node, tilemap, get_level_metadata(level_node))
 
 func get_level_metadata(level_node: Node2D):
 	return level_node.get_meta("LDtk_level_fields")
 
 func player_leave_map(level_node: Node2D, tilemap: TileMap):
-	print("player_leave_map", level_node.n)
+	print("player_leave_map", level_node.name)
 	# unload_entities(level_name)
 	var controller_name: String = level_node.name
 	var level_controller = get_node(controller_name)
 	if level_controller and level_controller.has_method("on_player_leave_map"):
 		level_controller.on_player_leave_map()
 
-	player_left_tilemap.emit(level_node, tilemap, get_level_metadata(level_node))
+	player_exited_level.emit(level_node, tilemap, get_level_metadata(level_node))
 
 func load_entities(level_node: Node2D) -> void:
 	var entities   := LdtkUtil.find_entities_meta_for_level(level_node)

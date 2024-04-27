@@ -2,22 +2,19 @@ extends Node
 
 @onready var fog := %Fog
 @onready var overworld_clouds := %OverworldClouds
-@onready var overworld_water := %OverworldWater
+@onready var background := %Background
+@onready var background3d := %Background3D
 
 func _ready():
 	fog.visible = false
 	overworld_clouds.visible = false
 	
-func set_fog(s: bool) -> void:
+func set_fog_visible(s: bool) -> void:
 	fog.visible = s
 	
-func set_overworld_clouds(s: bool) -> void:
+func set_overworld_clouds_visible(s: bool) -> void:
 	overworld_clouds.visible = s
 
-func enable_overworld():
-	set_fog(false)
-	set_overworld_clouds(true)
-	
-func enable_platformer():
-	set_fog(true)
-	set_overworld_clouds(false)
+func set_background_enabled(s: bool) -> void:
+	background3d.visible = s
+	background.visible = s

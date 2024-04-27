@@ -19,6 +19,8 @@ func _ready():
 	overworld_controller = OverworldController.new(self, $AnimatedSprite2D)
 	
 func _physics_process(delta):
+	if not enabled:
+		return
 	match active_controller:
 		PLATFORM:
 			platform_controller.physics_process(delta)
@@ -33,6 +35,13 @@ func switch_to_overworld():
 	
 func enable():
 	enabled = true
+	match active_controller:
+		PLATFORM:
+			platform_controller.enable()
+		OVERWORLD:
+			overworld_controller.enable()
 	
 func disable():
 	enabled = false
+	platform_controller.disable()
+	overworld_controller.disable()

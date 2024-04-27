@@ -75,3 +75,9 @@ func state_to_string(s) -> String:
 			return "DISABLED"
 		_:
 			return ""
+
+func enable():
+	enter_state(IDLE)
+	
+func disable():
+	enter_state(DISABLED)
