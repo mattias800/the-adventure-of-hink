@@ -1,0 +1,15 @@
+*Frame size* 
+
+- 32x32px: For all the animations.
+
+
+*Frame Duration*
+
+- 100ms: Attack, Die, Dmg and ProjectileCollisionEffect.
+
+- 200ms: Floating.
+
+
+*Notes*
+
+-The projectile should appear in the 4th frame of the attack animation. Overlay the correct projectile based on the direction of the attack.
