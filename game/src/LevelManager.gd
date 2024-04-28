@@ -5,9 +5,11 @@ const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 signal player_exited_level
 signal player_entered_level
 signal player_entered_portal
+signal player_entered_out_of_bounds
 
 var active_tile_map: TileMap
 var active_level_node: Node2D
+var is_out_of_bounds: bool = false
 
 @onready var cutscene_manager := %CutsceneManager
 @onready var game_manager := %GameManager
@@ -21,6 +23,7 @@ func check_for_level_change(player_world_position: Vector2):
 	var result := LdtkUtil.find_tilemap_by_world_coordinates(get_tree().root, player_world_position)
 	match result:
 		[true, var tilemap, var level_node]:
+			is_out_of_bounds = false
 			if (tilemap != active_tile_map):
 				if (active_tile_map):
 					player_leave_map(active_level_node, active_tile_map)
@@ -29,6 +32,9 @@ func check_for_level_change(player_world_position: Vector2):
 				player_enter_map(active_level_node, active_tile_map)
 
 		[false, _, _]:
+			if not is_out_of_bounds:
+				player_entered_out_of_bounds.emit()
+			is_out_of_bounds = true
 			print("Could not find tilemap containing player.")
 
 

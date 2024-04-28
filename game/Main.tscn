@@ -491,6 +491,7 @@ script = ExtResource("24_yry34")
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
 [connection signal="player_entered_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_level"]
+[connection signal="player_entered_out_of_bounds" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_out_of_bounds"]
 [connection signal="player_entered_portal" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_portal"]
 [connection signal="player_exited_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_exited_level"]
 [connection signal="cutscene_ended" from="CutsceneManager" to="GameManager" method="_on_cutscene_manager_cutscene_ended"]
