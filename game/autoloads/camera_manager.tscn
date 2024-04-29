@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7t6f5w41fgjg"]
+
+[ext_resource type="Script" path="res://autoloads/camera_manager.gd" id="1_ieh3h"]
+
+[node name="CameraManager" type="Node"]
+script = ExtResource("1_ieh3h")

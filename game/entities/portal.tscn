@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwxvfn64khsas"]
+
+[ext_resource type="Script" path="res://entities/portal.gd" id="1_o18rt"]
+
+[node name="Portal" type="Area2D"]
+script = ExtResource("1_o18rt")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

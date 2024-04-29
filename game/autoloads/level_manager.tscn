@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://deohxefog2fpy"]
+
+[ext_resource type="Script" path="res://autoloads/level_manager.gd" id="1_0ij56"]
+[ext_resource type="Script" path="res://world/Level_0/level_0.gd" id="2_46cq8"]
+[ext_resource type="Script" path="res://world/world01/level01/room01.gd" id="3_v5362"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_0ij56")
+
+[node name="Level_0" type="Node" parent="."]
+script = ExtResource("2_46cq8")
+
+[node name="Level_1" type="Node" parent="."]
+script = ExtResource("3_v5362")

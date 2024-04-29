@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4enuqhs2hq1"]
+
+[ext_resource type="Script" path="res://autoloads/music_manager.gd" id="1_est6h"]
+[ext_resource type="Script" path="res://music/Tracks.gd" id="2_id2od"]
+[ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://music/tracks/early_morning_guitar.mp3" id="3_5isms"]
+[ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://music/tracks/hink_the_game.mp3" id="4_q47pm"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_est6h")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Tracks" type="Node" parent="."]
+script = ExtResource("2_id2od")
+
+[node name="EarlyMorningMusic" type="AudioStreamPlayer" parent="Tracks"]
+stream = ExtResource("3_5isms")
+
+[node name="HinkTheGameMusic" type="AudioStreamPlayer" parent="Tracks"]
+stream = ExtResource("4_q47pm")

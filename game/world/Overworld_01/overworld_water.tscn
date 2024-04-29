@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://btey2n8ldsd37"]
+
+[ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="1_1gdae"]
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="2_pxtxi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qjiiu"]
+frequency = 0.1237
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e33tf"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_qjiiu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6mr41"]
+frequency = 0.2414
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pug82"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_6mr41")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_luc64"]
+shader = ExtResource("1_1gdae")
+shader_parameter/scroll1 = Vector2(0.02, 0.02)
+shader_parameter/scroll2 = Vector2(-0.02, -0.02)
+shader_parameter/tone_color = Color(0.380392, 0.215686, 0.87451, 1)
+shader_parameter/distortion_length = 0.01
+shader_parameter/WATER_COL = Color(0.133333, 0.188235, 0.721569, 1)
+shader_parameter/WATER2_COL = Color(0.282353, 0.282353, 0.878431, 1)
+shader_parameter/FOAM_COL = Color(1, 1, 1, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/noise1 = SubResource("NoiseTexture2D_e33tf")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
+
+[node name="OverworldWater" type="Node2D"]
+position = Vector2(100, 100)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_luc64")
+position = Vector2(209.346, 524.965)
+scale = Vector2(2.72827, 2.60035)
+texture = ExtResource("2_pxtxi")
