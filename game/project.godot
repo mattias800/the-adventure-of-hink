@@ -18,6 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+CameraManager="*res://autoloads/camera_manager.tscn"
+CutsceneManager="*res://autoloads/cutscene_manager.tscn"
+GameManager="*res://autoloads/game_manager.tscn"
+LevelManager="*res://autoloads/level_manager.tscn"
+MusicManager="*res://autoloads/music_manager.tscn"
 
 [dialogic]
 

@@ -1,29 +1,20 @@
-[gd_scene load_steps=43 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=26 format=3 uid="uid://baosx1eskl7rg"]
 
 [ext_resource type="PackedScene" uid="uid://d36ybixfeid2i" path="res://Hink.ldtk" id="1_400ha"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_i7f7c"]
-[ext_resource type="Script" path="res://src/Main.gd" id="1_tyb3q"]
+[ext_resource type="Script" path="res://src/mainn.gd" id="1_tyb3q"]
 [ext_resource type="PackedScene" uid="uid://8t1aimjy44n6" path="res://entities/Player.tscn" id="2_vmdn5"]
-[ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://music/tracks/early_morning_guitar.mp3" id="3_r1vjs"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_d68cp"]
-[ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://music/tracks/hink_the_game.mp3" id="4_dvji8"]
 [ext_resource type="Script" path="res://backgrounds/Background3D.gd" id="5_cvr4m"]
 [ext_resource type="Shader" path="res://CameraFog.gdshader" id="5_ys6gx"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="6_jjcl5"]
-[ext_resource type="Script" path="res://src/LevelManager.gd" id="7_5vt73"]
-[ext_resource type="Script" path="res://world/Level_0/level_0.gd" id="7_n0qyo"]
-[ext_resource type="Shader" path="res://Transition.gdshader" id="9_h3k37"]
-[ext_resource type="Script" path="res://world/Level_1/level_1.gd" id="9_ijev4"]
+[ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/Overworld_01/overworld_water.tscn" id="10_48g6q"]
 [ext_resource type="Shader" path="res://assets/OverworldClouds.gdshader" id="10_aafx2"]
 [ext_resource type="Texture2D" uid="uid://bhp4opv054whl" path="res://assets/overworld_tileset_grass_original.png" id="10_mhbpn"]
 [ext_resource type="Script" path="res://assets/OverworldClouds.gd" id="11_odwai"]
-[ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="15_jp4qx"]
-[ext_resource type="Script" path="res://src/MusicManager.gd" id="17_4302p"]
-[ext_resource type="Script" path="res://music/Tracks.gd" id="18_2mgg1"]
-[ext_resource type="Script" path="res://src/CutsceneManager.gd" id="20_muooe"]
-[ext_resource type="Script" path="res://src/EnvironmentManager.gd" id="22_4y78a"]
-[ext_resource type="Script" path="res://src/GameManager.gd" id="23_uanml"]
-[ext_resource type="Script" path="res://src/CameraManager.gd" id="24_yry34"]
+[ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="25_saslm"]
+[ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="26_oupmd"]
+[ext_resource type="PackedScene" uid="uid://cftipwvf0y2jk" path="res://world/world01/level01/room01.tscn" id="27_x357s"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075
@@ -282,81 +273,7 @@ texture = ExtResource("10_mhbpn")
 [sub_resource type="TileSet" id="TileSet_l2l2g"]
 sources/0 = SubResource("TileSetAtlasSource_7sund")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qjiiu"]
-frequency = 0.1237
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e33tf"]
-width = 128
-height = 128
-seamless = true
-noise = SubResource("FastNoiseLite_qjiiu")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_6mr41"]
-frequency = 0.2414
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pug82"]
-width = 128
-height = 128
-seamless = true
-noise = SubResource("FastNoiseLite_6mr41")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_luc64"]
-shader = ExtResource("15_jp4qx")
-shader_parameter/scroll1 = Vector2(0.02, 0.02)
-shader_parameter/scroll2 = Vector2(-0.02, -0.02)
-shader_parameter/tone_color = Color(0.380392, 0.215686, 0.87451, 1)
-shader_parameter/distortion_length = 0.01
-shader_parameter/WATER_COL = Color(0.133333, 0.188235, 0.721569, 1)
-shader_parameter/WATER2_COL = Color(0.282353, 0.282353, 0.878431, 1)
-shader_parameter/FOAM_COL = Color(1, 1, 1, 1)
-shader_parameter/distortion_speed = 2.0
-shader_parameter/tile = Vector2(5, 5)
-shader_parameter/offset = Vector2(0, 0)
-shader_parameter/noise1 = SubResource("NoiseTexture2D_e33tf")
-shader_parameter/noise2 = SubResource("NoiseTexture2D_pug82")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjbc1"]
-shader = ExtResource("9_h3k37")
-shader_parameter/circle_size = 0.0
-shader_parameter/screen_width = 320.0
-shader_parameter/screen_height = 180.0
-shader_parameter/focus_pos = Vector2(180, 100)
-
-[sub_resource type="Animation" id="Animation_yugec"]
-resource_name = "Transition"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/TransitionRect:material:shader_parameter/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.4, 2.05]
-}
-
-[sub_resource type="Animation" id="Animation_2eulv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/TransitionRect:material:shader_parameter/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5byn3"]
-_data = {
-"RESET": SubResource("Animation_2eulv"),
-"Transition": SubResource("Animation_yugec")
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvp8a"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tyb3q")
@@ -412,87 +329,28 @@ tile_set = SubResource("TileSet_l2l2g")
 format = 2
 layer_0/tile_data = PackedInt32Array(3014647, 0, 0, 3080183, 0, 1, 3145719, 0, 2, 3211255, 0, 3, 3014648, 65536, 0, 3080184, 65536, 1, 3145720, 65536, 2, 3211256, 65536, 3, 3014649, 131072, 0, 3080185, 131072, 1, 3145721, 131072, 2, 3211257, 131072, 3, 3014650, 0, 0, 3080186, 0, 1, 3145722, 0, 2, 3211258, 0, 3, 3014651, 65536, 0, 3080187, 65536, 1, 3145723, 65536, 2, 3211259, 65536, 3, 3014652, 131072, 0, 3080188, 131072, 1, 3145724, 131072, 2, 3211260, 131072, 3, 3014653, 0, 0, 3080189, 0, 1, 3145725, 0, 2, 3211261, 0, 3, 3014654, 65536, 0, 3080190, 65536, 1, 3145726, 65536, 2, 3211262, 65536, 3, 3014655, 131072, 0, 3080191, 131072, 1, 3145727, 131072, 2, 3211263, 131072, 3, 2752509, 0, 0, 2818045, 0, 1, 2883581, 0, 2, 2949117, 0, 3, 2752510, 65536, 0, 2818046, 65536, 1, 2883582, 65536, 2, 2949118, 65536, 3, 2752511, 131072, 0, 2818047, 131072, 1, 2883583, 131072, 2, 2949119, 131072, 3, 2752506, 0, 0, 2818042, 0, 1, 2883578, 0, 2, 2949114, 0, 3, 2752507, 65536, 0, 2818043, 65536, 1, 2883579, 65536, 2, 2949115, 65536, 3, 2752508, 131072, 0, 2818044, 131072, 1, 2883580, 131072, 2, 2949116, 131072, 3, 2752503, 0, 0, 2818039, 0, 1, 2883575, 0, 2, 2949111, 0, 3, 2752504, 65536, 0, 2818040, 65536, 1, 2883576, 65536, 2, 2949112, 65536, 3, 2752505, 131072, 0, 2818041, 131072, 1, 2883577, 131072, 2, 2949113, 131072, 3)
 
-[node name="OverworldWater" type="Node2D" parent="."]
-position = Vector2(100, 100)
-
-[node name="Sprite" type="Sprite2D" parent="OverworldWater"]
-material = SubResource("ShaderMaterial_luc64")
-position = Vector2(209.346, 524.965)
-scale = Vector2(2.72827, 2.60035)
-texture = ExtResource("1_i7f7c")
+[node name="OverworldWater" parent="." instance=ExtResource("10_48g6q")]
 
 [node name="Hink" parent="." instance=ExtResource("1_400ha")]
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_vmdn5")]
 unique_name_in_owner = true
-position = Vector2(108, 212)
+position = Vector2(-96, 1360)
 safe_margin = 0.001
 
-[node name="LevelManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("7_5vt73")
+[node name="TileMap" type="TileMap" parent="." groups=["rooms"]]
+position = Vector2(912, 728)
+tile_set = ExtResource("25_saslm")
+format = 2
+layer_0/tile_data = PackedInt32Array(458759, 131072, 3, 393223, 196608, 2, 327687, 131072, 2, 262151, 196608, 1, 196615, 262144, 2, 131079, 65536, 2, 65543, 65536, 0, 7, 65536, 1, 458758, 65536, 3, 393222, 0, 0, 327686, 262144, 2, 262150, 65536, 0, 196614, 65536, 0, 131078, 262144, 2, 65542, 65536, 0, 6, 65536, 1, 458757, 65536, 3, 393221, 65536, 2, 327685, 65536, 0, 262149, 262144, 2, 196613, 65536, 2, 131077, 262144, 2, 65541, 65536, 2, 5, 65536, 1, 458756, 65536, 3, 393220, 65536, 0, 327684, 65536, 0, 262148, 0, 0, 196612, 0, 0, 131076, 262144, 2, 65540, 0, 0, 4, 65536, 1, 458755, 262144, 1, 393219, 65536, 2, 327683, 262144, 2, 262147, 262144, 2, 196611, 65536, 0, 131075, 0, 0, 65539, 65536, 2, 3, 65536, 1, 458754, 65536, 3, 393218, 262144, 2, 327682, 131072, 0, 262146, 262144, 2, 196610, 65536, 0, 131074, 262144, 2, 65538, 65536, 2, 2, 262144, 3, 458753, 65536, 3, 393217, 131072, 0, 327681, 65536, 0, 262145, 65536, 0, 196609, 0, 0, 131073, 65536, 2, 65537, 65536, 0, 1, 262144, 3, 458752, 196608, 5, 393216, 0, 2, 327680, 327680, 2, 262144, 0, 2, 196608, 327680, 2, 131072, 327680, 2, 65536, 327680, 2, 0, 0, 1, 262152, 131072, 3, 196616, 131072, 2, 131080, 131072, 2, 65544, 131072, 2, 8, 65536, 4, 1572864, 0, 3, 1507328, 327680, 2, 1441792, 196608, 4, 1376256, 327680, 7, 1310720, 262144, 7, 1245184, 327680, 7, 1179648, 262144, 7, 1114112, 262144, 7, 1048576, 262144, 7, 983040, 327680, 7, 917504, 327680, 7, 851968, 327680, 7, 786432, 262144, 7, 720896, 262144, 7, 655360, 327680, 7, 589824, 262144, 7, 524288, 262144, 7, 1572878, 131072, 3, 1507342, 131072, 2, 1441806, 131072, 2, 1572877, 262144, 1, 1507341, 65536, 0, 1441805, 327680, 3, 1572876, 65536, 3, 1507340, 65536, 2, 1441804, 262144, 3, 1572875, 262144, 1, 1507339, 65536, 2, 1441803, 65536, 1, 1572874, 65536, 3, 1507338, 0, 0, 1441802, 65536, 1, 1572873, 65536, 3, 1507337, 131072, 0, 1441801, 65536, 1, 1572872, 262144, 1, 1507336, 131072, 0, 1441800, 262144, 3, 1572871, 262144, 1, 1507335, 65536, 0, 1441799, 65536, 1, 1572870, 262144, 1, 1507334, 65536, 0, 1441798, 65536, 1, 1572869, 65536, 3, 1507333, 65536, 0, 1441797, 65536, 1, 1572868, 65536, 3, 1507332, 262144, 2, 1441796, 65536, 1, 1572867, 65536, 3, 1507331, 65536, 2, 1441795, 65536, 1, 1572866, 262144, 1, 1507330, 65536, 0, 1441794, 262144, 3, 1572865, 262144, 1, 1507329, 65536, 2, 1441793, 262144, 3, 1376270, 196608, 2, 1310734, 131072, 1, 1376269, 327680, 2, 1310733, 0, 1, 1572886, 65536, 3, 1507350, 65536, 2, 1441814, 196608, 3, 1376278, 196608, 2, 1310742, 196608, 2, 1245206, 131072, 2, 1179670, 131072, 2, 1114134, 196608, 1, 1048598, 262144, 3, 1572885, 65536, 3, 1507349, 0, 0, 1441813, 131072, 0, 1376277, 0, 0, 1310741, 65536, 2, 1245205, 65536, 2, 1179669, 0, 0, 1114133, 262144, 2, 1048597, 262144, 3, 1572884, 0, 3, 1507348, 327680, 2, 1441812, 327680, 2, 1376276, 327680, 2, 1310740, 327680, 2, 1245204, 327680, 2, 1179668, 327680, 1, 1114132, 65536, 2, 1048596, 262144, 3, 1179667, 0, 3, 1114131, 0, 2, 1048595, 0, 1, 1114135, 131072, 3, 1048599, 131072, 1, 1572888, 65536, 3, 1507352, 196608, 3, 1441816, 131072, 1, 1572887, 262144, 1, 1507351, 65536, 2, 1441815, 65536, 1, 1572903, 131072, 3, 1507367, 131072, 2, 1572902, 65536, 3, 1507366, 65536, 2, 1572901, 262144, 1, 1507365, 65536, 0, 1572900, 65536, 3, 1507364, 131072, 0, 1572899, 65536, 3, 1507363, 131072, 0, 1572898, 65536, 3, 1507362, 262144, 2, 1572897, 262144, 1, 1507361, 131072, 0, 1572896, 262144, 1, 1507360, 65536, 0, 1572895, 65536, 3, 1507359, 0, 0, 1572894, 65536, 3, 1507358, 262144, 2, 1572893, 262144, 1, 1507357, 0, 0, 1572892, 262144, 1, 1507356, 131072, 0, 1572891, 262144, 1, 1507355, 327680, 3, 1572890, 65536, 3, 1507354, 65536, 1, 1572889, 262144, 1, 1507353, 65536, 1, 1441831, 131072, 2, 1376295, 196608, 2, 1310759, 131072, 2, 1245223, 196608, 2, 1179687, 196608, 2, 1114151, 196608, 2, 1048615, 131072, 2, 983079, 196608, 2, 1441830, 131072, 0, 1376294, 131072, 0, 1310758, 65536, 0, 1245222, 65536, 0, 1179686, 65536, 0, 1114150, 0, 0, 1048614, 262144, 2, 983078, 327680, 3, 1441829, 262144, 2, 1376293, 65536, 2, 1310757, 65536, 2, 1245221, 0, 0, 1179685, 262144, 2, 1114149, 65536, 0, 1048613, 131072, 0, 983077, 262144, 3, 1441828, 65536, 2, 1376292, 65536, 2, 1310756, 65536, 2, 1245220, 131072, 0, 1179684, 0, 0, 1114148, 65536, 2, 1048612, 65536, 2, 983076, 65536, 1, 1441827, 131072, 0, 1376291, 65536, 2, 1310755, 65536, 0, 1245219, 65536, 0, 1179683, 131072, 0, 1114147, 262144, 2, 1048611, 65536, 0, 983075, 65536, 1, 1441826, 0, 0, 1376290, 0, 0, 1310754, 131072, 0, 1245218, 65536, 2, 1179682, 262144, 2, 1114146, 65536, 0, 1048610, 65536, 2, 983074, 262144, 3, 1441825, 131072, 0, 1376289, 131072, 0, 1310753, 65536, 2, 1245217, 262144, 2, 1179681, 131072, 0, 1114145, 131072, 0, 1048609, 131072, 0, 983073, 262144, 3, 1441824, 131072, 0, 1376288, 65536, 2, 1310752, 0, 0, 1245216, 0, 0, 1179680, 65536, 2, 1114144, 0, 0, 1048608, 131072, 0, 983072, 65536, 1, 1441823, 131072, 0, 1376287, 65536, 2, 1310751, 131072, 0, 1245215, 327680, 3, 1179679, 0, 2, 1114143, 327680, 2, 1048607, 0, 2, 983071, 0, 1, 1441822, 65536, 2, 1376286, 65536, 0, 1310750, 131072, 0, 1245214, 65536, 1, 1441821, 65536, 2, 1376285, 131072, 0, 1310749, 65536, 2, 1245213, 65536, 1, 1441820, 262144, 2, 1376284, 0, 0, 1310748, 65536, 0, 1245212, 65536, 1, 1441819, 0, 2, 1376283, 0, 2, 1310747, 327680, 2, 1245211, 0, 1, 917543, 196608, 2, 852007, 131072, 2, 786471, 196608, 2, 720935, 196608, 2, 655399, 196608, 2, 589863, 131072, 2, 524327, 131072, 2, 458791, 131072, 2, 393255, 196608, 2, 327719, 131072, 2, 262183, 131072, 2, 196647, 131072, 2, 131111, 131072, 2, 65575, 196608, 2, 39, 131072, 1, 917542, 327680, 2, 852006, 327680, 2, 786470, 0, 2, 720934, 327680, 2, 655398, 327680, 2, 589862, 0, 2, 524326, 327680, 2, 458790, 327680, 2, 393254, 0, 2, 327718, 0, 2, 262182, 0, 2, 196646, 0, 2, 131110, 327680, 2, 65574, 327680, 2, 38, 0, 1, 655393, 327680, 8, 589857, 262144, 7, 524321, 131072, 5, 458785, 196608, 2, 393249, 196608, 2, 327713, 196608, 2, 262177, 196608, 2, 196641, 196608, 2, 131105, 131072, 2, 65569, 196608, 2, 33, 131072, 1, 524320, 0, 3, 458784, 327680, 2, 393248, 0, 2, 327712, 327680, 2, 262176, 327680, 1, 196640, 65536, 2, 131104, 65536, 0, 65568, 0, 0, 32, 262144, 3, 262175, 65536, 3, 196639, 65536, 2, 131103, 131072, 0, 65567, 0, 0, 31, 262144, 3, 262174, 262144, 1, 196638, 131072, 0, 131102, 131072, 0, 65566, 262144, 2, 30, 262144, 3, 262173, 0, 3, 196637, 327680, 2, 131101, 327680, 1, 65565, 262144, 2, 29, 65536, 1, 131100, 262144, 1, 65564, 0, 0, 28, 262144, 3, 131099, 262144, 1, 65563, 0, 0, 27, 65536, 1, 131098, 0, 3, 65562, 327680, 1, 26, 65536, 1, 65561, 262144, 1, 25, 262144, 3, 65560, 65536, 3, 24, 65536, 1, 65559, 196608, 1, 23, 262144, 3, 65558, 65536, 0, 22, 262144, 3, 65557, 65536, 2, 21, 65536, 1, 65556, 262144, 2, 20, 65536, 1, 65555, 327680, 1, 19, 262144, 3, 65554, 0, 3, 18, 0, 4, 327703, 131072, 2, 262167, 131072, 2, 196631, 196608, 2, 131095, 131072, 2, 327702, 65536, 0, 262166, 0, 0, 196630, 262144, 2, 131094, 0, 0, 327701, 65536, 2, 262165, 262144, 2, 196629, 131072, 0, 131093, 0, 0, 327700, 327680, 1, 262164, 0, 0, 196628, 262144, 2, 131092, 65536, 2, 327699, 0, 3, 262163, 327680, 2, 196627, 0, 2, 131091, 327680, 2, 393239, 131072, 3, 393238, 196608, 1, 393237, 65536, 0, 393236, 327680, 2, 589846, 131072, 3, 524310, 196608, 2, 458774, 131072, 2, 589845, 262144, 1, 524309, 65536, 0, 458773, 65536, 2, 589844, 0, 3, 524308, 327680, 2, 458772, 327680, 2, 17, 65536, 8, 16, 65536, 8, 15, 0, 7, 14, 65536, 8, 13, 65536, 8, 12, 65536, 8, 11, 65536, 8, 10, 65536, 8, 9, 65536, 8, 262159, 327680, 8, 196623, 262144, 7, 131087, 327680, 7, 65551, 262144, 7, 1572879, 1, 0, 1572880, 1, 0, 1572881, 1, 0, 1572882, 1, 0, 1572883, 1, 0, 1376279, 1, 0, 1376280, 1, 0, 1441817, 1, 0, 1441818, 1, 0, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 1, 0, 983063, 1, 0, 1310732, 262144, 5, 1376267, 262144, 5, 1376268, 262144, 4)
 
-[node name="Level_0" type="Node" parent="LevelManager"]
-script = ExtResource("7_n0qyo")
+[node name="Portal" parent="." instance=ExtResource("26_oupmd")]
+position = Vector2(928, 896)
 
-[node name="Level_1" type="Node" parent="LevelManager"]
-script = ExtResource("9_ijev4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource("RectangleShape2D_nvp8a")
 
-[node name="MusicManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("17_4302p")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicManager"]
-
-[node name="Tracks" type="Node" parent="MusicManager"]
-script = ExtResource("18_2mgg1")
-
-[node name="EarlyMorningMusic" type="AudioStreamPlayer" parent="MusicManager/Tracks"]
-stream = ExtResource("3_r1vjs")
-
-[node name="HinkTheGameMusic" type="AudioStreamPlayer" parent="MusicManager/Tracks"]
-stream = ExtResource("4_dvji8")
-
-[node name="CutsceneManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("20_muooe")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="CutsceneManager"]
-layer = 100
-
-[node name="TransitionRect" type="ColorRect" parent="CutsceneManager/CanvasLayer"]
-z_index = 200
-z_as_relative = false
-material = SubResource("ShaderMaterial_wjbc1")
-offset_left = -45.0
-offset_top = -42.0
-offset_right = 464.0
-offset_bottom = 255.0
-color = Color(0, 0, 0, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CutsceneManager/CanvasLayer/TransitionRect"]
-root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_5byn3")
-}
-speed_scale = 2.0
-
-[node name="EnvironmentManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("22_4y78a")
-
-[node name="GameManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("23_uanml")
-
-[node name="CameraManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("24_yry34")
+[node name="Level01" parent="." instance=ExtResource("27_x357s")]
+position = Vector2(-184, 1208)
 
 [connection signal="player_turned" from="Player" to="Camera" method="_on_player_turned"]
-[connection signal="player_entered_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_level"]
-[connection signal="player_entered_out_of_bounds" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_out_of_bounds"]
-[connection signal="player_entered_portal" from="LevelManager" to="GameManager" method="_on_level_manager_player_entered_portal"]
-[connection signal="player_exited_level" from="LevelManager" to="GameManager" method="_on_level_manager_player_exited_level"]
-[connection signal="cutscene_ended" from="CutsceneManager" to="GameManager" method="_on_cutscene_manager_cutscene_ended"]
-[connection signal="cutscene_started" from="CutsceneManager" to="GameManager" method="_on_cutscene_manager_cutscene_started"]

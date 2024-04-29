@@ -1,5 +1,7 @@
 extends Camera2D
 
+const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
+
 @export var tilemap: TileMap
 
 var release_falloff            := 35
@@ -79,25 +81,19 @@ func get_vector_from_center_to_player() -> Vector2:
 	var x: Vector2 =  target.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
-func connect_to_level(level_node: Node2D, next_tilemap: TileMap) -> void:
-	print("connect_to_level: " + level_node.name + " " + next_tilemap.name)
-	tilemap = next_tilemap
+func connect_to_tilemap(room_tilemap: TileMap) -> void:
+	print("connect_to_room: " + room_tilemap.name)
+	tilemap = room_tilemap
 	print(tilemap.name)
 	# set_zoom(get_camera_zoom_to_tilemap(tilemap))
 	set_zoom(Vector2.ONE)
-	apply_camera_limits(tilemap)
 
-func apply_camera_limits(source_tilemap: TileMap):
-	var tile_size           := source_tilemap.get_tileset().tile_size
-	var tilemap_size        := get_tilemap_size(source_tilemap)
-	var level_size          := Vector2i(tile_size * tilemap_size)
-	var levelOffsetX: float =  source_tilemap.get_parent().position.x
-	var levelOffsetY: float =  source_tilemap.get_parent().position.y
-
-	set_limit(SIDE_TOP, int(levelOffsetY))
-	set_limit(SIDE_BOTTOM, int(levelOffsetY) + level_size.y)
-	set_limit(SIDE_LEFT, int(levelOffsetX))
-	set_limit(SIDE_RIGHT, int(levelOffsetX) + level_size.x)
+	var rect = LdtkUtil.get_tilemap_global_rect(room_tilemap)
+	print("rect: " + str(rect))
+	set_limit(SIDE_LEFT, rect.position.x)
+	set_limit(SIDE_RIGHT, rect.position.x + rect.size.x)
+	set_limit(SIDE_TOP, rect.position.y)
+	set_limit(SIDE_BOTTOM, rect.position.y + rect.size.y)
 
 
 func update_global_position(delta: float):

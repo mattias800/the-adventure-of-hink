@@ -1,9 +1,14 @@
 extends Node
-class_name Songs
+class_name Tracks
 
-func get_track_node(song: MusicManager.Track):
+enum Track {
+	EARLY_MORNING,
+	HINK_THE_GAME
+}
+
+func get_track_node(song: Track):
 	match(song):
-		MusicManager.Track.EARLY_MORNING:
+		Track.EARLY_MORNING:
 			return $EarlyMorningMusic
-		MusicManager.Track.HINK_THE_GAME:
+		Track.HINK_THE_GAME:
 			return $HinkTheGameMusic

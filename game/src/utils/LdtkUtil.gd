@@ -1,54 +1,15 @@
-static func find_levels_parent(root: Window) -> Node2D:
-	return root.get_node("Main").get_node("Hink");
-
-static func find_level_node(root: Window, level_name: String) -> Node2D:
-	return find_levels_parent(root).get_node(level_name);
-
-static func find_all_level_nodes(root: Window) -> Array[Node]:
-	return find_levels_parent(root).get_children();
-
-static func find_entities_node_for_level(level_node: Node2D) -> Node2D:
-	return level_node.get_node("Entities")
-
-static func find_entities_meta_for_level(level_node: Node2D) -> Array:
-	return find_entities_node_for_level(level_node).get_meta("LDtk_entity_instances")
-
-static func get_level_settings(level_node: Node2D):
-	return level_node.get_meta("LDtk_level_fields")
-	
-static func find_tilemap_by_world_coordinates(root: Window, world_coordinates: Vector2) -> Array:
-	for level in find_all_level_nodes(root):
-		var tilemaps := level.get_children()
-		for tilemap in tilemaps:
-			if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
-				return [true, tilemap, level]
-
-	return [false, null, null]
-
-static func find_level_node_by_level_iid(root: Window, iid: String):
-	print("find_level_node_by_level_iid")
-	for n in find_all_level_nodes(root):
-		var raw_data = n.get_meta("LDtk_raw_data")
-		
-		if raw_data["iid"] == iid:
-			return n
-		
-
-static func find_entity_by_iid(root: Window, iid: String):
-	print("find_entity_by_iid")
-	for n in find_all_level_nodes(root):
-		var entities = find_entities_node_for_level(n)
-		
-		var entity_instances = entities.get_meta("LDtk_entity_instances")
-		for e in entity_instances:
-			if e["iid"] == iid:
-				return e
-			
+static func find_level_tilemap_by_world_coordinates(tree: SceneTree, world_coordinates: Vector2):
+	for tilemap in tree.get_nodes_in_group("rooms"):
+		if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
+			return tilemap
+	for tilemap in tree.get_nodes_in_group("overworlds"):
+		if tilemap is TileMap and is_world_coordinate_within_tilemap(tilemap, world_coordinates):
+			return tilemap
 
 static func is_world_coordinate_within_tilemap(tilemap: TileMap, world_coordinate: Vector2) -> bool:
-	return get_tilemap_world_rect(tilemap).has_point(world_coordinate)
+	return get_tilemap_global_rect(tilemap).has_point(world_coordinate)
 
-static func get_tilemap_world_rect(tilemap: TileMap) -> Rect2:
+static func get_tilemap_world_rect_old(tilemap: TileMap) -> Rect2:
 	var tile_size    := tilemap.get_tileset().tile_size
 	var tilemap_size := get_tilemap_size(tilemap)
 	var level_size   := Vector2i(tile_size * tilemap_size)
@@ -77,3 +38,10 @@ static func get_vector_from_direction(direction: String) -> Vector2:
 	print("Invalid direction: ", direction)
 	return Vector2(0, 0)
 			
+static func get_tilemap_global_rect(tilemap: TileMap) -> Rect2:
+	var rect := Rect2(tilemap.get_used_rect())
+	var tile_size           := tilemap.get_tileset().tile_size
+	rect.position *= Vector2(tile_size)
+	rect.position += tilemap.global_position
+	rect.size *= Vector2(tile_size)
+	return rect
