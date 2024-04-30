@@ -34,7 +34,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if target != null:
+	if target:
 		match state:
 			FOLLOWING_TARGET:
 				var focus := clamp_vec2_to_limits(target.get_global_transform().get_origin() - HALF_VIEWPORT)

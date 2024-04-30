@@ -6,19 +6,10 @@ signal cutscene_ended
 @onready var transition_rect = $"CanvasLayer/TransitionRect"
 @onready var animation_player = $"CanvasLayer/TransitionRect/AnimationPlayer"
 
-var player: Node2D
-var camera: Node2D
-
 func _physics_process(_delta):
-	var focus = player.global_position - camera.global_position
+	var focus = GameManager.player.global_position - CameraManager.camera.global_position
 	transition_rect.material.set_shader_parameter("focus_pos", focus)
 
-func set_player_node(p: Node2D):
-	player = p
-
-func set_camera_node(p: Node2D):
-	camera = p
-		
 func start_timeline(timeline_name: String):
 	cutscene_started.emit()
 	Dialogic.start(timeline_name)
@@ -27,9 +18,9 @@ func start_timeline(timeline_name: String):
 	cutscene_ended.emit()
 
 func transition_in():
-	print("transition_in PLAY")
+	print("transition_in")
 	animation_player.play("Transition")
-	
+
 func transition_out():
 	print("transition_out")
 	animation_player.play_backwards("Transition")

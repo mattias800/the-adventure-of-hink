@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://autoloads/level_manager.gd" id="1_0ij56"]
 [ext_resource type="Script" path="res://world/Level_0/level_0.gd" id="2_46cq8"]
-[ext_resource type="Script" path="res://world/world01/level01/room01.gd" id="3_v5362"]
+[ext_resource type="Script" path="res://world/world01/level01/level01.gd" id="3_v5362"]
 
 [node name="LevelManager" type="Node"]
 script = ExtResource("1_0ij56")
