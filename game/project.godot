@@ -22,7 +22,6 @@ CutsceneManager="*res://autoloads/cutscene_manager.tscn"
 GameManager="*res://autoloads/game_manager.tscn"
 LevelManager="*res://autoloads/level_manager.tscn"
 MusicManager="*res://autoloads/music_manager.tscn"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
@@ -63,10 +62,6 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 
 [input]
 
