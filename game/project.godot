@@ -31,8 +31,8 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "intro": "res://dialog/intro.dtl",
-"level1room1exit": "res://world/world01/level01/level1room1exit.dtl",
-"level1room1start": "res://world/world01/level01/level1room1start.dtl"
+"level1room1exit": "res://world/world_01/level_01/level1room1exit.dtl",
+"level1room1start": "res://world/world_01/level_01/level1room1start.dtl"
 }
 variables={}
 glossary/default_case_sensitive=true

@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_0uds8"]
-[ext_resource type="Script" path="res://world/world01/level01/level01.gd" id="1_w8tkp"]
+[ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_w8tkp"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="2_pd2ey"]
-[ext_resource type="Script" path="res://world/world01/level01/room_01.gd" id="3_h8o6l"]
-[ext_resource type="Script" path="res://world/world01/level01/room_02.gd" id="4_016ax"]
+[ext_resource type="Script" path="res://world/world_01/level_01/room_01.gd" id="3_h8o6l"]
+[ext_resource type="Script" path="res://world/world_01/level_01/room_02.gd" id="4_016ax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8hqc"]
 
