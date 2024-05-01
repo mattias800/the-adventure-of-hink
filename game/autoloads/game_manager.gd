@@ -23,7 +23,7 @@ func _process(_delta):
 	if not scene_is_loaded:
 		is_entering_new_scene = true
 		scene_is_loaded = true
-		get_tree().change_scene_to_file("res://world/world01/level01/level01.tscn")
+		get_tree().change_scene_to_file("res://world/world_01/level_01/level_01.tscn")
 		return
 
 	if Input.is_action_just_pressed("exit_game"):
