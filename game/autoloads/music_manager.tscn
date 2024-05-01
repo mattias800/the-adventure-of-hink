@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4enuqhs2hq1"]
+[gd_scene load_steps=7 format=3 uid="uid://d4enuqhs2hq1"]
 
 [ext_resource type="Script" path="res://autoloads/music_manager.gd" id="1_est6h"]
 [ext_resource type="Script" path="res://music/Tracks.gd" id="2_id2od"]
 [ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://music/tracks/early_morning_guitar.mp3" id="3_5isms"]
 [ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://music/tracks/hink_the_game.mp3" id="4_q47pm"]
+[ext_resource type="AudioStream" uid="uid://bta17kymkwmur" path="res://music/tracks/soft_ball.mp3" id="5_2a7bc"]
+[ext_resource type="AudioStream" uid="uid://sel0em3kf2sh" path="res://music/tracks/whispering_shadows.mp3" id="6_jk10u"]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource("1_est6h")
@@ -19,3 +21,9 @@ stream = ExtResource("3_5isms")
 
 [node name="HinkTheGameMusic" type="AudioStreamPlayer" parent="Tracks"]
 stream = ExtResource("4_q47pm")
+
+[node name="SoftBall" type="AudioStreamPlayer" parent="Tracks"]
+stream = ExtResource("5_2a7bc")
+
+[node name="WhisperingShadows" type="AudioStreamPlayer" parent="Tracks"]
+stream = ExtResource("6_jk10u")

@@ -22,6 +22,8 @@ CutsceneManager="*res://autoloads/cutscene_manager.tscn"
 GameManager="*res://autoloads/game_manager.tscn"
 LevelManager="*res://autoloads/level_manager.tscn"
 MusicManager="*res://autoloads/music_manager.tscn"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+GameState="*res://game_state/game_state.gd"
 
 [dialogic]
 
@@ -55,6 +57,10 @@ text/autopauses={}
 layout/style_list=["res://dialog/dialog_style.tres"]
 layout/default_style="res://dialog/dialog_style.tres"
 
+[dialogue_manager]
+
+general/states=["GameState"]
+
 [display]
 
 window/size/viewport_width=320
@@ -62,6 +68,10 @@ window/size/viewport_height=180
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -113,6 +123,10 @@ walk_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue")
 
 [rendering]
 

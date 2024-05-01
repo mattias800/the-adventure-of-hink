@@ -87,6 +87,9 @@ func enter_new_scene():
 		get_tree().quit()
 		
 	player.enable()
+	
+	if get_tree().current_scene.has_method("on_player_enter_scene"):
+		get_tree().current_scene.on_player_enter_scene()
 
 func get_portal_by_name(name_: String):
 	var portals = get_tree().get_nodes_in_group("portals")

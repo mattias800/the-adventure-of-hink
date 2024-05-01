@@ -1,6 +1,3 @@
-class_name Room01State
+class_name Level01State
 
-var has_visited: bool
-
-func _init():
-	has_visited = false
+var has_ever_visited: bool = false
