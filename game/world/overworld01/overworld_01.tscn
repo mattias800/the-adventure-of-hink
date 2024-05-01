@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
-[ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/Overworld_01/overworld_water.tscn" id="1_n4jpo"]
+[ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld01/overworld_water.tscn" id="1_n4jpo"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_uf8ks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvk1g"]

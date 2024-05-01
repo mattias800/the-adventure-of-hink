@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The-adventure-of-hink"
-run/main_scene="res://mainaaa.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -31,8 +31,8 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "intro": "res://dialog/intro.dtl",
-"level0exit": "res://world/Level_0/level0exit.dtl",
-"level0start": "res://world/Level_0/level0start.dtl"
+"level1room1exit": "res://world/world01/level01/level1room1exit.dtl",
+"level1room1start": "res://world/world01/level01/level1room1start.dtl"
 }
 variables={}
 glossary/default_case_sensitive=true
