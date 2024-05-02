@@ -1,15 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=12 format=3 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_yhmja"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
 [ext_resource type="Script" path="res://world/world_01/level_01/room_01.gd" id="3_k8d18"]
 [ext_resource type="Script" path="res://world/world_01/level_01/room_02.gd" id="4_wuahv"]
+[ext_resource type="Script" path="res://entities/camera/camera.gd" id="5_k1258"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="5_u4inf"]
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="6_ojvhv"]
+[ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="7_q1vx4"]
+[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="8_yaev6"]
+[ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="9_ws1eu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8hqc"]
 
 [node name="Level01" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_yhmja")
+
+[node name="Camera" type="Camera2D" parent="." groups=["cameras"]]
+position = Vector2(201, 96)
+offset = Vector2(2.08165e-12, 2.08165e-12)
+anchor_mode = 0
+script = ExtResource("5_k1258")
+
+[node name="Background" type="Sprite2D" parent="Camera"]
+unique_name_in_owner = true
+texture = ExtResource("6_ojvhv")
+centered = false
+
+[node name="Background3D" type="Sprite2D" parent="Camera"]
+unique_name_in_owner = true
+texture = ExtResource("6_ojvhv")
+centered = false
+script = ExtResource("7_q1vx4")
+
+[node name="SubViewport" type="SubViewport" parent="Camera/Background3D"]
+transparent_bg = true
+size = Vector2i(320, 180)
+
+[node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("8_yaev6")]
+
+[node name="Fog" parent="Camera" instance=ExtResource("9_ws1eu")]
+unique_name_in_owner = true
 
 [node name="Room01" type="TileMap" parent="." groups=["rooms"]]
 tile_set = ExtResource("2_7l16g")

@@ -8,24 +8,16 @@ var active_level_type
 var active_respawn_global_position
 
 var is_entering_new_scene: bool = true
-var new_scene_portal_name = "YayPortal"
-var scene_is_loaded = false
+var new_scene_portal_name = ""
 
 func _ready():
 	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)
 	LevelManager.player_exited_level.connect(_on_level_manager_player_exited_level)
 	LevelManager.player_entered_out_of_bounds.connect(_on_level_manager_player_entered_out_of_bounds)
-	CameraManager.camera.set_camera_target(player)
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
 
 func _process(_delta):
-	if not scene_is_loaded:
-		is_entering_new_scene = true
-		scene_is_loaded = true
-		get_tree().change_scene_to_file("res://world/world_01/level_01/level_01.tscn")
-		return
-
 	if Input.is_action_just_pressed("exit_game"):
 		get_tree().quit()
 		return
@@ -56,11 +48,12 @@ func enter_new_scene():
 	var portal = get_portal_by_name(new_scene_portal_name)
 
 	if not portal:
-		print("Found no target portal: " + new_scene_portal_name)
-		print("Available portals:")
-		print(get_tree().get_nodes_in_group("portals"))
-		print("Scene:")
-		print(get_tree().root.get_children())
+		print("Found no matching portal: " + new_scene_portal_name)
+		portal = get_any_available_portal()
+		
+	if not portal:
+		print("Found no portals at all.")
+		print("Panic!")
 		get_tree().quit()
 		return
 
@@ -75,6 +68,7 @@ func enter_new_scene():
 		player.global_position = portal.global_position
 
 	print(player.global_position)
+	CameraManager.set_camera_target(player)
 	CameraManager.camera.jump_to_target()
 	CutsceneManager.transition_in()
 	
@@ -97,6 +91,9 @@ func get_portal_by_name(name_: String):
 		if p.name == name_:
 			return p
 
+func get_any_available_portal():
+	return get_tree().get_first_node_in_group("portals")
+	
 func on_player_entered_room(tilemap: TileMap):
 	print("on_player_entered_room")
 

@@ -23,7 +23,7 @@ GameManager="*res://autoloads/game_manager.tscn"
 LevelManager="*res://autoloads/level_manager.tscn"
 MusicManager="*res://autoloads/music_manager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-GameState="*res://game_state/game_state.gd"
+GameState="*res://src/game_state/game_state.gd"
 
 [dialogic]
 

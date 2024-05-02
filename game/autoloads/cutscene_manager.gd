@@ -6,6 +6,9 @@ signal cutscene_ended
 @onready var transition_rect = $"CanvasLayer/TransitionRect"
 @onready var animation_player = $"CanvasLayer/TransitionRect/AnimationPlayer"
 
+func _ready():
+	pass
+	
 func _physics_process(_delta):
 	var focus = GameManager.player.global_position - CameraManager.camera.global_position
 	transition_rect.material.set_shader_parameter("focus_pos", focus)

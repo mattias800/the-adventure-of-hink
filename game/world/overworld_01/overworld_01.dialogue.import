@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://doeiv5wklbtga"
+path="res://.godot/imported/overworld_01.dialogue-fbe0fa9d803096ceb33fd43946029b03.tres"
+
+[deps]
+
+source_file="res://world/overworld_01/overworld_01.dialogue"
+dest_files=["res://.godot/imported/overworld_01.dialogue-fbe0fa9d803096ceb33fd43946029b03.tres"]
+
+[params]
+
+defaults=true

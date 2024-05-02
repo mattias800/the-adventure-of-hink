@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bidfps3q756ep"]
+
+[ext_resource type="Script" path="res://entities/camera/camera.gd" id="1_juncb"]
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="2_hkrqs"]
+[ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="3_irm7g"]
+[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="4_fqdte"]
+[ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="5_lpkbf"]
+[ext_resource type="PackedScene" uid="uid://do8560lw7gjwe" path="res://entities/camera/overworld_clouds.tscn" id="6_t122a"]
+
+[node name="Camera" type="Camera2D" groups=["cameras"]]
+position = Vector2(201, 96)
+offset = Vector2(2.08165e-12, 2.08165e-12)
+anchor_mode = 0
+script = ExtResource("1_juncb")
+
+[node name="Background" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_hkrqs")
+centered = false
+
+[node name="Background3D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_hkrqs")
+centered = false
+script = ExtResource("3_irm7g")
+
+[node name="SubViewport" type="SubViewport" parent="Background3D"]
+transparent_bg = true
+size = Vector2i(320, 180)
+
+[node name="MountainBackground" parent="Background3D/SubViewport" instance=ExtResource("4_fqdte")]
+
+[node name="Fog" parent="." instance=ExtResource("5_lpkbf")]
+unique_name_in_owner = true
+
+[node name="OverworldClouds" parent="." instance=ExtResource("6_t122a")]
+unique_name_in_owner = true

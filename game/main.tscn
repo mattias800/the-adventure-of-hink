@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://baosx1eskl7rg"]
+[gd_scene load_steps=3 format=3 uid="uid://ec5ivjmjuxrk"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_ssved"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_r17ip"]

@@ -1,0 +1,8 @@
+~ first_entry
+
+if overworld_01.level_01.has_ever_visited == false
+	Hink: *Yawn*.. Good morning to me..
+	Hink: Looks like a nice day!
+	set overworld_01.level_01.has_ever_visited = true
+	
+=> END
