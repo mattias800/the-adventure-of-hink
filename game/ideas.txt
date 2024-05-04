@@ -1,0 +1,6 @@
+Jump pads / bumpers
+Rain particle effect
+Smoke particle effect
+NPC:s with dialog
+Dash move
+Moving platforms
