@@ -16,8 +16,9 @@ var active_controller := PLATFORM
 
 func _ready():
 	platform_controller = PlatformController.new(self, $AnimatedSprite2D, $JumpSound)
+	platform_controller.player_turned.connect(func(direction): player_turned.emit(direction))
 	overworld_controller = OverworldController.new(self, $AnimatedSprite2D)
-	
+
 func _physics_process(delta):
 	if not enabled:
 		return
@@ -32,7 +33,7 @@ func switch_to_platform():
 
 func switch_to_overworld():
 	active_controller = OVERWORLD
-	
+
 func enable():
 	enabled = true
 	match active_controller:
@@ -40,7 +41,7 @@ func enable():
 			platform_controller.enable()
 		OVERWORLD:
 			overworld_controller.enable()
-	
+
 func disable():
 	enabled = false
 	platform_controller.disable()
