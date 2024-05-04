@@ -1,8 +1,19 @@
-~ first_entry
+~ room1_entry
 
-if overworld_01.level_01.has_ever_visited == false
-	Hink: *Yawn*.. Good morning to me..
-	Hink: Looks like a nice day!
-	set overworld_01.level_01.has_ever_visited = true
-	
+Hink: *Yawn*.. Good morning to me..
+Hink: Looks like a nice day!
+=> END
+
+~ room1_trigger
+
+Hink: The forest seems peaceful..
+Hink: I should probably get home..
+=> END
+
+~ room2_entry
+
+Hink: What should I do today? Hmm..
+Hink: What to do, on a nice, quiet day..
+Hink: I have an idea!
+Hink: I'm gonna go punch Limpan in the face!
 => END

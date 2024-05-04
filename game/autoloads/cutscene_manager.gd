@@ -6,6 +6,8 @@ signal cutscene_ended
 @onready var transition_rect = $"CanvasLayer/TransitionRect"
 @onready var animation_player = $"CanvasLayer/TransitionRect/AnimationPlayer"
 
+var cutscene_playing: bool = false
+
 func _ready():
 	pass
 	
@@ -14,14 +16,15 @@ func _physics_process(_delta):
 	transition_rect.material.set_shader_parameter("focus_pos", focus)
 
 func start_timeline(resource, start):
+	cutscene_playing = true
 	cutscene_started.emit()
 	GameManager.player.disable()
-	DialogueManager.show_dialogue_balloon(resource, start)
+	await DialogueManager.show_dialogue_balloon(resource, start)
 	await DialogueManager.dialogue_ended
 	await get_tree().create_timer(0.25).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()
 	GameManager.player.enable()
-	print("Cutscene done")
+	cutscene_playing = false
 
 func transition_in():
 	print("transition_in")

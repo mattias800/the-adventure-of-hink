@@ -71,6 +71,9 @@ func enter_new_scene():
 	CameraManager.set_camera_target(player)
 	CameraManager.camera.jump_to_target()
 	CutsceneManager.transition_in()
+	# var camera = get_tree().get_first_node_in_group("cameras")
+	player.player_turned.connect(CameraManager.camera._on_player_turned)
+
 
 	if get_tree().current_scene.is_in_group("platformers"):
 		player.switch_to_platform()
@@ -80,7 +83,9 @@ func enter_new_scene():
 		print("Scene must be in group platformers or overworlds.")
 		get_tree().quit()
 
-	player.enable()
+	if not CutsceneManager.cutscene_playing:
+		# If cutscene was triggered by levels enter room event, it will have disabled the player.
+		player.enable()
 
 	if get_tree().current_scene.has_method("on_player_enter_scene"):
 		get_tree().current_scene.on_player_enter_scene()
@@ -94,7 +99,7 @@ func get_portal_by_name(name_: String):
 func get_any_available_portal():
 	return get_tree().get_first_node_in_group("portals")
 
-func on_player_entered_room(tilemap: TileMap):
+func on_player_entered_room():
 	print("on_player_entered_room")
 
 	# Store player position for respawn after death

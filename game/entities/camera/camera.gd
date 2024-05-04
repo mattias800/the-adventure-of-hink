@@ -2,8 +2,6 @@ extends Camera2D
 
 const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
-@export var tilemap: TileMap
-
 var release_falloff            := 35
 var acceleration               := 10
 var max_speed                  := 20
@@ -14,8 +12,6 @@ const VIEWPORT      := Vector2(320, 180)
 const HALF_VIEWPORT := VIEWPORT / 2
 
 var target
-@onready var fog = $Fog
-@onready var overheadClouds = $OverworldClouds
 
 enum {
 	IDLE,
@@ -82,21 +78,6 @@ func get_vector_from_center_to_player() -> Vector2:
 	var x: Vector2 =  target.get_global_transform_with_canvas().get_origin() - get_viewport_rect().get_center()
 	return x.normalized()
 
-func connect_to_tilemap(room_tilemap: TileMap) -> void:
-	print("connect_to_room: " + room_tilemap.name)
-	tilemap = room_tilemap
-	print(tilemap.name)
-	# set_zoom(get_camera_zoom_to_tilemap(tilemap))
-	set_zoom(Vector2.ONE)
-
-	var rect = LdtkUtil.get_tilemap_global_rect(room_tilemap)
-	print("rect: " + str(rect))
-	set_limit(SIDE_LEFT, rect.position.x)
-	set_limit(SIDE_RIGHT, rect.position.x + rect.size.x)
-	set_limit(SIDE_TOP, rect.position.y)
-	set_limit(SIDE_BOTTOM, rect.position.y + rect.size.y)
-
-
 func update_global_position(delta: float):
 	global_position += lerp(
 		velocity,
@@ -104,8 +85,9 @@ func update_global_position(delta: float):
 		pow(2, -32 * delta)
 	)
 
-
 func clamp_camera_to_limits():
+	# Prevent camera position to outside of limits.
+	# This ensures that background does not move because of limit and position being out of sync.
 	# Camera limits must be set first.
 	# var zoomed_viewport_size = get_viewport_to_zoom_scale()
 	var zoomed_viewport_size := Vector2(320, 180)
