@@ -31,7 +31,7 @@ func place_node_on_world_coordinates(coord: Vector2, tile_size: Vector2i):
 
 func on_body_enter(body):
 	if body.is_in_group("player"):
-		GameManager.on_player_died()
+		GameManager.respawn_player()
 		
 func get_world_coordinates(coord: Vector2i, tile_size: Vector2i) -> Vector2:
 	var w = global_position

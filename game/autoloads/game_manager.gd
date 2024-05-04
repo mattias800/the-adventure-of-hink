@@ -5,15 +5,14 @@ const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 @onready var player = $Player
 
 var active_level_type
-var active_respawn_global_position
+var current_checkpoint: Checkpoint
+var last_spawnpoint: Vector2
 
 var is_entering_new_scene: bool = true
 var new_scene_portal_name = ""
 
 func _ready():
 	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)
-	LevelManager.player_exited_level.connect(_on_level_manager_player_exited_level)
-	LevelManager.player_entered_out_of_bounds.connect(_on_level_manager_player_entered_out_of_bounds)
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
 
@@ -63,9 +62,12 @@ func enter_new_scene():
 		print("Found spawn point")
 		print(spawn_point.global_position)
 		player.global_position = spawn_point.global_position
+		last_spawnpoint = spawn_point.global_position
+		
 	else:
 		print("Found no spawn point")
 		player.global_position = portal.global_position
+		last_spawnpoint = portal.global_position
 
 	print(player.global_position)
 	CameraManager.set_camera_target(player)
@@ -99,34 +101,24 @@ func get_portal_by_name(name_: String):
 func get_any_available_portal():
 	return get_tree().get_first_node_in_group("portals")
 
-func on_player_entered_room():
-	print("on_player_entered_room")
-
-	# Store player position for respawn after death
-	active_respawn_global_position = player.global_position
-
-	# CameraManager.connect_to_tilemap(tilemap)
-
-
-func _on_level_manager_player_exited_level(tilemap: TileMap):
-	pass # Replace with function body.
-
-
 func _on_cutscene_manager_cutscene_started():
 	player.disable()
 
 func _on_cutscene_manager_cutscene_ended():
 	player.enable()
 
-func on_player_died():
+func respawn_player():
 	print("Player died.")
-	if active_respawn_global_position:
-		player.global_position = active_respawn_global_position
-
-func _on_level_manager_player_entered_out_of_bounds():
-	print("Player is out of bounds.")
-	if active_respawn_global_position:
-		player.global_position = active_respawn_global_position
+	if current_checkpoint:
+		player.global_position = current_checkpoint.global_position
+	elif last_spawnpoint:
+		player.global_position = last_spawnpoint
+	else:
+		print("Respawn failed. No checkpoint and no last known spawnpoint.")
+		get_tree().quit()
+		
+	print("Respawned player.")
+	print(player.global_position)
 
 func load_scene(path):
 	print("LOADING NEW SCENE!")

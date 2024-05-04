@@ -16,7 +16,6 @@ func _on_body_entered(body):
 
 	if body.is_in_group("player"):
 		CameraLimiter.apply_collision_shape_to_camera_limits(camera, collision_shape)
-		GameManager.on_player_entered_room()
 		on_player_entered_room.emit()
 
 func _on_body_exited(body):
