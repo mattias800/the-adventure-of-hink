@@ -28,7 +28,7 @@ func _process(_delta):
 		enter_new_scene()
 		return
 
-	LevelManager.check_for_level_change(player.global_position)
+	# LevelManager.check_for_level_change(player.global_position)
 
 func on_player_entered_portal(portal):
 	print("on_player_entered_portal")
@@ -50,7 +50,7 @@ func enter_new_scene():
 	if not portal:
 		print("Found no matching portal: " + new_scene_portal_name)
 		portal = get_any_available_portal()
-		
+
 	if not portal:
 		print("Found no portals at all.")
 		print("Panic!")
@@ -71,7 +71,7 @@ func enter_new_scene():
 	CameraManager.set_camera_target(player)
 	CameraManager.camera.jump_to_target()
 	CutsceneManager.transition_in()
-	
+
 	if get_tree().current_scene.is_in_group("platformers"):
 		player.switch_to_platform()
 	elif get_tree().current_scene.is_in_group("overworlds"):
@@ -79,9 +79,9 @@ func enter_new_scene():
 	else:
 		print("Scene must be in group platformers or overworlds.")
 		get_tree().quit()
-		
+
 	player.enable()
-	
+
 	if get_tree().current_scene.has_method("on_player_enter_scene"):
 		get_tree().current_scene.on_player_enter_scene()
 
@@ -93,14 +93,14 @@ func get_portal_by_name(name_: String):
 
 func get_any_available_portal():
 	return get_tree().get_first_node_in_group("portals")
-	
+
 func on_player_entered_room(tilemap: TileMap):
 	print("on_player_entered_room")
 
 	# Store player position for respawn after death
 	active_respawn_global_position = player.global_position
 
-	CameraManager.connect_to_tilemap(tilemap)
+	# CameraManager.connect_to_tilemap(tilemap)
 
 
 func _on_level_manager_player_exited_level(tilemap: TileMap):
@@ -113,12 +113,18 @@ func _on_cutscene_manager_cutscene_started():
 func _on_cutscene_manager_cutscene_ended():
 	player.enable()
 
+func on_player_died():
+	print("Player died.")
+	if active_respawn_global_position:
+		player.global_position = active_respawn_global_position
+
 func _on_level_manager_player_entered_out_of_bounds():
 	print("Player is out of bounds.")
 	if active_respawn_global_position:
 		player.global_position = active_respawn_global_position
 
 func load_scene(path):
+	print("LOADING NEW SCENE!")
 	get_tree().current_scene.queue_free() # Instead of free()
 	var packed_scene := ResourceLoader.load(path) as PackedScene
 	var instanced_scene := packed_scene.instantiate()
