@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://bq22jxj2ct62h"]
+
+[ext_resource type="Script" path="res://entities/player_death_teleportation.gd" id="1_unuqi"]
+[ext_resource type="Texture2D" uid="uid://cvokx6lcwid3x" path="res://assets/player-death/SpriteSheetWhite.png" id="2_ep4ea"]
+[ext_resource type="Texture2D" uid="uid://cxtewtax26yjy" path="res://assets/player-death/SpriteSheetSpark.png" id="3_20vi7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7n1d"]
+atlas = ExtResource("2_ep4ea")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu66n"]
+atlas = ExtResource("2_ep4ea")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xrsv"]
+atlas = ExtResource("2_ep4ea")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3n88b"]
+atlas = ExtResource("2_ep4ea")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy8gg"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p0nd"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pgta"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf1yw"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d80ex"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdstl"]
+atlas = ExtResource("3_20vi7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r5764"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7n1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu66n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xrsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3n88b")
+}],
+"loop": true,
+"name": &"player_appearing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy8gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p0nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pgta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf1yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d80ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdstl")
+}],
+"loop": true,
+"name": &"teleporting",
+"speed": 15.0
+}]
+
+[node name="PlayerDeathTeleportation" type="Node2D"]
+script = ExtResource("1_unuqi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r5764")
+animation = &"teleporting"
+frame_progress = 0.0749413

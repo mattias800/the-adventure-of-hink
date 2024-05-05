@@ -172,14 +172,10 @@ target_portal_name = "ForestPortal"
 position = Vector2(40, -55)
 shape = SubResource("RectangleShape2D_4v7wp")
 
-[node name="StartPortal" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("5_u4inf")]
-position = Vector2(96, 144)
+[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
+position = Vector2(728, 32)
 next_scene_path = ""
 target_portal_name = "ForestPortal"
-spawn_point = NodePath("Marker2D")
-
-[node name="Marker2D" type="Marker2D" parent="StartPortal"]
-position = Vector2(24, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, 8)

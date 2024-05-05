@@ -15,6 +15,7 @@ func _ready():
 	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
+	player.disable()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("exit_game"):
@@ -110,9 +111,9 @@ func _on_cutscene_manager_cutscene_ended():
 func respawn_player():
 	print("Player died.")
 	if current_checkpoint:
-		player.global_position = current_checkpoint.global_position
+		player.death_teleport(current_checkpoint.global_position)
 	elif last_spawnpoint:
-		player.global_position = last_spawnpoint
+		player.death_teleport(last_spawnpoint)
 	else:
 		print("Respawn failed. No checkpoint and no last known spawnpoint.")
 		get_tree().quit()
