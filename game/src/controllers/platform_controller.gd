@@ -182,8 +182,8 @@ func physics_process(delta):
 
 			dash_time_left -= delta
 			if dash_time_left <= 0:
-				player.velocity *= 0.1
-				enter_state(IDLE)
+				player.velocity *= 0.3
+				enter_state(JUMPING)
 
 		IDLE:
 			if not player.is_on_floor():
