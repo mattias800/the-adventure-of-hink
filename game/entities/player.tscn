@@ -1,9 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=23 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
 [ext_resource type="PackedScene" uid="uid://bq22jxj2ct62h" path="res://entities/player_death_teleportation.tscn" id="2_eobix"]
-[ext_resource type="AudioStream" uid="uid://dpdegvjaqckip" path="res://assets/audio/sounds/jump.wav" id="3_ohafe"]
+[ext_resource type="AudioStream" uid="uid://cu6ta5clwtw8a" path="res://assets/audio/sounds/player_jump.wav" id="4_hmqpj"]
+[ext_resource type="AudioStream" uid="uid://buo3qly4p2sgn" path="res://assets/audio/sounds/player_explode.ogg" id="5_clhrg"]
+[ext_resource type="AudioStream" uid="uid://b8i4pernnhpqb" path="res://assets/audio/sounds/player_death_appear.ogg" id="6_mig32"]
+[ext_resource type="AudioStream" uid="uid://bntyvep6iqb4" path="res://assets/audio/sounds/player_land.wav" id="7_1sdbw"]
+[ext_resource type="AudioStream" uid="uid://tv6qbvbdii88" path="res://assets/audio/sounds/player_dash.wav" id="8_bwj6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
@@ -140,6 +144,26 @@ sprite_frames = SubResource("SpriteFrames_asvce")
 animation = &"jump"
 frame_progress = 0.955599
 
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_ohafe")
-volume_db = -34.36
+[node name="PlayerJumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hmqpj")
+bus = &"SFX"
+
+[node name="DeathBoomSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_clhrg")
+bus = &"SFX"
+
+[node name="DeathAppearSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mig32")
+bus = &"SFX"
+
+[node name="PlayerLandSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1sdbw")
+bus = &"SFX"
+
+[node name="PlayerDashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_bwj6w")
+bus = &"SFX"
+
+[node name="PlayerGrabWallSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PlayerJumpFromWallSound" type="AudioStreamPlayer2D" parent="."]

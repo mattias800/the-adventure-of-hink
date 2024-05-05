@@ -50,12 +50,20 @@ var active_tile_map: TileMap      =  null # Reference to active TileMap, used to
 var player: CharacterBody2D
 var animated_sprite: AnimatedSprite2D
 var jump_sound: AudioStreamPlayer2D
+var land_sound: AudioStreamPlayer2D
+var dash_sound: AudioStreamPlayer2D
+var grab_wall_sound: AudioStreamPlayer2D
+var jump_from_wall_sound: AudioStreamPlayer2D
 
 
-func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D):
+func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D, land_sound_: AudioStreamPlayer2D, dash_sound_: AudioStreamPlayer2D, grab_wall_sound_: AudioStreamPlayer2D, jump_from_wall_sound_):
 	player = player_
 	animated_sprite = animated_sprite_
 	jump_sound = jump_sound_
+	land_sound = land_sound_
+	dash_sound = dash_sound_
+	grab_wall_sound = grab_wall_sound_
+	jump_from_wall_sound = jump_from_wall_sound_
 
 
 func physics_process(delta):
@@ -153,13 +161,12 @@ func physics_process(delta):
 			player.velocity.y = minf(player.velocity.y + gravity * delta, MAX_FALL_SPEED)
 
 			if Input.is_action_just_pressed("jump") and coyote_time_left > 0.0:
-				trigger_jump(JumpSource.AIR)
+				trigger_jump(JumpSource.GROUND)
 				player.velocity.y = -JUMP_VELOCITY
 				player.velocity.x = direction * SPEED # TODO Always * SPEED here?
 			elif Input.is_action_just_pressed("jump") and jumps_left > 0:
-				jumps_left -= 1
+				trigger_jump(JumpSource.AIR)
 				player.velocity.y = -JUMP_VELOCITY
-				jump_sound.play()
 			elif Input.is_action_just_pressed("dash") and dashes_left > 0:
 				trigger_dash()
 			else:
@@ -168,6 +175,7 @@ func physics_process(delta):
 				player.move_and_slide()
 
 				if player.is_on_floor():
+					land_sound.play()
 					enter_state(IDLE)
 
 				if player.is_on_wall() and time_until_wall_grab_possible <= 0.0:
@@ -244,6 +252,7 @@ func enter_state(next_state):
 			animated_sprite.play("fall")
 
 		GRABBING_WALL:
+			grab_wall_sound.play()
 			animated_sprite.play("grabbing_wall")
 			player.velocity.y = 0
 			wall_grab_time_left = WALL_GRAB_TIME_LIMIT
@@ -277,15 +286,18 @@ func state_to_string(s) -> String:
 func trigger_jump(jump_source: JumpSource):
 	match jump_source:
 		JumpSource.GROUND:
+			jump_sound.play()
 			time_since_no_ground = 0.0
 			time_until_wall_grab_possible = 0.1
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 
 		JumpSource.AIR:
+			jump_sound.play()
 			jumps_left -= 1
 
 		JumpSource.WALL:
+			jump_from_wall_sound.play()
 			time_until_wall_grab_possible = 0.1
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
@@ -294,6 +306,7 @@ func trigger_jump(jump_source: JumpSource):
 	jump_sound.play()
 
 func trigger_dash():
+	dash_sound.play()
 	dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	dash_time_left = DASH_TIME
 	dashes_left -= 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=25 format=3 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_yhmja"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://o1lq27bbki8k" path="res://entities/death_tilemap.tscn" id="10_kho7g"]
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="12_1mwam"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="12_waw7x"]
+[ext_resource type="AudioStream" uid="uid://bupao4rvqxujk" path="res://assets/audio/ambience/birds_atmosphere.mp3" id="14_gyhtp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi8ud"]
 size = Vector2(320, 200)
@@ -180,6 +181,11 @@ target_portal_name = "ForestPortal"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_v8hqc")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_gyhtp")
+autoplay = true
+bus = &"Ambience"
 
 [connection signal="on_player_entered_room" from="Room1" to="." method="_on_room_1_on_player_entered_room"]
 [connection signal="on_player_entered" from="Room1/Room1Trigger" to="." method="_on_room_1_trigger_on_player_entered"]
