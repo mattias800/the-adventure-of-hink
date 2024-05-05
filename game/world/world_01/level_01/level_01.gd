@@ -16,7 +16,6 @@ func _on_room_2_on_player_entered_room():
 func _on_room_3_on_player_entered_room():
 	pass
 
-
 func _on_room_1_trigger_on_player_entered():
 	if GameState.once("level_01", "has_ever_visited_room2"):
 		CutsceneManager.start_timeline(resource, "room1_trigger")

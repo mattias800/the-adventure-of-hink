@@ -21,10 +21,10 @@ var animated_sprite: AnimatedSprite2D
 func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D):
 	player = player_
 	animated_sprite = animated_sprite_
-	
+
 func physics_process(_delta):
-	var direction = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
-	
+	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
 	match state:
 		DISABLED:
 			pass
@@ -40,9 +40,9 @@ func physics_process(_delta):
 				# Slide when stopping
 				player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 				player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
-				
+
 			player.move_and_slide()
-			
+
 	if player.velocity.x > 0:
 		animated_sprite.flip_h = false
 		if player_direction == PlayerDirection.LEFT:
@@ -64,7 +64,7 @@ func enter_state(next_state):
 			animated_sprite.play("idle")
 		IDLE:
 			animated_sprite.play("idle")
-	
+
 	state = next_state
 
 func state_to_string(s) -> String:
@@ -78,6 +78,6 @@ func state_to_string(s) -> String:
 
 func enable():
 	enter_state(IDLE)
-	
+
 func disable():
 	enter_state(DISABLED)

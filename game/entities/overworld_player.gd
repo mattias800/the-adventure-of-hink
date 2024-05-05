@@ -17,11 +17,11 @@ var player_direction              := PlayerDirection.RIGHT
 
 func _ready():
 	pass
-	
+
 func _physics_process(_delta):
 	var a := $AnimatedSprite2D
-	var direction = Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
-	
+	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+
 	match state:
 		DISABLED:
 			pass
@@ -37,9 +37,9 @@ func _physics_process(_delta):
 				# Slide when stopping
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.y = move_toward(velocity.y, 0, SPEED)
-				
+
 			move_and_slide()
-			
+
 	if velocity.x > 0:
 		a.flip_h = false
 		if player_direction == PlayerDirection.LEFT:
@@ -57,13 +57,13 @@ func _physics_process(_delta):
 func enter_state(next_state):
 	print("Enter state: " + state_to_string(next_state))
 	var a := $AnimatedSprite2D
-	
+
 	match state:
 		DISABLED:
 			a.play("idle")
 		IDLE:
 			a.play("idle")
-	
+
 	state = next_state
 
 func state_to_string(s) -> String:
@@ -77,6 +77,6 @@ func state_to_string(s) -> String:
 
 func enable():
 	enter_state(IDLE)
-	
+
 func disable():
 	enter_state(DISABLED)

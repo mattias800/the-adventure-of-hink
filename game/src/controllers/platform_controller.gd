@@ -1,63 +1,65 @@
 class_name PlatformController
 
 signal player_turned
-
 const SPEED: float                 = 80.0
+const DASH_SPEED: float            = 400.0
+const DASH_TIME: float             = 0.1
 const MAX_FALL_SPEED: float        = 250.0
 const JUMP_HORIZONTAL_SPEED: float = 7.0
 const MAX_HORIZONTAL_SPEED: float  = 80.0
 const JUMP_VELOCITY: float         = 150.0
 const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 1.0
-const COYOTE_TIME_LIMIT: float = 0.05
-
+const COYOTE_TIME_LIMIT: float     = 0.05
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 # var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity: float = 600.0
-
 enum JumpSource {
 	GROUND,
 	WALL,
 	AIR
 }
-
 enum {
 	IDLE,
 	JUMPING,
 	FALLING,
 	GRABBING_WALL,
 	WALL_SLIDING,
+	DASHING,
 	DISABLE_INPUT,
 	DISABLED
 }
-
 enum PlayerDirection {
 	LEFT,
 	RIGHT
 }
-
 var state                         := IDLE
 var player_direction              := PlayerDirection.RIGHT
 var time_since_no_ground          := 0.0
 var time_until_wall_grab_possible := 0.0
 var wall_grab_time_left           := 0.0
+var dash_time_left                := 0.0
+var dash_direction                := Vector2.ZERO
 var jumps_left                    := 0
+var dashes_left                    := 0
 var num_double_jumps              := 1
+var num_dashes              := 1
 var coyote_time_left              := 0.0
 var velocity_into_wall            := 0.0 # The character velocity when hitting the wall. Need to reuse when calculating is_on_wall()
 var active_tile_map: TileMap      =  null # Reference to active TileMap, used to check if player has entered new TileMap
-
 var player: CharacterBody2D
 var animated_sprite: AnimatedSprite2D
 var jump_sound: AudioStreamPlayer2D
+
 
 func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D):
 	player = player_
 	animated_sprite = animated_sprite_
 	jump_sound = jump_sound_
 
+
 func physics_process(delta):
-	var direction := Input.get_axis("walk_left", "walk_right")
+	var direction := Input.get_axis("move_left", "move_right")
 
 	match state:
 		DISABLED:
@@ -79,10 +81,10 @@ func physics_process(delta):
 					coyote_time_left = COYOTE_TIME_LIMIT
 					enter_state(FALLING)
 
- 				# Multiply with high value to ensure it doesn't lose connection with moving platforms.
+				# Multiply with high value to ensure it doesn't lose connection with moving platforms.
 				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
 				player.move_and_slide()
-				
+
 				if not player.is_on_wall():
 					enter_state(FALLING)
 
@@ -119,27 +121,28 @@ func physics_process(delta):
 			if not Input.is_action_pressed("jump") and player.velocity.y < JUMP_RELEASE_VELOCITY:
 				player.velocity.y = -50
 				enter_state(FALLING)
-
-			if Input.is_action_just_pressed("jump") and jumps_left > 0:
+			elif Input.is_action_just_pressed("jump") and jumps_left > 0:
 				trigger_jump(JumpSource.AIR)
 				player.velocity.y = -JUMP_VELOCITY
+			elif Input.is_action_just_pressed("dash") and dashes_left > 0:
+				trigger_dash()
+			else:
+				add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
-			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+				player.move_and_slide()
 
-			player.move_and_slide()
+				if player.velocity.y > 0:
+					enter_state(FALLING)
 
-			if player.velocity.y > 0:
-				enter_state(FALLING)
+				if player.is_on_floor():
+					enter_state(IDLE)
 
-			if player.is_on_floor():
-				enter_state(IDLE)
-
-			if player.is_on_wall() and time_until_wall_grab_possible <= 0.0:
-				velocity_into_wall = player.get_wall_normal().x * -1
-				if wall_grab_time_left >= 0.0:
-					enter_state(GRABBING_WALL)
-				else:
-					enter_state(WALL_SLIDING)
+				if player.is_on_wall() and time_until_wall_grab_possible <= 0.0:
+					velocity_into_wall = player.get_wall_normal().x * -1
+					if wall_grab_time_left >= 0.0:
+						enter_state(GRABBING_WALL)
+					else:
+						enter_state(WALL_SLIDING)
 
 		FALLING:
 			if coyote_time_left >= 0.0:
@@ -153,25 +156,34 @@ func physics_process(delta):
 				trigger_jump(JumpSource.AIR)
 				player.velocity.y = -JUMP_VELOCITY
 				player.velocity.x = direction * SPEED # TODO Always * SPEED here?
-
-			if Input.is_action_just_pressed("jump") and jumps_left > 0:
+			elif Input.is_action_just_pressed("jump") and jumps_left > 0:
 				jumps_left -= 1
 				player.velocity.y = -JUMP_VELOCITY
 				jump_sound.play()
+			elif Input.is_action_just_pressed("dash") and dashes_left > 0:
+				trigger_dash()
+			else:
+				add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
-			add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+				player.move_and_slide()
 
+				if player.is_on_floor():
+					enter_state(IDLE)
+
+				if player.is_on_wall() and time_until_wall_grab_possible <= 0.0:
+					velocity_into_wall = player.get_wall_normal().x * -1
+					if wall_grab_time_left >= 0.0:
+						enter_state(GRABBING_WALL)
+					else:
+						enter_state(WALL_SLIDING)
+		DASHING:
+			player.velocity = dash_direction * DASH_SPEED
 			player.move_and_slide()
 
-			if player.is_on_floor():
+			dash_time_left -= delta
+			if dash_time_left <= 0:
+				player.velocity *= 0.1
 				enter_state(IDLE)
-
-			if player.is_on_wall() and time_until_wall_grab_possible <= 0.0:
-				velocity_into_wall = player.get_wall_normal().x * -1
-				if wall_grab_time_left >= 0.0:
-					enter_state(GRABBING_WALL)
-				else:
-					enter_state(WALL_SLIDING)
 
 		IDLE:
 			if not player.is_on_floor():
@@ -241,8 +253,10 @@ func enter_state(next_state):
 
 	state = next_state
 
+
 func add_velocity_x(val: float):
 	player.velocity.x = clamp(player.velocity.x + val, -MAX_HORIZONTAL_SPEED, MAX_HORIZONTAL_SPEED)
+
 
 func state_to_string(s) -> String:
 	match s:
@@ -265,6 +279,7 @@ func trigger_jump(jump_source: JumpSource):
 		JumpSource.GROUND:
 			time_since_no_ground = 0.0
 			time_until_wall_grab_possible = 0.1
+			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 
 		JumpSource.AIR:
@@ -272,13 +287,21 @@ func trigger_jump(jump_source: JumpSource):
 
 		JumpSource.WALL:
 			time_until_wall_grab_possible = 0.1
+			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 
 	enter_state(JUMPING)
 	jump_sound.play()
 
+func trigger_dash():
+	dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	dash_time_left = DASH_TIME
+	dashes_left -= 1
+	enter_state(DASHING)
+
 func enable():
 	enter_state(IDLE)
-	
+
+
 func disable():
 	enter_state(DISABLE_INPUT)
