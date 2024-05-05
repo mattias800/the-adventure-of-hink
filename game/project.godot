@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The-adventure-of-hink"
-run/main_scene="res://main.tscn"
+run/main_scene="res://world/world_01/level_01/level_01.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -134,4 +134,5 @@ locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overwo
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true

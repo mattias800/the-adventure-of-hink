@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://fe2ov4bweby4"
 path.s3tc="res://.godot/imported/clouds_2.png-f641192c9256e4b75dec8a3d30796cfb.s3tc.ctex"
+path.etc2="res://.godot/imported/clouds_2.png-f641192c9256e4b75dec8a3d30796cfb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/layered-backgrounds/game_background_1/layers/clouds_2.png"
-dest_files=["res://.godot/imported/clouds_2.png-f641192c9256e4b75dec8a3d30796cfb.s3tc.ctex"]
+dest_files=["res://.godot/imported/clouds_2.png-f641192c9256e4b75dec8a3d30796cfb.s3tc.ctex", "res://.godot/imported/clouds_2.png-f641192c9256e4b75dec8a3d30796cfb.etc2.ctex"]
 
 [params]
 
