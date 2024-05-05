@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=25 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://b8i4pernnhpqb" path="res://assets/audio/sounds/player_death_appear.ogg" id="6_mig32"]
 [ext_resource type="AudioStream" uid="uid://bntyvep6iqb4" path="res://assets/audio/sounds/player_land.wav" id="7_1sdbw"]
 [ext_resource type="AudioStream" uid="uid://tv6qbvbdii88" path="res://assets/audio/sounds/player_dash.wav" id="8_bwj6w"]
+[ext_resource type="AudioStream" uid="uid://dq452v6yxstvd" path="res://assets/audio/sounds/player_jump_from_wall.wav" id="9_mfmyp"]
+[ext_resource type="AudioStream" uid="uid://c2w7sa2nxnh0e" path="res://assets/audio/sounds/player_jump_from_air.wav" id="9_xp7d3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
@@ -167,3 +169,8 @@ bus = &"SFX"
 [node name="PlayerGrabWallSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="PlayerJumpFromWallSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_mfmyp")
+
+[node name="PlayerJumpFromAirSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_xp7d3")
+bus = &"SFX"

@@ -54,9 +54,10 @@ var land_sound: AudioStreamPlayer2D
 var dash_sound: AudioStreamPlayer2D
 var grab_wall_sound: AudioStreamPlayer2D
 var jump_from_wall_sound: AudioStreamPlayer2D
+var jump_from_air_sound: AudioStreamPlayer2D
 
 
-func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D, land_sound_: AudioStreamPlayer2D, dash_sound_: AudioStreamPlayer2D, grab_wall_sound_: AudioStreamPlayer2D, jump_from_wall_sound_):
+func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D, land_sound_: AudioStreamPlayer2D, dash_sound_: AudioStreamPlayer2D, grab_wall_sound_: AudioStreamPlayer2D, jump_from_wall_sound_: AudioStreamPlayer2D, jump_from_air_sound_: AudioStreamPlayer2D):
 	player = player_
 	animated_sprite = animated_sprite_
 	jump_sound = jump_sound_
@@ -64,6 +65,7 @@ func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_so
 	dash_sound = dash_sound_
 	grab_wall_sound = grab_wall_sound_
 	jump_from_wall_sound = jump_from_wall_sound_
+	jump_from_air_sound = jump_from_air_sound_
 
 
 func physics_process(delta):
@@ -293,7 +295,7 @@ func trigger_jump(jump_source: JumpSource):
 			jumps_left = num_double_jumps
 
 		JumpSource.AIR:
-			jump_sound.play()
+			jump_from_air_sound.play()
 			jumps_left -= 1
 
 		JumpSource.WALL:
@@ -308,6 +310,8 @@ func trigger_jump(jump_source: JumpSource):
 func trigger_dash():
 	dash_sound.play()
 	dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if dash_direction == Vector2.ZERO:
+		dash_direction = Vector2(player.velocity.normalized().x, 0)
 	dash_time_left = DASH_TIME
 	dashes_left -= 1
 	enter_state(DASHING)
