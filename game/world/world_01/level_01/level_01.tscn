@@ -173,7 +173,7 @@ position = Vector2(40, -55)
 shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
-position = Vector2(728, 32)
+position = Vector2(88, 144)
 next_scene_path = ""
 target_portal_name = "ForestPortal"
 

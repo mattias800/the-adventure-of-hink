@@ -5,10 +5,10 @@ extends Node2D
 
 func _ready():
 	pass
-	
+
 func _enter_tree():
 	add_nodes_for_each_tile()
-	
+
 func add_nodes_for_each_tile():
 	var used_cells = tilemap.get_used_cells(0)
 	var tile_size = tilemap.tile_set.tile_size
@@ -25,14 +25,14 @@ func place_node_on_world_coordinates(coord: Vector2, tile_size: Vector2i):
 	shape.size = tile_size
 	collision_shape.shape = shape
 	area2d.add_child(collision_shape)
-	
+
 	add_child(area2d)
 	area2d.body_entered.connect(on_body_enter)
 
 func on_body_enter(body):
 	if body.is_in_group("player"):
-		GameManager.respawn_player()
-		
+		GameManager.respawn_player.call_deferred()
+
 func get_world_coordinates(coord: Vector2i, tile_size: Vector2i) -> Vector2:
 	var w = global_position
 	w.x = w.x + coord.x * tile_size.x
