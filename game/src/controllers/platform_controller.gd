@@ -199,6 +199,7 @@ func physics_process(delta):
 		IDLE:
 			if not player.is_on_floor():
 				jumps_left = 0
+				dashes_left = num_dashes
 				coyote_time_left = COYOTE_TIME_LIMIT
 				enter_state(FALLING)
 			else:
