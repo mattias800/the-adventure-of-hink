@@ -35,6 +35,8 @@ var state := PlayerState.ACTIVE
 func _ready():
 	platform_controller = PlatformController.new(self, animated_sprite, player_jump_sound, player_land_sound, player_dash_sound, player_grab_wall_sound, player_jump_from_wall_sound, $PlayerJumpFromAirSound)
 	platform_controller.player_turned.connect(func(direction): player_turned.emit(direction))
+	platform_controller.player_dashed.connect(on_player_dashed)
+	
 	overworld_controller = OverworldController.new(self, animated_sprite)
 
 func _physics_process(delta):
@@ -56,6 +58,9 @@ func switch_to_platform():
 func switch_to_overworld():
 	active_controller = CharacterControllerType.OVERWORLD
 
+func on_player_dashed(_direction: Vector2):
+	$DashAnimation.play()
+	
 func death_teleport(spawn_world_pos: Vector2):
 	death_boom_sound.play()
 	disable()

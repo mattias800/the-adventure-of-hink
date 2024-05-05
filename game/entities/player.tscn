@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=31 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://tv6qbvbdii88" path="res://assets/audio/sounds/player_dash.wav" id="8_bwj6w"]
 [ext_resource type="AudioStream" uid="uid://dq452v6yxstvd" path="res://assets/audio/sounds/player_jump_from_wall.wav" id="9_mfmyp"]
 [ext_resource type="AudioStream" uid="uid://c2w7sa2nxnh0e" path="res://assets/audio/sounds/player_jump_from_air.wav" id="9_xp7d3"]
+[ext_resource type="Texture2D" uid="uid://cvokx6lcwid3x" path="res://assets/player-death/SpriteSheetWhite.png" id="11_gv2e8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
@@ -131,6 +132,45 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_obhsk"]
+atlas = ExtResource("11_gv2e8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyda0"]
+atlas = ExtResource("11_gv2e8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2evh"]
+atlas = ExtResource("11_gv2e8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kike7"]
+atlas = ExtResource("11_gv2e8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yuxq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obhsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyda0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2evh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kike7")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 10
 script = ExtResource("1_a3i6k")
@@ -174,3 +214,8 @@ stream = ExtResource("9_mfmyp")
 [node name="PlayerJumpFromAirSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_xp7d3")
 bus = &"SFX"
+
+[node name="DashAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4yuxq")
+frame = 4
+frame_progress = 1.0

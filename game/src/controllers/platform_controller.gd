@@ -1,6 +1,8 @@
 class_name PlatformController
 
 signal player_turned
+signal player_dashed(direction: Vector2)
+
 const SPEED: float                 = 80.0
 const DASH_SPEED: float            = 400.0
 const DASH_TIME: float             = 0.1
@@ -55,7 +57,6 @@ var dash_sound: AudioStreamPlayer2D
 var grab_wall_sound: AudioStreamPlayer2D
 var jump_from_wall_sound: AudioStreamPlayer2D
 var jump_from_air_sound: AudioStreamPlayer2D
-
 
 func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D, land_sound_: AudioStreamPlayer2D, dash_sound_: AudioStreamPlayer2D, grab_wall_sound_: AudioStreamPlayer2D, jump_from_wall_sound_: AudioStreamPlayer2D, jump_from_air_sound_: AudioStreamPlayer2D):
 	player = player_
@@ -310,10 +311,14 @@ func trigger_jump(jump_source: JumpSource):
 func trigger_dash():
 	dash_sound.play()
 	dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
+	# If no direction is held by player, just dash forward
 	if dash_direction == Vector2.ZERO:
-		dash_direction = Vector2(player.velocity.normalized().x, 0)
+		dash_direction = Vector2(1 if player_direction == PlayerDirection.RIGHT else -1, 0)
+		
 	dash_time_left = DASH_TIME
 	dashes_left -= 1
+	player_dashed.emit(dash_direction)
 	enter_state(DASHING)
 
 func enable():
