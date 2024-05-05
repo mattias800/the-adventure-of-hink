@@ -9,7 +9,7 @@ var current_checkpoint: Checkpoint
 var last_spawnpoint: Vector2
 
 var is_entering_new_scene: bool = true
-var new_scene_portal_name = ""
+var new_scene_portal_name = "StartPortal"
 
 func _ready():
 	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)

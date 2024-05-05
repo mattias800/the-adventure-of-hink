@@ -1166,7 +1166,7 @@ unique_name_in_owner = true
 [node name="ForestPortal" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("3_uf8ks")]
 position = Vector2(128, 152)
 next_scene_path = "res://world/world_01/level_01/level_01.tscn"
-target_portal_name = "YayPortal"
+target_portal_name = "ForestPortal"
 spawn_point = NodePath("Marker2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]

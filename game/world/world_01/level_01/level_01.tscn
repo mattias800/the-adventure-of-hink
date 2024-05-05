@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=24 format=3 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_yhmja"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -49,6 +49,9 @@ func on_player_enter_room():
 	has_entered_room = true
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v7wp"]
+size = Vector2(16, 130)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8hqc"]
 
 [node name="Level01" type="Node2D" groups=["platformers"]]
@@ -79,6 +82,7 @@ size = Vector2i(320, 180)
 
 [node name="Fog" parent="Camera" instance=ExtResource("9_ws1eu")]
 unique_name_in_owner = true
+scroll_offset = Vector2(-1470.22, -65.7224)
 
 [node name="Room1" parent="." node_paths=PackedStringArray("camera", "collision_shape") instance=ExtResource("7_silrh")]
 camera = NodePath("../Camera")
@@ -159,16 +163,25 @@ tile_set = ExtResource("2_7l16g")
 format = 2
 layer_0/tile_data = PackedInt32Array(1245245, 1, 0, 1245246, 1, 0, 1245247, 1, 0, 1245248, 1, 0, 1245249, 1, 0, 1245250, 1, 0, 1245251, 1, 0, 1245252, 1, 0, 1245253, 1, 0, 1245254, 1, 0, 1245255, 1, 0, 1245256, 1, 0, 1245257, 1, 0, 1245258, 1, 0, 1245259, 1, 0, 1245260, 1, 0, 1245261, 1, 0, 1245262, 1, 0, 1245263, 1, 0, 1179727, 65537, 1, 1114191, 65537, 1, 1048655, 65537, 1, 983119, 65537, 1, 917583, 65537, 1, 852047, 65537, 1, 786511, 65537, 1, 720975, 65537, 1, 655439, 65537, 1, 589903, 65537, 1, 524367, 65537, 1, 458831, 65537, 1, 393295, 65537, 1, 1179709, 65537, 0, 1114173, 65537, 0, 1048637, 65537, 0, 983101, 65537, 0, 1638447, 1, 0, 1638448, 1, 0, 1638449, 1, 0, 1638450, 1, 0, 1638451, 1, 0, 1638452, 1, 0, 1638453, 1, 0, 1638454, 1, 0, 1638455, 1, 0, 1638456, 1, 0, 1638457, 1, 0, 655409, 1, 1, 655410, 1, 1, 655411, 1, 1, 852056, 1, 0, 852057, 1, 0, 852058, 1, 0, 852059, 1, 0, 852060, 1, 0, 852061, 1, 0, 852062, 1, 0, 852063, 1, 0, 852064, 1, 0, 852065, 1, 0, 852066, 1, 0, 852067, 1, 0, 852068, 1, 0, 852069, 1, 0, 852070, 1, 0, 852071, 1, 0, 852072, 1, 0, 852073, 1, 0, 852074, 1, 0, 852075, 1, 0, 852076, 1, 0, 852077, 1, 0, 852078, 1, 0, 852079, 1, 0, 852080, 1, 0, 852081, 1, 0, 852082, 1, 0, 852083, 1, 0, 852084, 1, 0, 852085, 1, 0, 852086, 1, 0, 852087, 1, 0, 852088, 1, 0, 852089, 1, 0, 852090, 1, 0, 852091, 1, 0, 852092, 1, 0, 852093, 1, 0, 852094, 1, 0, 852095, 1, 0)
 
-[node name="YayPortal" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("5_u4inf")]
+[node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
+position = Vector2(976, 40)
+next_scene_path = "res://world/overworld_01/overworld_01.tscn"
+target_portal_name = "ForestPortal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
+position = Vector2(40, -55)
+shape = SubResource("RectangleShape2D_4v7wp")
+
+[node name="StartPortal" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("5_u4inf")]
 position = Vector2(96, 144)
-next_scene_path = "res://world/Overworld_01/overworld_01.tscn"
+next_scene_path = ""
 target_portal_name = "ForestPortal"
 spawn_point = NodePath("Marker2D")
 
-[node name="Marker2D" type="Marker2D" parent="YayPortal"]
+[node name="Marker2D" type="Marker2D" parent="StartPortal"]
 position = Vector2(24, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YayPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_v8hqc")
 
