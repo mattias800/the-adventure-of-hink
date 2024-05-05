@@ -14,7 +14,7 @@ func _ready():
 	state = DISABLED
 	animated_sprite.visible = false
 	
-func _process(delta):
+func _process(_delta):
 	match state:
 		DISABLED:
 			# animated_sprite.visible = false

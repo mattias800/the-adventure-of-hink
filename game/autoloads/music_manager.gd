@@ -6,7 +6,7 @@ extends Node
 var currently_playing_track
 var queued_track
 
-func _process(delta):
+func _process(_delta):
 	if queued_track != null:
 		play_queued_track()
 		queued_track = null

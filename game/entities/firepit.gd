@@ -11,7 +11,7 @@ func _ready():
 	randomize()
 	value = randi() % MAX_VALUE
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	value += 1
 	value = value % MAX_VALUE
 	
