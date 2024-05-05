@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://boycm6ichnl6f"]
+
+[ext_resource type="Script" path="res://entities/firepit.gd" id="1_4y00a"]
+
+[sub_resource type="Curve" id="Curve_7wt5v"]
+max_value = 20.0
+_data = [Vector2(0, 0.989011), 0.0, 0.0, 0, 0, Vector2(0.898876, 2.63736), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.85883, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_q76bg"]
+offsets = PackedFloat32Array(0, 0.173333, 0.646667)
+colors = PackedColorArray(0.169245, 0.169245, 0.169245, 1, 0.277528, 0.277528, 0.277528, 1, 1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_dxh4x"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0786517, 2), 0.0, 0.0, 0, 0, Vector2(0.983146, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_p8rua"]
+offsets = PackedFloat32Array(0, 0.306667, 0.673333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.968627, 0.968627, 0.0196078, 1, 0.831373, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_676sd"]
+offsets = PackedFloat32Array(0, 0.746753)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_frsl4"]
+gradient = SubResource("Gradient_676sd")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Firepit" type="Node2D"]
+script = ExtResource("1_4y00a")
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+position = Vector2(88, 151)
+lifetime = 5.0
+spread = 72.27
+gravity = Vector2(1, -10)
+initial_velocity_max = 1.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_7wt5v")
+color = Color(0.226707, 0.226707, 0.226707, 1)
+color_ramp = SubResource("Gradient_q76bg")
+
+[node name="Fire" type="CPUParticles2D" parent="."]
+position = Vector2(88, 156)
+lifetime = 1.2
+randomness = 0.07
+lifetime_randomness = 0.91
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(2.08165e-12, -1)
+spread = 180.0
+gravity = Vector2(1, -150)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+linear_accel_min = -62.63
+linear_accel_max = -13.25
+damping_min = 50.0
+damping_max = 94.949
+angle_min = -116.3
+angle_max = -116.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dxh4x")
+color_ramp = SubResource("Gradient_p8rua")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(88, 152)
+color = Color(1, 1, 0, 1)
+energy = 0.8
+texture = SubResource("GradientTexture2D_frsl4")
