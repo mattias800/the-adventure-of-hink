@@ -17,17 +17,17 @@ volumetric_fog_albedo = Color(0.85098, 0.901961, 1, 1)
 
 [node name="MountainBackground" type="Node3D"]
 
-[node name="Clounds1" type="Sprite3D" parent="."]
+[node name="Clouds1" type="Sprite3D" parent="."]
 texture = ExtResource("1_4cjwt")
 
-[node name="Clounds2" type="Sprite3D" parent="."]
+[node name="Clouds2" type="Sprite3D" parent="."]
 texture = ExtResource("2_aeyrm")
 
-[node name="Clounds3" type="Sprite3D" parent="."]
+[node name="Clouds3" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 1)
 texture = ExtResource("3_uxcqm")
 
-[node name="Clounds4" type="Sprite3D" parent="."]
+[node name="Clouds4" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 1)
 texture = ExtResource("4_vvdhk")
 

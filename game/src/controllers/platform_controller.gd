@@ -72,13 +72,19 @@ func physics_process(delta):
 				trigger_jump(JumpSource.WALL)
 				var jump_direction := Vector2(player.get_wall_normal().x, -1)
 				player.velocity = jump_direction.normalized() * JUMP_VELOCITY
+				player.move_and_slide()
+			else:
+				if (player.get_wall_normal().x * direction) > 0:
+					# User pressed away from wall
+					coyote_time_left = COYOTE_TIME_LIMIT
+					enter_state(FALLING)
 
-			if (player.get_wall_normal().x * direction) > 0:
-				# User pressed away from wall
-				coyote_time_left = COYOTE_TIME_LIMIT
-				enter_state(FALLING)
-
-			player.move_and_slide()
+ 				# Multiply with high value to ensure it doesn't lose connection with moving platforms.
+				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
+				player.move_and_slide()
+				
+				if not player.is_on_wall():
+					enter_state(FALLING)
 
 		WALL_SLIDING:
 			player.velocity.y = lerp(player.velocity.y, 50.0, 0.1)
