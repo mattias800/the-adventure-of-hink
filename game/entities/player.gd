@@ -27,7 +27,6 @@ var active_controller := CharacterControllerType.PLATFORM
 var state := PlayerState.ACTIVE
 
 func _ready():
-	player_death_teleportation.visible = false
 	platform_controller = PlatformController.new(self, animated_sprite, jump_sound)
 	platform_controller.player_turned.connect(func(direction): player_turned.emit(direction))
 	overworld_controller = OverworldController.new(self, animated_sprite)
@@ -52,29 +51,29 @@ func switch_to_overworld():
 	active_controller = CharacterControllerType.OVERWORLD
 
 func death_teleport(spawn_world_pos: Vector2):
-	player_death_teleportation.play_teleporting()
 	disable()
 	collision_shape.disabled = true
-	# animated_sprite.visible = false
-	var duration = global_position.distance_to(spawn_world_pos) / 20
-	
+	animated_sprite.visible = false
+
+	player_death_teleportation.play_teleporting()
+
+	var duration = global_position.distance_to(spawn_world_pos) / 200
+
 	var tween = create_tween()
-	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	tween.set_parallel(false)
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_loops()
 	tween.tween_property(self, "global_position", spawn_world_pos, duration)
 	tween.finished.connect(on_death_teleportation_done)
 
 func on_death_teleportation_done():
+	print("death tele done")
 	player_death_teleportation.play_player_appearing()
 	collision_shape.disabled = false
 	animated_sprite.visible = true
+	velocity = Vector2.ZERO
 	enable()
-	
+
 func enable():
 	enabled = true
-	collision_shape.disabled = true
 	match active_controller:
 		CharacterControllerType.PLATFORM:
 			platform_controller.enable()
@@ -83,6 +82,5 @@ func enable():
 
 func disable():
 	enabled = false
-	collision_shape.disabled = false
 	platform_controller.disable()
 	overworld_controller.disable()

@@ -15,7 +15,6 @@ func _ready():
 	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
-	player.disable()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("exit_game"):
@@ -64,7 +63,7 @@ func enter_new_scene():
 		print(spawn_point.global_position)
 		player.global_position = spawn_point.global_position
 		last_spawnpoint = spawn_point.global_position
-		
+
 	else:
 		print("Found no spawn point")
 		player.global_position = portal.global_position
@@ -117,9 +116,6 @@ func respawn_player():
 	else:
 		print("Respawn failed. No checkpoint and no last known spawnpoint.")
 		get_tree().quit()
-		
-	print("Respawned player.")
-	print(player.global_position)
 
 func load_scene(path):
 	print("LOADING NEW SCENE!")

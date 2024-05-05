@@ -19,7 +19,7 @@ func start_timeline(resource, start):
 	cutscene_playing = true
 	cutscene_started.emit()
 	GameManager.player.disable()
-	await DialogueManager.show_dialogue_balloon(resource, start)
+	DialogueManager.show_dialogue_balloon(resource, start)
 	await DialogueManager.dialogue_ended
 	await get_tree().create_timer(0.25).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()

@@ -59,7 +59,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3n88b")
 }],
-"loop": true,
+"loop": false,
 "name": &"player_appearing",
 "speed": 15.0
 }, {
@@ -92,5 +92,6 @@ script = ExtResource("1_unuqi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_r5764")
-animation = &"teleporting"
-frame_progress = 0.0749413
+animation = &"player_appearing"
+frame = 3
+frame_progress = 1.0
