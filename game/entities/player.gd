@@ -18,6 +18,7 @@ var platform_controller: PlatformController
 var overworld_controller: OverworldController
 
 var enabled := false
+var is_respawn_teleporting := false
 
 enum CharacterControllerType {
 	PLATFORM,
@@ -62,6 +63,11 @@ func on_player_dashed(_direction: Vector2):
 	$DashAnimation.play()
 	
 func death_teleport(spawn_world_pos: Vector2):
+	if is_respawn_teleporting:
+		return
+		
+	print("Player died, teleporting!")
+	is_respawn_teleporting = true
 	death_boom_sound.play()
 	disable()
 	collision_shape.disabled = true
@@ -71,13 +77,24 @@ func death_teleport(spawn_world_pos: Vector2):
 
 	var duration = global_position.distance_to(spawn_world_pos) / 200
 
+	var fx := AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0) as AudioEffectLowPassFilter
+
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_parallel(true)
 	tween.tween_property(self, "global_position", spawn_world_pos, duration)
+	tween.tween_method(fx.set_cutoff, 0, 500, duration).set_trans(Tween.TRANS_CIRC)
+	tween.tween_method(fx.set_resonance, 2.0, 0.5, duration).set_trans(Tween.TRANS_CIRC)
 	tween.finished.connect(on_death_teleportation_done)
+	
+	
 
 func on_death_teleportation_done():
 	print("death tele done")
+	is_respawn_teleporting = false
+	var fx := AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0) as AudioEffectLowPassFilter
+	fx.set_cutoff(20500)
+	fx.set_resonance(0.5)
 	death_appear_sound.play()
 	player_death_teleportation.play_player_appearing()
 	collision_shape.disabled = false
@@ -93,6 +110,9 @@ func enable():
 		CharacterControllerType.OVERWORLD:
 			overworld_controller.enable()
 
+func turn_off_collisions():
+	collision_shape.disabled = true
+	
 func disable():
 	enabled = false
 	platform_controller.disable()

@@ -108,7 +108,6 @@ func _on_cutscene_manager_cutscene_ended():
 	player.enable()
 
 func respawn_player():
-	print("Player died.")
 	if current_checkpoint:
 		player.death_teleport(current_checkpoint.global_position)
 	elif last_spawnpoint:
