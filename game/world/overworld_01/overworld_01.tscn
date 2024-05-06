@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2422fwpoj4pm"]
+[gd_scene load_steps=11 format=3 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
 [ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld_01/overworld_water.tscn" id="1_n4jpo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_uf8ks"]
 [ext_resource type="Script" path="res://entities/camera/camera.gd" id="4_tl3cl"]
 [ext_resource type="PackedScene" uid="uid://do8560lw7gjwe" path="res://entities/camera/overworld_clouds.tscn" id="5_yu0f5"]
+[ext_resource type="AudioStream" uid="uid://cmyeumil4h2kj" path="res://assets/audio/ambience/windy.mp3" id="7_gswvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvk1g"]
 texture = ExtResource("1_2fcae")
@@ -1176,3 +1177,8 @@ shape = SubResource("RectangleShape2D_yvso0")
 
 [node name="Marker2D" type="Marker2D" parent="ForestPortal"]
 position = Vector2(32, 0)
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gswvf")
+volume_db = -6.72
+autoplay = true
