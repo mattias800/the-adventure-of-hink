@@ -1,9 +1,9 @@
 Jump pads / bumpers
 Rain particle effect
 NPC:s with dialog
-Low-pass filter on all but SFX bus when death animation is running
 
 DONE
 Smoke particle effect
 Dash move
 Moving platforms
+Low-pass filter on all but SFX bus when death animation is running
