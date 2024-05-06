@@ -57,6 +57,9 @@ func enter_new_scene():
 		return
 
 	print("Found portal: " + portal.name)
+	
+	current_checkpoint = null
+	
 	var spawn_point = portal.spawn_point
 	if spawn_point:
 		print("Found spawn point")
