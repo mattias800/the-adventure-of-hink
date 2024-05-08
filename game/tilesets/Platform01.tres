@@ -1,7 +1,11 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://ppgp41y1bsbf"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://ppgp41y1bsbf"]
 
 [ext_resource type="Texture2D" uid="uid://rtpft5oabs2b" path="res://assets/GrasslandAtlas.png" id="1_hbflt"]
 [ext_resource type="Texture2D" uid="uid://d6htqs1n6yqb" path="res://assets/Hinktiles.png" id="2_arljr"]
+[ext_resource type="PackedScene" uid="uid://bd58x0uc7vkka" path="res://entities/spikes/spikes-down.tscn" id="3_anggi"]
+[ext_resource type="PackedScene" uid="uid://ck4coqx71bgcs" path="res://entities/spikes/spikes-up.tscn" id="3_rubed"]
+[ext_resource type="PackedScene" uid="uid://duwgwqstta0wb" path="res://entities/spikes/spikes-left.tscn" id="5_3tk5s"]
+[ext_resource type="PackedScene" uid="uid://6ru6i6brjt6i" path="res://entities/spikes/spikes-right.tscn" id="6_7w3ye"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ll05b"]
 texture = ExtResource("1_hbflt")
@@ -807,6 +811,12 @@ texture_region_size = Vector2i(8, 8)
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4vyfn"]
+scenes/1/scene = ExtResource("3_anggi")
+scenes/2/scene = ExtResource("3_rubed")
+scenes/3/scene = ExtResource("5_3tk5s")
+scenes/4/scene = ExtResource("6_7w3ye")
+
 [resource]
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
@@ -817,3 +827,4 @@ terrain_set_0/terrain_1/name = "Grass"
 terrain_set_0/terrain_1/color = Color(0.513726, 1, 0.482353, 1)
 sources/0 = SubResource("TileSetAtlasSource_ll05b")
 sources/1 = SubResource("TileSetAtlasSource_ftfml")
+sources/3 = SubResource("TileSetScenesCollectionSource_4vyfn")
