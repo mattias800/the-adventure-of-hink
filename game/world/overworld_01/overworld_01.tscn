@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2422fwpoj4pm"]
+[gd_scene load_steps=12 format=3 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
 [ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld_01/overworld_water.tscn" id="1_n4jpo"]
@@ -1145,6 +1145,9 @@ sources/1 = SubResource("TileSetAtlasSource_fvk1g")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvso0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjuaf"]
+size = Vector2(16, 20)
+
 [node name="Overworld01" type="Node2D" groups=["overworlds"]]
 script = ExtResource("1_o4hvk")
 
@@ -1182,3 +1185,12 @@ position = Vector2(32, 0)
 stream = ExtResource("7_gswvf")
 volume_db = -6.72
 autoplay = true
+
+[node name="RightForestPortal" parent="." instance=ExtResource("3_uf8ks")]
+position = Vector2(560, 184)
+next_scene_path = "res://world/world_01/level_02/level_02.tscn"
+target_portal_name = "StartPortal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightForestPortal"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_bjuaf")

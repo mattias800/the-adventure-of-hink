@@ -152,7 +152,7 @@ end_position = NodePath("EndPosition")
 [node name="EndPosition" type="Node2D" parent="Room3/MovingPlatform"]
 position = Vector2(64, 0)
 
-[node name="Ground" type="TileMap" parent="." groups=["rooms"]]
+[node name="Ground" type="TileMap" parent="."]
 tile_set = ExtResource("2_7l16g")
 format = 2
 layer_0/name = "Ground"

@@ -7,6 +7,10 @@ signal on_player_exited_room
 @export var camera: Camera2D
 @export var collision_shape: CollisionShape2D
 
+func _physics_process(delta):
+	if overlaps_body(GameManager.player):
+		CameraLimiter.apply_collision_shape_to_camera_limits(camera, collision_shape)
+	
 func _on_body_entered(body):
 	if not camera:
 		print("Missing camera on room node.")
