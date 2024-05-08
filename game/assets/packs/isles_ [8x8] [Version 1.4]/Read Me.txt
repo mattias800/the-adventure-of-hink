@@ -1,0 +1,65 @@
+Thank you for using the isles_ [8x8]!
+
+
+Stuff to know - Animations
+
+Character animations
+
+- Each row of the sprite-sheet is a different animation
+- Each animation frame is 24x24 pixels
+
+Ambient animation
+
+- Each animation frame is 5x5 pixels
+
+Item animations
+
+- Each animation frame is 8x8 pixels EXCEPT for Coin where each animation frame is 5x5 pixels
+- Each animation vaires in length
+
+Object animations
+
+- Each Platform is 24x16 pixels
+- Each Small Platform is 16x16 pixels
+- Each Chest animation frame is 16x16 pixels
+- Each Furnace animation frame is 24x32 pixels
+- Each Mushroom animation frame is 16x16 pixels
+- Each Big Mushroom animation frame is 32x16 pixels
+- The Crate is outlines at the bottom as it is designed to be a dynamic object
+
+All animations are listed on the webpage https://analogstudios.itch.io/isles
+
+
+
+Stuff to know - Tileset
+
+Isle [Grass, Swamp, Snow & Mine]
+
+- Each tile is 8x8 pixels
+- The Waterfall Accents are designed to make waterfalls look better over 'grooves'
+
+Animated tiles
+
+- Each row of the Waterfall/Lavafall sprite-sheets is 2 different animations
+- Waterfall/Lavafall have LEFT and RIGHT facing animations that are 3 FRAMES
+- Each Lava Bubble/Water Splash animation frame is 16x16 pixels
+
+
+
+Stuff to know - UI
+
+Profiles
+
+- Each Character Profile is 16x16 pixels
+
+Items
+
+- Each Item is 8x8 pixels
+
+Item slots
+
+- Each Item slot is 16x16 pixels
+
+
+
+...if you have any questions or requests you can contact me at analogstudios.inc@gmail.com

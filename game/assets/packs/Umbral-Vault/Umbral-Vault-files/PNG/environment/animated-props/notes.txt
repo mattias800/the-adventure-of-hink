@@ -1,0 +1,5 @@
+prop_candle-coffinAnimation = 32x24 frame size
+
+prop_candle-skullAnimations = 8x16 frame size
+
+Be sure to experiment with combining them! They are designed to be modular.

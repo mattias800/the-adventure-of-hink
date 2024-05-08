@@ -1,0 +1,2 @@
+					
+	All props and even the background layers are made up of individual 8x8 tiles. While I've provided prefabs, I encourage you to build your own backgrounds. You can do a ton of different stuff with the background and middleground tiles, such as a more solid wall look or a vertical scrolling formation.
