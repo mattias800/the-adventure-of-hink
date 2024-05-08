@@ -1,6 +1,12 @@
 Jump pads / bumpers
 Rain particle effect
 NPC:s with dialog
+One-way platforms
+Knife pendulum
+Something that shoots out stuff
+Moving circular saw
+
+Need some environmental stuff that affects movement, not just causes death.
 
 DONE
 Smoke particle effect
