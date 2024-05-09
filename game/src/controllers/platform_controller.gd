@@ -102,10 +102,14 @@ func physics_process(delta):
 					animated_sprite.play("climbing")
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
+				if not player.is_on_wall():
+					enter_state(IDLE)
 			elif Input.is_action_pressed("move_down"):
 				animated_sprite.play("climbing")
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
+				if not player.is_on_wall():
+					enter_state(IDLE)
 			elif (player.get_wall_normal().x * direction) > 0:
 				# User pressed away from wall
 				coyote_time_left = COYOTE_TIME_LIMIT
@@ -113,7 +117,11 @@ func physics_process(delta):
 			elif not Input.is_action_pressed("grab_wall"):
 				# User relased wall grab button
 				coyote_time_left = COYOTE_TIME_LIMIT
-				enter_state(FALLING)
+				if (player.get_wall_normal().x * direction) < 0:
+					# User is pressing against wall
+					enter_state(WALL_SLIDING)
+				else:
+					enter_state(FALLING)
 			else:
 				# Multiply with high value to ensure it doesn't lose connection with moving platforms.
 				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
@@ -126,7 +134,7 @@ func physics_process(delta):
 
 		WALL_SLIDING:
 			player.velocity.y = lerp(player.velocity.y, 50.0, 0.1)
-			player.velocity.x = velocity_into_wall
+			player.velocity.x = direction
 
 			player.move_and_slide()
 
@@ -135,12 +143,19 @@ func physics_process(delta):
 					# User pressed away from wall
 					coyote_time_left = COYOTE_TIME_LIMIT
 					enter_state(FALLING)
-
+				if direction == 0:
+					# User released hold towards wall
+					coyote_time_left = COYOTE_TIME_LIMIT
+					player.velocity.x = 0
+					enter_state(FALLING)
+					
 				if Input.is_action_just_pressed("jump"):
 					trigger_jump(JumpSource.WALL)
 					var jump_direction := Vector2(player.get_wall_normal().x, -1)
 					player.velocity = jump_direction.normalized() * JUMP_VELOCITY
 
+				if Input.is_action_just_pressed("grab_wall") and wall_grab_time_left > 0:
+					enter_state(GRABBING_WALL)
 				if player.is_on_floor():
 					enter_state(IDLE)
 			else:
@@ -206,11 +221,14 @@ func physics_process(delta):
 					land_sound.play()
 					enter_state(IDLE)
 
-				if player.is_on_wall() and time_until_wall_grab_possible <= 0.0 and Input.is_action_pressed("grab_wall"):
-					velocity_into_wall = player.get_wall_normal().x * -1
-					if wall_grab_time_left >= 0.0:
-						enter_state(GRABBING_WALL)
-					else:
+				if player.is_on_wall():
+					if Input.is_action_pressed("grab_wall") and time_until_wall_grab_possible <= 0.0:
+						velocity_into_wall = player.get_wall_normal().x * -1
+						if wall_grab_time_left >= 0.0:
+							enter_state(GRABBING_WALL)
+						else:
+							enter_state(WALL_SLIDING)
+					elif direction != 0:
 						enter_state(WALL_SLIDING)
 		DASHING:
 			player.velocity = dash_direction * DASH_SPEED
@@ -271,6 +289,7 @@ func physics_process(delta):
 
 
 func enter_state(next_state):
+	print("Enter state: ", state_to_string(next_state))
 	match next_state:
 		DISABLE_INPUT:
 			animated_sprite.play("idle")
