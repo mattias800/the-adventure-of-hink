@@ -100,12 +100,14 @@ func physics_process(delta):
 					animated_sprite.play("grabbing_wall")
 				elif not Input.is_action_just_pressed("move_up"):
 					animated_sprite.play("climbing")
+				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
 				if not player.is_on_wall():
 					enter_state(IDLE)
 			elif Input.is_action_pressed("move_down"):
 				animated_sprite.play("climbing")
+				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
 				if not player.is_on_wall():
