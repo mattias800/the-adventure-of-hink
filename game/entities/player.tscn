@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=44 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -16,6 +16,14 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or8n1"]
+atlas = ExtResource("1_tii7m")
+region = Rect2(32, 104, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spqvl"]
+atlas = ExtResource("1_tii7m")
+region = Rect2(48, 104, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywi3p"]
 atlas = ExtResource("1_tii7m")
@@ -67,6 +75,17 @@ region = Rect2(64, 40, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_asvce"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or8n1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spqvl")
+}],
+"loop": true,
+"name": &"climbing",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ywi3p")
@@ -231,8 +250,7 @@ shape = SubResource("RectangleShape2D_8w7pu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_asvce")
-animation = &"jump"
-frame_progress = 0.955599
+animation = &"climbing"
 
 [node name="PlayerJumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_hmqpj")
