@@ -1,7 +1,6 @@
 Clamp death teleportation time, minimum 1 sec, maximum 3 sec?
 Getting squished between two things should kill the player.
 Dashing into the floor could cause a new, more powerful dash. This is Celeste though.
-Particle effect when running, jumping and landing
 Jump buffer (jumping just before hitting ground should cause a jump when hitting jump)
 Areas with different gravity (which could be explained by wind for example)
 wall slide by player, by pressing down. while sliding, pause wall grab counter.
@@ -13,10 +12,12 @@ Knife pendulum
 Something that shoots out stuff
 Moving circular saw
 Platforms that appear and disappear on a timer, like Megaman.
+Particle effect when landing
 
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Particle effect when running, jumping and landing
 Smoke particle effect
 Dash move
 Moving platforms

@@ -124,3 +124,11 @@ func disable():
 	enabled = false
 	platform_controller.disable()
 	overworld_controller.disable()
+
+func trigger_force(force: Vector2):
+	velocity = force
+
+	match active_controller:
+		CharacterControllerType.PLATFORM:
+			platform_controller.trigger_force(force)
+	

@@ -83,6 +83,7 @@ func physics_process(delta):
 		DISABLE_INPUT:
 			return
 		GRABBING_WALL:
+			dashes_left = num_dashes
 			wall_grab_time_left -= delta
 			if wall_grab_time_left <= 0.0:
 				enter_state(WALL_SLIDING)
@@ -332,9 +333,13 @@ func trigger_dash():
 	player_dash_started.emit(dash_direction)
 	enter_state(DASHING)
 
+func trigger_force(force: Vector2):
+	enter_state(FALLING)
+
 func enable():
 	enter_state(IDLE)
 
 
 func disable():
 	enter_state(DISABLE_INPUT)
+

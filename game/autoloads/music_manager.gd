@@ -31,3 +31,6 @@ func play_queued_track():
 func play_track_node(track_node: AudioStreamPlayer):
 	player.stream = track_node.stream
 	player.play()
+
+func stop():
+	player.stop()
