@@ -1,7 +1,10 @@
 class_name PlatformController
 
 signal player_turned
-signal player_dashed(direction: Vector2)
+signal player_started_moving_on_ground
+signal player_stopped_moving_on_ground
+signal player_dash_started(direction: Vector2)
+signal player_dash_stopped
 
 const SPEED: float                 = 80.0
 const DASH_SPEED: float            = 400.0
@@ -13,9 +16,11 @@ const JUMP_VELOCITY: float         = 150.0
 const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 1.0
 const COYOTE_TIME_LIMIT: float     = 0.05
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-# var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var gravity: float = 600.0
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# var gravity: float = 600.0
+
 enum JumpSource {
 	GROUND,
 	WALL,
@@ -194,6 +199,7 @@ func physics_process(delta):
 			dash_time_left -= delta
 			if dash_time_left <= 0:
 				player.velocity *= 0.3
+				player_dash_stopped.emit()
 				enter_state(JUMPING)
 
 		IDLE:
@@ -201,12 +207,14 @@ func physics_process(delta):
 				jumps_left = 0
 				dashes_left = num_dashes
 				coyote_time_left = COYOTE_TIME_LIMIT
+				player_stopped_moving_on_ground.emit()
 				enter_state(FALLING)
 			else:
 				var is_jump_allowed := player.is_on_floor() or time_since_no_ground < 0.1
 
 				# Handle jump.
 				if Input.is_action_just_pressed("jump") and is_jump_allowed:
+					player_stopped_moving_on_ground.emit()
 					trigger_jump(JumpSource.GROUND)
 					player.velocity.y = -JUMP_VELOCITY
 					player.velocity.x = direction * SPEED
@@ -217,8 +225,10 @@ func physics_process(delta):
 
 					if direction != 0.0:
 						animated_sprite.play("walk")
+						player_started_moving_on_ground.emit()
 					else:
 						animated_sprite.play("idle")
+						player_stopped_moving_on_ground.emit()
 
 					if direction:
 						player.velocity.x = lerp(player.velocity.x, direction * SPEED, 0.3)
@@ -312,14 +322,14 @@ func trigger_jump(jump_source: JumpSource):
 func trigger_dash():
 	dash_sound.play()
 	dash_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
+
 	# If no direction is held by player, just dash forward
 	if dash_direction == Vector2.ZERO:
 		dash_direction = Vector2(1 if player_direction == PlayerDirection.RIGHT else -1, 0)
-		
+
 	dash_time_left = DASH_TIME
 	dashes_left -= 1
-	player_dashed.emit(dash_direction)
+	player_dash_started.emit(dash_direction)
 	enter_state(DASHING)
 
 func enable():

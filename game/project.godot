@@ -135,6 +135,10 @@ dash={
 
 locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue")
 
+[physics]
+
+2d/default_gravity=600.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

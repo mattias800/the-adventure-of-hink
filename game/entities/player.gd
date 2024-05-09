@@ -2,6 +2,10 @@ extends CharacterBody2D
 class_name Player
 
 signal player_turned
+signal player_dash_started(direction: Vector2)
+signal player_dash_stopped
+signal player_started_moving_on_ground
+signal player_stopped_moving_on_ground
 
 @onready var player_death_teleportation := $PlayerDeathTeleportation
 @onready var animated_sprite := $AnimatedSprite2D
@@ -36,8 +40,11 @@ var state := PlayerState.ACTIVE
 func _ready():
 	platform_controller = PlatformController.new(self, animated_sprite, player_jump_sound, player_land_sound, player_dash_sound, player_grab_wall_sound, player_jump_from_wall_sound, $PlayerJumpFromAirSound)
 	platform_controller.player_turned.connect(func(direction): player_turned.emit(direction))
-	platform_controller.player_dashed.connect(on_player_dashed)
-	
+	platform_controller.player_dash_started.connect(on_player_dash_started)
+	platform_controller.player_dash_started.connect(func(direction): player_dash_started.emit(direction))
+	platform_controller.player_dash_stopped.connect(func(): player_dash_stopped.emit())
+	platform_controller.player_started_moving_on_ground.connect(func(): player_started_moving_on_ground.emit())
+	platform_controller.player_stopped_moving_on_ground.connect(func(): player_stopped_moving_on_ground.emit())
 	overworld_controller = OverworldController.new(self, animated_sprite)
 
 func _physics_process(delta):
@@ -59,13 +66,13 @@ func switch_to_platform():
 func switch_to_overworld():
 	active_controller = CharacterControllerType.OVERWORLD
 
-func on_player_dashed(_direction: Vector2):
+func on_player_dash_started(_direction: Vector2):
 	$DashAnimation.play()
-	
+
 func death_teleport(spawn_world_pos: Vector2):
 	if is_respawn_teleporting:
 		return
-		
+
 	print("Player died, teleporting!")
 	is_respawn_teleporting = true
 	death_boom_sound.play()
@@ -86,8 +93,8 @@ func death_teleport(spawn_world_pos: Vector2):
 	tween.tween_method(fx.set_cutoff, 0, 500, duration).set_trans(Tween.TRANS_CIRC)
 	tween.tween_method(fx.set_resonance, 2.0, 0.5, duration).set_trans(Tween.TRANS_CIRC)
 	tween.finished.connect(on_death_teleportation_done)
-	
-	
+
+
 
 func on_death_teleportation_done():
 	print("death tele done")
@@ -112,7 +119,7 @@ func enable():
 
 func turn_off_collisions():
 	collision_shape.disabled = true
-	
+
 func disable():
 	enabled = false
 	platform_controller.disable()
