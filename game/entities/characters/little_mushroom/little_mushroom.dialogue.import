@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://b2kc6dm2k5fah"
+path="res://.godot/imported/little_mushroom.dialogue-1ee688ea0ac7bf57c5dd044a63da2d24.tres"
+
+[deps]
+
+source_file="res://entities/characters/little_mushroom/little_mushroom.dialogue"
+dest_files=["res://.godot/imported/little_mushroom.dialogue-1ee688ea0ac7bf57c5dd044a63da2d24.tres"]
+
+[params]
+
+defaults=true

@@ -2,8 +2,10 @@ First priority:
 Not all walls should be climbable!
 NPC:s with dialog
 One-way platforms (can jump up through it)
+Flying "enemies" that you can jump and bounce off of.
 
 Secondary:
+Add a little cape to the player, that is physical with Joint2D
 Clamp death teleportation time, minimum 1 sec, maximum 3 sec?
 Getting squished between two things should kill the player.
 Dashing into the floor could cause a new, more powerful dash. This is Celeste though.

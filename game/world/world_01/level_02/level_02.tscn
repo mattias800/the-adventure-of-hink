@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=14 format=3 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
 [ext_resource type="Script" path="res://world/world_01/level_02/level_02.gd" id="1_53lln"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="5_4cq6v"]
 [ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="6_7pbfu"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="10_x3p3d"]
+[ext_resource type="PackedScene" uid="uid://ctngb5ewgd3dh" path="res://entities/characters/little_mushroom/little_mushroom.tscn" id="11_30tbe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nxnvt"]
 size = Vector2(384, 256)
@@ -75,3 +76,6 @@ shape = SubResource("RectangleShape2D_el4fd")
 
 [node name="JumpPad" parent="." instance=ExtResource("10_x3p3d")]
 position = Vector2(96, 208)
+
+[node name="LittleMushroom" parent="." instance=ExtResource("11_30tbe")]
+position = Vector2(40, 112)

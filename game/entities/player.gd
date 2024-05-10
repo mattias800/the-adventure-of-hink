@@ -83,6 +83,7 @@ func death_teleport(spawn_world_pos: Vector2):
 	player_death_teleportation.play_teleporting()
 
 	var duration = global_position.distance_to(spawn_world_pos) / 200
+	duration = clamp(duration, 1.0, 2.0)
 
 	var fx := AudioServer.get_bus_effect(AudioServer.get_bus_index("Music"), 0) as AudioEffectLowPassFilter
 
