@@ -66,6 +66,8 @@ var dash_sound: AudioStreamPlayer2D
 var grab_wall_sound: AudioStreamPlayer2D
 var jump_from_wall_sound: AudioStreamPlayer2D
 var jump_from_air_sound: AudioStreamPlayer2D
+var ray_cast_left: RayCast2D
+var ray_cast_right: RayCast2D
 
 func _init(\
 		player_: CharacterBody2D, \
@@ -84,6 +86,8 @@ func _init(\
 	grab_wall_sound = grab_wall_sound_
 	jump_from_wall_sound = jump_from_wall_sound_
 	jump_from_air_sound = jump_from_air_sound_
+	ray_cast_left = player.ray_cast_left
+	ray_cast_right = player.ray_cast_right
 
 
 func physics_process(delta):
@@ -379,7 +383,7 @@ func trigger_jump(jump_source: JumpSource):
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 			time_until_jump_velocity_reset_allowed = 1.0
-			time_until_jump_horizontal_control = 0.2
+			time_until_jump_horizontal_control = 0.1
 
 
 	enter_state(JUMPING)
@@ -413,6 +417,7 @@ func on_hit_jump_source():
 	# TODO Handle user jump action here, including coyote time?
 	player.velocity.y = -JUMP_VELOCITY
 	trigger_jump(PlatformController.JumpSource.GROUND)
+	time_until_jump_velocity_reset_allowed = 0.2
 
 func enable():
 	enter_state(IDLE)
@@ -421,3 +426,5 @@ func enable():
 func disable():
 	enter_state(DISABLE_INPUT)
 
+func is_node_is_wall_jumpable(node: Node2D):
+	return ray_cast_right.get_collider().get_class() == "TileMap"
