@@ -94,6 +94,9 @@ func physics_process(delta):
 	var direction := Input.get_axis("move_left", "move_right")
 	var vertical_direction := Input.get_axis("move_up", "move_down")
 
+	if coyote_time_left > 0:
+		coyote_time_left -= delta
+
 	match state:
 		DISABLED:
 			return
@@ -219,10 +222,6 @@ func physics_process(delta):
 		FALLING:
 			time_until_jump_velocity_reset_allowed -= delta
 			time_until_jump_horizontal_control -= delta
-
-			if coyote_time_left >= 0.0:
-				coyote_time_left -= delta
-
 			time_since_no_ground += delta
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 			player.velocity.y = minf(player.velocity.y + gravity * delta, MAX_FALL_SPEED)
@@ -385,7 +384,7 @@ func trigger_jump(jump_source: JumpSource):
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 			time_until_jump_velocity_reset_allowed = 1.0
-			time_until_jump_horizontal_control = 0.2
+			time_until_jump_horizontal_control = 0.15
 
 
 	enter_state(JUMPING)
