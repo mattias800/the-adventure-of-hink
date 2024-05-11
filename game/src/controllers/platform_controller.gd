@@ -90,6 +90,9 @@ func physics_process(delta):
 		GRABBING_WALL:
 			dashes_left = num_dashes
 			wall_grab_time_left -= delta
+			if vertical_direction == 0:
+				animated_sprite.play("grabbing_wall")
+				
 			if wall_grab_time_left <= 0.0:
 				enter_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
@@ -231,8 +234,6 @@ func physics_process(delta):
 						velocity_into_wall = player.get_wall_normal().x * -1
 						if wall_grab_time_left >= 0.0:
 							enter_state(GRABBING_WALL)
-						else:
-							enter_state(WALL_SLIDING)
 					elif direction != 0:
 						enter_state(WALL_SLIDING)
 		DASHING:
@@ -379,15 +380,19 @@ func trigger_dash():
 	enter_state(DASHING)
 
 func trigger_force(force: Vector2):
+	print("trigger_force")
+	print(force)
+	player.velocity = force
 	dashes_left = num_dashes
 	jumps_left = num_double_jumps
 	time_since_no_ground = 0.0
 	wall_grab_time_left = WALL_GRAB_TIME_LIMIT
-	enter_state(FALLING)
+	time_until_jump_velocity_reset_allowed = 5
+	enter_state(JUMPING)
 
 func on_hit_jump_source():
-	# Handle user jump action here, including coyote time.
-	player.velocity.y = -150
+	# TODO Handle user jump action here, including coyote time?
+	player.velocity.y = -JUMP_VELOCITY
 	trigger_jump(PlatformController.JumpSource.GROUND)
 
 func enable():

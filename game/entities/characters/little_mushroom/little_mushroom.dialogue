@@ -1,12 +1,12 @@
 ~ start
 
-Mushy: Oh, hello!
-Mushy: Please be careful with the spikes.
+Mushy: Ahh, I have you seen the [shake rate=20 level=5]SPIKES[/shake]?!
 Hink: Yeah, I noticed.
 Hink: Are they yours?
-Mushy: Oh, no, I don't like spikes.
-Mushy: Well ok then, take care!
+Mushy: Oh, no, I do [shake rate=20 level=5]NOT[/shake] like spikes.
+Hink: Well ok then, take care!
+Mushy: I [shake rate=20 level=5]HATE[/shake] spikes.
 => END
 
 ~ second
-Mushy: Beware the spikes!
+Mushy: Holy shit, [shake rate=20 level=5]SPIKES[/shake]!

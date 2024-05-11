@@ -83,6 +83,3 @@ position = Vector2(40, 112)
 
 [node name="JumpyBat" parent="." instance=ExtResource("12_qt5sq")]
 position = Vector2(48, 216)
-
-[node name="JumpyBat2" parent="." instance=ExtResource("12_qt5sq")]
-position = Vector2(40, 104)
