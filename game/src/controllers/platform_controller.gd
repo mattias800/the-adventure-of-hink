@@ -129,12 +129,8 @@ func physics_process(delta):
 				player.move_and_slide()
 				if not player.is_on_wall():
 					enter_state(IDLE)
-			elif (player.get_wall_normal().x * direction) > 0:
-				# User pressed away from wall
-				coyote_time_left = COYOTE_TIME_LIMIT
-				enter_state(FALLING)
 			elif not Input.is_action_pressed("grab_wall"):
-				# User relased wall grab button
+				# User released wall grab button
 				coyote_time_left = COYOTE_TIME_LIMIT
 				if (player.get_wall_normal().x * direction) < 0:
 					# User is pressing against wall
@@ -200,7 +196,10 @@ func physics_process(delta):
 				trigger_dash()
 			else:
 				if time_until_jump_horizontal_control <= 0:
-					add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+					if direction != 0:
+						add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+					else:
+						player.velocity.x = lerp(player.velocity.x, 0.0, 0.05)
 
 				player.move_and_slide()
 
@@ -239,7 +238,10 @@ func physics_process(delta):
 				trigger_dash()
 			else:
 				if time_until_jump_horizontal_control <= 0:
-					add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+					if direction != 0:
+						add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+					else:
+						player.velocity.x = lerp(player.velocity.x, 0.0, 0.05)
 
 				player.move_and_slide()
 
@@ -383,7 +385,7 @@ func trigger_jump(jump_source: JumpSource):
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 			time_until_jump_velocity_reset_allowed = 1.0
-			time_until_jump_horizontal_control = 0.1
+			time_until_jump_horizontal_control = 0.2
 
 
 	enter_state(JUMPING)
