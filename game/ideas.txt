@@ -2,7 +2,6 @@ First priority:
 
 Not all walls should be climbable!
 One-way platforms (can jump up through it)
-Flying "enemies" that you can jump and bounce off of.
 
 Secondary:
 
@@ -30,3 +29,4 @@ wall slide by player, by pressing down. while sliding, pause wall grab counter.
 Jump pads / bumpers
 NPC:s with dialog
 Clamp death teleportation time, minimum 1 sec, maximum 3 sec?
+Flying "enemies" that you can jump and bounce off of.

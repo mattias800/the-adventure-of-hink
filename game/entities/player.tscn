@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=45 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -238,6 +238,9 @@ gradient = SubResource("Gradient_dvr0s")
 fill = 2
 fill_from = Vector2(0.491304, 0.478261)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5skp"]
+radius = 6.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 10
 script = ExtResource("1_a3i6k")
@@ -294,6 +297,11 @@ process_material = SubResource("ParticleProcessMaterial_35di3")
 texture = SubResource("GradientTexture2D_6k3tp")
 lifetime = 0.5
 script = ExtResource("13_f7fw7")
+
+[node name="BounceShape" type="Area2D" parent="." groups=["player_bounce"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceShape"]
+shape = SubResource("CircleShape2D_d5skp")
 
 [connection signal="player_dash_started" from="." to="FootDust" method="_on_player_player_dash_started"]
 [connection signal="player_dash_stopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]

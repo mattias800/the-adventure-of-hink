@@ -133,3 +133,7 @@ func trigger_force(force: Vector2):
 		CharacterControllerType.PLATFORM:
 			platform_controller.trigger_force(force)
 	
+func on_hit_jump_source():
+	match active_controller:
+		CharacterControllerType.PLATFORM:
+			platform_controller.on_hit_jump_source()

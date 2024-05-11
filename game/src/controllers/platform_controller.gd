@@ -17,6 +17,7 @@ const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 5.0
 const WALL_CLIMB_SPEED: float  = 40.0
 const COYOTE_TIME_LIMIT: float     = 0.05
+const JUMP_TIME_UNTIL_VELOCITY_RESET_IS_ALLOWED := 0.1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -48,6 +49,7 @@ var time_until_wall_grab_possible := 0.0
 var wall_grab_time_left           := 0.0
 var dash_time_left                := 0.0
 var dash_direction                := Vector2.ZERO
+var time_until_jump_velocity_reset_allowed := 0.0
 var jumps_left                    := 0
 var dashes_left                    := 0
 var num_double_jumps              := 1
@@ -166,12 +168,13 @@ func physics_process(delta):
 
 
 		JUMPING:
+			time_until_jump_velocity_reset_allowed -= delta
 			player.velocity.y += gravity * delta
 			time_since_no_ground += delta
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 
 			# Dampen jump if jump button is released
-			if not Input.is_action_pressed("jump") and player.velocity.y < JUMP_RELEASE_VELOCITY:
+			if not Input.is_action_pressed("jump") and player.velocity.y < JUMP_RELEASE_VELOCITY and time_until_jump_velocity_reset_allowed <= 0:
 				player.velocity.y = -50
 				enter_state(FALLING)
 			elif Input.is_action_just_pressed("jump") and jumps_left > 0:
@@ -357,6 +360,8 @@ func trigger_jump(jump_source: JumpSource):
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
 
+	time_until_jump_velocity_reset_allowed = JUMP_TIME_UNTIL_VELOCITY_RESET_IS_ALLOWED
+	
 	enter_state(JUMPING)
 	jump_sound.play()
 
@@ -379,6 +384,11 @@ func trigger_force(force: Vector2):
 	time_since_no_ground = 0.0
 	wall_grab_time_left = WALL_GRAB_TIME_LIMIT
 	enter_state(FALLING)
+
+func on_hit_jump_source():
+	# Handle user jump action here, including coyote time.
+	player.velocity.y = -150
+	trigger_jump(PlatformController.JumpSource.GROUND)
 
 func enable():
 	enter_state(IDLE)
