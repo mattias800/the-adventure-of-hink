@@ -303,6 +303,14 @@ script = ExtResource("13_f7fw7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceShape"]
 shape = SubResource("CircleShape2D_d5skp")
 
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(4, 2.08165e-12)
+target_position = Vector2(2, 2.08165e-12)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(-4, 2.08165e-12)
+target_position = Vector2(-2, 2.08165e-12)
+
 [connection signal="player_dash_started" from="." to="FootDust" method="_on_player_player_dash_started"]
 [connection signal="player_dash_stopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]
 [connection signal="player_started_moving_on_ground" from="." to="FootDust" method="_on_player_player_started_moving_on_ground"]

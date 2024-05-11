@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmf6f05e3f6wo"]
+
+[ext_resource type="AudioStream" uid="uid://bupao4rvqxujk" path="res://assets/audio/ambience/birds_atmosphere.mp3" id="1_gvgeu"]
+
+[node name="Ambience" type="AudioStreamPlayer"]
+stream = ExtResource("1_gvgeu")
+volume_db = -6.559
+autoplay = true
+bus = &"Ambience"

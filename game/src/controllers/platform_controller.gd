@@ -17,7 +17,6 @@ const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 5.0
 const WALL_CLIMB_SPEED: float  = 40.0
 const COYOTE_TIME_LIMIT: float     = 0.05
-const JUMP_TIME_UNTIL_VELOCITY_RESET_IS_ALLOWED := 0.1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -50,6 +49,7 @@ var wall_grab_time_left           := 0.0
 var dash_time_left                := 0.0
 var dash_direction                := Vector2.ZERO
 var time_until_jump_velocity_reset_allowed := 0.0
+var time_until_jump_horizontal_control := 0.0
 var jumps_left                    := 0
 var dashes_left                    := 0
 var num_double_jumps              := 1
@@ -67,7 +67,15 @@ var grab_wall_sound: AudioStreamPlayer2D
 var jump_from_wall_sound: AudioStreamPlayer2D
 var jump_from_air_sound: AudioStreamPlayer2D
 
-func _init(player_: CharacterBody2D, animated_sprite_: AnimatedSprite2D, jump_sound_: AudioStreamPlayer2D, land_sound_: AudioStreamPlayer2D, dash_sound_: AudioStreamPlayer2D, grab_wall_sound_: AudioStreamPlayer2D, jump_from_wall_sound_: AudioStreamPlayer2D, jump_from_air_sound_: AudioStreamPlayer2D):
+func _init(\
+		player_: CharacterBody2D, \
+		animated_sprite_: AnimatedSprite2D, \
+		jump_sound_: AudioStreamPlayer2D, \
+		land_sound_: AudioStreamPlayer2D, \
+		dash_sound_: AudioStreamPlayer2D, \
+		grab_wall_sound_: AudioStreamPlayer2D, \
+		jump_from_wall_sound_: AudioStreamPlayer2D, \
+		jump_from_air_sound_: AudioStreamPlayer2D):
 	player = player_
 	animated_sprite = animated_sprite_
 	jump_sound = jump_sound_
@@ -92,7 +100,7 @@ func physics_process(delta):
 			wall_grab_time_left -= delta
 			if vertical_direction == 0:
 				animated_sprite.play("grabbing_wall")
-				
+
 			if wall_grab_time_left <= 0.0:
 				enter_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
@@ -133,7 +141,7 @@ func physics_process(delta):
 				# Multiply with high value to ensure it doesn't lose connection with moving platforms.
 				player.velocity.x = velocity_into_wall * JUMP_VELOCITY
 				player.velocity.y = 0
-				
+
 				player.move_and_slide()
 
 				if not player.is_on_wall():
@@ -155,7 +163,7 @@ func physics_process(delta):
 					coyote_time_left = COYOTE_TIME_LIMIT
 					player.velocity.x = 0
 					enter_state(FALLING)
-					
+
 				if Input.is_action_just_pressed("jump"):
 					trigger_jump(JumpSource.WALL)
 					var jump_direction := Vector2(player.get_wall_normal().x, -1)
@@ -172,6 +180,7 @@ func physics_process(delta):
 
 		JUMPING:
 			time_until_jump_velocity_reset_allowed -= delta
+			time_until_jump_horizontal_control -= delta
 			player.velocity.y += gravity * delta
 			time_since_no_ground += delta
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
@@ -186,7 +195,8 @@ func physics_process(delta):
 			elif Input.is_action_just_pressed("dash") and dashes_left > 0:
 				trigger_dash()
 			else:
-				add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+				if time_until_jump_horizontal_control <= 0:
+					add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
 				player.move_and_slide()
 
@@ -204,6 +214,9 @@ func physics_process(delta):
 						enter_state(WALL_SLIDING)
 
 		FALLING:
+			time_until_jump_velocity_reset_allowed -= delta
+			time_until_jump_horizontal_control -= delta
+
 			if coyote_time_left >= 0.0:
 				coyote_time_left -= delta
 
@@ -221,7 +234,8 @@ func physics_process(delta):
 			elif Input.is_action_just_pressed("dash") and dashes_left > 0:
 				trigger_dash()
 			else:
-				add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
+				if time_until_jump_horizontal_control <= 0:
+					add_velocity_x(direction * JUMP_HORIZONTAL_SPEED)
 
 				player.move_and_slide()
 
@@ -350,19 +364,24 @@ func trigger_jump(jump_source: JumpSource):
 			time_until_wall_grab_possible = 0.1
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
+			time_until_jump_velocity_reset_allowed = 0.0
+			time_until_jump_horizontal_control = 0.0
 
 		JumpSource.AIR:
 			jump_from_air_sound.play()
 			jumps_left -= 1
+			time_until_jump_velocity_reset_allowed = 0.5
+			time_until_jump_horizontal_control = 0.1
 
 		JumpSource.WALL:
 			jump_from_wall_sound.play()
 			time_until_wall_grab_possible = 0.1
 			dashes_left = num_dashes
 			jumps_left = num_double_jumps
+			time_until_jump_velocity_reset_allowed = 1.0
+			time_until_jump_horizontal_control = 0.2
 
-	time_until_jump_velocity_reset_allowed = JUMP_TIME_UNTIL_VELOCITY_RESET_IS_ALLOWED
-	
+
 	enter_state(JUMPING)
 	jump_sound.play()
 

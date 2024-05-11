@@ -18,6 +18,8 @@ signal player_stopped_moving_on_ground
 @onready var death_appear_sound := $DeathAppearSound
 @onready var collision_shape := $CollisionShape2D
 @onready var bounce_shape = $BounceShape/CollisionShape2D
+@onready var ray_cast_right = $RayCastRight
+@onready var ray_cast_left = $RayCastLeft
 
 var platform_controller: PlatformController
 var overworld_controller: OverworldController
