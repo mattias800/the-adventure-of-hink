@@ -17,6 +17,7 @@ signal player_stopped_moving_on_ground
 @onready var death_boom_sound := $DeathBoomSound
 @onready var death_appear_sound := $DeathAppearSound
 @onready var collision_shape := $CollisionShape2D
+@onready var bounce_shape = $BounceShape/CollisionShape2D
 
 var platform_controller: PlatformController
 var overworld_controller: OverworldController
@@ -77,7 +78,8 @@ func death_teleport(spawn_world_pos: Vector2):
 	is_respawn_teleporting = true
 	death_boom_sound.play()
 	disable()
-	collision_shape.disabled = true
+	turn_off_collisions()
+	
 	animated_sprite.visible = false
 
 	player_death_teleportation.play_teleporting()
@@ -105,7 +107,7 @@ func on_death_teleportation_done():
 	fx.set_resonance(0.5)
 	death_appear_sound.play()
 	player_death_teleportation.play_player_appearing()
-	collision_shape.disabled = false
+	turn_on_collisions()
 	animated_sprite.visible = true
 	velocity = Vector2.ZERO
 	enable()
@@ -120,6 +122,11 @@ func enable():
 
 func turn_off_collisions():
 	collision_shape.disabled = true
+	bounce_shape.disabled = true
+
+func turn_on_collisions():
+	collision_shape.disabled = false
+	bounce_shape.disabled = false
 
 func disable():
 	enabled = false

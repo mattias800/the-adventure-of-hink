@@ -15,6 +15,8 @@ func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("player_bounce") and active:
+		animated_sprite_2d.play("hit")
+		animated_sprite_2d.animation_looped.connect(on_hit_animation_done)
 		if area.global_position.y > global_position.y:
 			GameManager.respawn_player()
 		else:
@@ -23,3 +25,6 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 			await get_tree().create_timer(0.1).timeout
 			active = true
 	
+func on_hit_animation_done():
+	animated_sprite_2d.play("idle")
+	animated_sprite_2d.animation_finished.disconnect(on_hit_animation_done)
