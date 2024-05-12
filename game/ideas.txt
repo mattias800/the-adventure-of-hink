@@ -1,6 +1,4 @@
 First priority:
-Need to separate coyote time from ground and from wall.
-
 Not all walls should be climbable!
 One-way platforms (can jump up through it)
 
@@ -31,4 +29,5 @@ Jump pads / bumpers
 NPC:s with dialog
 Clamp death teleportation time, minimum 1 sec, maximum 3 sec?
 Flying "enemies" that you can jump and bounce off of.
+Need to separate coyote time from ground and from wall.
 
