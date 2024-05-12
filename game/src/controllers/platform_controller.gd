@@ -55,7 +55,9 @@ var dashes_left                    := 0
 var num_double_jumps              := 1
 var num_dashes              := 1
 var is_against_wall := false
-var coyote_time_left              := 0.0
+var coyote_time_from_ground_left              := 0.0
+var coyote_time_from_wall_left              := 0.0
+var normal_for_last_wall_touched = Vector2.ZERO
 var velocity_into_wall            := 0.0 # The character velocity when hitting the wall. Need to reuse when calculating is_on_wall()
 var active_tile_map: TileMap      =  null # Reference to active TileMap, used to check if player has entered new TileMap
 var player: CharacterBody2D
@@ -94,8 +96,14 @@ func physics_process(delta):
 	var direction := Input.get_axis("move_left", "move_right")
 	var vertical_direction := Input.get_axis("move_up", "move_down")
 
-	if coyote_time_left > 0:
-		coyote_time_left -= delta
+	if coyote_time_from_ground_left > 0:
+		coyote_time_from_ground_left -= delta
+
+	if coyote_time_from_wall_left > 0:
+		coyote_time_from_wall_left -= delta
+
+	if player.is_on_wall():
+		normal_for_last_wall_touched = player.get_wall_normal()
 
 	match state:
 		DISABLED:
@@ -105,6 +113,7 @@ func physics_process(delta):
 		GRABBING_WALL:
 			dashes_left = num_dashes
 			wall_grab_time_left -= delta
+
 			if vertical_direction == 0:
 				animated_sprite.play("grabbing_wall")
 
@@ -112,8 +121,7 @@ func physics_process(delta):
 				enter_state(WALL_SLIDING)
 			elif Input.is_action_just_pressed("jump"):
 				trigger_jump(JumpSource.WALL)
-				var jump_direction := Vector2(player.get_wall_normal().x, -1)
-				player.velocity = jump_direction.normalized() * JUMP_VELOCITY
+				player.velocity = get_wall_jump_direction(player.get_wall_normal()) * JUMP_VELOCITY
 				player.move_and_slide()
 			elif Input.is_action_pressed("move_up"):
 				if player.is_on_ceiling():
@@ -134,7 +142,7 @@ func physics_process(delta):
 					enter_state(IDLE)
 			elif not Input.is_action_pressed("grab_wall"):
 				# User released wall grab button
-				coyote_time_left = COYOTE_TIME_LIMIT
+				coyote_time_from_wall_left = COYOTE_TIME_LIMIT
 				if (player.get_wall_normal().x * direction) < 0:
 					# User is pressing against wall
 					enter_state(WALL_SLIDING)
@@ -159,11 +167,11 @@ func physics_process(delta):
 			if player.is_on_wall():
 				if (player.get_wall_normal().x * direction) > 0:
 					# User pressed away from wall
-					coyote_time_left = COYOTE_TIME_LIMIT
+					coyote_time_from_wall_left = COYOTE_TIME_LIMIT
 					enter_state(FALLING)
 				if direction == 0:
 					# User released hold towards wall
-					coyote_time_left = COYOTE_TIME_LIMIT
+					coyote_time_from_wall_left = COYOTE_TIME_LIMIT
 					player.velocity.x = 0
 					enter_state(FALLING)
 
@@ -177,7 +185,7 @@ func physics_process(delta):
 				if player.is_on_floor():
 					enter_state(IDLE)
 			else:
-				coyote_time_left = COYOTE_TIME_LIMIT
+				coyote_time_from_wall_left = COYOTE_TIME_LIMIT
 				enter_state(FALLING)
 
 
@@ -226,10 +234,13 @@ func physics_process(delta):
 			time_until_wall_grab_possible = time_until_wall_grab_possible - delta
 			player.velocity.y = minf(player.velocity.y + gravity * delta, MAX_FALL_SPEED)
 
-			if Input.is_action_just_pressed("jump") and coyote_time_left > 0.0:
+			if Input.is_action_just_pressed("jump") and coyote_time_from_ground_left > 0.0:
 				trigger_jump(JumpSource.GROUND)
 				player.velocity.y = -JUMP_VELOCITY
 				player.velocity.x = direction * SPEED # TODO Always * SPEED here?
+			if Input.is_action_just_pressed("jump") and coyote_time_from_wall_left > 0.0:
+				player.velocity = get_wall_jump_direction(normal_for_last_wall_touched) * JUMP_VELOCITY
+				trigger_jump(JumpSource.WALL)
 			elif Input.is_action_just_pressed("jump") and jumps_left > 0:
 				trigger_jump(JumpSource.AIR)
 				player.velocity.y = -JUMP_VELOCITY
@@ -247,8 +258,7 @@ func physics_process(delta):
 				if player.is_on_floor():
 					land_sound.play()
 					enter_state(IDLE)
-
-				if player.is_on_wall():
+				elif player.is_on_wall():
 					if Input.is_action_pressed("grab_wall") and time_until_wall_grab_possible <= 0.0:
 						velocity_into_wall = player.get_wall_normal().x * -1
 						if wall_grab_time_left >= 0.0:
@@ -269,7 +279,7 @@ func physics_process(delta):
 			if not player.is_on_floor():
 				jumps_left = 0
 				dashes_left = num_dashes
-				coyote_time_left = COYOTE_TIME_LIMIT
+				coyote_time_from_ground_left = COYOTE_TIME_LIMIT
 				player_stopped_moving_on_ground.emit()
 				enter_state(FALLING)
 			else:
@@ -429,3 +439,7 @@ func disable():
 
 func is_node_is_wall_jumpable(node: Node2D):
 	return ray_cast_right.get_collider().get_class() == "TileMap"
+
+func get_wall_jump_direction(wall_normal: Vector2) -> Vector2:
+	var jump_direction := Vector2(wall_normal.x, -1)
+	return jump_direction.normalized()
