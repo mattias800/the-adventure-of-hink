@@ -12,10 +12,10 @@ func _physics_process(delta):
 		CameraLimiter.apply_collision_shape_to_camera_limits(camera, collision_shape)
 	
 func _on_body_entered(body):
-	if not camera:
+	if camera == null:
 		print("Missing camera on room node.")
 
-	if not collision_shape:
+	if collision_shape == null:
 		print("Missing collision shape on room node.")
 
 	if body.is_in_group("player"):
