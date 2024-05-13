@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=20 format=3 uid="uid://cfeug64aouer"]
 
 [ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="5_ff650"]
 [ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="5_hqkfk"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="6_7me56"]
+[ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqbss"]
 size = Vector2(26, 80)
@@ -24,6 +25,95 @@ size = Vector2(26, 242)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qw1vw"]
 size = Vector2(1208, 408)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_def6q"]
+texture = ExtResource("13_4ao8o")
+texture_region_size = Vector2i(8, 8)
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+6:2/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:10/0 = 0
+2:4/0 = 0
+2:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+6:4/0 = 0
+5:4/0 = 0
+6:6/0 = 0
+9:2/0 = 0
+9:3/0 = 0
+9:4/0 = 0
+9:5/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+13:5/0 = 0
+13:4/0 = 0
+13:3/0 = 0
+13:2/0 = 0
+12:2/0 = 0
+11:2/0 = 0
+10:2/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+7:10/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+8:9/0 = 0
+8:10/0 = 0
+8:11/0 = 0
+7:11/0 = 0
+9:10/0 = 0
+9:9/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+7:16/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+8:16/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+8:19/0 = 0
+8:20/0 = 0
+8:21/0 = 0
+8:22/0 = 0
+7:22/0 = 0
+7:21/0 = 0
+7:20/0 = 0
+7:19/0 = 0
+2:20/0 = 0
+3:20/0 = 0
+4:20/0 = 0
+5:20/0 = 0
+6:20/0 = 0
+9:20/0 = 0
+10:20/0 = 0
+11:20/0 = 0
+12:20/0 = 0
+13:20/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a3kw4"]
+sources/0 = SubResource("TileSetAtlasSource_def6q")
 
 [node name="Hometown" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_cybgc")
@@ -106,3 +196,7 @@ collision_shape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room"]
 position = Vector2(604, 68)
 shape = SubResource("RectangleShape2D_qw1vw")
+
+[node name="Underground" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_a3kw4")
+format = 2
