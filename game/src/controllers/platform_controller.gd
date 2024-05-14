@@ -132,6 +132,8 @@ func physics_process(delta):
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
 				if not player.is_on_wall():
+					player.velocity.x = velocity_into_wall * SPEED * 0.5
+					player.move_and_slide()
 					enter_state(IDLE)
 			elif Input.is_action_pressed("move_down"):
 				animated_sprite.play("climbing")
@@ -139,6 +141,8 @@ func physics_process(delta):
 				player.velocity.y = vertical_direction * WALL_CLIMB_SPEED
 				player.move_and_slide()
 				if not player.is_on_wall():
+					player.velocity.x = 0
+					player.move_and_slide()
 					enter_state(IDLE)
 			elif not Input.is_action_pressed("grab_wall"):
 				# User released wall grab button
@@ -156,6 +160,8 @@ func physics_process(delta):
 				player.move_and_slide()
 
 				if not player.is_on_wall():
+					player.velocity.x = direction * JUMP_HORIZONTAL_SPEED
+					player.move_and_slide()
 					enter_state(FALLING)
 
 		WALL_SLIDING:
