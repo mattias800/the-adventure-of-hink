@@ -1,11 +1,10 @@
 First priority:
 Not all walls should be climbable!
-Add raycast that is smaller than collision, if distance=0 in both x-directions, player was squashed!
 
 Secondary:
 
+Particle effect when jumping, double jumping and landing
 Add a little cape to the player, that is physical with Joint2D
-Getting squished between two things should kill the player.
 Dashing into the floor could cause a new, more powerful dash. This is Celeste though.
 Jump buffer (jumping just before hitting ground should cause a jump when hitting jump)
 Areas with different gravity (which could be explained by wind for example)
@@ -14,11 +13,12 @@ Knife pendulum
 Something that shoots out stuff
 Moving circular saw
 Platforms that appear and disappear on a timer, like Megaman.
-Particle effect when landing
 
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Add raycast that is smaller than collision, if distance=0 in both x-directions, player was squashed!
+Getting squished between two things should kill the player.
 Particle effect when running, jumping and landing
 Smoke particle effect
 Dash move
