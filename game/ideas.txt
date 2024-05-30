@@ -1,5 +1,6 @@
 First priority:
 Not all walls should be climbable!
+Add raycast that is smaller than collision, if distance=0 in both x-directions, player was squashed!
 
 Secondary:
 

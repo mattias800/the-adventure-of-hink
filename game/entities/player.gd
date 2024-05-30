@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal player_disabled
+signal player_enabled
 signal player_turned
 signal player_dash_started(direction: Vector2)
 signal player_dash_stopped
@@ -18,8 +20,12 @@ signal player_stopped_moving_on_ground
 @onready var death_appear_sound := $DeathAppearSound
 @onready var collision_shape := $CollisionShape2D
 @onready var bounce_shape = $BounceShape/CollisionShape2D
-@onready var ray_cast_right = $RayCastRight
-@onready var ray_cast_left = $RayCastLeft
+@onready var squish_cast_right = $SquishCastRight
+@onready var squish_cast_left = $SquishCastLeft
+@onready var squish_cast_up = $SquishCastUp
+@onready var squish_cast_down = $SquishCastDown
+@onready var wall_ray_cast_left = $WallRayCastLeft
+@onready var wall_ray_cast_right = $WallRayCastRight
 
 var platform_controller: PlatformController
 var overworld_controller: OverworldController
@@ -53,8 +59,10 @@ func _ready():
 func _physics_process(delta):
 	if not enabled:
 		return
+		
 	match state:
 		PlayerState.ACTIVE:
+			check_squish()
 			match active_controller:
 				CharacterControllerType.PLATFORM:
 					platform_controller.physics_process(delta)
@@ -121,6 +129,8 @@ func enable():
 			platform_controller.enable()
 		CharacterControllerType.OVERWORLD:
 			overworld_controller.enable()
+			
+	player_enabled.emit()
 
 func turn_off_collisions():
 	collision_shape.disabled = true
@@ -134,6 +144,7 @@ func disable():
 	enabled = false
 	platform_controller.disable()
 	overworld_controller.disable()
+	player_disabled.emit()
 
 func trigger_force(force: Vector2):
 	match active_controller:
@@ -144,3 +155,11 @@ func on_hit_jump_source():
 	match active_controller:
 		CharacterControllerType.PLATFORM:
 			platform_controller.on_hit_jump_source()
+
+func check_squish():
+	var squish_sides = squish_cast_left.is_colliding() and squish_cast_right.is_colliding()
+	var squish_updown = squish_cast_up.is_colliding() and squish_cast_down.is_colliding()
+	if squish_sides or squish_updown:
+		await get_tree().create_timer(0.05).timeout
+		GameManager.respawn_player()
+	

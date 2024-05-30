@@ -34,7 +34,7 @@ script = ExtResource("1_20104")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_50bvm")
 animation = &"idle"
-frame_progress = 0.706556
+frame_progress = 0.501367
 
 [node name="Talkable" parent="." instance=ExtResource("2_qsnp8")]
 position = Vector2(0, 16)

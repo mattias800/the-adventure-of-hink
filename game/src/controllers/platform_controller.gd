@@ -68,8 +68,8 @@ var dash_sound: AudioStreamPlayer2D
 var grab_wall_sound: AudioStreamPlayer2D
 var jump_from_wall_sound: AudioStreamPlayer2D
 var jump_from_air_sound: AudioStreamPlayer2D
-var ray_cast_left: RayCast2D
-var ray_cast_right: RayCast2D
+var wall_ray_cast_left: RayCast2D
+var wall_ray_cast_right: RayCast2D
 
 func _init(\
 		player_: CharacterBody2D, \
@@ -88,8 +88,8 @@ func _init(\
 	grab_wall_sound = grab_wall_sound_
 	jump_from_wall_sound = jump_from_wall_sound_
 	jump_from_air_sound = jump_from_air_sound_
-	ray_cast_left = player.ray_cast_left
-	ray_cast_right = player.ray_cast_right
+	wall_ray_cast_left = player.wall_ray_cast_left
+	wall_ray_cast_right = player.wall_ray_cast_right
 
 
 func physics_process(delta):
@@ -444,7 +444,7 @@ func disable():
 	enter_state(DISABLE_INPUT)
 
 func is_node_is_wall_jumpable(node: Node2D):
-	return ray_cast_right.get_collider().get_class() == "TileMap"
+	return wall_ray_cast_right.get_collider().get_class() == "TileMap"
 
 func get_wall_jump_direction(wall_normal: Vector2) -> Vector2:
 	var jump_direction := Vector2(wall_normal.x, -1)

@@ -23,7 +23,6 @@ func _on_player_player_turned(direction: String):
 		"right":
 			turn_right()
 
-
 func _on_player_player_started_moving_on_ground():
 	emitting = true
 	amount_ratio = 0.5
@@ -41,4 +40,8 @@ func _on_player_player_dash_started(_direction):
 
 
 func _on_player_player_dash_stopped():
+	emitting = false
+
+
+func _on_player_player_disabled():
 	emitting = false

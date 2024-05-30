@@ -181,6 +181,13 @@ shape = SubResource("RectangleShape2D_v8hqc")
 
 [node name="Ambience" parent="." instance=ExtResource("14_ottqj")]
 
+[node name="MovingPlatform" parent="." node_paths=PackedStringArray("end_position") instance=ExtResource("12_1mwam")]
+position = Vector2(24, 136)
+end_position = NodePath("EndPosition")
+
+[node name="EndPosition" type="Marker2D" parent="MovingPlatform"]
+position = Vector2(40, 0)
+
 [connection signal="on_player_entered_room" from="Room1" to="." method="_on_room_1_on_player_entered_room"]
 [connection signal="on_player_entered" from="Room1/Room1Trigger" to="." method="_on_room_1_trigger_on_player_entered"]
 [connection signal="on_player_entered_room" from="Room2" to="." method="_on_room_2_on_player_entered_room"]

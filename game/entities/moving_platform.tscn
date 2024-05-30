@@ -17,5 +17,6 @@ format = 2
 layer_0/tile_data = PackedInt32Array(2, 196608, 8, 1, 65536, 8, 0, 0, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+visible = false
 position = Vector2(12, 4)
 shape = SubResource("RectangleShape2D_nucyt")
