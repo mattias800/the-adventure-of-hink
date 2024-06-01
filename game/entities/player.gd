@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+@export var dust_boom_scene: PackedScene
+
 signal player_disabled
 signal player_enabled
 signal player_turned
@@ -47,7 +49,17 @@ var active_controller := CharacterControllerType.PLATFORM
 var state := PlayerState.ACTIVE
 
 func _ready():
-	platform_controller = PlatformController.new(self, animated_sprite, player_jump_sound, player_land_sound, player_dash_sound, player_grab_wall_sound, player_jump_from_wall_sound, $PlayerJumpFromAirSound)
+	platform_controller = PlatformController.new(
+		self, \
+		animated_sprite, \
+		player_jump_sound, \
+		player_land_sound, \
+		player_dash_sound, \
+		player_grab_wall_sound, \
+		player_jump_from_wall_sound, \
+		$PlayerJumpFromAirSound, \
+		dust_boom_scene
+		)
 	platform_controller.player_turned.connect(func(direction): player_turned.emit(direction))
 	platform_controller.player_dash_started.connect(on_player_dash_started)
 	platform_controller.player_dash_started.connect(func(direction): player_dash_started.emit(direction))

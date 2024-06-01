@@ -1,7 +1,6 @@
 First priority:
 Not all walls should be climbable!
 Chest that can be opened, with nice animation when you receive the item/skill.
-Particle effect when jumping, double jumping and landing
 
 Secondary:
 
@@ -18,6 +17,7 @@ Platforms that appear and disappear on a timer, like Megaman.
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Particle effect when jumping, double jumping and landing
 Add raycast that is smaller than collision, if distance=0 in both x-directions, player was squashed!
 Getting squished between two things should kill the player.
 Particle effect when running, jumping and landing

@@ -70,6 +70,7 @@ var jump_from_wall_sound: AudioStreamPlayer2D
 var jump_from_air_sound: AudioStreamPlayer2D
 var wall_ray_cast_left: RayCast2D
 var wall_ray_cast_right: RayCast2D
+var dust_boom_scene: PackedScene
 
 func _init(\
 		player_: CharacterBody2D, \
@@ -79,7 +80,8 @@ func _init(\
 		dash_sound_: AudioStreamPlayer2D, \
 		grab_wall_sound_: AudioStreamPlayer2D, \
 		jump_from_wall_sound_: AudioStreamPlayer2D, \
-		jump_from_air_sound_: AudioStreamPlayer2D):
+		jump_from_air_sound_: AudioStreamPlayer2D, \
+		dust_boom_scene_: PackedScene):
 	player = player_
 	animated_sprite = animated_sprite_
 	jump_sound = jump_sound_
@@ -90,6 +92,7 @@ func _init(\
 	jump_from_air_sound = jump_from_air_sound_
 	wall_ray_cast_left = player.wall_ray_cast_left
 	wall_ray_cast_right = player.wall_ray_cast_right
+	dust_boom_scene = dust_boom_scene_
 
 
 func physics_process(delta):
@@ -263,6 +266,7 @@ func physics_process(delta):
 
 				if player.is_on_floor():
 					land_sound.play()
+					spawn_dust_boom()
 					enter_state(IDLE)
 				elif player.is_on_wall():
 					if Input.is_action_pressed("grab_wall") and time_until_wall_grab_possible <= 0.0:
@@ -402,7 +406,7 @@ func trigger_jump(jump_source: JumpSource):
 			time_until_jump_velocity_reset_allowed = 1.0
 			time_until_jump_horizontal_control = 0.15
 
-
+	spawn_dust_boom()
 	enter_state(JUMPING)
 	jump_sound.play()
 
@@ -436,6 +440,11 @@ func on_hit_jump_source():
 	trigger_jump(PlatformController.JumpSource.GROUND)
 	time_until_jump_velocity_reset_allowed = 0.2
 
+func spawn_dust_boom():
+	var dust_instance = dust_boom_scene.instantiate()
+	dust_instance.global_position = player.global_position + Vector2(0, 2)
+	player.get_tree().root.add_child(dust_instance)
+	
 func enable():
 	enter_state(IDLE)
 
