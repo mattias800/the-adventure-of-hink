@@ -36,4 +36,3 @@ func get_level_type_for_tilemap(room_tilemap: TileMap):
 	if room_tilemap.is_in_group("overworlds"):
 		return LevelType.OVERWORLD
 		
-

@@ -124,7 +124,7 @@ vec3 water(vec2 uv, vec3 cdir, float iTime)
     uv += a * h;
     h = sin(0.841471 * uv.x - 0.540302 * uv.y + iTime);
     uv += a * h;
-    
+
     // Texture distortion
     float d1 = mod(uv.x + uv.y, TWOPI);
     float d2 = mod((uv.x + uv.y + 0.25) * 1.3, SIXPI);
@@ -134,7 +134,7 @@ vec3 water(vec2 uv, vec3 cdir, float iTime)
     	sin(d1) * 0.15 + sin(d2) * 0.05,
     	cos(d1) * 0.15 + cos(d2) * 0.05
     );
-    
+
     vec3 ret = mix(WATER_COL.rgb, WATER2_COL.rgb, waterlayer(uv + dist.xy));
     ret = mix(ret, FOAM_COL.rgb, waterlayer(vec2(1.0) - uv - dist.yx));
     return ret;
@@ -152,24 +152,24 @@ vec2 pixelate(vec2 ab, float amount) {
 
 void fragment() {
 	vec2 pixelated_uv = pixelate(UV, 512);
-	
+
 	float depth = texture(noise1, UV + scroll1 * TIME).r * texture(noise2, UV + scroll2 * TIME).r;
-	
+
 	float depth_pixelated = texture(noise1, pixelated_uv + scroll1 * TIME).r * texture(noise2, pixelated_uv + scroll2 * TIME).r;
-	
+
 	vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_length * vec2(depth));
-	
+
 	vec2 uv = pixelate(globalposition / 32.0, 28);
 
 	vec3 cartoon = vec3(water(uv * tile + offset, vec3(0,1,0), TIME * distortion_speed));
-	
+
 	float underwater_blue = 0.4;
-	
+
 	vec4 underwater_color = vec4(screen_color.r * underwater_blue, screen_color.g * underwater_blue, screen_color.b, 1.0);
 	vec4 water_color = (tone_color * 0.5) + (underwater_color * 2.0);
-	
+
 	vec3 final_color = water_color.rgb * cartoon;
-	
+
 	COLOR.rgb = final_color;
 }
 

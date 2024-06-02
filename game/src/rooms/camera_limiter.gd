@@ -8,4 +8,3 @@ static func apply_collision_shape_to_camera_limits(camera: Camera2D, collision_s
 		camera.set_limit(SIDE_TOP, rect.position.y)
 		camera.set_limit(SIDE_BOTTOM, rect.position.y + rect.size.y)
 		
-
