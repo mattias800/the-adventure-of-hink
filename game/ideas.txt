@@ -1,6 +1,8 @@
 First priority:
 Not all walls should be climbable!
 Chest that can be opened, with nice animation when you receive the item/skill.
+Objects that can be pushed
+Levers that can be toggled, should affect the level
 
 Secondary:
 
