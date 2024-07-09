@@ -1,4 +1,5 @@
 First priority:
+Boomerang!
 Not all walls should be climbable!
 Chest that can be opened, with nice animation when you receive the item/skill.
 Objects that can be pushed
@@ -6,6 +7,7 @@ Levers that can be toggled, should affect the level
 
 Secondary:
 
+Floor with spikes that appear 1 sec after player steps on it
 Add a little cape to the player, that is physical with Joint2D
 Dashing into the floor could cause a new, more powerful dash. This is Celeste though.
 Jump buffer (jumping just before hitting ground should cause a jump when hitting jump)

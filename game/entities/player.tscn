@@ -1,9 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=47 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
 [ext_resource type="PackedScene" uid="uid://bq22jxj2ct62h" path="res://entities/player_death_teleportation.tscn" id="2_eobix"]
 [ext_resource type="PackedScene" uid="uid://rfgg8gl078uo" path="res://entities/dust_boom.tscn" id="2_ykok0"]
+[ext_resource type="PackedScene" uid="uid://cf2adb7i38jj6" path="res://entities/boomerang/boomerang.tscn" id="3_7yl8v"]
 [ext_resource type="AudioStream" uid="uid://cu6ta5clwtw8a" path="res://assets/audio/sounds/player_jump.wav" id="4_hmqpj"]
 [ext_resource type="AudioStream" uid="uid://buo3qly4p2sgn" path="res://assets/audio/sounds/player_explode.ogg" id="5_clhrg"]
 [ext_resource type="AudioStream" uid="uid://b8i4pernnhpqb" path="res://assets/audio/sounds/player_death_appear.ogg" id="6_mig32"]
@@ -246,6 +247,7 @@ radius = 6.0
 z_index = 10
 script = ExtResource("1_a3i6k")
 dust_boom_scene = ExtResource("2_ykok0")
+boomerang_scene = ExtResource("3_7yl8v")
 
 [node name="PlayerDeathTeleportation" parent="." instance=ExtResource("2_eobix")]
 

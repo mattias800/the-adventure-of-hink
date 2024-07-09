@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf2adb7i38jj6"]
+
+[ext_resource type="Script" path="res://entities/boomerang/boomerang.gd" id="1_ttip1"]
+[ext_resource type="Texture2D" uid="uid://bvkkclwqlmcw" path="res://entities/boomerang/arrow_1.png" id="2_m4yqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vjps3"]
+radius = 3.0
+
+[node name="Boomerang" type="CharacterBody2D"]
+script = ExtResource("1_ttip1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_m4yqv")
+region_enabled = true
+region_rect = Rect2(4, 5, 7, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vjps3")
