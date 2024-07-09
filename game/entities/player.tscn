@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=48 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c2w7sa2nxnh0e" path="res://assets/audio/sounds/player_jump_from_air.wav" id="9_xp7d3"]
 [ext_resource type="Texture2D" uid="uid://cvokx6lcwid3x" path="res://assets/player-death/SpriteSheetWhite.png" id="11_gv2e8"]
 [ext_resource type="Script" path="res://entities/foot_dust.gd" id="13_f7fw7"]
+[ext_resource type="PackedScene" uid="uid://c7vvtoj345h67" path="res://entities/boomerang/boomerang_controller.tscn" id="15_c2qsn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)
@@ -247,7 +248,6 @@ radius = 6.0
 z_index = 10
 script = ExtResource("1_a3i6k")
 dust_boom_scene = ExtResource("2_ykok0")
-boomerang_scene = ExtResource("3_7yl8v")
 
 [node name="PlayerDeathTeleportation" parent="." instance=ExtResource("2_eobix")]
 
@@ -335,9 +335,14 @@ target_position = Vector2(-4, 0)
 position = Vector2(2, 0)
 target_position = Vector2(4, 0)
 
+[node name="BoomerangController" parent="." instance=ExtResource("15_c2qsn")]
+position = Vector2(0, 3)
+boomerang_scene = ExtResource("3_7yl8v")
+
 [connection signal="player_dash_started" from="." to="FootDust" method="_on_player_player_dash_started"]
 [connection signal="player_dash_stopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]
 [connection signal="player_disabled" from="." to="FootDust" method="_on_player_player_disabled"]
 [connection signal="player_started_moving_on_ground" from="." to="FootDust" method="_on_player_player_started_moving_on_ground"]
 [connection signal="player_stopped_moving_on_ground" from="." to="FootDust" method="_on_player_player_stopped_moving_on_ground"]
 [connection signal="player_turned" from="." to="FootDust" method="_on_player_player_turned"]
+[connection signal="player_turned" from="." to="BoomerangController" method="_on_player_player_turned"]

@@ -2,35 +2,73 @@ extends CharacterBody2D
 
 @onready var sprite_2d = $Sprite2D
 
+enum State {
+	GOING_OUT,
+	GOING_BACK,
+	STUCK
+}
+
 var start_direction := Vector2(1, 0)
 var current_direction := Vector2(1, 0)
 var max_distance := 5.0
 var max_speed := 200.0
-var current_speed := 1.0
 var rotation_speed := 4.0
 var rotating := true
+var progress := 0.0
+var going_back := false
+var stuck := false
+
+var state := State.GOING_OUT
 
 var start_position := Vector2(0, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	throw(global_position, start_direction)
+	throw(start_direction)
 
-func throw(start: Vector2, direction: Vector2):
-	start_position = start
-	global_position = start_position
+func throw(direction: Vector2):
+	start_position = global_position
 	start_direction = direction
 	current_direction = direction
-	current_speed = max_speed
-	# velocity = direction * speed
-	rotating = true
+	progress = 0.0
+	enter_state(State.GOING_OUT)
 
 func _process(delta):
-	if rotating:
-		sprite_2d.rotate(PI * rotation_speed * delta)
+	match state:
+		State.GOING_OUT:
+			sprite_2d.rotate(PI * rotation_speed * delta)
 
+		State.GOING_BACK:
+			sprite_2d.rotate(PI * rotation_speed * delta)
+
+		State.STUCK:
+			pass
+			
+func enter_state(next: State):
+	print("BOOMERANG ENTER STATE: " + State.keys()[next])
+	match next:
+		State.GOING_OUT:
+			pass
+
+		State.GOING_BACK:
+			pass
+
+		State.STUCK:
+			pass
+	state = next
+	
 func _physics_process(delta):
-	var collision = move_and_collide(current_direction * current_speed * delta)
-	if collision != null:
-		rotating = false
+	match state:
+		State.GOING_OUT:
+			progress += delta
+			var current_speed = (1.0 - progress) * max_speed
+			var collision = move_and_collide(current_direction * current_speed * delta)
+			if collision != null:
+				enter_state(State.STUCK)
+
+		State.GOING_BACK:
+			pass
+
+		State.STUCK:
+			pass
 	

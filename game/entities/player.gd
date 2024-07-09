@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @export var dust_boom_scene: PackedScene
-@export var boomerang_scene: PackedScene
 
 signal player_disabled
 signal player_enabled
@@ -69,10 +68,6 @@ func _ready():
 	platform_controller.player_stopped_moving_on_ground.connect(func(): player_stopped_moving_on_ground.emit())
 	overworld_controller = OverworldController.new(self, animated_sprite)
 
-func _process(delta):
-	if Input.is_action_just_pressed("throw"):
-		spawn_boomerang()
-	
 func _physics_process(delta):
 	if not enabled:
 		return
@@ -179,9 +174,3 @@ func check_squish():
 	if squish_sides or squish_updown:
 		await get_tree().create_timer(0.05).timeout
 		GameManager.respawn_player()
-	
-func spawn_boomerang():
-	var boomerang_instance = boomerang_scene.instantiate()
-	var pos = global_position + Vector2(8, 0)
-	get_tree().root.add_child(boomerang_instance)
-	boomerang_instance.throw(pos, Vector2(1, 0))

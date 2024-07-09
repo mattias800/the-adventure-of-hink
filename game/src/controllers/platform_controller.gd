@@ -94,7 +94,6 @@ func _init(\
 	wall_ray_cast_right = player.wall_ray_cast_right
 	dust_boom_scene = dust_boom_scene_
 
-
 func physics_process(delta):
 	var direction := Input.get_axis("move_left", "move_right")
 	var vertical_direction := Input.get_axis("move_up", "move_down")
@@ -444,7 +443,7 @@ func spawn_dust_boom():
 	var dust_instance = dust_boom_scene.instantiate()
 	dust_instance.global_position = player.global_position + Vector2(0, 2)
 	player.get_tree().root.add_child(dust_instance)
-	
+
 func enable():
 	enter_state(IDLE)
 
