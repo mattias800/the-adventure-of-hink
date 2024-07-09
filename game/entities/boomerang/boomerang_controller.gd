@@ -3,8 +3,8 @@ extends Node2D
 @export var boomerang_scene: PackedScene
 
 var spawn_position_offset := Vector2(8, 0)
-var right_offset := Vector2(8, 0)
-var left_offset := Vector2(-8, 0)
+var right_offset := Vector2(8, -4)
+var left_offset := Vector2(-8, -4)
 var direction := Vector2(1, 0)
 
 func _ready():

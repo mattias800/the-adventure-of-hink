@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var sprite_2d = $Sprite2D
 
+signal collided_with_player
+
 enum State {
 	GOING_OUT,
 	GOING_BACK,
@@ -45,7 +47,6 @@ func _process(delta):
 			pass
 			
 func enter_state(next: State):
-	print("BOOMERANG ENTER STATE: " + State.keys()[next])
 	match next:
 		State.GOING_OUT:
 			pass
@@ -63,11 +64,26 @@ func _physics_process(delta):
 			progress += delta
 			var current_speed = (1.0 - progress) * max_speed
 			var collision = move_and_collide(current_direction * current_speed * delta)
+			if progress > 1.0:
+				enter_state(State.GOING_BACK)
 			if collision != null:
-				enter_state(State.STUCK)
+				if collision.get_collider().is_in_group("player"):
+					collided_with_player.emit()
+					queue_free()
+				else:
+					enter_state(State.STUCK)
 
 		State.GOING_BACK:
-			pass
+			progress += delta
+			var current_speed = (1.0 - progress) * max_speed
+			current_direction = global_position - GameManager.player.global_position
+			var collision = move_and_collide(current_direction.normalized() * current_speed * delta)
+			if collision != null:
+				if collision.get_collider().is_in_group("player"):
+					collided_with_player.emit()
+					queue_free()
+				else:
+					enter_state(State.STUCK)
 
 		State.STUCK:
 			pass
