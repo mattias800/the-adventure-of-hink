@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=19 format=4 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
 [ext_resource type="Script" path="res://world/world_01/level_02/level_02.gd" id="1_53lln"]
@@ -21,6 +21,9 @@ size = Vector2(384, 288)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_el4fd"]
 size = Vector2(8, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csetp"]
+size = Vector2(87, 61)
 
 [node name="Level02" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_53lln")
@@ -93,5 +96,9 @@ position = Vector2(48, 216)
 [node name="Chest" parent="." instance=ExtResource("14_51bis")]
 position = Vector2(128, 24)
 
-[node name="Water" parent="." instance=ExtResource("15_3xd5g")]
-position = Vector2(90, 97)
+[node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("15_3xd5g")]
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(123.5, 86.5)
+shape = SubResource("RectangleShape2D_csetp")

@@ -1,5 +1,6 @@
-extends Node2D
+extends Area2D
 
+@export var collision_shape: CollisionShape2D
 @export var k := 0.015
 @export var d := 0.03
 @export var spread = 0.0002
@@ -8,34 +9,40 @@ var springs: Array[WaterSpring] = []
 var passes := 8
 
 # Spring instances
-var distance_between_springs := 16
-var number_of_springs := 32
-var water_width := distance_between_springs * number_of_springs
+@export var distance_between_springs := 8
 @onready var water_spring := preload("res://src/features/water/water_spring.tscn")
 
 # Body of water
-var depth := 1000
-var target_height = global_position.y
-var bottom = target_height + depth
 @onready var water_body := $WaterBody
 
 # Surface
 @export var border_thickness = 0.5
 @onready var water_surface := $WaterSurface
 
+# Layout
+var water_position := Vector2i(0, 0)
+
 func _ready():
+	var rect = collision_shape.shape.get_rect()
+	water_position = collision_shape.global_position + rect.position
+	print("water_position: " + str(water_position))
+	print("rect.size.x: " + str(rect.size.x))
+	print("distance_between_springs: " + str(distance_between_springs))
 	water_surface.width = border_thickness
 	
-	for i in range(number_of_springs):
-		var x = i * distance_between_springs
+	var num_springs = round(rect.size.x / distance_between_springs) + 1
+	
+	for i in range(num_springs):
+		var global_x = water_position.x + i * distance_between_springs			
 		var w = water_spring.instantiate()
 		
 		add_child(w)
 		springs.append(w)
-		w.initialize(x)
+		w.initialize(Vector2i(global_x, water_position.y))
 
 	splash(2, 5)
-	splash(5, 4)
+	splash(4, 7)
+	splash(5, 12)
 	splash(12, 7)
 	
 
@@ -71,18 +78,19 @@ func splash(index: int, speed: float):
 		
 
 func draw_water_body():
-	var surface_points = []
+	var rect = collision_shape.shape.get_rect()
+	var bottom = water_position.y + rect.size.y
 	
-	for i in range(springs.size()):
-		surface_points.append(springs[i].position)
-		
+	var curve = water_surface.curve
+	var points = Array(curve.get_baked_points())
+	
+	var water_polygon_points = points
+	
 	var first_index = 0
-	var last_index = surface_points.size() - 1
+	var last_index = water_polygon_points.size() - 1
 	
-	var water_polygon_points = surface_points
-	
-	water_polygon_points.append(Vector2(surface_points[last_index].x, bottom))
-	water_polygon_points.append(Vector2(surface_points[first_index].x, bottom))
+	water_polygon_points.append(Vector2(water_polygon_points[last_index].x, bottom))
+	water_polygon_points.append(Vector2(water_polygon_points[first_index].x, bottom))
 	
 	water_polygon_points = PackedVector2Array(water_polygon_points)
 	

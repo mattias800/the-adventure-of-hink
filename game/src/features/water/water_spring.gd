@@ -6,11 +6,11 @@ var force := 0.0
 var height := 0.0
 var target_height := 0.0
 
-func initialize(x: int):
+func initialize(next_global_position: Vector2i):
+	global_position = next_global_position
 	height = position.y
 	target_height = position.y
 	velocity = 0.0
-	position.x = x
 	
 func water_update(spring_constant: float, dampening: float):
 	height = position.y

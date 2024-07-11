@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=22 format=3 uid="uid://cfeug64aouer"]
 
 [ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
@@ -13,12 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="5_hqkfk"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="6_7me56"]
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
+[ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqbss"]
 size = Vector2(26, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71cr7"]
 size = Vector2(20, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjuvd"]
+size = Vector2(40, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsxs6"]
 size = Vector2(26, 242)
@@ -157,6 +161,13 @@ size = Vector2i(320, 180)
 
 [node name="Fog" parent="Camera" instance=ExtResource("5_hqkfk")]
 unique_name_in_owner = true
+
+[node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(92, 271)
+shape = SubResource("RectangleShape2D_cjuvd")
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = ExtResource("2_di72y")

@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://crupmtw6dw47h"]
+[gd_scene load_steps=3 format=3 uid="uid://crupmtw6dw47h"]
 
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="1_nd0hp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmo5g"]
+size = Vector2(168, 93.5)
+
 [node name="WaterTest" type="Node2D"]
 
-[node name="Water" parent="." instance=ExtResource("1_nd0hp")]
+[node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_nd0hp")]
 position = Vector2(66, 83)
+collision_shape = NodePath("CollisionShape2D")
+distance_between_springs = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(93, 8)
+shape = SubResource("RectangleShape2D_rmo5g")
