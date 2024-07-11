@@ -8,16 +8,22 @@ var active_level_type
 var current_checkpoint: Checkpoint
 var last_spawnpoint: Vector2
 
-var is_entering_new_scene: bool = true
+var is_entering_new_scene: bool = false
 var new_scene_portal_name = "StartPortal"
 
 func _ready():
-	# LevelManager.player_entered_level.connect(_on_level_manager_player_entered_level)
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
+	# start_level()
+	CutsceneManager.transition_in()
+
+func start_level():
+	is_entering_new_scene = true
+	new_scene_portal_name = "StartPortal"
 
 func _process(_delta):
 	if Input.is_action_just_pressed("exit_game"):
+		print("User pressed Esc, quitting game.")
 		get_tree().quit()
 		return
 
@@ -39,7 +45,6 @@ func on_player_entered_portal(portal):
 	print("Load next level?")
 	if portal.next_scene_path:
 		print("LOAD SCENE WOO")
-		LevelManager.active_room_tilemap = null
 		load_scene(portal.next_scene_path)
 
 
@@ -57,9 +62,9 @@ func enter_new_scene():
 		return
 
 	print("Found portal: " + portal.name)
-	
+
 	current_checkpoint = null
-	
+
 	var spawn_point = portal.spawn_point
 	if spawn_point:
 		print("Found spawn point")

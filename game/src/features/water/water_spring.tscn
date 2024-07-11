@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpg4qgyph2ef8"]
+
+[ext_resource type="Script" path="res://src/features/water/water_spring.gd" id="1_7f85q"]
+
+[node name="WaterSpring" type="Node2D"]
+script = ExtResource("1_7f85q")

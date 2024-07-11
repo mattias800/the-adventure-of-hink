@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=18 format=4 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
 [ext_resource type="Script" path="res://world/world_01/level_02/level_02.gd" id="1_53lln"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bpm40kcqmyhmd" path="res://entities/jumpy-bat/jumpy_bat.tscn" id="12_qt5sq"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="13_r5e6r"]
 [ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="14_51bis"]
+[ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="15_3xd5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nxnvt"]
 size = Vector2(384, 288)
@@ -91,3 +92,6 @@ position = Vector2(48, 216)
 
 [node name="Chest" parent="." instance=ExtResource("14_51bis")]
 position = Vector2(128, 24)
+
+[node name="Water" parent="." instance=ExtResource("15_3xd5g")]
+position = Vector2(102, 69)
