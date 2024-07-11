@@ -12,6 +12,7 @@ Cling boomerang, can be walked on after it gets stuck
 Hookshot boomerang, what it sounds like :)
 Bounce boomerang, bounces on surfaces.
 Maybe single use boomerangs, that can be used mid-air when collected, like Celeste extra jumps.
+Try add a chain with joint2d?
 
 Secondary:
 
