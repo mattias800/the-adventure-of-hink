@@ -94,4 +94,4 @@ position = Vector2(48, 216)
 position = Vector2(128, 24)
 
 [node name="Water" parent="." instance=ExtResource("15_3xd5g")]
-position = Vector2(102, 69)
+position = Vector2(90, 97)

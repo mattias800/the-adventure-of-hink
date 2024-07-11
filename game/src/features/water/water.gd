@@ -8,8 +8,8 @@ var springs: Array[WaterSpring] = []
 var passes := 8
 
 # Spring instances
-var distance_between_springs := 32
-var number_of_springs := 8
+var distance_between_springs := 16
+var number_of_springs := 32
 var water_width := distance_between_springs * number_of_springs
 @onready var water_spring := preload("res://src/features/water/water_spring.tscn")
 
@@ -20,7 +20,7 @@ var bottom = target_height + depth
 @onready var water_body := $WaterBody
 
 # Surface
-@export var border_thickness = 1.1
+@export var border_thickness = 0.5
 @onready var water_surface := $WaterSurface
 
 func _ready():
@@ -35,7 +35,8 @@ func _ready():
 		w.initialize(x)
 
 	splash(2, 5)
-	splash(5, 10)
+	splash(5, 4)
+	splash(12, 7)
 	
 
 func _process(delta):

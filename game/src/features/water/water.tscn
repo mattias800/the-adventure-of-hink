@@ -1,7 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://574kkfimrgct"]
+[gd_scene load_steps=8 format=3 uid="uid://574kkfimrgct"]
 
 [ext_resource type="Script" path="res://src/features/water/water.gd" id="1_x0jyx"]
+[ext_resource type="Shader" path="res://src/features/water/water_body.gdshader" id="2_2cjj0"]
 [ext_resource type="Script" path="res://src/smooth_path.gd" id="2_tv1cv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jgpx1"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bqewx"]
+seamless = true
+noise = SubResource("FastNoiseLite_jgpx1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srtba"]
+shader = ExtResource("2_2cjj0")
+shader_parameter/tint = Color(0.260089, 0.408758, 0.999987, 1)
+shader_parameter/noise1 = SubResource("NoiseTexture2D_bqewx")
 
 [sub_resource type="Curve2D" id="Curve2D_qsuny"]
 
@@ -9,6 +21,7 @@
 script = ExtResource("1_x0jyx")
 
 [node name="WaterBody" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_srtba")
 color = Color(0.180392, 0.560784, 1, 0.713726)
 
 [node name="WaterSurface" type="Path2D" parent="."]
