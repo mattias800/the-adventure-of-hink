@@ -1,12 +1,21 @@
 First priority:
-Boomerang!
 Not all walls should be climbable!
 Chest that can be opened, with nice animation when you receive the item/skill.
 Objects that can be pushed
 Levers that can be toggled, should affect the level
 
+Boomerang ideas:
+Push boomerang, can push things
+Pull boomerang, can pull things
+Freeze boomerang, can create ice blocks on water
+Cling boomerang, can be walked on after it gets stuck
+Hookshot boomerang, what it sounds like :)
+Bounce boomerang, bounces on surfaces.
+Maybe single use boomerangs, that can be used mid-air when collected, like Celeste extra jumps.
+
 Secondary:
 
+Surfaces that the boomerang bounce off of and get redirected.
 Floor with spikes that appear 1 sec after player steps on it
 Add a little cape to the player, that is physical with Joint2D
 Dashing into the floor could cause a new, more powerful dash. This is Celeste though.
@@ -21,6 +30,7 @@ Platforms that appear and disappear on a timer, like Megaman.
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Boomerang!
 Particle effect when jumping, double jumping and landing
 Add raycast that is smaller than collision, if distance=0 in both x-directions, player was squashed!
 Getting squished between two things should kill the player.
