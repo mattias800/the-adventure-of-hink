@@ -9,8 +9,8 @@ size = Vector2(168, 93.5)
 
 [node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_nd0hp")]
 position = Vector2(66, 83)
-collision_shape = NodePath("CollisionShape2D")
 distance_between_springs = 32
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 position = Vector2(93, 8)

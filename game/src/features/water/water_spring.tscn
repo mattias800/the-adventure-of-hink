@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpg4qgyph2ef8"]
+[gd_scene load_steps=3 format=3 uid="uid://bpg4qgyph2ef8"]
 
 [ext_resource type="Script" path="res://src/features/water/water_spring.gd" id="1_7f85q"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jaiw"]
+
 [node name="WaterSpring" type="Node2D"]
 script = ExtResource("1_7f85q")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7jaiw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

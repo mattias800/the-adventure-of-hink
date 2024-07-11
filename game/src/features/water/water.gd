@@ -1,6 +1,5 @@
 extends Area2D
 
-@export var collision_shape: CollisionShape2D
 @export var k := 0.015
 @export var d := 0.03
 @export var spread = 0.0002
@@ -21,8 +20,10 @@ var passes := 8
 
 # Layout
 var water_position := Vector2i(0, 0)
+@export var collision_shape: CollisionShape2D
 
 func _ready():
+	print("collision_shape:" + str(collision_shape))
 	var rect = collision_shape.shape.get_rect()
 	water_position = collision_shape.global_position + rect.position
 	print("water_position: " + str(water_position))
@@ -38,13 +39,10 @@ func _ready():
 		
 		add_child(w)
 		springs.append(w)
-		w.initialize(Vector2i(global_x, water_position.y))
-
-	splash(2, 5)
-	splash(4, 7)
-	splash(5, 12)
-	splash(12, 7)
-	
+		w.initialize(Vector2i(global_x, water_position.y), i)
+		w.set_collision_width(distance_between_springs)
+		w.splash.connect(splash)
+		
 
 func _process(delta):
 	pass

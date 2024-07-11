@@ -14,8 +14,8 @@ var new_scene_portal_name = "StartPortal"
 func _ready():
 	CutsceneManager.cutscene_started.connect(_on_cutscene_manager_cutscene_started)
 	CutsceneManager.cutscene_ended.connect(_on_cutscene_manager_cutscene_ended)
-	# start_level()
-	CutsceneManager.transition_in()
+	start_level()
+	# CutsceneManager.transition_in()
 
 func start_level():
 	is_entering_new_scene = true

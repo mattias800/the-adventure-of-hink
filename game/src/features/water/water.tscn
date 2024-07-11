@@ -27,4 +27,3 @@ color = Color(0.180392, 0.560784, 1, 0.713726)
 [node name="WaterSurface" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qsuny")
 script = ExtResource("2_tv1cv")
-spline_length = 16
