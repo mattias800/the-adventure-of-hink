@@ -1,8 +1,11 @@
-extends CharacterBody2D
+extends Node2D
+class_name Boomerang
 
+@onready var area_2d = $Area2D
 @onready var sprite_2d = $Sprite2D
 
-signal collided_with_player
+signal collided_with_player()
+signal hit_body(body: Node2D)
 
 enum State {
 	GOING_OUT,
@@ -10,29 +13,23 @@ enum State {
 	STUCK
 }
 
-var start_direction := Vector2(1, 0)
-var current_direction := Vector2(1, 0)
-var max_distance := 5.0
+# Movement
+var current_velocity := Vector2(1, 0)
 var max_speed := 200.0
+
+var outgoing_progress := 0.0
+var outgoing_threshold = 0.2
+var angular_velocity_multiplier := 0.07
+
+# Visual
 var rotation_speed := 4.0
 var rotating := true
-var progress := 0.0
-var going_back := false
-var stuck := false
 
 var state := State.GOING_OUT
 
-var start_position := Vector2(0, 0)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	throw(start_direction)
-
 func throw(direction: Vector2):
-	start_position = global_position
-	start_direction = direction
-	current_direction = direction
-	progress = 0.0
+	current_velocity = direction
+	outgoing_progress = 0.0
 	enter_state(State.GOING_OUT)
 
 func _process(delta):
@@ -47,6 +44,7 @@ func _process(delta):
 			pass
 			
 func enter_state(next: State):
+	print("Boomerang state: " + State.keys()[next])
 	match next:
 		State.GOING_OUT:
 			pass
@@ -61,29 +59,38 @@ func enter_state(next: State):
 func _physics_process(delta):
 	match state:
 		State.GOING_OUT:
-			progress += delta
-			var current_speed = (1.0 - progress) * max_speed
-			var collision = move_and_collide(current_direction * current_speed * delta)
-			if progress > 1.0:
+			var bodies = CollisionUtil.bodies_except_player(area_2d.get_overlapping_bodies())
+			
+			if not bodies.is_empty():
+				hit_body.emit(bodies[0])
+				enter_state(State.STUCK)
+				return
+				
+			outgoing_progress += delta
+			global_position += current_velocity * max_speed * delta
+
+			if outgoing_progress >= outgoing_threshold:
 				enter_state(State.GOING_BACK)
-			if collision != null:
-				if collision.get_collider().is_in_group("player"):
-					collided_with_player.emit()
-					queue_free()
-				else:
-					enter_state(State.STUCK)
 
 		State.GOING_BACK:
-			progress += delta
-			var current_speed = (1.0 - progress) * max_speed
-			current_direction = global_position - GameManager.player.global_position
-			var collision = move_and_collide(current_direction.normalized() * current_speed * delta)
-			if collision != null:
-				if collision.get_collider().is_in_group("player"):
-					collided_with_player.emit()
-					queue_free()
-				else:
-					enter_state(State.STUCK)
+			var bodies = area_2d.get_overlapping_bodies()
+			
+			if CollisionUtil.bodies_contain_player(bodies):
+				collided_with_player.emit()
+				queue_free()
+				return
+			
+			if not bodies.is_empty():
+				hit_body.emit(bodies[0])
+				enter_state(State.STUCK)
+				return
+			
+			var direction_to_player: Vector2 = GameManager.player.global_position - global_position
+			current_velocity += direction_to_player.normalized() * angular_velocity_multiplier
+			if current_velocity.length() > 1.0:
+				current_velocity = current_velocity.normalized()
+
+			global_position += current_velocity * max_speed * delta
 
 		State.STUCK:
 			pass

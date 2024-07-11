@@ -71,7 +71,7 @@ func _ready():
 func _physics_process(delta):
 	if not enabled:
 		return
-		
+
 	match state:
 		PlayerState.ACTIVE:
 			check_squish()
@@ -101,7 +101,7 @@ func death_teleport(spawn_world_pos: Vector2):
 	death_boom_sound.play()
 	disable()
 	turn_off_collisions()
-	
+
 	animated_sprite.visible = false
 
 	player_death_teleportation.play_teleporting()
@@ -141,7 +141,7 @@ func enable():
 			platform_controller.enable()
 		CharacterControllerType.OVERWORLD:
 			overworld_controller.enable()
-			
+
 	player_enabled.emit()
 
 func turn_off_collisions():
@@ -162,7 +162,7 @@ func trigger_force(force: Vector2):
 	match active_controller:
 		CharacterControllerType.PLATFORM:
 			platform_controller.trigger_force(force)
-	
+
 func on_hit_jump_source():
 	match active_controller:
 		CharacterControllerType.PLATFORM:
@@ -173,4 +173,5 @@ func check_squish():
 	var squish_updown = squish_cast_up.is_colliding() and squish_cast_down.is_colliding()
 	if squish_sides or squish_updown:
 		await get_tree().create_timer(0.05).timeout
+		print("Player squished!")
 		GameManager.respawn_player()
