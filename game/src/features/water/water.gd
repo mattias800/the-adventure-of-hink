@@ -52,7 +52,6 @@ func _ready():
 		w.initialize(Vector2i(global_x, water_position.y), i)
 		w.set_collision_width(distance_between_springs)
 		w.splash.connect(splash)
-		
 
 func _process(delta):
 	pass
