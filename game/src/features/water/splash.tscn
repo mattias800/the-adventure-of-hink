@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7ctu21wu07k0"]
+
+[sub_resource type="Gradient" id="Gradient_ethop"]
+offsets = PackedFloat32Array(0, 0.476667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.949989, 0.941762, 0.99891, 1, 0.239702, 0.000371564, 0.981736, 1)
+
+[node name="Splash" type="CPUParticles2D"]
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.74
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(2.08165e-12, -1)
+gravity = Vector2(2.08165e-12, 100)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+angular_velocity_max = 50.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_ethop")

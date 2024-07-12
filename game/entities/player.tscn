@@ -249,6 +249,10 @@ z_index = 10
 script = ExtResource("1_a3i6k")
 dust_boom_scene = ExtResource("2_ykok0")
 
+[node name="BoomerangController" parent="." instance=ExtResource("15_c2qsn")]
+position = Vector2(0, 3)
+boomerang_scene = ExtResource("3_7yl8v")
+
 [node name="PlayerDeathTeleportation" parent="." instance=ExtResource("2_eobix")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -335,14 +339,10 @@ target_position = Vector2(-4, 0)
 position = Vector2(2, 0)
 target_position = Vector2(4, 0)
 
-[node name="BoomerangController" parent="." instance=ExtResource("15_c2qsn")]
-position = Vector2(0, 3)
-boomerang_scene = ExtResource("3_7yl8v")
-
 [connection signal="player_dash_started" from="." to="FootDust" method="_on_player_player_dash_started"]
 [connection signal="player_dash_stopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]
 [connection signal="player_disabled" from="." to="FootDust" method="_on_player_player_disabled"]
 [connection signal="player_started_moving_on_ground" from="." to="FootDust" method="_on_player_player_started_moving_on_ground"]
 [connection signal="player_stopped_moving_on_ground" from="." to="FootDust" method="_on_player_player_stopped_moving_on_ground"]
-[connection signal="player_turned" from="." to="FootDust" method="_on_player_player_turned"]
 [connection signal="player_turned" from="." to="BoomerangController" method="_on_player_player_turned"]
+[connection signal="player_turned" from="." to="FootDust" method="_on_player_player_turned"]

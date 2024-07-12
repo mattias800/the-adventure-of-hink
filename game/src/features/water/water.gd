@@ -7,6 +7,9 @@ extends Area2D
 var springs: Array[WaterSpring] = []
 var passes := 8
 
+# Splash
+@onready var splash_particles = $Splash
+
 # Spring instances
 @export var distance_between_springs := 8
 @onready var water_spring := preload("res://src/features/water/water_spring.tscn")
@@ -22,7 +25,14 @@ var passes := 8
 var water_position := Vector2i(0, 0)
 @export var collision_shape: CollisionShape2D
 
+# Random waves
+var noise: FastNoiseLite
+var noise_offset := 0.0
+
 func _ready():
+	noise = FastNoiseLite.new()
+	noise.frequency = 1
+	
 	print("collision_shape:" + str(collision_shape))
 	var rect = collision_shape.shape.get_rect()
 	water_position = collision_shape.global_position + rect.position
@@ -34,7 +44,7 @@ func _ready():
 	var num_springs = round(rect.size.x / distance_between_springs) + 1
 	
 	for i in range(num_springs):
-		var global_x = water_position.x + i * distance_between_springs			
+		var global_x = water_position.x + i * distance_between_springs
 		var w = water_spring.instantiate()
 		
 		add_child(w)
@@ -47,7 +57,15 @@ func _ready():
 func _process(delta):
 	pass
 
+func apply_noise_waves(delta: float):
+	noise_offset += delta
+	for i in range(springs.size()):
+		var n = noise.get_noise_1d(noise_offset + i)
+		springs[i].velocity += n * 0.01
+	
 func _physics_process(delta):
+	apply_noise_waves(delta)
+
 	for i in springs:
 		i.water_update(k, d)
 
@@ -73,7 +91,8 @@ func _physics_process(delta):
 func splash(index: int, speed: float):
 	if (index >= 0 and index < springs.size()):
 		springs[index].velocity += speed
-		
+	
+	splash_particles.emitting = true
 
 func draw_water_body():
 	var rect = collision_shape.shape.get_rect()
