@@ -18,7 +18,7 @@ var passes := 8
 @onready var water_body := $WaterBody
 
 # Surface
-@export var border_thickness = 0.5
+@export var border_thickness = 1
 @onready var water_surface := $WaterSurface
 
 # Layout

@@ -43,4 +43,4 @@ func _get_point(i):
 func _draw():
 	var points = curve.get_baked_points()
 	if points:
-		draw_polyline(points, color, width, true)
+		draw_polyline(points, color, width, false)
