@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=23 format=3 uid="uid://cfeug64aouer"]
 
 [ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="6_7me56"]
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
+[ext_resource type="PackedScene" uid="uid://dlfxkp22svqul" path="res://entities/saw-wheel/saw-wheel.tscn" id="15_qnoq2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqbss"]
 size = Vector2(26, 80)
@@ -211,3 +212,6 @@ shape = SubResource("RectangleShape2D_qw1vw")
 [node name="Underground" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_a3kw4")
 format = 2
+
+[node name="Saw-wheel" parent="." instance=ExtResource("15_qnoq2")]
+position = Vector2(56, 184)
