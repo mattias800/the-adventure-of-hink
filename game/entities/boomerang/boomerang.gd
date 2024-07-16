@@ -3,6 +3,9 @@ class_name Boomerang
 
 @onready var area_2d = $Area2D
 @onready var sprite_2d = $Sprite2D
+@onready var start_sound = $StartSound
+@onready var stuck_sound = $StuckSound
+@onready var flying_sound = $FlyingSound
 
 signal collided_with_player()
 signal hit_body(body: Node2D)
@@ -47,13 +50,15 @@ func enter_state(next: State):
 	print("Boomerang state: " + State.keys()[next])
 	match next:
 		State.GOING_OUT:
-			pass
+			start_sound.play(0.05)
+			flying_sound.play()
 
 		State.GOING_BACK:
 			pass
 
 		State.STUCK:
-			pass
+			stuck_sound.play()
+			flying_sound.stop()
 	state = next
 	
 func _physics_process(delta):
