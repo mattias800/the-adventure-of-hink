@@ -42,7 +42,7 @@ func _process(delta):
 
 		State.GOING_BACK:
 			sprite_2d.rotate(PI * rotation_speed * delta)
-
+			global_rotation = 0.0
 		State.STUCK:
 			pass
 			
@@ -59,6 +59,8 @@ func enter_state(next: State):
 		State.STUCK:
 			stuck_sound.play()
 			flying_sound.stop()
+			sprite_2d.rotation = 0.0
+
 	state = next
 	
 func _physics_process(delta):
@@ -76,6 +78,7 @@ func _physics_process(delta):
 
 			if outgoing_progress >= outgoing_threshold:
 				enter_state(State.GOING_BACK)
+				return
 
 		State.GOING_BACK:
 			var bodies = area_2d.get_overlapping_bodies()
@@ -99,4 +102,3 @@ func _physics_process(delta):
 
 		State.STUCK:
 			pass
-	

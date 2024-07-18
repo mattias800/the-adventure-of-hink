@@ -71,9 +71,7 @@ size = Vector2i(320, 180)
 unique_name_in_owner = true
 scroll_offset = Vector2(-1470.22, -65.7224)
 
-[node name="Room1" parent="." node_paths=PackedStringArray("camera", "collision_shape") instance=ExtResource("7_silrh")]
-camera = NodePath("../Camera")
-collision_shape = NodePath("CollisionShape2D")
+[node name="Room1" parent="." instance=ExtResource("7_silrh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room1"]
 position = Vector2(160, 100)
@@ -94,9 +92,7 @@ position = Vector2(64, 0)
 
 [node name="Firepit" parent="Room1" instance=ExtResource("15_1d2oq")]
 
-[node name="Room2" parent="." node_paths=PackedStringArray("camera", "collision_shape") instance=ExtResource("7_silrh")]
-camera = NodePath("../Camera")
-collision_shape = NodePath("CollisionShape2D")
+[node name="Room2" parent="." instance=ExtResource("7_silrh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room2"]
 position = Vector2(496, 48)
@@ -116,9 +112,7 @@ position = Vector2(360, 120)
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_bt7n4")
 
-[node name="Room3" parent="." node_paths=PackedStringArray("camera", "collision_shape") instance=ExtResource("7_silrh")]
-camera = NodePath("../Camera")
-collision_shape = NodePath("CollisionShape2D")
+[node name="Room3" parent="." instance=ExtResource("7_silrh")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room3"]
 position = Vector2(848, 20)
