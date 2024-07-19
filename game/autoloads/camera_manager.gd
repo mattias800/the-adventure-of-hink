@@ -7,7 +7,6 @@ func _process(delta):
 	if room != null:
 		CameraLimiter.apply_collision_shape_to_camera_limits(camera, room.collision_shape)
 	else:
-		print("no room")
 		camera.clear_camera_limits()
 	
 func connect_to_tilemap(next_tilemap: TileMap) -> void:
