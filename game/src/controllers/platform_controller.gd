@@ -16,7 +16,7 @@ const JUMP_VELOCITY: float         = 150.0
 const JUMP_RELEASE_VELOCITY: float = 100.0
 const WALL_GRAB_TIME_LIMIT: float  = 5.0
 const WALL_CLIMB_SPEED: float  = 40.0
-const COYOTE_TIME_LIMIT: float     = 0.05
+const COYOTE_TIME_LIMIT: float     = 0.15
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")

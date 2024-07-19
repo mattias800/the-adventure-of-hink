@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://574kkfimrgct"]
+[gd_scene load_steps=8 format=3 uid="uid://574kkfimrgct"]
 
 [ext_resource type="Script" path="res://src/features/water/water.gd" id="1_x0jyx"]
 [ext_resource type="Shader" path="res://src/features/water/water_body.gdshader" id="2_2cjj0"]
@@ -17,9 +17,6 @@ shader_parameter/noise1 = SubResource("NoiseTexture2D_bqewx")
 
 [sub_resource type="Curve2D" id="Curve2D_qsuny"]
 
-[sub_resource type="Gradient" id="Gradient_jom20"]
-colors = PackedColorArray(1, 1, 1, 1, 0.239702, 0.000371564, 0.981736, 1)
-
 [node name="Water" type="Area2D"]
 script = ExtResource("1_x0jyx")
 
@@ -30,17 +27,3 @@ color = Color(0.180392, 0.560784, 1, 0.713726)
 [node name="WaterSurface" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qsuny")
 script = ExtResource("2_tv1cv")
-
-[node name="Splash" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 32
-one_shot = true
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 6.0
-direction = Vector2(2.08165e-12, -1)
-gravity = Vector2(2.08165e-12, 100)
-initial_velocity_min = 46.2
-initial_velocity_max = 46.2
-angular_velocity_max = 50.0
-color_ramp = SubResource("Gradient_jom20")
