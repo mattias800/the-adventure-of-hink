@@ -28,6 +28,7 @@ signal player_stopped_moving_on_ground
 @onready var squish_cast_down = $SquishCastDown
 @onready var wall_ray_cast_left = $WallRayCastLeft
 @onready var wall_ray_cast_right = $WallRayCastRight
+@onready var room_detection = $RoomDetection
 
 var platform_controller: PlatformController
 var overworld_controller: OverworldController

@@ -15,4 +15,3 @@ func _on_body_entered(body: Node2D) -> void:
 		camera.set_limit(SIDE_TOP, rect.position.y)
 		camera.set_limit(SIDE_BOTTOM, rect.position.y + rect.size.y)
 		
-

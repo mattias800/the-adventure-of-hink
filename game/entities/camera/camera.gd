@@ -1,4 +1,5 @@
 extends Camera2D
+class_name GameCamera
 
 const LdtkUtil = preload("res://src/utils/LdtkUtil.gd")
 
@@ -11,38 +12,36 @@ var look_ahead_target: Vector2 =  Vector2.ZERO
 const VIEWPORT      := Vector2(320, 180)
 const HALF_VIEWPORT := VIEWPORT / 2
 
-var target
+var target: Node2D
 
-enum {
+enum CameraState {
 	IDLE,
 	CONTROLLED,
 	FOLLOWING_TARGET,
 	FOLLOWING_PLAYER
 }
 
-var state
+var state: CameraState = CameraState.FOLLOWING_PLAYER
 
 
 func _ready():
 	set_anchor_mode(Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT)
-	state = FOLLOWING_PLAYER
+	state = CameraState.FOLLOWING_PLAYER
 	CameraManager.set_camera(self)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target:
 		match state:
-			FOLLOWING_TARGET:
+			CameraState.FOLLOWING_TARGET:
 				var focus := clamp_vec2_to_limits(target.get_global_transform().get_origin() - HALF_VIEWPORT)
 				global_transform.origin = lerp(global_transform.origin, focus, 0.1)
 
-			FOLLOWING_PLAYER:
+			CameraState.FOLLOWING_PLAYER:
 				look_ahead = lerp(look_ahead, look_ahead_target, 0.005)
 				var focus := clamp_vec2_to_limits(target.position - HALF_VIEWPORT + look_ahead)
 				position = lerp(position, focus, 0.1)
 
-			CONTROLLED:
+			CameraState.CONTROLLED:
 				# var input_vector = Input.get_vector("camera_move_left", "camera_move_right", "camera_move_up", "camera_move_down")
 				var target_vector := get_vector_from_center_to_player()
 				calculate_velocity(delta, target_vector)
@@ -85,6 +84,14 @@ func update_global_position(delta: float):
 		pow(2, -32 * delta)
 	)
 
+func clear_camera_limits():
+	var l = 1000000000
+	limit_left = -l
+	limit_right = l
+	limit_top = -l
+	limit_bottom = l
+
+	
 func clamp_camera_to_limits():
 	# Prevent camera position to outside of limits.
 	# This ensures that background does not move because of limit and position being out of sync.

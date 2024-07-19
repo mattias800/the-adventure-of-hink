@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=49 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://entities/player.gd" id="1_a3i6k"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -244,6 +244,9 @@ fill_from = Vector2(0.491304, 0.478261)
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5skp"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c06m"]
+radius = 4.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 10
 script = ExtResource("1_a3i6k")
@@ -338,6 +341,13 @@ target_position = Vector2(-4, 0)
 [node name="WallRayCastRight" type="RayCast2D" parent="."]
 position = Vector2(2, 0)
 target_position = Vector2(4, 0)
+
+[node name="RoomDetection" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetection"]
+shape = SubResource("CircleShape2D_0c06m")
 
 [connection signal="player_dash_started" from="." to="FootDust" method="_on_player_player_dash_started"]
 [connection signal="player_dash_stopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://entities/room.gd" id="1_y15ik"]
 
 [node name="Room" type="Area2D" groups=["rooms"]]
+collision_layer = 32768
+collision_mask = 32768
 script = ExtResource("1_y15ik")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
