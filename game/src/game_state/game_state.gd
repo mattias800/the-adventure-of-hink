@@ -15,6 +15,9 @@ var state: Dictionary = {
 			"has_room1_triggered": false,
 			"has_ever_visited_room2": false
 		},
+		"home_town": {
+			"is_under_attack": false
+		}
 	},
 	"characters": {
 		"little_mushroom": {

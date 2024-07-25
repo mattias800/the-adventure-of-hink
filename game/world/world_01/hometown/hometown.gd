@@ -5,13 +5,15 @@ extends Node2D
 @onready var room_1_underground = $Rooms/Room1Underground
 @onready var room_2_underground = $Rooms/Room2Underground
 @onready var ground_over_well_hole = $GroundOverWellHole
+@onready var attacking_state = $AttackingState
 
 func _ready():
 	MusicManager.play_track(Tracks.Track.SOFT_BALL)
+	if not GameState.state.levels.home_town.is_under_attack:
+		attacking_state.queue_free()
 
 func _on_room_switch_trigger_body_entered(body):
 	if CollisionUtil.is_player(body):
-		print("Entered underground ----------------------------")
 		room.enabled = false
 		room_2.enabled = false
 		room_1_underground.enabled = true
@@ -19,7 +21,6 @@ func _on_room_switch_trigger_body_entered(body):
 
 func _on_overground_camera_trigger_body_entered(body):
 	if CollisionUtil.is_player(body):
-		print("Entered over ground ----------------------------")
 		room.enabled = true
 		room_2.enabled = true
 		room_1_underground.enabled = false

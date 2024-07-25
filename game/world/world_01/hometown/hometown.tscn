@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=36 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
@@ -28,6 +28,9 @@ size = Vector2(20, 122)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjuvd"]
 size = Vector2(40, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsjlo"]
+size = Vector2(32, 15)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1s6x4"]
 texture = ExtResource("10_n4beb")
@@ -235,6 +238,14 @@ collision_shape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 position = Vector2(92, 271)
 shape = SubResource("RectangleShape2D_cjuvd")
+
+[node name="Water2" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
+position = Vector2(168, 260)
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water2"]
+position = Vector2(16, 11.5)
+shape = SubResource("RectangleShape2D_rsjlo")
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true
