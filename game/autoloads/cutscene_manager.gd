@@ -17,13 +17,16 @@ func _physics_process(_delta):
 		var focus = GameManager.player.global_position - CameraManager.camera.global_position
 		transition_rect.material.set_shader_parameter("focus_pos", focus)
 
-func start_timeline(resource, start):
+func start_timeline(resource, start, delay: float = 0.0):
 	cutscene_playing = true
 	cutscene_started.emit()
 	GameManager.player.disable()
+	print("delay=" + str(delay))
+	if delay > 0.0:
+		await get_tree().create_timer(delay).timeout
 	DialogueManager.show_dialogue_balloon(resource, start)
 	await DialogueManager.dialogue_ended
-	await get_tree().create_timer(0.25).timeout # Prevent last input to be sent to player.
+	await get_tree().create_timer(0.5).timeout # Prevent last input to be sent to player.
 	cutscene_ended.emit()
 	GameManager.player.enable()
 	cutscene_playing = false

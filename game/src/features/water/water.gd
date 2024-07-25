@@ -32,16 +32,9 @@ func _ready():
 	noise = FastNoiseLite.new()
 	noise.frequency = 1
 
-	print("collision_shape:" + str(collision_shape))
 	var rect = collision_shape.shape.get_rect()
 	water_position = collision_shape.global_position + rect.position
 	water_size = rect.size
-	print("collision_shape.global_position: " + str(collision_shape.global_position))
-	print("water_position: " + str(water_position))
-	print("water_size: " + str(water_size))
-	print("rect: " + str(rect))
-	print("rect.size.x: " + str(rect.size.x))
-	print("distance_between_springs: " + str(distance_between_springs))
 	water_surface.width = border_thickness
 
 	var num_springs = round(rect.size.x / distance_between_springs) + 1

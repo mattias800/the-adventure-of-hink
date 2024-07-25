@@ -7,7 +7,14 @@ signal on_player_exited_room
 @onready var collision_shape = $CollisionShape2D
 
 @export var enabled := true
+var frames_left_initial_player_checked := 10
 
+func _physics_process(delta):
+	if frames_left_initial_player_checked > 0:
+		frames_left_initial_player_checked -= 1
+		if enabled and GameManager.player.room_detection.overlaps_area(self):
+			on_player_entered_room.emit()
+		
 func _on_body_entered(body):
 	if enabled and body.is_in_group("player"):
 		print("Player entered room: " + name)

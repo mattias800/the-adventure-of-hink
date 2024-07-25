@@ -18,19 +18,20 @@ enum BirdState {
 @export var flying_direction := Vector2(1, -1)
 
 var distance_flown := 0.0
+var animation_speed := randf_range(0.7, 1.3)
 
 func _ready():
 	current_speed = fly_away_start_speed
-	animated_sprite_2d.play("idle")
 	if player_fly_area != null:
 		player_fly_area.body_entered.connect(fly_away_if_player)
+	animated_sprite_2d.play("idle", animation_speed)
 
 func _process(delta):
 	match state:
 		BirdState.IDLE:
-			animated_sprite_2d.play("idle")
+			animated_sprite_2d.play("idle", animation_speed)
 		BirdState.FLYING_AWAY:
-			animated_sprite_2d.play("fly")
+			animated_sprite_2d.play("fly", animation_speed)
 
 
 func _physics_process(delta):

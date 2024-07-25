@@ -279,25 +279,25 @@ position = Vector2(40, -55)
 shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
-position = Vector2(104, 152)
+position = Vector2(104, 156)
 next_scene_path = ""
 target_portal_name = "ForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
-position = Vector2(0, 8)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_v8hqc")
 
 [node name="Ambience" parent="." instance=ExtResource("14_ottqj")]
 
 [node name="Bird" parent="." instance=ExtResource("15_iv3w6")]
-position = Vector2(7, 41)
+position = Vector2(-20, 41)
 fly_away_start_speed = 60.0
 fly_max_speed = 60
 state = 1
 flying_direction = Vector2(1, 2.08165e-12)
 
 [node name="Bird2" parent="." instance=ExtResource("15_iv3w6")]
-position = Vector2(12, 49)
+position = Vector2(-15, 49)
 fly_away_start_speed = 80.0
 fly_max_speed = 80
 state = 1
@@ -310,6 +310,15 @@ player_fly_area = NodePath("Area2D")
 [node name="Area2D" type="Area2D" parent="StandingBird"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StandingBird/Area2D"]
+shape = SubResource("CircleShape2D_pvusa")
+
+[node name="StandingBird2" parent="." node_paths=PackedStringArray("player_fly_area") instance=ExtResource("15_iv3w6")]
+position = Vector2(241, 152)
+player_fly_area = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="StandingBird2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StandingBird2/Area2D"]
 shape = SubResource("CircleShape2D_pvusa")
 
 [node name="Checkpoint" parent="." instance=ExtResource("12_waw7x")]

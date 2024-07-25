@@ -7,7 +7,7 @@ func _ready():
 
 func _on_room_1_on_player_entered_room():
 	if GameState.once_for_level("level_01", "has_ever_visited_room1"):
-		CutsceneManager.start_timeline(resource, "room1_entry")
+		CutsceneManager.start_timeline(resource, "room1_entry", 1.0)
 
 func _on_room_2_on_player_entered_room():
 	if GameState.once_for_level("level_01", "has_room1_triggered"):
