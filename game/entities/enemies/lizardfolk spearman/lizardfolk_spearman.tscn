@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3ox6v6o6fh4h"]
+
+[ext_resource type="Texture2D" uid="uid://b7kxhbivtvt8b" path="res://entities/enemies/lizardfolk spearman/LizardfolkSpearman.png" id="1_2xfbk"]
+[ext_resource type="Script" path="res://entities/enemies/lizardfolk spearman/lizardfolk_spearman.gd" id="2_qi64j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50r0a"]
+atlas = ExtResource("1_2xfbk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e607c"]
+atlas = ExtResource("1_2xfbk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3r21"]
+atlas = ExtResource("1_2xfbk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n57em"]
+atlas = ExtResource("1_2xfbk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pepyt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50r0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e607c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3r21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n57em")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LizardfolkSpearman" type="AnimatedSprite2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_pepyt")
+frame_progress = 0.423676
+script = ExtResource("2_qi64j")

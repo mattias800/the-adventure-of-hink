@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=35 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://ba7h5wreyfr76" path="res://entities/well/well.tscn" id="14_040f5"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/bird/bird.tscn" id="16_pmt6j"]
+[ext_resource type="PackedScene" uid="uid://dnkxeparjd1oy" path="res://entities/enemies/lizardfolk archer/lizardfolk_archer.tscn" id="17_ih6gy"]
+[ext_resource type="PackedScene" uid="uid://ciu0ybq7h3aq" path="res://entities/enemies/lizardfolk gladiator/lizardfolk_gladiator.tscn" id="18_moilp"]
+[ext_resource type="PackedScene" uid="uid://klqjplldgtu5" path="res://entities/fire/house_fire.tscn" id="19_s8ljo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqbss"]
 size = Vector2(26, 80)
@@ -320,6 +323,45 @@ position = Vector2(0, 289)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/UndergroundCameraTrigger"]
 position = Vector2(456.5, 27)
 shape = SubResource("RectangleShape2D_fcxpw")
+
+[node name="AttackingState" type="Node2D" parent="."]
+
+[node name="LizardfolkArcher" parent="AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(158, 248)
+
+[node name="LizardfolkArcher2" parent="AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(221, 240)
+
+[node name="LizardfolkArcher3" parent="AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(239, 240)
+
+[node name="LizardfolkGladiator" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(283, 224)
+
+[node name="LizardfolkGladiator2" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(231, 240)
+
+[node name="LizardfolkGladiator3" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(346, 240)
+
+[node name="LizardfolkGladiator4" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(423, 216)
+
+[node name="LizardfolkGladiator5" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(504, 216)
+flip_h = true
+
+[node name="LizardfolkGladiator6" parent="AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(576, 208)
+
+[node name="HouseFire" parent="AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(457, 199)
+
+[node name="HouseFire2" parent="AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(479, 173)
+
+[node name="HouseFire3" parent="AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(494, 204)
 
 [connection signal="player_entered_well" from="Well" to="." method="_on_well_player_entered_well"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="_on_overground_camera_trigger_body_entered"]

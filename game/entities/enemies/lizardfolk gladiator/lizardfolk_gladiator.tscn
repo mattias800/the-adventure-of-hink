@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://ciu0ybq7h3aq"]
+
+[ext_resource type="Texture2D" uid="uid://bvq4f1atxqj4b" path="res://entities/enemies/lizardfolk gladiator/LizardfolkGladiator.png" id="1_30k4x"]
+[ext_resource type="Script" path="res://entities/enemies/lizardfolk gladiator/lizardfolk_gladiator.gd" id="2_j02ul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6caj"]
+atlas = ExtResource("1_30k4x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvw8b"]
+atlas = ExtResource("1_30k4x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jnju"]
+atlas = ExtResource("1_30k4x")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qykwh"]
+atlas = ExtResource("1_30k4x")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_25351"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6caj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvw8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jnju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qykwh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LizardfolkGladiator" type="AnimatedSprite2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_25351")
+frame_progress = 0.827149
+script = ExtResource("2_j02ul")

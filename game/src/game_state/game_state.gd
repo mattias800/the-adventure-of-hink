@@ -11,9 +11,9 @@ var state: Dictionary = {
 			"has_ever_visited": false
 		},
 		"level_01": {
-			"has_ever_visited_room1": true,
-			"has_room1_triggered": true,
-			"has_ever_visited_room2": true
+			"has_ever_visited_room1": false,
+			"has_room1_triggered": false,
+			"has_ever_visited_room2": false
 		},
 	},
 	"characters": {

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://boycm6ichnl6f"]
 
-[ext_resource type="Script" path="res://entities/firepit.gd" id="1_4y00a"]
+[ext_resource type="Script" path="res://entities/fire/firepit.gd" id="1_4y00a"]
 [ext_resource type="AudioStream" uid="uid://dn2gjblj2awhq" path="res://assets/audio/ambience/fireplace.mp3" id="2_g8bsx"]
 
 [sub_resource type="Curve" id="Curve_7wt5v"]

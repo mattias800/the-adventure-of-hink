@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnkxeparjd1oy"]
+
+[ext_resource type="Texture2D" uid="uid://c505ng5g1uf7" path="res://entities/enemies/lizardfolk archer/LizardfolkArcher.png" id="1_wo38q"]
+[ext_resource type="Script" path="res://entities/enemies/lizardfolk archer/lizardfolk_archer.gd" id="2_sxv5u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwq0n"]
+atlas = ExtResource("1_wo38q")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d34a"]
+atlas = ExtResource("1_wo38q")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo6nk"]
+atlas = ExtResource("1_wo38q")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngauo"]
+atlas = ExtResource("1_wo38q")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2pnor"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwq0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d34a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo6nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngauo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LizardfolkArcher" type="AnimatedSprite2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_2pnor")
+frame_progress = 0.774047
+script = ExtResource("2_sxv5u")
