@@ -1,20 +1,20 @@
 [gd_scene load_steps=7 format=3 uid="uid://d4enuqhs2hq1"]
 
-[ext_resource type="Script" path="res://autoloads/music_manager.gd" id="1_est6h"]
-[ext_resource type="Script" path="res://music/Tracks.gd" id="2_id2od"]
+[ext_resource type="Script" path="res://autoloads/MusicManager.cs" id="1_1wv17"]
+[ext_resource type="Script" path="res://autoloads/Tracks.cs" id="2_pn61j"]
 [ext_resource type="AudioStream" uid="uid://boggjljdj3kil" path="res://music/tracks/early_morning_guitar.mp3" id="3_5isms"]
 [ext_resource type="AudioStream" uid="uid://bw1fij0ki3mlx" path="res://music/tracks/hink_the_game.mp3" id="4_q47pm"]
 [ext_resource type="AudioStream" uid="uid://bta17kymkwmur" path="res://music/tracks/soft_ball.mp3" id="5_2a7bc"]
 [ext_resource type="AudioStream" uid="uid://sel0em3kf2sh" path="res://music/tracks/whispering_shadows.mp3" id="6_jk10u"]
 
 [node name="MusicManager" type="Node"]
-script = ExtResource("1_est6h")
+script = ExtResource("1_1wv17")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
 [node name="Tracks" type="Node" parent="."]
-script = ExtResource("2_id2od")
+script = ExtResource("2_pn61j")
 
 [node name="EarlyMorningMusic" type="AudioStreamPlayer" parent="Tracks"]
 stream = ExtResource("3_5isms")

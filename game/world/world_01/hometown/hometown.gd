@@ -8,7 +8,7 @@ extends Node2D
 @onready var attacking_state = $AttackingState
 
 func _ready():
-	MusicManager.play_track(Tracks.Track.SOFT_BALL)
+	MusicManager.PlayTrack(Tracks.Track.SOFT_BALL)
 	if not GameState.state.levels.home_town.is_under_attack:
 		attacking_state.queue_free()
 

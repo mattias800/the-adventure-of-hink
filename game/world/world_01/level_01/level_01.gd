@@ -3,7 +3,7 @@ extends Node
 @onready var resource = load("res://world/world_01/level_01/level_01.dialogue")
 
 func _ready():
-	MusicManager.play_track(Tracks.Track.EARLY_MORNING)
+	MusicManager.PlayTrack(Tracks.Track.EARLY_MORNING)
 
 func _on_room_1_on_player_entered_room():
 	if GameState.once_for_level("level_01", "has_ever_visited_room1"):
