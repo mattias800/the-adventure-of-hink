@@ -10,6 +10,7 @@ public partial class AchievementEffect : Node2D
     private AnimatedSprite2D _blueLight;
     private AnimatedSprite2D _sparkles;
     private AudioStreamPlayer2D _sound;
+    private Node2D _itemInstanceWrapper;
 
     private bool _running;
     private bool _stopping;
@@ -54,14 +55,14 @@ public partial class AchievementEffect : Node2D
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.TweenProperty(_blueLight, "scale", new Vector2(0.25f, 0.25f), 0.3);
 
-        var instanceWrapper = new Node2D();
+        _itemInstanceWrapper = new Node2D();
         var instance = AchievementIcon.Instantiate();
-        instanceWrapper.Scale = new Vector2(0, 0);
-        instanceWrapper.AddChild(instance);
-        AddChild(instanceWrapper);
+        _itemInstanceWrapper.Scale = new Vector2(0, 0);
+        _itemInstanceWrapper.AddChild(instance);
+        AddChild(_itemInstanceWrapper);
         var thingTween = CreateTween();
         thingTween.SetTrans(Tween.TransitionType.Sine);
-        thingTween.TweenProperty(instanceWrapper, "scale", new Vector2(1.0f, 1.0f), 0.3);
+        thingTween.TweenProperty(_itemInstanceWrapper, "scale", new Vector2(1.0f, 1.0f), 0.3);
     }
 
     public async void Stop()
@@ -76,6 +77,11 @@ public partial class AchievementEffect : Node2D
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.TweenProperty(_blueLight, "scale", new Vector2(0, 0), 0.3);
+
+        var thingTween = CreateTween();
+        thingTween.SetTrans(Tween.TransitionType.Sine);
+        thingTween.TweenProperty(_itemInstanceWrapper, "scale", Vector2.Zero, 0.3);
+
         await ToSignal(tween, Tween.SignalName.Finished);
         QueueFree();
     }
