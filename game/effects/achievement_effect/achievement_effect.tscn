@@ -1,8 +1,20 @@
-[gd_scene load_steps=37 format=3 uid="uid://d0qsuxg3506n5"]
+[gd_scene load_steps=41 format=3 uid="uid://d0qsuxg3506n5"]
 
 [ext_resource type="Script" path="res://effects/achievement_effect/AchievementEffect.cs" id="1_to6mp"]
 [ext_resource type="Texture2D" uid="uid://dqekw8fcj4xc2" path="res://effects/achievement_effect/GlowingBall Blue 22frames RPG.png" id="2_fgjpe"]
 [ext_resource type="Texture2D" uid="uid://djviejidjbglt" path="res://effects/achievement_effect/00.png" id="3_avbhn"]
+[ext_resource type="AudioStream" uid="uid://dr8xwcsac4wgd" path="res://effects/achievement_effect/achievement_effect.wav" id="4_714p5"]
+
+[sub_resource type="Curve" id="Curve_8juhy"]
+_data = [Vector2(0, 0.975297), 0.0, 0.0, 0, 0, Vector2(0.620112, 0.638717), 0.0, 0.0, 0, 0, Vector2(0.988827, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_smcyl"]
+offsets = PackedFloat32Array(0, 0.986667)
+colors = PackedColorArray(1, 0.960784, 0.768627, 0.713726, 1, 1, 0, 0.223529)
+
+[sub_resource type="Gradient" id="Gradient_0aj4n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2mpx"]
 atlas = ExtResource("2_fgjpe")
@@ -240,8 +252,21 @@ animations = [{
 [node name="AchievementEffect" type="Node2D"]
 script = ExtResource("1_to6mp")
 
+[node name="MoreSparkles" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 0.25
+emission_shape = 1
+emission_sphere_radius = 32.0
+gravity = Vector2(0, 0)
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_8juhy")
+color_ramp = SubResource("Gradient_smcyl")
+color_initial_ramp = SubResource("Gradient_0aj4n")
+hue_variation_min = -0.99
+hue_variation_max = 1.0
+
 [node name="BlueLight" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_vumsf")
 frame_progress = 0.148698
 
@@ -249,3 +274,6 @@ frame_progress = 0.148698
 sprite_frames = SubResource("SpriteFrames_r1ygf")
 frame = 12
 frame_progress = 1.0
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_714p5")

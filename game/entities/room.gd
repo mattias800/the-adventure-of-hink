@@ -16,10 +16,21 @@ func _physics_process(delta):
 			on_player_entered_room.emit()
 		
 func _on_body_entered(body):
-	if enabled and body.is_in_group("player"):
+	if enabled and CollisionUtil.is_player(body):
 		print("Player entered room: " + name)
 		on_player_entered_room.emit()
 
 func _on_body_exited(body):
-	if enabled and body.is_in_group("player"):
+	if enabled and CollisionUtil.is_player(body):
+		on_player_exited_room.emit()
+
+func _on_area_entered(area):
+	# Checks against room trigger node on player.
+	if enabled and CollisionUtil.is_player(area.get_parent()):
+		print("Player entered room: " + name)
+		on_player_entered_room.emit()
+
+func _on_area_exited(area):
+	# Checks against room trigger node on player.
+	if enabled and CollisionUtil.is_player(area.get_parent()):
 		on_player_exited_room.emit()

@@ -57,4 +57,6 @@ func fly_away_if_player(body):
 
 
 func fly_away():
+	if flying_direction.x < 0:
+		animated_sprite_2d.flip_h = true
 	state = BirdState.FLYING_AWAY

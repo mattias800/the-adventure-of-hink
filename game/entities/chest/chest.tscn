@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://csiifwdk2oaqr"]
+[gd_scene load_steps=16 format=3 uid="uid://csiifwdk2oaqr"]
 
 [ext_resource type="Script" path="res://entities/chest/Chest.cs" id="1_kf7n7"]
 [ext_resource type="Texture2D" uid="uid://duy5obsbit6ur" path="res://entities/chest/sheetlist_48x32_smallchest_2.png" id="1_qbt2t"]
 [ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://entities/interactible.tscn" id="2_k5j2m"]
+[ext_resource type="AudioStream" uid="uid://byaewn4i2id8h" path="res://entities/chest/open_chest.wav" id="4_fx7yy"]
+[ext_resource type="AudioStream" uid="uid://coh7yc5pyau5g" path="res://entities/chest/close_chest.wav" id="5_apadi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dg0w"]
 atlas = ExtResource("1_qbt2t")
@@ -95,5 +97,13 @@ position = Vector2(0, -16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_eddqv")
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fx7yy")
+bus = &"SFX"
+
+[node name="CloseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_apadi")
+bus = &"SFX"
 
 [connection signal="on_interact" from="Interactible" to="." method="OnInteract"]

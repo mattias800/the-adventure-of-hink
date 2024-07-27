@@ -4,8 +4,10 @@ public partial class AchievementEffect : Node2D
 {
     [Export] public PackedScene AchievementIcon;
 
+    private CpuParticles2D _moreSparkles;
     private AnimatedSprite2D _blueLight;
     private AnimatedSprite2D _sparkles;
+    private AudioStreamPlayer2D _sound;
 
     private bool _running;
     private bool _stopping;
@@ -13,9 +15,11 @@ public partial class AchievementEffect : Node2D
 
     public override void _Ready()
     {
-        GD.Print("AchievementEffect ready!");
+        _moreSparkles = GetNode<CpuParticles2D>("MoreSparkles");
         _blueLight = GetNode<AnimatedSprite2D>("BlueLight");
         _sparkles = GetNode<AnimatedSprite2D>("Sparkles");
+        _sound = GetNode<AudioStreamPlayer2D>("Sound");
+        _moreSparkles.Emitting = false;
         _blueLight.Visible = false;
         _sparkles.Visible = false;
         _running = false;
@@ -35,7 +39,9 @@ public partial class AchievementEffect : Node2D
         _running = true;
         _sparkles.Play("default");
         _sparkles.Visible = true;
-
+        _moreSparkles.Emitting = true;
+        _sound.Play();
+        
         await ToSignal(GetTree().CreateTimer(0.2), Timer.SignalName.Timeout);
 
         _blueLight.Visible = true;
@@ -64,6 +70,7 @@ public partial class AchievementEffect : Node2D
         }
 
         _stopping = true;
+        _moreSparkles.Emitting = false;
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.TweenProperty(_blueLight, "scale", new Vector2(0, 0), 0.3);
