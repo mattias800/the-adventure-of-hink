@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://csiifwdk2oaqr"]
 
-[ext_resource type="Script" path="res://entities/chest/chest.gd" id="1_mw7qb"]
+[ext_resource type="Script" path="res://entities/chest/Chest.cs" id="1_kf7n7"]
 [ext_resource type="Texture2D" uid="uid://duy5obsbit6ur" path="res://entities/chest/sheetlist_48x32_smallchest_2.png" id="1_qbt2t"]
 [ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://entities/interactible.tscn" id="2_k5j2m"]
 
@@ -82,7 +82,7 @@ animations = [{
 size = Vector2(32, 24)
 
 [node name="Chest" type="Node2D"]
-script = ExtResource("1_mw7qb")
+script = ExtResource("1_kf7n7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ckm57")
@@ -96,4 +96,4 @@ position = Vector2(0, -16)
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_eddqv")
 
-[connection signal="on_interact" from="Interactible" to="." method="_on_interactible_on_interact"]
+[connection signal="on_interact" from="Interactible" to="." method="OnInteract"]
