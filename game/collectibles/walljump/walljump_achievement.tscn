@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cig5s2vuwcccs"]
+[gd_scene load_steps=3 format=3 uid="uid://dejnqxr43dn4k"]
 
 [ext_resource type="PackedScene" uid="uid://d0qsuxg3506n5" path="res://effects/achievement_effect/achievement_effect.tscn" id="1_rrr58"]
 [ext_resource type="PackedScene" uid="uid://dietyhcy8arcs" path="res://collectibles/walljump/walljump_icon.tscn" id="2_fdfpt"]

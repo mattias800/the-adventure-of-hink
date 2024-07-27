@@ -19,7 +19,6 @@ public partial class AchievementEffect : Node2D
         _blueLight.Visible = false;
         _sparkles.Visible = false;
         _running = false;
-        Start();
     }
 
     public override void _Process(double delta)

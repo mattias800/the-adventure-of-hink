@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://hieoenfvl8p8"
+path="res://.godot/imported/walljump_dialogue.dialogue-c37536a2d5c7be7ef280fefee9c307d1.tres"
+
+[deps]
+
+source_file="res://collectibles/walljump/walljump_dialogue.dialogue"
+dest_files=["res://.godot/imported/walljump_dialogue.dialogue-c37536a2d5c7be7ef280fefee9c307d1.tres"]
+
+[params]
+
+defaults=true

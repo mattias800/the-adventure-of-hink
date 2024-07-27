@@ -18,6 +18,7 @@ func _physics_process(_delta):
 		transition_rect.material.set_shader_parameter("focus_pos", focus)
 
 func start_timeline(resource, start, delay: float = 0.0):
+	print("start_timeline")
 	cutscene_playing = true
 	cutscene_started.emit()
 	GameManager.player.disable()
