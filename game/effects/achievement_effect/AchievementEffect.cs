@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Theadventureofhink.effects.achievement_effect;
+
 public partial class AchievementEffect : Node2D
 {
     [Export] public PackedScene AchievementIcon;

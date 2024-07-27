@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace Theadventureofhink.autoloads;
 
 public partial class UiManager : Node2D
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Theadventureofhink.entities.chest;
+
 public partial class Chest : Node2D
 {
     [Signal]

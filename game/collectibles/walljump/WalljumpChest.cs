@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using Theadventureofhink.effects.achievement_effect;
+
+namespace Theadventureofhink.collectibles.walljump;
 
 public partial class WalljumpChest : Node2D
 {
