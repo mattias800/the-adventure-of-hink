@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dietyhcy8arcs"]
+
+[ext_resource type="Texture2D" uid="uid://bg074sjved521" path="res://collectibles/walljump/Item__40.png" id="1_dpqmu"]
+
+[node name="WalljumpIcon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dpqmu")

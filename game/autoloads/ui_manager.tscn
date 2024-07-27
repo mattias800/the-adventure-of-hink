@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cep71ujfhtk3i"]
+
+[ext_resource type="Script" path="res://autoloads/UiManager.cs" id="1_nykfx"]
+
+[node name="UiManager" type="Node2D"]
+script = ExtResource("1_nykfx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Center" type="Node2D" parent="CanvasLayer"]
+position = Vector2(160, 80)

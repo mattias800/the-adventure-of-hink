@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bycs6ufwcpy5k"]
+
+[ext_resource type="Script" path="res://collectibles/walljump/WalljumpChest.cs" id="1_wgujw"]
+[ext_resource type="PackedScene" uid="uid://cig5s2vuwcccs" path="res://collectibles/walljump/walljump_achievement.tscn" id="2_gi61t"]
+[ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="2_oeliu"]
+
+[node name="WalljumpChest" type="Node2D"]
+script = ExtResource("1_wgujw")
+Achievement = ExtResource("2_gi61t")
+
+[node name="Chest" parent="." instance=ExtResource("2_oeliu")]
+flipped = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(160, 80)
+transform = Transform2D(1, 0, 0, 1, 160, 80)
+
+[connection signal="ChestOpened" from="Chest" to="." method="OnOpen"]
