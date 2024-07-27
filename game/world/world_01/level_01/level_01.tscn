@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=41 format=4 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_yhmja"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="14_ottqj"]
 [ext_resource type="PackedScene" uid="uid://boycm6ichnl6f" path="res://entities/fire/firepit.tscn" id="15_1d2oq"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/bird/bird.tscn" id="15_iv3w6"]
-[ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="15_xg5d0"]
+[ext_resource type="PackedScene" uid="uid://bycs6ufwcpy5k" path="res://collectibles/walljump/walljump_chest.tscn" id="15_q5inp"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="16_qsdrt"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="17_0pr2k"]
 
@@ -80,6 +80,9 @@ radius = 36.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu75"]
 size = Vector2(20, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjucq"]
+size = Vector2(14, 20)
 
 [node name="Level01" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_yhmja")
@@ -266,8 +269,8 @@ end_position = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="Rooms/LeftRoom4/MovingPlatform"]
 position = Vector2(2.08165e-12, -64)
 
-[node name="Chest" parent="Rooms/LeftRoom4" instance=ExtResource("15_xg5d0")]
-position = Vector2(257, -1)
+[node name="WalljumpChest" parent="Rooms/LeftRoom4" instance=ExtResource("15_q5inp")]
+position = Vector2(251, -1)
 
 [node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(976, 40)
@@ -278,12 +281,12 @@ target_portal_name = "ForestPortal"
 position = Vector2(40, -55)
 shape = SubResource("RectangleShape2D_4v7wp")
 
-[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
+[node name="IntroPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
 next_scene_path = ""
 target_portal_name = "ForestPortal"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IntroPortal"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_v8hqc")
 
@@ -327,6 +330,13 @@ position = Vector2(-90, -122)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
 position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_4bu75")
+
+[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
+position = Vector2(-178, -155)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_gjucq")
 
 [connection signal="on_player_entered_room" from="Rooms/Room1" to="." method="_on_room_1_on_player_entered_room"]
 [connection signal="on_player_entered" from="Rooms/Room1/Room1Trigger" to="." method="_on_room_1_trigger_on_player_entered"]

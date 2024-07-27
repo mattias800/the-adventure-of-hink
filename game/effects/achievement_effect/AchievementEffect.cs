@@ -2,63 +2,73 @@ using Godot;
 
 public partial class AchievementEffect : Node2D
 {
+    [Export] public PackedScene AchievementIcon;
 
-	private AnimatedSprite2D _blueLight;
-	private AnimatedSprite2D _sparkles;
-	
-	private bool _running;
-	private bool _stopping;
-	private float _runCounter;
+    private AnimatedSprite2D _blueLight;
+    private AnimatedSprite2D _sparkles;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		_blueLight = GetNode<AnimatedSprite2D>("BlueLight");
-		_sparkles = GetNode<AnimatedSprite2D>("Sparkles");
-		_blueLight.Visible = false;
-		_sparkles.Visible = false;
-		_running = false;
-	}
+    private bool _running;
+    private bool _stopping;
+    private float _runCounter;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public override void _Ready()
+    {
+        GD.Print("AchievementEffect ready!");
+        _blueLight = GetNode<AnimatedSprite2D>("BlueLight");
+        _sparkles = GetNode<AnimatedSprite2D>("Sparkles");
+        _blueLight.Visible = false;
+        _sparkles.Visible = false;
+        _running = false;
+        Start();
+    }
 
-	public async void Start()
-	{
-		if (_running)
-		{
-			return;
-		}
+    public override void _Process(double delta)
+    {
+    }
 
-		_running = true;
-		_sparkles.Play("default");
-		_sparkles.Visible = true;
+    public async void Start()
+    {
+        if (_running)
+        {
+            return;
+        }
 
-		await ToSignal(GetTree().CreateTimer(0.2), "timeout");
+        _running = true;
+        _sparkles.Play("default");
+        _sparkles.Visible = true;
 
-		_blueLight.Visible = true;
-		_blueLight.Scale = new Vector2(0, 0);
-		_blueLight.Play("default");
+        await ToSignal(GetTree().CreateTimer(0.2), Timer.SignalName.Timeout);
 
-		var tween = CreateTween();
-		tween.SetTrans(Tween.TransitionType.Sine);
-		tween.TweenProperty(_blueLight, "scale", new Vector2(0.25f, 0.25f), 0.3);
-	}
+        _blueLight.Visible = true;
+        _blueLight.Scale = new Vector2(0, 0);
+        _blueLight.Play("default");
 
-	public async void Stop()
-	{
-		if (_stopping)
-		{
-			return;
-		}
+        var tween = CreateTween();
+        tween.SetTrans(Tween.TransitionType.Sine);
+        tween.TweenProperty(_blueLight, "scale", new Vector2(0.25f, 0.25f), 0.3);
 
-		_stopping = true;
-		var tween = CreateTween();
-		tween.SetTrans(Tween.TransitionType.Sine);
-		tween.TweenProperty(_blueLight, "scale", new Vector2(0, 0), 0.3);
-		await ToSignal(tween, "finished");
-		QueueFree();
-	}
+        var instanceWrapper = new Node2D();
+        var instance = AchievementIcon.Instantiate();
+        instanceWrapper.Scale = new Vector2(0, 0);
+        instanceWrapper.AddChild(instance);
+        AddChild(instanceWrapper);
+        var thingTween = CreateTween();
+        thingTween.SetTrans(Tween.TransitionType.Sine);
+        thingTween.TweenProperty(instanceWrapper, "scale", new Vector2(1.0f, 1.0f), 0.3);
+    }
+
+    public async void Stop()
+    {
+        if (_stopping)
+        {
+            return;
+        }
+
+        _stopping = true;
+        var tween = CreateTween();
+        tween.SetTrans(Tween.TransitionType.Sine);
+        tween.TweenProperty(_blueLight, "scale", new Vector2(0, 0), 0.3);
+        await ToSignal(tween, Tween.SignalName.Finished);
+        QueueFree();
+    }
 }
