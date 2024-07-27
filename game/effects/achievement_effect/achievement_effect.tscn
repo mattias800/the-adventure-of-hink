@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://d0qsuxg3506n5"]
 
-[ext_resource type="Script" path="res://effects/achievement_effect/achievement_effect.gd" id="1_kiqpd"]
+[ext_resource type="Script" path="res://effects/achievement_effect/AchievementEffect.cs" id="1_to6mp"]
 [ext_resource type="Texture2D" uid="uid://dqekw8fcj4xc2" path="res://effects/achievement_effect/GlowingBall Blue 22frames RPG.png" id="2_fgjpe"]
 [ext_resource type="Texture2D" uid="uid://djviejidjbglt" path="res://effects/achievement_effect/00.png" id="3_avbhn"]
 
@@ -238,7 +238,7 @@ animations = [{
 }]
 
 [node name="AchievementEffect" type="Node2D"]
-script = ExtResource("1_kiqpd")
+script = ExtResource("1_to6mp")
 
 [node name="BlueLight" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
