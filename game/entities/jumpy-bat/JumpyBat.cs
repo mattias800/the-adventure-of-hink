@@ -38,7 +38,7 @@ public partial class JumpyBat : Area2D
             }
             else
             {
-                _gameManager.Player.Call("on_hit_jump_source");
+                _gameManager.Player.OnHitJumpSource();
                 active = false;
                 await ToSignal(GetTree().CreateTimer(0.1), "timeout");
                 active = true;

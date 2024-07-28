@@ -90,7 +90,7 @@ public partial class Boomerang : Node2D
 
                 if (bodiesOut.Count > 0)
                 {
-                    EmitSignal(nameof(HitBody), bodiesOut[0]);
+                    EmitSignal(SignalName.HitBody, bodiesOut[0]);
                     GD.Print("Got stuck when going back");
                     EnterState(BoomerangState.Stuck);
                     return;
@@ -111,14 +111,14 @@ public partial class Boomerang : Node2D
 
                 if (CollisionUtil.BodiesContainPlayer(bodiesBack))
                 {
-                    EmitSignal(nameof(CollidedWithPlayer));
+                    EmitSignal(SignalName.CollidedWithPlayer);
                     QueueFree();
                     return;
                 }
 
                 if (bodiesBack.Count > 0)
                 {
-                    EmitSignal(nameof(HitBody), bodiesBack[0]);
+                    EmitSignal(SignalName.HitBody, bodiesBack[0]);
                     GD.Print("Got stuck when going back");
                     EnterState(BoomerangState.Stuck);
                     return;

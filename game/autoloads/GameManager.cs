@@ -12,14 +12,14 @@ public partial class GameManager : Node
     public bool IsEnteringNewScene;
     public string NewScenePortalName = "StartPortal";
 
-    public Node2D Player;
+    public Player Player;
 
     private CameraManager _cameraManager;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
     {
-        Player = GetNode<Node2D>("Player");
+        Player = GetNode<Player>("Player");
         _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         StartLevel();
@@ -52,7 +52,7 @@ public partial class GameManager : Node
     public async void OnPlayerEnteredPortal(Portal portal)
     {
         GD.Print("on_player_entered_portal");
-        Player.Call("disable");
+        Player.Disable();
         await _cutsceneManager.TransitionOut();
         await ToSignal(GetTree().CreateTimer(0.5), "timeout");
         IsEnteringNewScene = true;
@@ -95,16 +95,16 @@ public partial class GameManager : Node
         _cameraManager.Camera.JumpToTarget();
         _cutsceneManager.TransitionIn();
         // var camera = get_tree().get_first_node_in_group("cameras")
-        
+
         Player.Connect("player_turned", new Callable(this, nameof(OnPlayerTurned)));
-        
+
         if (GetTree().CurrentScene.IsInGroup("platformers"))
         {
-            Player.Call("switch_to_platform");
+            Player.SwitchToPlatform();
         }
         else if (GetTree().CurrentScene.IsInGroup("overworlds"))
         {
-            Player.Call("switch_to_overworld");
+            Player.SwitchToOverworld();
         }
         else
         {
@@ -116,12 +116,12 @@ public partial class GameManager : Node
         {
             // If cutscene was triggered by levels enter room event, it will have disabled the player.
             GD.Print("gameManager enabling player!!");
-            Player.Call("enable");
+            Player.Enable();
         }
 
-        if (GetTree().CurrentScene.HasMethod("on_player_enter_scene"))
+        if (GetTree().CurrentScene.HasMethod("OnPlayerEnterScene"))
         {
-            GetTree().CurrentScene.Call("on_player_enter_scene");
+            GetTree().CurrentScene.Call("OnPlayerEnterScene");
         }
     }
 
@@ -129,7 +129,7 @@ public partial class GameManager : Node
     {
         _cameraManager.Camera.OnPlayerTurned(direction);
     }
-    
+
     private Portal? GetPortalByName(string name)
     {
         var portals = GetTree().GetNodesInGroup("portals").OfType<Portal>();
@@ -152,27 +152,28 @@ public partial class GameManager : Node
 
     public void OnCutsceneManagerCutsceneStarted()
     {
-        Player.Call("disable");
+        Player.Disable();
     }
 
     public void OnCutsceneManagerCutsceneEnded()
     {
-        Player.Call("enable");
+        Player.Enable();
     }
 
     public void RespawnPlayer()
     {
+        GD.Print("RespawnPlayer");
         if (CurrentCheckpoint != null)
         {
-            Player.Call("death_teleport", CurrentCheckpoint.GlobalPosition);
+            Player.DeathTeleport(CurrentCheckpoint.GlobalPosition);
         }
         else if (LastSpawnpoint != null)
         {
-            Player.Call("death_teleport", LastSpawnpoint);
+            Player.DeathTeleport(LastSpawnpoint);
         }
         else
         {
-            GD.Print("Respawn failed. No checkpoint and no last known spawnpoint.");
+            GD.Print("Respawn failed. No checkpoint and no last known spawn point.");
             GetTree().Quit();
         }
     }

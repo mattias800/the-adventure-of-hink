@@ -44,7 +44,7 @@ public partial class CutsceneManager : Node
 		GD.Print("start_timeline");
 		CutscenePlaying = true;
 		EmitSignal(SignalName.CutsceneStarted);
-		_gameManager.Player.Call("disable");
+		_gameManager.Player.Disable();
 
 		if (delay > 0.0)
 		{
@@ -57,7 +57,7 @@ public partial class CutsceneManager : Node
 		await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 		
 		EmitSignal(SignalName.CutsceneEnded);
-		_gameManager.Player.Call("enable");
+		_gameManager.Player.Enable();
 		CutscenePlaying = false;
 	}
 

@@ -29,7 +29,7 @@ public partial class JumpPad : Node2D
             animated_sprite.Play("blam");
             animated_sprite.AnimationLooped += on_hit_animation_done;
             // animated_sprite.Connect(AnimatedSprite2D.SignalName.AnimationLooped, Callable.From(on_hit_animation_done));
-            _gameManager.Player.Call("trigger_force", new Vector2(0, -power));
+            _gameManager.Player.TriggerForce(new Vector2(0, -power));
             // active = false
             // await get_tree().create_timer(0.1).timeout
             // active = true
