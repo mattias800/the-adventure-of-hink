@@ -1,15 +1,11 @@
-[gd_scene load_steps=42 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=38 format=4 uid="uid://cftipwvf0y2jk"]
 
-[ext_resource type="Script" path="res://world/world_01/level_01/level_01.gd" id="1_yhmja"]
+[ext_resource type="Script" path="res://world/world_01/level_01/Level01.cs" id="1_7cpa0"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
-[ext_resource type="Script" path="res://entities/camera/camera.gd" id="5_k1258"]
+[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_tl3u6"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="5_u4inf"]
-[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="6_ojvhv"]
-[ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="7_q1vx4"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="7_silrh"]
 [ext_resource type="PackedScene" uid="uid://cpj05br0x2fj0" path="res://entities/player_enter_trigger.tscn" id="8_4xcwo"]
-[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="8_yaev6"]
-[ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="9_ws1eu"]
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="12_1mwam"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="12_waw7x"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="14_ottqj"]
@@ -88,34 +84,9 @@ size = Vector2(20, 63)
 size = Vector2(14, 20)
 
 [node name="Level01" type="Node2D" groups=["platformers"]]
-script = ExtResource("1_yhmja")
+script = ExtResource("1_7cpa0")
 
-[node name="Camera" type="Camera2D" parent="." groups=["cameras"]]
-position = Vector2(201, 96)
-offset = Vector2(2.08165e-12, 2.08165e-12)
-anchor_mode = 0
-script = ExtResource("5_k1258")
-
-[node name="Background" type="Sprite2D" parent="Camera"]
-unique_name_in_owner = true
-texture = ExtResource("6_ojvhv")
-centered = false
-
-[node name="Background3D" type="Sprite2D" parent="Camera"]
-unique_name_in_owner = true
-texture = ExtResource("6_ojvhv")
-centered = false
-script = ExtResource("7_q1vx4")
-
-[node name="SubViewport" type="SubViewport" parent="Camera/Background3D"]
-transparent_bg = true
-size = Vector2i(320, 180)
-
-[node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("8_yaev6")]
-
-[node name="Fog" parent="Camera" instance=ExtResource("9_ws1eu")]
-unique_name_in_owner = true
-scroll_offset = Vector2(-1470.22, -65.7224)
+[node name="Camera" parent="." instance=ExtResource("2_tl3u6")]
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -204,10 +175,8 @@ position = Vector2(45, 67)
 position = Vector2(-3.5, -26.5)
 shape = SubResource("RectangleShape2D_ke5tr")
 
-[node name="StandingBird" parent="Rooms/LeftRoom1" node_paths=PackedStringArray("player_fly_area") instance=ExtResource("15_iv3w6")]
+[node name="StandingBird" parent="Rooms/LeftRoom1" instance=ExtResource("15_iv3w6")]
 position = Vector2(31, -14)
-player_fly_area = NodePath("Area2D")
-flying_direction = Vector2(-1, -0.5)
 
 [node name="Area2D" type="Area2D" parent="Rooms/LeftRoom1/StandingBird"]
 
@@ -288,19 +257,15 @@ position = Vector2(251, -1)
 
 [node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(976, 40)
-next_scene_path = "res://world/overworld_01/overworld_01.tscn"
-target_portal_name = "ForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
 position = Vector2(52.5, -55)
 shape = SubResource("RectangleShape2D_4v7wp")
 
-[node name="IntroPortal" parent="." instance=ExtResource("5_u4inf")]
+[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
-next_scene_path = ""
-target_portal_name = "ForestPortal"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="IntroPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_v8hqc")
 
@@ -308,30 +273,20 @@ shape = SubResource("RectangleShape2D_v8hqc")
 
 [node name="Bird" parent="." instance=ExtResource("15_iv3w6")]
 position = Vector2(-20, 41)
-fly_away_start_speed = 60.0
-fly_max_speed = 60
-state = 1
-flying_direction = Vector2(1, 2.08165e-12)
 
 [node name="Bird2" parent="." instance=ExtResource("15_iv3w6")]
 position = Vector2(-15, 49)
-fly_away_start_speed = 80.0
-fly_max_speed = 80
-state = 1
-flying_direction = Vector2(1, -0.005)
 
-[node name="StandingBird" parent="." node_paths=PackedStringArray("player_fly_area") instance=ExtResource("15_iv3w6")]
+[node name="StandingBird" parent="." instance=ExtResource("15_iv3w6")]
 position = Vector2(232, 152)
-player_fly_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="StandingBird"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StandingBird/Area2D"]
 shape = SubResource("CircleShape2D_pvusa")
 
-[node name="StandingBird2" parent="." node_paths=PackedStringArray("player_fly_area") instance=ExtResource("15_iv3w6")]
+[node name="StandingBird2" parent="." instance=ExtResource("15_iv3w6")]
 position = Vector2(241, 152)
-player_fly_area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="StandingBird2"]
 
@@ -345,14 +300,13 @@ position = Vector2(-90, -122)
 position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_4bu75")
 
-[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
+[node name="IntroPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(-178, -155)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IntroPortal"]
 position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_gjucq")
 
-[connection signal="on_player_entered_room" from="Rooms/Room1" to="." method="_on_room_1_on_player_entered_room"]
-[connection signal="on_player_entered" from="Rooms/Room1/Room1Trigger" to="." method="_on_room_1_trigger_on_player_entered"]
-[connection signal="on_player_entered_room" from="Rooms/Room2" to="." method="_on_room_2_on_player_entered_room"]
-[connection signal="on_player_entered_room" from="Rooms/Room3" to="." method="_on_room_3_on_player_entered_room"]
+[connection signal="PlayerEnteredRoom" from="Rooms/Room1" to="." method="OnPlayerEnteredRoom1"]
+[connection signal="on_player_entered" from="Rooms/Room1/Room1Trigger" to="." method="OnPlayerEnteredRoom1Trigger"]
+[connection signal="PlayerEnteredRoom" from="Rooms/Room2" to="." method="OnPlayerEnteredRoom2"]

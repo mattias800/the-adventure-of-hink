@@ -12,10 +12,10 @@ public partial class GameState : Node
     {
         if (!s.Value())
         {
-            return false;
+            s.SetValue(true);
+            return true;
         }
-
-        s.SetValue(true);
-        return true;
+        
+        return false;
     }
 }

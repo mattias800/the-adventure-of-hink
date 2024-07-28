@@ -4,6 +4,11 @@ public class BooleanState
 {
     private bool _value;
 
+    public BooleanState()
+    {
+        _value = false;
+    }
+
     public BooleanState(bool value)
     {
         this._value = value;

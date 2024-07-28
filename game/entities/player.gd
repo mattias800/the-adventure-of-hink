@@ -136,6 +136,7 @@ func on_death_teleportation_done():
 	enable()
 
 func enable():
+	print("enable player")
 	enabled = true
 	match active_controller:
 		CharacterControllerType.PLATFORM:
@@ -154,6 +155,7 @@ func turn_on_collisions():
 	bounce_shape.disabled = false
 
 func disable():
+	print("disable player")
 	enabled = false
 	platform_controller.disable()
 	overworld_controller.disable()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfnwf5vrtylsq"]
 
-[ext_resource type="Script" path="res://autoloads/cutscene_manager.gd" id="1_njrip"]
+[ext_resource type="Script" path="res://autoloads/CutsceneManager.cs" id="1_pna1m"]
 [ext_resource type="Shader" path="res://entities/camera/transitionsss.gdshader" id="2_mkib3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjbc1"]
@@ -47,7 +47,7 @@ _data = {
 }
 
 [node name="CutsceneManager" type="Node"]
-script = ExtResource("1_njrip")
+script = ExtResource("1_pna1m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 100

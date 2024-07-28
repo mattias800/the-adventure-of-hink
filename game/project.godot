@@ -23,7 +23,7 @@ CutsceneManager="*res://autoloads/cutscene_manager.tscn"
 MusicManager="*res://autoloads/music_manager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 UiManager="*res://autoloads/ui_manager.tscn"
-GameState="*res://src/game_state/game_state.gd"
+GameState="*res://src/game_state/GameState.cs"
 
 [dialogic]
 

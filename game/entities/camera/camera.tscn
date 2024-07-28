@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bidfps3q756ep"]
 
-[ext_resource type="Script" path="res://entities/camera/camera.gd" id="1_juncb"]
+[ext_resource type="Script" path="res://entities/camera/Camera.cs" id="1_x1fiq"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="2_hkrqs"]
 [ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="3_irm7g"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="4_fqdte"]
@@ -11,7 +11,7 @@
 position = Vector2(201, 96)
 offset = Vector2(2.08165e-12, 2.08165e-12)
 anchor_mode = 0
-script = ExtResource("1_juncb")
+script = ExtResource("1_x1fiq")
 
 [node name="Background" type="Sprite2D" parent="."]
 unique_name_in_owner = true
