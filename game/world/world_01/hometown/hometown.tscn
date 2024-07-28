@@ -253,6 +253,8 @@ is_open = true
 
 [node name="StartPortal" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(24, 216)
+NextScenePath = "res://world/overworld_01/overworld_01.tscn"
+TargetPortalName = "TownPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(-29, -49)

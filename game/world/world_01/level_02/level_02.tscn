@@ -1,14 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=15 format=4 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="Script" path="res://world/world_01/level_02/Level02.cs" id="1_4e7fq"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
-[ext_resource type="Script" path="res://entities/room.gd" id="2_gxnnn"]
-[ext_resource type="Script" path="res://entities/camera/camera.gd" id="2_ugh0k"]
+[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_hd861"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_c0nni"]
-[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="3_e8y4l"]
-[ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="4_x5jkx"]
-[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="5_4cq6v"]
-[ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://entities/camera/fog.tscn" id="6_7pbfu"]
+[ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="4_aownt"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="10_x3p3d"]
 [ext_resource type="PackedScene" uid="uid://ctngb5ewgd3dh" path="res://entities/characters/little_mushroom/little_mushroom.tscn" id="11_30tbe"]
 [ext_resource type="PackedScene" uid="uid://bpm40kcqmyhmd" path="res://entities/jumpy-bat/jumpy_bat.tscn" id="12_qt5sq"]
@@ -16,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="14_51bis"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="15_3xd5g"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxnvt"]
-size = Vector2(384, 288)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1smo6"]
+size = Vector2(397, 286)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_el4fd"]
 size = Vector2(8, 104)
@@ -28,31 +24,7 @@ size = Vector2(87, 61)
 [node name="Level02" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_4e7fq")
 
-[node name="Camera" type="Camera2D" parent="." groups=["cameras"]]
-position = Vector2(97, 96)
-offset = Vector2(2.08165e-12, 2.08165e-12)
-anchor_mode = 0
-script = ExtResource("2_ugh0k")
-
-[node name="Background" type="Sprite2D" parent="Camera"]
-unique_name_in_owner = true
-texture = ExtResource("3_e8y4l")
-centered = false
-
-[node name="Background3D" type="Sprite2D" parent="Camera"]
-unique_name_in_owner = true
-texture = ExtResource("3_e8y4l")
-centered = false
-script = ExtResource("4_x5jkx")
-
-[node name="SubViewport" type="SubViewport" parent="Camera/Background3D"]
-transparent_bg = true
-size = Vector2i(320, 180)
-
-[node name="MountainBackground" parent="Camera/Background3D/SubViewport" instance=ExtResource("5_4cq6v")]
-
-[node name="Fog" parent="Camera" instance=ExtResource("6_7pbfu")]
-unique_name_in_owner = true
+[node name="Camera" parent="." instance=ExtResource("2_hd861")]
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -64,15 +36,16 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAACAB0AAwAAAAAAAgADAB0AAwAAAAAAAgAEAB0AAwAAAAAAAgAFAB0AAwAAAAAAAgAGAB0AAwAAAAAAAgAHAB0AAwAAAAAAAgAIAB0AAwAAAAAAAgASABsAAwAAAAAAAgATABsAAwAAAAAAAgAUABsAAwAAAAAAAgAVABsAAwAAAAAAAgAaAB0AAwAAAAAAAgAbAB0AAwAAAAAAAgAcAB0AAwAAAAAAAgAdAB0AAwAAAAAAAgAeAB0AAwAAAAAAAgAfAB0AAwAAAAAAAgAgAB0AAwAAAAAAAgAhAB0AAwAAAAAAAgAiAB0AAwAAAAAAAgAjAB0AAwAAAAAAAgAkAB0AAwAAAAAAAgAlAB0AAwAAAAAAAgAmAB0AAwAAAAAAAgAnAB0AAwAAAAAAAgAoAB0AAwAAAAAAAgApAB0AAwAAAAAAAgAqAB0AAwAAAAAAAgArAB0AAwAAAAAAAgAsAB0AAwAAAAAAAgAtAB0AAwAAAAAAAgAiABgAAwAAAAAAAwAiABkAAwAAAAAAAwAnABYAAwAAAAAAAwAnABcAAwAAAAAAAwAdABgAAwAAAAAAAwAdABkAAwAAAAAAAwAfABgAAwAAAAAABAAfABkAAwAAAAAABAAkABgAAwAAAAAABAAkABkAAwAAAAAABAApABYAAwAAAAAABAApABcAAwAAAAAABAACABwAAwAAAAAABAACABsAAwAAAAAABAACABoAAwAAAAAABAACABkAAwAAAAAABAACABgAAwAAAAAABAACABcAAwAAAAAABAACABYAAwAAAAAABAACABUAAwAAAAAABAACABQAAwAAAAAABAACABMAAwAAAAAABAAtABwAAwAAAAAAAwAtABsAAwAAAAAAAwAtABoAAwAAAAAAAwAtABkAAwAAAAAAAwAtABgAAwAAAAAAAwAtABcAAwAAAAAAAwAtABYAAwAAAAAAAwAtABUAAwAAAAAAAwAtABQAAwAAAAAAAwAtABMAAwAAAAAAAwAtABIAAwAAAAAAAwAtABEAAwAAAAAAAwAOAA4AAwAAAAAAAgAPAA4AAwAAAAAAAgAQAA4AAwAAAAAAAgARAA4AAwAAAAAAAgASAA4AAwAAAAAAAgA=")
 tile_set = ExtResource("1_8ecia")
 
-[node name="Room1" type="Area2D" parent="." groups=["rooms"]]
-script = ExtResource("2_gxnnn")
+[node name="Room" parent="." instance=ExtResource("4_aownt")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room1"]
-position = Vector2(192, 112)
-shape = SubResource("RectangleShape2D_nxnvt")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room"]
+position = Vector2(188.5, 115)
+shape = SubResource("RectangleShape2D_1smo6")
 
 [node name="StartPortal" parent="." instance=ExtResource("3_c0nni")]
 position = Vector2(24, 120)
+NextScenePath = "res://world/overworld_01/overworld_01.tscn"
+TargetPortalName = "RightForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(-20, -44)

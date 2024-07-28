@@ -8,7 +8,6 @@ public partial class Portal : Area2D
     public string NextScenePath;
     
     [Export] public string TargetPortalName;
-    [Export] public Marker2D SpawnPoint;
 
     [Signal]
     public delegate void PlayerEnteredPortalEventHandler();
@@ -22,6 +21,7 @@ public partial class Portal : Area2D
 
     public void OnBodyEntered(Node2D body)
     {
+        GD.Print("OnBodyEntered portal");
         if (CollisionUtil.IsPlayer(body) && NextScenePath != null)
         {
             GD.Print("Entered portal: " + Name);

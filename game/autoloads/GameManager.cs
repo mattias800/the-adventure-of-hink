@@ -87,22 +87,8 @@ public partial class GameManager : Node
         GD.Print("Found portal: " + portal.Name);
 
         CurrentCheckpoint = null;
-
-        var spawnPoint = portal.SpawnPoint;
-
-        if (spawnPoint != null)
-        {
-            GD.Print("Found spawn point");
-            GD.Print(spawnPoint.GlobalPosition);
-            Player.GlobalPosition = spawnPoint.GlobalPosition;
-            LastSpawnpoint = spawnPoint.GlobalPosition;
-        }
-        else
-        {
-            GD.Print("Found no spawn point");
-            Player.GlobalPosition = portal.GlobalPosition;
-            LastSpawnpoint = portal.GlobalPosition;
-        }
+        Player.GlobalPosition = portal.GlobalPosition;
+        LastSpawnpoint = portal.GlobalPosition;
 
         GD.Print(Player.GlobalPosition);
         _cameraManager.SetCameraTarget(Player);

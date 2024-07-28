@@ -5,4 +5,4 @@
 [node name="Portal" type="Area2D" groups=["portals"]]
 script = ExtResource("1_wixc1")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

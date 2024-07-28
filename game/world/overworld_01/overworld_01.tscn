@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://d2422fwpoj4pm"]
+[gd_scene load_steps=12 format=4 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
+[ext_resource type="Script" path="res://world/overworld_01/Overworld01.cs" id="1_m2gna"]
 [ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld_01/overworld_water.tscn" id="1_n4jpo"]
-[ext_resource type="Script" path="res://world/overworld_01/overworld_01.gd" id="1_o4hvk"]
+[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_ro3rw"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_uf8ks"]
-[ext_resource type="Script" path="res://entities/camera/camera.gd" id="4_tl3cl"]
-[ext_resource type="PackedScene" uid="uid://do8560lw7gjwe" path="res://entities/camera/overworld_clouds.tscn" id="5_yu0f5"]
 [ext_resource type="AudioStream" uid="uid://cmyeumil4h2kj" path="res://assets/audio/ambience/windy.mp3" id="7_gswvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvk1g"]
@@ -731,7 +730,9 @@ size = Vector2(16, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sae0b"]
 
 [node name="Overworld01" type="Node2D" groups=["overworlds"]]
-script = ExtResource("1_o4hvk")
+script = ExtResource("1_m2gna")
+
+[node name="Camera" parent="." instance=ExtResource("2_ro3rw")]
 
 [node name="OverworldWater" parent="." instance=ExtResource("1_n4jpo")]
 position = Vector2(-16, -656)
@@ -747,26 +748,15 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAAVAAQAAQAAAAwAAAAVAAUAAQAAAA0AAAAVAAYAAQAAAA4AAAAVAAcAAQAAAA8AAAAWAAQAAQABAAwAAAAWAAUAAQABAA0AAAAWAAYAAQABAA4AAAAWAAcAAQABAA8AAAAXAAQAAQACAAwAAAAXAAUAAQACAA0AAAAXAAYAAQACAA4AAAAXAAcAAQACAA8AAAAYAAQAAQADAAwAAAAYAAUAAQADAA0AAAAYAAYAAQADAA4AAAAYAAcAAQADAA8AAAAeAAYAAQAJAA8AAAAeAAcAAQAJABAAAAAdAAcAAQAIABAAAAAcAAkAAQAGABAAAAA=")
 tile_set = SubResource("TileSet_n6idn")
 
-[node name="Camera" type="Camera2D" parent="." groups=["cameras"]]
-position = Vector2(201, 96)
-offset = Vector2(2.08165e-12, 2.08165e-12)
-anchor_mode = 0
-script = ExtResource("4_tl3cl")
-
-[node name="OverworldClouds" parent="Camera" instance=ExtResource("5_yu0f5")]
-unique_name_in_owner = true
-
-[node name="ForestPortal" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("3_uf8ks")]
-position = Vector2(128, 152)
-next_scene_path = "res://world/world_01/level_01/level_01.tscn"
-target_portal_name = "ForestPortal"
-spawn_point = NodePath("Marker2D")
+[node name="ForestPortal" parent="." node_paths=PackedStringArray("SpawnPoint") instance=ExtResource("3_uf8ks")]
+position = Vector2(143, 153)
+NextScenePath = "res://world/world_01/level_01/level_01.tscn"
+TargetPortalName = "ForestPortal"
+SpawnPoint = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
+position = Vector2(-18, 0)
 shape = SubResource("RectangleShape2D_yvso0")
-
-[node name="Marker2D" type="Marker2D" parent="ForestPortal"]
-position = Vector2(32, 0)
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_gswvf")
@@ -775,8 +765,8 @@ autoplay = true
 
 [node name="RightForestPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(560, 184)
-next_scene_path = "res://world/world_01/level_02/level_02.tscn"
-target_portal_name = "StartPortal"
+NextScenePath = "res://world/world_01/level_02/level_02.tscn"
+TargetPortalName = "StartPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightForestPortal"]
 position = Vector2(16, 0)
@@ -784,7 +774,8 @@ shape = SubResource("RectangleShape2D_bjuaf")
 
 [node name="TownPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(376, 128)
-next_scene_path = "res://world/world_01/hometown/hometown.tscn"
+NextScenePath = "res://world/world_01/hometown/hometown.tscn"
+TargetPortalName = "StartPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TownPortal"]
 position = Vector2(0, -22)

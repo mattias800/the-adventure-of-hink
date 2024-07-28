@@ -256,10 +256,12 @@ position = Vector2(2.08165e-12, -64)
 position = Vector2(251, -1)
 
 [node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
-position = Vector2(976, 40)
+position = Vector2(1000, 39)
+NextScenePath = "res://world/overworld_01/overworld_01.tscn"
+TargetPortalName = "ForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
-position = Vector2(52.5, -55)
+position = Vector2(26, -52)
 shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
