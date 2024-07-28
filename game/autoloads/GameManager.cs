@@ -62,18 +62,18 @@ public partial class GameManager : Node
         if (portal.NextScenePath != null)
         {
             GD.Print("LOAD SCENE WOO");
-            load_scene(portal.NextScenePath);
+            LoadScene(portal.NextScenePath);
         }
     }
 
     public void EnterNewScene()
     {
-        var portal = get_portal_by_name(NewScenePortalName);
+        var portal = GetPortalByName(NewScenePortalName);
 
         if (portal == null)
         {
             GD.Print("Found no matching portal: " + NewScenePortalName);
-            portal = get_any_available_portal();
+            portal = GetAnyAvailablePortal();
         }
 
         if (portal == null)
@@ -130,7 +130,7 @@ public partial class GameManager : Node
         _cameraManager.Camera.OnPlayerTurned(direction);
     }
     
-    private Portal? get_portal_by_name(string name)
+    private Portal? GetPortalByName(string name)
     {
         var portals = GetTree().GetNodesInGroup("portals").OfType<Portal>();
 
@@ -145,7 +145,7 @@ public partial class GameManager : Node
         return null;
     }
 
-    public Portal? get_any_available_portal()
+    public Portal? GetAnyAvailablePortal()
     {
         return GetTree().GetFirstNodeInGroup("portals") as Portal;
     }
@@ -160,7 +160,7 @@ public partial class GameManager : Node
         Player.Call("enable");
     }
 
-    public void respawn_player()
+    public void RespawnPlayer()
     {
         if (CurrentCheckpoint != null)
         {
@@ -177,7 +177,7 @@ public partial class GameManager : Node
         }
     }
 
-    public void load_scene(string path)
+    public void LoadScene(string path)
     {
         GD.Print("LOADING NEW SCENE!");
         GetTree().CurrentScene.QueueFree(); // Instead of free()

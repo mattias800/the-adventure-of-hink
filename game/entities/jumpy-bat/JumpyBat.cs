@@ -22,7 +22,7 @@ public partial class JumpyBat : Area2D
     {
         if (active && CollisionUtil.IsPlayer(body))
         {
-            _gameManager.respawn_player();
+            _gameManager.RespawnPlayer();
         }
     }
 
@@ -34,7 +34,7 @@ public partial class JumpyBat : Area2D
             _animatedSprite2D.AnimationLooped += OnHitAnimationDone;
             if (area.GlobalPosition.Y > GlobalPosition.Y)
             {
-                _gameManager.respawn_player();
+                _gameManager.RespawnPlayer();
             }
             else
             {
