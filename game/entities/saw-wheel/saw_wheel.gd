@@ -8,4 +8,4 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if CollisionUtil.is_player(body):
-		GameManager.respawn_player()
+		GameManager.RespawnPlayer()
