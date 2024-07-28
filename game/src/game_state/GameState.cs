@@ -7,6 +7,7 @@ public partial class GameState : Node
     public WorldState WorldState = new();
     public PlayerState PlayerState = new();
     public PlayerPositionState PlayerPositionState = new();
+    public CharactersState CharactersState = new();
 
     public static bool Once(BooleanState s)
     {

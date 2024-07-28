@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctngb5ewgd3dh"]
 
-[ext_resource type="Script" path="res://entities/characters/little_mushroom/little_mushroom.gd" id="1_20104"]
+[ext_resource type="Script" path="res://entities/characters/little_mushroom/LittleMushroom.cs" id="1_mcl8r"]
 [ext_resource type="Texture2D" uid="uid://c6ieoghhd66vv" path="res://assets/Enchanted Forest Characters with animations.png" id="1_yfjj6"]
 [ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="2_qsnp8"]
 
@@ -29,7 +29,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mf34o"]
 
 [node name="LittleMushroom" type="Node2D"]
-script = ExtResource("1_20104")
+script = ExtResource("1_mcl8r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_50bvm")
@@ -43,4 +43,4 @@ position = Vector2(0, 16)
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_mf34o")
 
-[connection signal="on_talk" from="Talkable" to="." method="_on_talkable_on_talk"]
+[connection signal="TalkStarted" from="Talkable" to="." method="OnTalk"]

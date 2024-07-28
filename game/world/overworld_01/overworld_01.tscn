@@ -748,11 +748,10 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAAVAAQAAQAAAAwAAAAVAAUAAQAAAA0AAAAVAAYAAQAAAA4AAAAVAAcAAQAAAA8AAAAWAAQAAQABAAwAAAAWAAUAAQABAA0AAAAWAAYAAQABAA4AAAAWAAcAAQABAA8AAAAXAAQAAQACAAwAAAAXAAUAAQACAA0AAAAXAAYAAQACAA4AAAAXAAcAAQACAA8AAAAYAAQAAQADAAwAAAAYAAUAAQADAA0AAAAYAAYAAQADAA4AAAAYAAcAAQADAA8AAAAeAAYAAQAJAA8AAAAeAAcAAQAJABAAAAAdAAcAAQAIABAAAAAcAAkAAQAGABAAAAA=")
 tile_set = SubResource("TileSet_n6idn")
 
-[node name="ForestPortal" parent="." node_paths=PackedStringArray("SpawnPoint") instance=ExtResource("3_uf8ks")]
+[node name="ForestPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(143, 153)
 NextScenePath = "res://world/world_01/level_01/level_01.tscn"
 TargetPortalName = "ForestPortal"
-SpawnPoint = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
 position = Vector2(-18, 0)

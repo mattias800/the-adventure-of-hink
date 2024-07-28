@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpm40kcqmyhmd"]
 
-[ext_resource type="Script" path="res://entities/jumpy-bat/jumpy_bat.gd" id="1_gse4f"]
+[ext_resource type="Script" path="res://entities/jumpy-bat/JumpyBat.cs" id="1_wjdxc"]
 [ext_resource type="Texture2D" uid="uid://biu2ki6j3a5qi" path="res://entities/jumpy-bat/Bat 32x32.png" id="2_kt3oh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qnlj"]
@@ -69,7 +69,7 @@ animations = [{
 size = Vector2(12, 8)
 
 [node name="JumpyBat" type="Area2D"]
-script = ExtResource("1_gse4f")
+script = ExtResource("1_wjdxc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ikxx2")
@@ -80,5 +80,5 @@ frame_progress = 0.550387
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_ok0ls")
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
-[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="area_shape_entered" from="." to="." method="OnAreaShapeEntered"]
+[connection signal="body_shape_entered" from="." to="." method="OnBodyShapeEntered"]

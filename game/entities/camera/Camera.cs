@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.utils;
 
 public partial class Camera : Camera2D
 {
@@ -47,15 +48,15 @@ public partial class Camera : Camera2D
                 case CameraState.FollowingTarget:
                 {
                     var focus = ClampVec2ToLimits(Target.GetGlobalTransform().Origin - _halfViewport);
-                    GlobalTransform = new Transform2D(0f, Lerp(GlobalTransform.Origin, focus, 0.1f));
+                    GlobalTransform = new Transform2D(0f, Lerper.Lerp(GlobalTransform.Origin, focus, 0.1f));
                     break;
                 }
 
                 case CameraState.FollowingPlayer:
                 {
-                    LookAhead = Lerp(LookAhead, LookAheadTarget, 0.005f);
+                    LookAhead = Lerper.Lerp(LookAhead, LookAheadTarget, 0.005f);
                     var focus = ClampVec2ToLimits(Target.Position - _halfViewport + LookAhead);
-                    Position = Lerp(Position, focus, 0.1f);
+                    Position = Lerper.Lerp(Position, focus, 0.1f);
                     break;
                 }
 
@@ -125,7 +126,7 @@ public partial class Camera : Camera2D
 
     private void UpdateGlobalPosition(float delta)
     {
-        GlobalPosition += Lerp(
+        GlobalPosition += Lerper.Lerp(
             Velocity,
             Vector2.Zero,
             Mathf.Pow(2, -32 * delta)
@@ -218,15 +219,5 @@ public partial class Camera : Camera2D
             tilemapRect.End.X - tilemapRect.Position.X,
             tilemapRect.End.Y - tilemapRect.Position.Y
         );
-    }
-
-    private Vector2 Lerp(Vector2 a, Vector2 b, float t)
-    {
-        return new Vector2(Lerp(a.X, b.X, t), Lerp(a.Y, b.Y, t));
-    }
-
-    private float Lerp(float a, float b, float t)
-    {
-        return a + (b - a) * t;
     }
 }

@@ -7,5 +7,5 @@ public class CharactersState
 
 public class LittleMushroomState
 {
-    public bool HasEverMet;
+    public BooleanState HasEverMet = new();
 }
