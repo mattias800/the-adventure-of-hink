@@ -249,7 +249,7 @@ shape = SubResource("CircleShape2D_roamx")
 
 [node name="Well" parent="." instance=ExtResource("14_040f5")]
 position = Vector2(844, 192)
-is_open = true
+IsOpen = true
 
 [node name="StartPortal" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(24, 216)
@@ -346,6 +346,6 @@ position = Vector2(479, 173)
 [node name="HouseFire3" parent="AttackingState" instance=ExtResource("19_s8ljo")]
 position = Vector2(494, 204)
 
-[connection signal="player_entered_well" from="Well" to="." method="OnPlayerEnteredWell"]
+[connection signal="PlayerEnteredWell" from="Well" to="." method="OnPlayerEnteredWell"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]
 [connection signal="body_entered" from="Rooms/UndergroundCameraTrigger" to="." method="OnUndergroundCameraTriggered"]

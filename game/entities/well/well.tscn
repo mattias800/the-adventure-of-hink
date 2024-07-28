@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ba7h5wreyfr76"]
 
-[ext_resource type="Script" path="res://entities/well/well.gd" id="1_njv35"]
+[ext_resource type="Script" path="res://entities/well/Well.cs" id="1_k5q01"]
 [ext_resource type="Texture2D" uid="uid://bdlrokxlo7a71" path="res://assets/BGL_Village Forest_Tileset pack/TileSet (original size).png" id="1_tvhty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2riw"]
@@ -16,7 +16,7 @@ size = Vector2(24, 16)
 size = Vector2(24, 8)
 
 [node name="Well" type="Node2D"]
-script = ExtResource("1_njv35")
+script = ExtResource("1_k5q01")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_tvhty")
@@ -47,4 +47,4 @@ shape = SubResource("RectangleShape2D_my5i6")
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_2q2x3")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="OnArea2dBodyEntered"]
