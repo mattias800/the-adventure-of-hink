@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://cf2adb7i38jj6"]
 
-[ext_resource type="Script" path="res://entities/boomerang/boomerang.gd" id="1_ttip1"]
+[ext_resource type="Script" path="res://entities/boomerang/Boomerang.cs" id="1_681ei"]
 [ext_resource type="Texture2D" uid="uid://bvkkclwqlmcw" path="res://entities/boomerang/arrow_1.png" id="2_m4yqv"]
 [ext_resource type="AudioStream" uid="uid://c0xy7d61eo1hr" path="res://entities/boomerang/audio/Axe_Whoosh_01.wav" id="3_my82g"]
 [ext_resource type="AudioStream" uid="uid://q1xwyq0ukgyt" path="res://entities/boomerang/audio/Arrow_Hit_Wood_01.wav" id="4_yehon"]
@@ -16,7 +16,7 @@ loop_end = 10000
 stereo = true
 
 [node name="Boomerang" type="Node2D"]
-script = ExtResource("1_ttip1")
+script = ExtResource("1_681ei")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_m4yqv")

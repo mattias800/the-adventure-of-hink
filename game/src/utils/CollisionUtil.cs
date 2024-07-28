@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 namespace Theadventureofhink.utils;
 
@@ -11,7 +12,7 @@ public static class CollisionUtil
         return bodies.Any(IsPlayer);
     }
 
-    public static IEnumerable<Node> BodiesExceptPlayer(IList<Node> bodies)
+    public static IEnumerable<Node2D> BodiesExceptPlayer(Array<Node2D> bodies)
     {
         return bodies.Where(b => !IsPlayer(b));
     }
