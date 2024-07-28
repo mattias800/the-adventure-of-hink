@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=4 uid="uid://cfeug64aouer"]
 
-[ext_resource type="Script" path="res://world/world_01/hometown/hometown.gd" id="1_cybgc"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
+[ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_di72y"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_t484x"]
 [ext_resource type="Texture2D" uid="uid://c8j2r07kxk6bh" path="res://world/common/house/House copy.png" id="3_g521m"]
@@ -186,7 +186,7 @@ size = Vector2(925, 263)
 size = Vector2(913, 54)
 
 [node name="Hometown" type="Node2D" groups=["platformers"]]
-script = ExtResource("1_cybgc")
+script = ExtResource("1_sfoep")
 
 [node name="Camera" parent="." instance=ExtResource("2_t484x")]
 
@@ -238,8 +238,9 @@ position = Vector2(712, 183)
 texture = ExtResource("3_g521m")
 offset = Vector2(2.08165e-12, 4)
 
-[node name="Bird" parent="." instance=ExtResource("16_pmt6j")]
+[node name="Bird" parent="." node_paths=PackedStringArray("PlayerFlyArea") instance=ExtResource("16_pmt6j")]
 position = Vector2(139, 256)
+PlayerFlyArea = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="Bird"]
 
@@ -343,6 +344,6 @@ position = Vector2(479, 173)
 [node name="HouseFire3" parent="AttackingState" instance=ExtResource("19_s8ljo")]
 position = Vector2(494, 204)
 
-[connection signal="player_entered_well" from="Well" to="." method="_on_well_player_entered_well"]
-[connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="_on_overground_camera_trigger_body_entered"]
-[connection signal="body_entered" from="Rooms/UndergroundCameraTrigger" to="." method="_on_room_switch_trigger_body_entered"]
+[connection signal="player_entered_well" from="Well" to="." method="OnPlayerEnteredWell"]
+[connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]
+[connection signal="body_entered" from="Rooms/UndergroundCameraTrigger" to="." method="OnUndergroundCameraTriggered"]

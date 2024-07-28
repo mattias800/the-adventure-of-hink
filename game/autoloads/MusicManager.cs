@@ -35,7 +35,7 @@ public partial class MusicManager : Node
         _queuedTrack = track;
     }
 
-    public void PlayQueuedTrack()
+    private void PlayQueuedTrack()
     {
         if (_player.Playing)
         {

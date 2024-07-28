@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://coj6uli1lchbp"]
 
+[ext_resource type="Script" path="res://world/world_01/level_02/Level02.cs" id="1_4e7fq"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
-[ext_resource type="Script" path="res://world/world_01/level_02/level_02.gd" id="1_53lln"]
 [ext_resource type="Script" path="res://entities/room.gd" id="2_gxnnn"]
 [ext_resource type="Script" path="res://entities/camera/camera.gd" id="2_ugh0k"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_c0nni"]
@@ -26,7 +26,7 @@ size = Vector2(8, 104)
 size = Vector2(87, 61)
 
 [node name="Level02" type="Node2D" groups=["platformers"]]
-script = ExtResource("1_53lln")
+script = ExtResource("1_4e7fq")
 
 [node name="Camera" type="Camera2D" parent="." groups=["cameras"]]
 position = Vector2(97, 96)
@@ -73,8 +73,6 @@ shape = SubResource("RectangleShape2D_nxnvt")
 
 [node name="StartPortal" parent="." instance=ExtResource("3_c0nni")]
 position = Vector2(24, 120)
-next_scene_path = "res://world/overworld_01/overworld_01.tscn"
-target_portal_name = "RightForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(-20, -44)

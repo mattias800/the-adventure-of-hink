@@ -23,7 +23,6 @@ public partial class Level01 : Node2D
 
     public async void OnPlayerEnteredRoom1()
     {
-        GD.Print("OnPlayerEnteredRoom1");
         if (GameState.Once(_gameState.WorldState.Level01State.HasEverVisitedRoom1))
         {
             await _cutsceneManager.StartTimeline(resource, "room1_entry", 1.0f);
@@ -32,7 +31,6 @@ public partial class Level01 : Node2D
 
     public async void OnPlayerEnteredRoom2()
     {
-        GD.Print("OnPlayerEnteredRoom2");
         if (GameState.Once(_gameState.WorldState.Level01State.HasEverVisitedRoom2))
         {
             await _cutsceneManager.StartTimeline(resource, "room2_entry");
@@ -41,7 +39,6 @@ public partial class Level01 : Node2D
 
     public async void OnPlayerEnteredRoom1Trigger()
     {
-        GD.Print("OnPlayerEnteredRoom1Trigger");
         if (GameState.Once(_gameState.WorldState.Level01State.HasRoom1Triggered))
         {
             await _cutsceneManager.StartTimeline(resource, "room1_trigger");
