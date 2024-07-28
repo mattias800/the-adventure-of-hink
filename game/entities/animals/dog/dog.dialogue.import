@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://bq03556lskmyt"
+path="res://.godot/imported/dog.dialogue-c9758b3409b9967c4c891e0302424a34.tres"
+
+[deps]
+
+source_file="res://entities/animals/dog/dog.dialogue"
+dest_files=["res://.godot/imported/dog.dialogue-c9758b3409b9967c4c891e0302424a34.tres"]
+
+[params]
+
+defaults=true

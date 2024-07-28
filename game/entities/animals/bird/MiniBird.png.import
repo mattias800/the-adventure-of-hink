@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buhaja1vs5re8"
-path="res://.godot/imported/Attack.png-a020e5e426392bf2a9b85612f40711ba.ctex"
+uid="uid://i8w4lqpnfrfi"
+path="res://.godot/imported/MiniBird.png-6203636af442843b220916377b68e7a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/cat/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-a020e5e426392bf2a9b85612f40711ba.ctex"]
+source_file="res://entities/animals/bird/MiniBird.png"
+dest_files=["res://.godot/imported/MiniBird.png-6203636af442843b220916377b68e7a4.ctex"]
 
 [params]
 

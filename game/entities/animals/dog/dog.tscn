@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://cp57ybi6rmnw1"]
+
+[ext_resource type="Script" path="res://entities/animals/dog/Dog.cs" id="1_61wsb"]
+[ext_resource type="Texture2D" uid="uid://cjjxyf3byq3ud" path="res://entities/animals/dog/FaithfulDogIdleSide.png" id="1_nvhie"]
+[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="2_dm4ys"]
+[ext_resource type="AudioStream" uid="uid://fd581e7k7uot" path="res://entities/animals/dog/dog_bark.mp3" id="4_q7bqc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ulkp"]
+atlas = ExtResource("1_nvhie")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q03fs"]
+atlas = ExtResource("1_nvhie")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h0dv"]
+atlas = ExtResource("1_nvhie")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m615m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ulkp")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q03fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1h0dv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dld6k"]
+size = Vector2(20, 18)
+
+[node name="Dog" type="Node2D"]
+script = ExtResource("1_61wsb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m615m")
+animation = &"idle"
+frame_progress = 0.821064
+
+[node name="Talkable" parent="." instance=ExtResource("2_dm4ys")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Talkable"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_dld6k")
+
+[node name="BarkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_q7bqc")
+
+[connection signal="TalkStarted" from="Talkable" to="." method="OnTalk"]

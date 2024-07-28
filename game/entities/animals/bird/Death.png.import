@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7gt0io55obn"
-path="res://.godot/imported/Idle.png-56298fe802f300925c02bb8f9be3bfc4.ctex"
+uid="uid://btrm7i6un6wco"
+path="res://.godot/imported/Death.png-a70e18330af53f72f92e3aa064443b40.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/bird/Idle.png"
-dest_files=["res://.godot/imported/Idle.png-56298fe802f300925c02bb8f9be3bfc4.ctex"]
+source_file="res://entities/animals/bird/Death.png"
+dest_files=["res://.godot/imported/Death.png-a70e18330af53f72f92e3aa064443b40.ctex"]
 
 [params]
 

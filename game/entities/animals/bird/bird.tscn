@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cmmc12dmay5lp"]
 
-[ext_resource type="Script" path="res://entities/bird/Bird.cs" id="1_p3rgy"]
-[ext_resource type="Texture2D" uid="uid://i8w4lqpnfrfi" path="res://entities/bird/MiniBird.png" id="2_3fshw"]
+[ext_resource type="Script" path="res://entities/animals/bird/Bird.cs" id="1_p3rgy"]
+[ext_resource type="Texture2D" uid="uid://i8w4lqpnfrfi" path="res://entities/animals/bird/MiniBird.png" id="2_3fshw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vg7vn"]
 atlas = ExtResource("2_3fshw")

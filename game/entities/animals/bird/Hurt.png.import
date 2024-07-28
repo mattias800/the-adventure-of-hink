@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cduxg0fy7p38f"
-path="res://.godot/imported/Idle.png-cfac70ec37156acd3fe2c7f5215e11ae.ctex"
+uid="uid://b2mdihod4l6pg"
+path="res://.godot/imported/Hurt.png-5cf20d382ab74cd36ea8edb72c833967.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/dog/Idle.png"
-dest_files=["res://.godot/imported/Idle.png-cfac70ec37156acd3fe2c7f5215e11ae.ctex"]
+source_file="res://entities/animals/bird/Hurt.png"
+dest_files=["res://.godot/imported/Hurt.png-5cf20d382ab74cd36ea8edb72c833967.ctex"]
 
 [params]
 

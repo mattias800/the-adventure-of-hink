@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lycmefnh6im5"
-path="res://.godot/imported/Walk.png-01023476a0c709d9b670e4da4940a693.ctex"
+uid="uid://cjjxyf3byq3ud"
+path="res://.godot/imported/FaithfulDogIdleSide.png-eaaaa1970f8f46be01e1e3413a7fb0e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/bird/Walk.png"
-dest_files=["res://.godot/imported/Walk.png-01023476a0c709d9b670e4da4940a693.ctex"]
+source_file="res://entities/animals/dog/FaithfulDogIdleSide.png"
+dest_files=["res://.godot/imported/FaithfulDogIdleSide.png-eaaaa1970f8f46be01e1e3413a7fb0e8.ctex"]
 
 [params]
 

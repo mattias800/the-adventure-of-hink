@@ -112,7 +112,6 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("Player _PhysicsProcess enabled=" + _enabled);
         if (!_enabled)
             return;
 
@@ -123,11 +122,9 @@ public partial class Player : CharacterBody2D
                 switch (_activeController)
                 {
                     case CharacterControllerType.Platform:
-                        GD.Print("physics platform");
                         _platformController._PhysicsProcess(delta);
                         break;
                     case CharacterControllerType.Overworld:
-                        GD.Print("physics overworld");
                         _overworldController._PhysicsProcess(delta);
                         break;
                 }
@@ -139,13 +136,11 @@ public partial class Player : CharacterBody2D
 
     public void SwitchToPlatform()
     {
-        GD.Print("SwitchToPlatform");
         _activeController = CharacterControllerType.Platform;
     }
 
     public void SwitchToOverworld()
     {
-        GD.Print("SwitchToOverworld");
         _activeController = CharacterControllerType.Overworld;
     }
 

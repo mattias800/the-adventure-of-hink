@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=33 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
@@ -11,7 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
 [ext_resource type="PackedScene" uid="uid://ba7h5wreyfr76" path="res://entities/well/well.tscn" id="14_040f5"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
-[ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/bird/bird.tscn" id="16_pmt6j"]
+[ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="16_pmt6j"]
+[ext_resource type="PackedScene" uid="uid://cp57ybi6rmnw1" path="res://entities/animals/dog/dog.tscn" id="16_ygco4"]
 [ext_resource type="PackedScene" uid="uid://dnkxeparjd1oy" path="res://entities/enemies/lizardfolk archer/lizardfolk_archer.tscn" id="17_ih6gy"]
 [ext_resource type="PackedScene" uid="uid://ciu0ybq7h3aq" path="res://entities/enemies/lizardfolk gladiator/lizardfolk_gladiator.tscn" id="18_moilp"]
 [ext_resource type="PackedScene" uid="uid://klqjplldgtu5" path="res://entities/fire/house_fire.tscn" id="19_s8ljo"]
@@ -345,6 +346,10 @@ position = Vector2(479, 173)
 
 [node name="HouseFire3" parent="AttackingState" instance=ExtResource("19_s8ljo")]
 position = Vector2(494, 204)
+
+[node name="Dog" parent="." instance=ExtResource("16_ygco4")]
+position = Vector2(651, 216)
+Flipped = true
 
 [connection signal="PlayerEnteredWell" from="Well" to="." method="OnPlayerEnteredWell"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]

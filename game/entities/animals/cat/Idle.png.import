@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://peeygtcenbpy"
-path="res://.godot/imported/Attack.png-0ba14196952b21de60431e67b36543a9.ctex"
+uid="uid://bbwj3oj0rqg83"
+path="res://.godot/imported/Idle.png-d1a1b315475e8f5705aa0b528b947c93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/dog/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-0ba14196952b21de60431e67b36543a9.ctex"]
+source_file="res://entities/animals/cat/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-d1a1b315475e8f5705aa0b528b947c93.ctex"]
 
 [params]
 
