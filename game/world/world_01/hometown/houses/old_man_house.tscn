@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://mq20yu1nyoch"]
+[gd_scene load_steps=13 format=4 uid="uid://mq20yu1nyoch"]
 
 [ext_resource type="Texture2D" uid="uid://cw6fgtnxu75ql" path="res://world/world_01/hometown/assets/VH_Viking house Tileset 16x16.png" id="1_re7wn"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="1_yvq8o"]
 [ext_resource type="PackedScene" uid="uid://dxxkd8vw6t2dy" path="res://entities/lights/flickering-light/flickering_light.tscn" id="2_7f5f1"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="2_pnskt"]
-[ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="3_spybx"]
 [ext_resource type="PackedScene" uid="uid://esminst5rh4s" path="res://collectibles/double_jump/double_jump_chest.tscn" id="6_rklan"]
+[ext_resource type="PackedScene" uid="uid://c868fnxn2lrek" path="res://entities/portals/portal_door.tscn" id="7_knxix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2ij2"]
 size = Vector2(320, 192)
@@ -223,9 +223,6 @@ polygon = PackedVector2Array(96, 96, 96, 112, 128, 112, 128, 96)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n2xba"]
 polygon = PackedVector2Array(32, 64, 32, 80, 80, 80, 80, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fyok"]
-size = Vector2(14, 31)
-
 [node name="OldManHouse" type="Node2D" groups=["platformers"]]
 
 [node name="Camera" parent="." instance=ExtResource("1_yvq8o")]
@@ -241,7 +238,7 @@ tile_map_data = PackedByteArray("AAAAAAEAAAABAAIAAAASAAAAAAACAAUAAAARAAAAAAACAAU
 tile_set = SubResource("TileSet_oc4yo")
 
 [node name="Props" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAQAAoAAAAKAAsAAAARAAoAAAALAAsAAAASAAkAAAAMAAoAAAASAAoAAAAMAAsAAAAOAAoAAAAIAAsAAAAJAAkAAAAMAAkAAAAQAAYAAAAMAAkAAAABAAkAAAAOAAwAAAABAAoAAAAOAA0AAAA=")
+tile_map_data = PackedByteArray("AAAQAAoAAAAKAAsAAAARAAoAAAALAAsAAAASAAkAAAAMAAoAAAASAAoAAAAMAAsAAAAOAAoAAAAIAAsAAAAJAAkAAAAMAAkAAAAQAAYAAAAMAAkAAAAGAAkAAAAOAAwAAAAGAAoAAAAOAA0AAAADAAYAAAAMAAkAAAA=")
 tile_set = SubResource("TileSet_oc4yo")
 
 [node name="FlickeringLight" parent="." instance=ExtResource("2_7f5f1")]
@@ -252,6 +249,16 @@ texture_scale = 0.3
 position = Vector2(264, 108)
 texture_scale = 0.3
 
+[node name="FlickeringLight3" parent="." instance=ExtResource("2_7f5f1")]
+position = Vector2(56, 110)
+texture_scale = 0.8
+
+[node name="WindowLight" parent="." instance=ExtResource("2_7f5f1")]
+position = Vector2(153, 59)
+color = Color(1, 1, 1, 1)
+energy = 1.0
+texture_scale = 3.0
+
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_icadf")
 
@@ -261,18 +268,10 @@ occluder = SubResource("OccluderPolygon2D_g3d7g")
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_n2xba")
 
-[node name="StartPortal" parent="." instance=ExtResource("3_spybx")]
-position = Vector2(47, 165)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
-position = Vector2(-23, -5.5)
-shape = SubResource("RectangleShape2D_7fyok")
-
 [node name="DoubleJumpChest" parent="." instance=ExtResource("6_rklan")]
 position = Vector2(177, 160)
 
-[node name="FlickeringLight3" parent="." instance=ExtResource("2_7f5f1")]
-position = Vector2(153, 59)
-color = Color(1, 1, 1, 1)
-energy = 1.0
-texture_scale = 3.0
+[node name="StartPortal" parent="." instance=ExtResource("7_knxix")]
+position = Vector2(104, 167)
+NextScenePath = "res://world/world_01/hometown/hometown.tscn"
+TargetPortalName = "OldManHousePortalDoor"

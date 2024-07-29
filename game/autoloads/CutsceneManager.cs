@@ -10,6 +10,7 @@ public partial class CutsceneManager : Node
 
 	[Signal]
 	public delegate void CutsceneStartedEventHandler();
+
 	[Signal]
 	public delegate void CutsceneEndedEventHandler();
 

@@ -87,6 +87,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 platformers="Root node for a platformer scene"
 overworlds="Root node for an overworld scene"
+portals="Portals"
 
 [input]
 

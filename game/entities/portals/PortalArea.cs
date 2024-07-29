@@ -1,8 +1,9 @@
 using Godot;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.entities.portals;
 using Theadventureofhink.utils;
 
-public partial class Portal : Area2D
+public partial class PortalArea : Area2D, IPortal
 {
     [Export(PropertyHint.File, "*.tscn")]
     public string NextScenePath;
@@ -30,4 +31,23 @@ public partial class Portal : Area2D
         }
     }
 
+    public string? GetNextScenePath()
+    {
+        return NextScenePath;
+    }
+
+    public string GetTargetPortalName()
+    {
+        return TargetPortalName;
+    }
+
+    public string GetName()
+    {
+        return Name;
+    }
+
+    public Vector2 GetSpawnPosition()
+    {
+        return GlobalPosition;
+    }
 }

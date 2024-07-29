@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c868fnxn2lrek"]
+
+[ext_resource type="Script" path="res://entities/portals/PortalDoor.cs" id="1_u8otm"]
+[ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://entities/interactible.tscn" id="2_cbky2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w76q5"]
+size = Vector2(20, 31)
+
+[node name="PortalDoor" type="Node2D" groups=["portals"]]
+script = ExtResource("1_u8otm")
+
+[node name="Interactible" parent="." instance=ExtResource("2_cbky2")]
+position = Vector2(1, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
+position = Vector2(0, 22.5)
+shape = SubResource("RectangleShape2D_w76q5")
+
+[connection signal="PlayerInteracted" from="Interactible" to="." method="OnPlayerEnteredDoor"]

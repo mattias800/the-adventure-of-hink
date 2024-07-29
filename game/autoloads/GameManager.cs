@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Godot;
+using Theadventureofhink.entities.portals;
 
 namespace Theadventureofhink.autoloads;
 
@@ -49,20 +50,24 @@ public partial class GameManager : Node
         }
     }
 
-    public async void OnPlayerEnteredPortal(Portal portal)
+    public async void OnPlayerEnteredPortal(IPortal portal)
     {
         GD.Print("on_player_entered_portal");
         Player.Disable();
         await _cutsceneManager.TransitionOut();
         await ToSignal(GetTree().CreateTimer(0.5), "timeout");
         IsEnteringNewScene = true;
-        NewScenePortalName = portal.TargetPortalName;
+        NewScenePortalName = portal.GetTargetPortalName();
+        
+        GD.Print("Next portal: " + NewScenePortalName);
         GD.Print("Load next level?");
 
-        if (portal.NextScenePath != null)
+        var nextScenePath = portal.GetNextScenePath();
+        
+        if (nextScenePath != null)
         {
             GD.Print("LOAD SCENE WOO");
-            LoadScene(portal.NextScenePath);
+            LoadScene(nextScenePath);
         }
     }
 
@@ -84,11 +89,11 @@ public partial class GameManager : Node
             return;
         }
 
-        GD.Print("Found portal: " + portal.Name);
+        GD.Print("Found portal: " + portal.GetName());
 
         CurrentCheckpoint = null;
-        Player.GlobalPosition = portal.GlobalPosition;
-        LastSpawnpoint = portal.GlobalPosition;
+        Player.GlobalPosition = portal.GetSpawnPosition();
+        LastSpawnpoint = portal.GetSpawnPosition();
 
         GD.Print(Player.GlobalPosition);
         _cameraManager.SetCameraTarget(Player);
@@ -130,13 +135,13 @@ public partial class GameManager : Node
         _cameraManager.Camera.OnPlayerTurned(direction);
     }
 
-    private Portal? GetPortalByName(string name)
+    private IPortal? GetPortalByName(string name)
     {
-        var portals = GetTree().GetNodesInGroup("portals").OfType<Portal>();
+        var portals = GetTree().GetNodesInGroup("portals").OfType<IPortal>();
 
         foreach (var p in portals)
         {
-            if (p.Name == name)
+            if (p.GetName() == name)
             {
                 return p;
             }
@@ -145,9 +150,9 @@ public partial class GameManager : Node
         return null;
     }
 
-    public Portal? GetAnyAvailablePortal()
+    public PortalArea? GetAnyAvailablePortal()
     {
-        return GetTree().GetFirstNodeInGroup("portals") as Portal;
+        return GetTree().GetFirstNodeInGroup("portals") as PortalArea;
     }
 
     public void OnCutsceneManagerCutsceneStarted()

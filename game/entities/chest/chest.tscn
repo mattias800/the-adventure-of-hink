@@ -106,4 +106,4 @@ bus = &"SFX"
 stream = ExtResource("5_apadi")
 bus = &"SFX"
 
-[connection signal="on_interact" from="Interactible" to="." method="OnInteract"]
+[connection signal="PlayerInteracted" from="Interactible" to="." method="OnInteract"]

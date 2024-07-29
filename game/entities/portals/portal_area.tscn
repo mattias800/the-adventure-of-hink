@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dwxvfn64khsas"]
 
-[ext_resource type="Script" path="res://entities/Portal.cs" id="1_wixc1"]
+[ext_resource type="Script" path="res://entities/portals/PortalArea.cs" id="1_wixc1"]
 
-[node name="Portal" type="Area2D" groups=["portals"]]
+[node name="PortalArea" type="Area2D" groups=["portals"]]
 script = ExtResource("1_wixc1")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
