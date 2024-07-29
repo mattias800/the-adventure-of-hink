@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxwwsjvwx7o2y"]
+
+[ext_resource type="Texture2D" uid="uid://b4yauepsurigu" path="res://collectibles/double_jump/Item__36.png" id="1_7tott"]
+
+[node name="DoubleJumpIcon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7tott")

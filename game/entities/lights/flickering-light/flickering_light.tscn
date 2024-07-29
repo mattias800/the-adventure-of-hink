@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxxkd8vw6t2dy"]
+
+[ext_resource type="Script" path="res://entities/lights/flickering-light/FlickeringLight.cs" id="1_c40rs"]
+
+[sub_resource type="Gradient" id="Gradient_xmdgj"]
+offsets = PackedFloat32Array(0, 0.694253)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4v3vm"]
+gradient = SubResource("Gradient_xmdgj")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="FlickeringLight" type="PointLight2D"]
+color = Color(1, 1, 0, 1)
+energy = 2.41
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_4v3vm")
+script = ExtResource("1_c40rs")

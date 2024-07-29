@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://vqnr4cymdm8c"
+path="res://.godot/imported/double_jump_dialogue.dialogue-8d83fe1ee317cbdc024e3969d6cdf5b2.tres"
+
+[deps]
+
+source_file="res://collectibles/double_jump/double_jump_dialogue.dialogue"
+dest_files=["res://.godot/imported/double_jump_dialogue.dialogue-8d83fe1ee317cbdc024e3969d6cdf5b2.tres"]
+
+[params]
+
+defaults=true

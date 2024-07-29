@@ -83,6 +83,11 @@ movie_writer/movie_file="/Users/mattias800/Downloads/hink.avi"
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
+[global_group]
+
+platformers="Root node for a platformer scene"
+overworlds="Root node for an overworld scene"
+
 [input]
 
 move_left={
@@ -154,7 +159,7 @@ throw={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue", "res://entities/characters/little_mushroom/little_mushroom.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://entities/characters/hometown/hometown_villager.dialogue")
+locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue", "res://entities/characters/little_mushroom/little_mushroom.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://entities/characters/hometown/hometown_villager.dialogue", "res://collectibles/double_jump/double_jump_dialogue.dialogue")
 
 [layer_names]
 

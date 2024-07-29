@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://esminst5rh4s"]
+
+[ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="1_dk47e"]
+[ext_resource type="Script" path="res://collectibles/double_jump/DoubleJumpChest.cs" id="1_kuufp"]
+[ext_resource type="PackedScene" uid="uid://d0qsuxg3506n5" path="res://effects/achievement_effect/achievement_effect.tscn" id="2_u0kk8"]
+[ext_resource type="PackedScene" uid="uid://bxwwsjvwx7o2y" path="res://collectibles/double_jump/double_jump_icon.tscn" id="3_3mcty"]
+
+[node name="DoubleJumpChest" type="Node2D"]
+script = ExtResource("1_kuufp")
+
+[node name="Chest" parent="." instance=ExtResource("1_dk47e")]
+flipped = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(160, 90)
+transform = Transform2D(1, 0, 0, 1, 160, 90)
+
+[node name="AchievementEffect" parent="CanvasLayer" instance=ExtResource("2_u0kk8")]
+AchievementIcon = ExtResource("3_3mcty")
+
+[connection signal="ChestOpened" from="Chest" to="." method="OnOpen"]

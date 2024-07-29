@@ -12,8 +12,8 @@ script = ExtResource("1_wgujw")
 flipped = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-offset = Vector2(160, 80)
-transform = Transform2D(1, 0, 0, 1, 160, 80)
+offset = Vector2(160, 90)
+transform = Transform2D(1, 0, 0, 1, 160, 90)
 
 [node name="AchievementEffect" parent="CanvasLayer" instance=ExtResource("3_uegta")]
 AchievementIcon = ExtResource("4_udhb0")
