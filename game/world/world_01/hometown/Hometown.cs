@@ -26,7 +26,7 @@ public partial class Hometown : Node2D
         room_1_underground = GetNode<Room>("Rooms/Room1Underground");
         room_2_underground = GetNode<Room>("Rooms/Room2Underground");
         ground_over_well_hole = GetNode<TileMapLayer>("GroundOverWellHole");
-        attacking_state = GetNode<Node2D>("AttackingState");
+        attacking_state = GetNode<Node2D>("States/AttackingState");
 
         _musicManager.PlayTrack(Tracks.Track.SoftBall);
         if (!_gameState.WorldState.HometownState.IsUnderAttack.Value())

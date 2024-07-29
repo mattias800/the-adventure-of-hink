@@ -1,0 +1,38 @@
+~ blacksmith_start
+
+Blacksmith: Hi Hink! How was your day in the forest?
+Blacksmith: Your grandpa is waiting for you at your house.
+
+=> END
+
+~ grandpa_start
+
+Hink: Hi grandpa!
+Grandpa: Oh, Hello Hink!
+Grandpa: Did you enjoy the forest?
+Hink: Yeah! Lots of birds, and I made a fire!
+Grandpa: Oh did you? That must've been cozy.
+Grandpa: Don't forget the ceremony is tomorrow.
+Hink: I know! I can't wait! I finally get the dash emblem!
+Grandpa: Haha, yes. But I also have a little something for you in the house.
+Grandpa: Please go get it for me.
+
+=> END
+
+~ grandpa_start_repeat
+
+Grandpa: I have something for you in the house. Please go get it for me.
+
+=> END
+
+~ grandpa_start_after_double_jump
+
+Grandpa: You found it!
+Grandpa: That emblem makes it possible to double jump!
+Hink: Oh, nice!
+Grandpa: Why don't you try it out? I'm sure there are places in the forest where it can be put to good use.
+Hink: Thanks, grandpa! You're the best!
+Grandpa: Hoho, just be careful my boy. This might be a safe place, but you can still fall.
+Hink: I'll be careful, see you later!
+
+=> END

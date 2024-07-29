@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn31me2tk256i"]
+
+[ext_resource type="Script" path="res://entities/characters/hometown/HometownVillager.cs" id="1_how0v"]
+[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="1_ijiie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2o5g"]
+
+[node name="HometownVillager" type="Node2D"]
+script = ExtResource("1_how0v")
+
+[node name="Talkable" parent="." instance=ExtResource("1_ijiie")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Talkable"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_n2o5g")
+
+[connection signal="TalkStarted" from="Talkable" to="." method="OnTalk"]

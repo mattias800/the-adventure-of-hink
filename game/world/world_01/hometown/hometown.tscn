@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=47 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
@@ -8,7 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portal.tscn" id="4_0ce4s"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="6_7me56"]
 [ext_resource type="Texture2D" uid="uid://rtpft5oabs2b" path="res://assets/GrasslandAtlas.png" id="10_n4beb"]
+[ext_resource type="PackedScene" uid="uid://dn31me2tk256i" path="res://entities/characters/hometown/hometown_villager.tscn" id="10_siccx"]
+[ext_resource type="Texture2D" uid="uid://byo414j2t65up" path="res://entities/characters/hometown/blacksmith/MiniBlacksmith.png" id="11_c5tfa"]
+[ext_resource type="Texture2D" uid="uid://vqgekly4rdrh" path="res://entities/characters/hometown/old_man/MiniOldMan.png" id="12_uko8f"]
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
+[ext_resource type="Script" path="res://entities/characters/hometown/old_man/OldManDialogueSwitcher.cs" id="13_qoncd"]
 [ext_resource type="PackedScene" uid="uid://ba7h5wreyfr76" path="res://entities/well/well.tscn" id="14_040f5"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="16_pmt6j"]
@@ -75,6 +79,78 @@ sources/0 = SubResource("TileSetAtlasSource_1s6x4")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_roamx"]
 radius = 52.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1utyx"]
+atlas = ExtResource("11_c5tfa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nmm1"]
+atlas = ExtResource("11_c5tfa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074rb"]
+atlas = ExtResource("11_c5tfa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdo2s"]
+atlas = ExtResource("11_c5tfa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u0bda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1utyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nmm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdo2s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa5en"]
+atlas = ExtResource("12_uko8f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q336"]
+atlas = ExtResource("12_uko8f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87j6m"]
+atlas = ExtResource("12_uko8f")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrxc3"]
+atlas = ExtResource("12_uko8f")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwryw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa5en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q336")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87j6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrxc3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsxs6"]
 size = Vector2(26, 242)
@@ -252,6 +328,71 @@ shape = SubResource("CircleShape2D_roamx")
 position = Vector2(844, 192)
 IsOpen = true
 
+[node name="States" type="Node2D" parent="."]
+
+[node name="StartState" type="Node2D" parent="States"]
+
+[node name="Blacksmith" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
+position = Vector2(419, 224)
+Dialogue = "blacksmith_start"
+AnimatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="States/StartState/Blacksmith"]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_u0bda")
+animation = &"idle"
+
+[node name="Grandpa" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
+position = Vector2(734, 224)
+DialogueSwitcherPath = NodePath("DialogueSwitcher")
+AnimatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="States/StartState/Grandpa"]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_nwryw")
+
+[node name="DialogueSwitcher" type="Node2D" parent="States/StartState/Grandpa"]
+script = ExtResource("13_qoncd")
+
+[node name="AttackingState" type="Node2D" parent="States"]
+
+[node name="LizardfolkArcher" parent="States/AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(158, 248)
+
+[node name="LizardfolkArcher2" parent="States/AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(221, 240)
+
+[node name="LizardfolkArcher3" parent="States/AttackingState" instance=ExtResource("17_ih6gy")]
+position = Vector2(239, 240)
+
+[node name="LizardfolkGladiator" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(283, 224)
+
+[node name="LizardfolkGladiator2" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(231, 240)
+
+[node name="LizardfolkGladiator3" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(346, 240)
+
+[node name="LizardfolkGladiator4" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(423, 216)
+
+[node name="LizardfolkGladiator5" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(504, 216)
+flip_h = true
+
+[node name="LizardfolkGladiator6" parent="States/AttackingState" instance=ExtResource("18_moilp")]
+position = Vector2(576, 208)
+
+[node name="HouseFire" parent="States/AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(457, 199)
+
+[node name="HouseFire2" parent="States/AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(479, 173)
+
+[node name="HouseFire3" parent="States/AttackingState" instance=ExtResource("19_s8ljo")]
+position = Vector2(494, 204)
+
 [node name="StartPortal" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(24, 216)
 NextScenePath = "res://world/overworld_01/overworld_01.tscn"
@@ -307,45 +448,6 @@ position = Vector2(0, 289)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/UndergroundCameraTrigger"]
 position = Vector2(456.5, 27)
 shape = SubResource("RectangleShape2D_fcxpw")
-
-[node name="AttackingState" type="Node2D" parent="."]
-
-[node name="LizardfolkArcher" parent="AttackingState" instance=ExtResource("17_ih6gy")]
-position = Vector2(158, 248)
-
-[node name="LizardfolkArcher2" parent="AttackingState" instance=ExtResource("17_ih6gy")]
-position = Vector2(221, 240)
-
-[node name="LizardfolkArcher3" parent="AttackingState" instance=ExtResource("17_ih6gy")]
-position = Vector2(239, 240)
-
-[node name="LizardfolkGladiator" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(283, 224)
-
-[node name="LizardfolkGladiator2" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(231, 240)
-
-[node name="LizardfolkGladiator3" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(346, 240)
-
-[node name="LizardfolkGladiator4" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(423, 216)
-
-[node name="LizardfolkGladiator5" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(504, 216)
-flip_h = true
-
-[node name="LizardfolkGladiator6" parent="AttackingState" instance=ExtResource("18_moilp")]
-position = Vector2(576, 208)
-
-[node name="HouseFire" parent="AttackingState" instance=ExtResource("19_s8ljo")]
-position = Vector2(457, 199)
-
-[node name="HouseFire2" parent="AttackingState" instance=ExtResource("19_s8ljo")]
-position = Vector2(479, 173)
-
-[node name="HouseFire3" parent="AttackingState" instance=ExtResource("19_s8ljo")]
-position = Vector2(494, 204)
 
 [node name="Dog" parent="." instance=ExtResource("16_ygco4")]
 position = Vector2(651, 216)
