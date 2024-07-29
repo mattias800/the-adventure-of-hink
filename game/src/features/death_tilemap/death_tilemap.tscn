@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o1lq27bbki8k"]
 
-[ext_resource type="Script" path="res://entities/death_tilemap.gd" id="1_ru2cj"]
+[ext_resource type="Script" path="res://src/features/death_tilemap/death_tilemap.gd" id="1_ru2cj"]
 
 [node name="DeathTilemap" type="Node2D"]
 script = ExtResource("1_ru2cj")

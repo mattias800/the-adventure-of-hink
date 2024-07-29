@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dh4lm1cwj5com"]
 
-[ext_resource type="Script" path="res://entities/camera/camera_limit.gd" id="1_hvs31"]
+[ext_resource type="Script" path="res://src/features/camera/camera_limit.gd" id="1_hvs31"]
 
 [node name="CameraLimit" type="Area2D"]
 script = ExtResource("1_hvs31")

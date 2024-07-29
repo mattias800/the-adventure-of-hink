@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7vvtoj345h67"]
 
-[ext_resource type="Script" path="res://entities/boomerang/BoomerangController.cs" id="1_q15o2"]
+[ext_resource type="Script" path="res://src/features/boomerang/BoomerangController.cs" id="1_q15o2"]
 
 [node name="BoomerangController" type="Node2D"]
 script = ExtResource("1_q15o2")

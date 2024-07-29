@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://q8i0rvm54twb"]
 
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_15u3a"]
-[ext_resource type="Script" path="res://entities/camera/background_3d.gd" id="2_l1hgi"]
+[ext_resource type="Script" path="res://src/features/camera/background_3d.gd" id="2_l1hgi"]
 [ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="3_vrxsd"]
 
 [node name="Background3D" type="Sprite2D"]

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bup3i3g8hlbkh"
-path="res://.godot/imported/Small_Weapon_Whoosh_01.wav-436bbb85a2020c00a7cc598fe3f16212.sample"
+path="res://.godot/imported/Small_Weapon_Whoosh_01.wav-6ba7e57c92d4dd90494e5906e2f11095.sample"
 
 [deps]
 
-source_file="res://entities/boomerang/audio/Small_Weapon_Whoosh_01.wav"
-dest_files=["res://.godot/imported/Small_Weapon_Whoosh_01.wav-436bbb85a2020c00a7cc598fe3f16212.sample"]
+source_file="res://src/features/boomerang/audio/Small_Weapon_Whoosh_01.wav"
+dest_files=["res://.godot/imported/Small_Weapon_Whoosh_01.wav-6ba7e57c92d4dd90494e5906e2f11095.sample"]
 
 [params]
 

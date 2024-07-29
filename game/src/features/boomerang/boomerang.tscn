@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=4 uid="uid://cf2adb7i38jj6"]
 
-[ext_resource type="Script" path="res://entities/boomerang/Boomerang.cs" id="1_681ei"]
-[ext_resource type="Texture2D" uid="uid://bvkkclwqlmcw" path="res://entities/boomerang/arrow_1.png" id="2_m4yqv"]
-[ext_resource type="AudioStream" uid="uid://c0xy7d61eo1hr" path="res://entities/boomerang/audio/Axe_Whoosh_01.wav" id="3_my82g"]
-[ext_resource type="AudioStream" uid="uid://q1xwyq0ukgyt" path="res://entities/boomerang/audio/Arrow_Hit_Wood_01.wav" id="4_yehon"]
+[ext_resource type="Script" path="res://src/features/boomerang/Boomerang.cs" id="1_681ei"]
+[ext_resource type="Texture2D" uid="uid://bvkkclwqlmcw" path="res://src/features/boomerang/arrow_1.png" id="2_m4yqv"]
+[ext_resource type="AudioStream" uid="uid://c0xy7d61eo1hr" path="res://src/features/boomerang/audio/Axe_Whoosh_01.wav" id="3_my82g"]
+[ext_resource type="AudioStream" uid="uid://q1xwyq0ukgyt" path="res://src/features/boomerang/audio/Arrow_Hit_Wood_01.wav" id="4_yehon"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vjps3"]
 radius = 3.0

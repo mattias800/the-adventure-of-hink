@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/features/player/Player.cs" id="1_8tupy"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
-[ext_resource type="PackedScene" uid="uid://bq22jxj2ct62h" path="res://entities/player_death_teleportation.tscn" id="2_eobix"]
+[ext_resource type="PackedScene" uid="uid://bq22jxj2ct62h" path="res://src/features/player/player_death_teleportation.tscn" id="2_eobix"]
 [ext_resource type="PackedScene" uid="uid://rfgg8gl078uo" path="res://src/features/player/dust_boom.tscn" id="2_ykok0"]
-[ext_resource type="PackedScene" uid="uid://cf2adb7i38jj6" path="res://entities/boomerang/boomerang.tscn" id="3_7yl8v"]
+[ext_resource type="PackedScene" uid="uid://cf2adb7i38jj6" path="res://src/features/boomerang/boomerang.tscn" id="3_7yl8v"]
 [ext_resource type="AudioStream" uid="uid://cu6ta5clwtw8a" path="res://assets/audio/sounds/player_jump.wav" id="4_hmqpj"]
 [ext_resource type="Script" path="res://src/features/player/PlayerDeathTeleportation.cs" id="5_afbpt"]
 [ext_resource type="AudioStream" uid="uid://buo3qly4p2sgn" path="res://assets/audio/sounds/player_explode.ogg" id="5_clhrg"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://c2w7sa2nxnh0e" path="res://assets/audio/sounds/player_jump_from_air.wav" id="9_xp7d3"]
 [ext_resource type="Texture2D" uid="uid://cvokx6lcwid3x" path="res://assets/player-death/SpriteSheetWhite.png" id="11_gv2e8"]
 [ext_resource type="Script" path="res://src/features/player/foot_dust.gd" id="13_f7fw7"]
-[ext_resource type="PackedScene" uid="uid://c7vvtoj345h67" path="res://entities/boomerang/boomerang_controller.tscn" id="15_c2qsn"]
+[ext_resource type="PackedScene" uid="uid://c7vvtoj345h67" path="res://src/features/boomerang/boomerang_controller.tscn" id="15_c2qsn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
 size = Vector2(8, 8)

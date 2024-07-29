@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://tybwjymdhrvi"
-path="res://.godot/imported/Weapon_Hit.wav-9ea4955ca9a8281b0594d8894da5ecd4.sample"
+path="res://.godot/imported/Weapon_Hit.wav-fd3a27174352944f4bec6ca23c397c3a.sample"
 
 [deps]
 
-source_file="res://entities/boomerang/audio/Weapon_Hit.wav"
-dest_files=["res://.godot/imported/Weapon_Hit.wav-9ea4955ca9a8281b0594d8894da5ecd4.sample"]
+source_file="res://src/features/boomerang/audio/Weapon_Hit.wav"
+dest_files=["res://.godot/imported/Weapon_Hit.wav-fd3a27174352944f4bec6ca23c397c3a.sample"]
 
 [params]
 

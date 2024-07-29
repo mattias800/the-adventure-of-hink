@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world/world_01/level_02/Level02.cs" id="1_4e7fq"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
-[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_hd861"]
+[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="2_hd861"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="3_c0nni"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="4_aownt"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="10_x3p3d"]

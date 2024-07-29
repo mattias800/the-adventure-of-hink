@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c0xy7d61eo1hr"
-path="res://.godot/imported/Axe_Whoosh_01.wav-6bdaca07cde7b8d61b47a83b86b8748d.sample"
+path="res://.godot/imported/Axe_Whoosh_01.wav-298a82259570efd7ac87f8a30407c498.sample"
 
 [deps]
 
-source_file="res://entities/boomerang/audio/Axe_Whoosh_01.wav"
-dest_files=["res://.godot/imported/Axe_Whoosh_01.wav-6bdaca07cde7b8d61b47a83b86b8748d.sample"]
+source_file="res://src/features/boomerang/audio/Axe_Whoosh_01.wav"
+dest_files=["res://.godot/imported/Axe_Whoosh_01.wav-298a82259570efd7ac87f8a30407c498.sample"]
 
 [params]
 

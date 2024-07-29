@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dwr2cxlsvmw1r"
-path="res://.godot/imported/Punch_08.wav-0efb3a180adc1cb067d55ab581386e5c.sample"
+path="res://.godot/imported/Punch_08.wav-041b85770b455de07640ff1749d6ef74.sample"
 
 [deps]
 
-source_file="res://entities/boomerang/audio/Punch_08.wav"
-dest_files=["res://.godot/imported/Punch_08.wav-0efb3a180adc1cb067d55ab581386e5c.sample"]
+source_file="res://src/features/boomerang/audio/Punch_08.wav"
+dest_files=["res://.godot/imported/Punch_08.wav-041b85770b455de07640ff1749d6ef74.sample"]
 
 [params]
 

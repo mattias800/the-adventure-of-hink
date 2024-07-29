@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfnwf5vrtylsq"]
 
 [ext_resource type="Script" path="res://autoloads/CutsceneManager.cs" id="1_pna1m"]
-[ext_resource type="Shader" path="res://entities/camera/transitionsss.gdshader" id="2_mkib3"]
+[ext_resource type="Shader" path="res://src/features/camera/transitionsss.gdshader" id="2_mkib3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjbc1"]
 shader = ExtResource("2_mkib3")

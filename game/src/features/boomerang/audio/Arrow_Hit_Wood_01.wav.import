@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://q1xwyq0ukgyt"
-path="res://.godot/imported/Arrow_Hit_Wood_01.wav-6700266ec4a6a3480751b4b5cc1caa17.sample"
+path="res://.godot/imported/Arrow_Hit_Wood_01.wav-b7130802ad9152d9079d60149cdcac47.sample"
 
 [deps]
 
-source_file="res://entities/boomerang/audio/Arrow_Hit_Wood_01.wav"
-dest_files=["res://.godot/imported/Arrow_Hit_Wood_01.wav-6700266ec4a6a3480751b4b5cc1caa17.sample"]
+source_file="res://src/features/boomerang/audio/Arrow_Hit_Wood_01.wav"
+dest_files=["res://.godot/imported/Arrow_Hit_Wood_01.wav-b7130802ad9152d9079d60149cdcac47.sample"]
 
 [params]
 
