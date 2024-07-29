@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=39 format=4 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/Level01.cs" id="1_7cpa0"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="5_u4inf"]
 [ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://backgrounds/fog/fog.tscn" id="5_xy6t2"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="7_silrh"]
-[ext_resource type="PackedScene" uid="uid://cpj05br0x2fj0" path="res://entities/player_enter_trigger.tscn" id="8_4xcwo"]
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="12_1mwam"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="12_waw7x"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="14_ottqj"]
@@ -20,9 +19,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi8ud"]
 size = Vector2(320, 200)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8a6j"]
-size = Vector2(13, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wxmx"]
 size = Vector2(352, 304)
@@ -114,12 +110,6 @@ tile_set = ExtResource("2_7l16g")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room1"]
 position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_oi8ud")
-
-[node name="Room1Trigger" parent="Rooms/Room1" instance=ExtResource("8_4xcwo")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room1/Room1Trigger"]
-position = Vector2(163.5, 149)
-shape = SubResource("RectangleShape2D_b8a6j")
 
 [node name="MovingPlatform2" parent="Rooms/Room1" node_paths=PackedStringArray("end_position") instance=ExtResource("12_1mwam")]
 position = Vector2(872, 48)
@@ -329,5 +319,3 @@ position = Vector2(3, 0)
 shape = SubResource("RectangleShape2D_gjucq")
 
 [connection signal="PlayerEnteredRoom" from="Rooms/Room1" to="." method="OnPlayerEnteredRoom1"]
-[connection signal="on_player_entered" from="Rooms/Room1/Room1Trigger" to="." method="OnPlayerEnteredRoom1Trigger"]
-[connection signal="PlayerEnteredRoom" from="Rooms/Room2" to="." method="OnPlayerEnteredRoom2"]

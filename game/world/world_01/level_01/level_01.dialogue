@@ -1,19 +1,8 @@
 ~ room1_entry
 
 Hink: *Yawn*.. Good morning to me..
-Hink: Looks like a nice day!
-=> END
-
-~ room1_trigger
-
 Hink: The forest seems peaceful..
-Hink: I should probably get home..
-=> END
+Hink: Looks like it's gonna be a nice day.
+Hink: I should probably get home before grandpa starts to worry.
 
-~ room2_entry
-
-Hink: What should I do today? Hmm..
-Hink: What to do, on a nice, quiet day..
-Hink: I have an idea!
-Hink: I'm gonna go punch Limpan in the face!
 => END

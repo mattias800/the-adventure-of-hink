@@ -61,6 +61,7 @@ layout/default_style="res://dialog/dialog_style.tres"
 
 general/states=["GameState"]
 general/uses_dotnet=true
+general/balloon_path="res://src/features/dialogue/Balloon.tscn"
 
 [display]
 
