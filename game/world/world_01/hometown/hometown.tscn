@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=50 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_di72y"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="2_t484x"]
+[ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="3_1pr8d"]
 [ext_resource type="Texture2D" uid="uid://c8j2r07kxk6bh" path="res://world/common/house/House copy.png" id="3_g521m"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="4_0ce4s"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="6_7me56"]
@@ -268,6 +269,8 @@ size = Vector2(913, 54)
 script = ExtResource("1_sfoep")
 
 [node name="Camera" parent="." instance=ExtResource("2_t484x")]
+
+[node name="PaintedForest" parent="Camera" instance=ExtResource("3_1pr8d")]
 
 [node name="Checkpoint" parent="." instance=ExtResource("1_lcggy")]
 position = Vector2(584, 216)

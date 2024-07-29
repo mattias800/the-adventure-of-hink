@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqilxb5fb5pno"]
 
-[ext_resource type="Shader" path="res://src/features/camera/overworld_clouds/OverworldClouds.gdshader" id="1_5qr7p"]
-[ext_resource type="Script" path="res://src/features/camera/overworld_clouds/OverworldClouds.gd" id="2_guhtj"]
+[ext_resource type="Shader" path="res://backgrounds/overworld_clouds/shaders/OverworldClouds.gdshader" id="1_5qr7p"]
+[ext_resource type="Script" path="res://backgrounds/overworld_clouds/overworld_clouds.gd" id="2_guhtj"]
 
 [sub_resource type="Gradient" id="Gradient_71o6t"]
 offsets = PackedFloat32Array(0.139344, 1)

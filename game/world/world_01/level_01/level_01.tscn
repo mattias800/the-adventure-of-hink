@@ -1,9 +1,12 @@
-[gd_scene load_steps=38 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=41 format=4 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/Level01.cs" id="1_7cpa0"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="2_tl3u6"]
+[ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="3_ig1ss"]
+[ext_resource type="PackedScene" uid="uid://cpy6gsuu6lqq2" path="res://backgrounds/3d/mountains_background.tscn" id="4_qtp14"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="5_u4inf"]
+[ext_resource type="PackedScene" uid="uid://bjcf2unj0fpmu" path="res://backgrounds/fog/fog.tscn" id="5_xy6t2"]
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="7_silrh"]
 [ext_resource type="PackedScene" uid="uid://cpj05br0x2fj0" path="res://entities/player_enter_trigger.tscn" id="8_4xcwo"]
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="12_1mwam"]
@@ -87,6 +90,12 @@ size = Vector2(14, 20)
 script = ExtResource("1_7cpa0")
 
 [node name="Camera" parent="." instance=ExtResource("2_tl3u6")]
+
+[node name="PaintedForest" parent="Camera" instance=ExtResource("3_ig1ss")]
+
+[node name="MountainsBackground" parent="Camera" instance=ExtResource("4_qtp14")]
+
+[node name="Fog" parent="Camera" instance=ExtResource("5_xy6t2")]
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true

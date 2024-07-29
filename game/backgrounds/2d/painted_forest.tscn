@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cei31y2nm4o8n"]
+
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_2u7o0"]
+
+[node name="PaintedForest" type="Sprite2D"]
+texture = ExtResource("1_2u7o0")
+centered = false

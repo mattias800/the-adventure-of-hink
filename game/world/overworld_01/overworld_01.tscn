@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://d2422fwpoj4pm"]
+[gd_scene load_steps=13 format=4 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
 [ext_resource type="Script" path="res://world/overworld_01/Overworld01.cs" id="1_m2gna"]
 [ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld_01/overworld_water.tscn" id="1_n4jpo"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="2_ro3rw"]
+[ext_resource type="PackedScene" uid="uid://do8560lw7gjwe" path="res://backgrounds/overworld_clouds/overworld_clouds.tscn" id="3_hog5s"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="3_uf8ks"]
 [ext_resource type="AudioStream" uid="uid://cmyeumil4h2kj" path="res://assets/audio/ambience/windy.mp3" id="7_gswvf"]
 
@@ -733,6 +734,8 @@ size = Vector2(16, 20)
 script = ExtResource("1_m2gna")
 
 [node name="Camera" parent="." instance=ExtResource("2_ro3rw")]
+
+[node name="OverworldClouds" parent="Camera" instance=ExtResource("3_hog5s")]
 
 [node name="OverworldWater" parent="." instance=ExtResource("1_n4jpo")]
 position = Vector2(-16, -656)
