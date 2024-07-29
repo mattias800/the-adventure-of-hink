@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://q8i0rvm54twb"]
+[gd_scene load_steps=4 format=3 uid="uid://cjfkh1jgdivfi"]
 
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_15u3a"]
-[ext_resource type="Script" path="res://src/features/camera/background_3d.gd" id="2_l1hgi"]
-[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/mountain_background.tscn" id="3_vrxsd"]
+[ext_resource type="Script" path="res://backgrounds/3d/background_3d.gd" id="2_l1hgi"]
+[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/3d/mountains.tscn" id="3_vrxsd"]
 
 [node name="Background3D" type="Sprite2D"]
 texture = ExtResource("1_15u3a")

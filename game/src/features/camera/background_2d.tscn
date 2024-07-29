@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://7hi1l8h3qs86"]
-
-[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_41gcc"]
-
-[node name="Background" type="Sprite2D"]
-texture = ExtResource("1_41gcc")
-centered = false

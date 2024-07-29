@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjcf2unj0fpmu"]
 
-[ext_resource type="Shader" path="res://src/features/camera/camera_fog.gdshader" id="1_htlsy"]
+[ext_resource type="Shader" path="res://src/features/camera/fog/camera_fog.gdshader" id="1_htlsy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ix55e"]
 frequency = 0.0075

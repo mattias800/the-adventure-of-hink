@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpy6gsuu6lqq2"]
+
+[ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_lnij0"]
+[ext_resource type="Script" path="res://backgrounds/3d/background_3d.gd" id="2_ngd8w"]
+[ext_resource type="PackedScene" uid="uid://dq340y23imlfs" path="res://backgrounds/3d/mountains.tscn" id="3_xhnty"]
+
+[node name="MountainsBackground" type="Sprite2D"]
+texture = ExtResource("1_lnij0")
+centered = false
+script = ExtResource("2_ngd8w")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(320, 180)
+
+[node name="Mountains" parent="SubViewport" instance=ExtResource("3_xhnty")]
