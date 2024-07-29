@@ -30,12 +30,12 @@ public class JumpingState : PlayerState
             controller.Player.Velocity = new Vector2(controller.Player.Velocity.X, -50);
             controller.ChangeState(new FallingState(controller));
         }
-        else if (Input.IsActionJustPressed("jump") && controller.JumpsLeft > 0)
+        else if (playerSkillsState.CanDoubleJump.Value() && Input.IsActionJustPressed("jump") && controller.JumpsLeft > 0)
         {
             controller.TriggerJump(PlatformController.JumpSource.Air);
             controller.Player.Velocity = new Vector2(controller.Player.Velocity.X, -controller.JumpVelocity);
         }
-        else if (Input.IsActionJustPressed("dash") && controller.DashesLeft > 0)
+        else if (Input.IsActionJustPressed("dash") && controller.DashesLeft > 0 && playerSkillsState.CanDash.Value())
         {
             controller.TriggerDash();
         }
@@ -68,7 +68,7 @@ public class JumpingState : PlayerState
             }
 
             if (controller.Player.IsOnWall() && controller.TimeUntilWallGrabPossible <= 0.0 &&
-                Input.IsActionPressed("grab_wall"))
+                Input.IsActionPressed("grab_wall") && playerSkillsState.CanClimbWalls.Value())
             {
                 controller.VelocityIntoWall = controller.Player.GetWallNormal().X * -1;
                 if (controller.WallGrabTimeLeft >= 0.0)

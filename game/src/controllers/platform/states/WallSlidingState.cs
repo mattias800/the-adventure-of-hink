@@ -3,20 +3,24 @@ using Theadventureofhink.game_state;
 
 public class WallSlidingState : PlayerState
 {
-    public WallSlidingState(PlatformController controller) : base(controller, "WallSliding") { }
+    public WallSlidingState(PlatformController controller) : base(controller, "WallSliding")
+    {
+    }
 
     public override void Enter()
     {
         controller.AnimatedSprite.Play("grabbing_wall");
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+    }
 
     public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)
     {
         float direction = Input.GetAxis("move_left", "move_right");
 
-        controller.Player.Velocity = new Vector2(controller.Player.Velocity.X, 
+        controller.Player.Velocity = new Vector2(controller.Player.Velocity.X,
             Mathf.Lerp(controller.Player.Velocity.Y, 50.0f, 0.1f));
         controller.Player.Velocity = new Vector2(direction, controller.Player.Velocity.Y);
 
@@ -29,6 +33,7 @@ public class WallSlidingState : PlayerState
                 controller.CoyoteTimeFromWallLeft = controller.CoyoteTimeLimit;
                 controller.ChangeState(new FallingState(controller));
             }
+
             if (direction == 0)
             {
                 controller.CoyoteTimeFromWallLeft = controller.CoyoteTimeLimit;
@@ -44,10 +49,12 @@ public class WallSlidingState : PlayerState
                 controller.ChangeState(new JumpingState(controller));
             }
 
-            if (Input.IsActionJustPressed("grab_wall") && controller.WallGrabTimeLeft > 0)
+            if (Input.IsActionJustPressed("grab_wall") && controller.WallGrabTimeLeft > 0 &&
+                playerSkillsState.CanClimbWalls.Value())
             {
                 controller.ChangeState(new GrabbingWallState(controller));
             }
+
             if (controller.Player.IsOnFloor())
             {
                 controller.ChangeState(new IdleState(controller));
