@@ -5,6 +5,27 @@ Blacksmith: Your grandpa is waiting for you at your house.
 
 => END
 
+~ blacksmith_has_no_double_jump
+
+Blacksmith: Did you talk to your grandpa?
+
+=> END
+
+~ blacksmith_suggest_going_to_forest
+
+Blacksmith: Ooh, what have you got there?
+Hink: Double jump! My grandpa have it to me!
+Blacksmith: Nice!
+Blacksmith: There are some nice double jump spots in the forest!
+
+=> END
+
+~ blacksmith_when_has_wall_climb
+
+Blacksmith: Wow, you found wall climb! Nice!
+
+=> END
+
 ~ grandpa_start
 
 Hink: Hi grandpa!
@@ -25,14 +46,32 @@ Grandpa: I have something for you in the house. Please go get it for me.
 
 => END
 
-~ grandpa_start_after_double_jump
+~ grandpa_start_suggest_going_to_forest
 
 Grandpa: You found it!
 Grandpa: That emblem makes it possible to double jump!
 Hink: Oh, nice!
 Grandpa: Why don't you try it out? I'm sure there are places in the forest where it can be put to good use.
 Hink: Thanks, grandpa! You're the best!
-Grandpa: Hoho, just be careful my boy. This might be a safe place, but you can still fall.
-Hink: I'll be careful, see you later!
+Grandpa: Hoho, just be careful my boy. This might be a safe place, but you can still fall and hit your head.
+Hink: Yes yes, I know. I'll be careful, see you later!
+Grandpa: Have fun!
+
+=> END
+
+~ grandpa_start_suggest_going_to_forest_repeat
+
+Grandpa: Go to the forest and see if you find some nice spots to double jump.
+
+=> END
+
+~ grandpa_reacts_to_wallclimb
+
+Hink: Look what I found!
+Grandpa: What is that? Another emblem?
+Hink: Yeah! Wall climb!
+Hink: And I can wall jump too!
+Grandpa: Wow, that is unexpected, I'm happy for you!
+Grandpa: You sure are growing up fast!
 
 => END

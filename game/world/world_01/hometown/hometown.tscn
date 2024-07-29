@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=49 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://entities/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://rtpft5oabs2b" path="res://assets/GrasslandAtlas.png" id="10_n4beb"]
 [ext_resource type="PackedScene" uid="uid://dn31me2tk256i" path="res://entities/characters/hometown/hometown_villager.tscn" id="10_siccx"]
 [ext_resource type="Texture2D" uid="uid://byo414j2t65up" path="res://entities/characters/hometown/blacksmith/MiniBlacksmith.png" id="11_c5tfa"]
+[ext_resource type="Script" path="res://entities/characters/hometown/blacksmith/BlacksmithDialogueSwitcher.cs" id="12_a3xsh"]
 [ext_resource type="Texture2D" uid="uid://vqgekly4rdrh" path="res://entities/characters/hometown/old_man/MiniOldMan.png" id="12_uko8f"]
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
 [ext_resource type="Script" path="res://entities/characters/hometown/old_man/OldManDialogueSwitcher.cs" id="13_qoncd"]
@@ -335,18 +336,23 @@ IsOpen = true
 
 [node name="Blacksmith" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
 position = Vector2(419, 224)
-Dialogue = "blacksmith_start"
+DialogueSwitcherPath = NodePath("DialogueSwitcher")
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
+StartTurnedLeft = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="States/StartState/Blacksmith"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_u0bda")
 animation = &"idle"
 
+[node name="DialogueSwitcher" type="Node2D" parent="States/StartState/Blacksmith"]
+script = ExtResource("12_a3xsh")
+
 [node name="Grandpa" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
 position = Vector2(734, 224)
 DialogueSwitcherPath = NodePath("DialogueSwitcher")
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
+StartTurnedLeft = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="States/StartState/Grandpa"]
 position = Vector2(0, -15)
