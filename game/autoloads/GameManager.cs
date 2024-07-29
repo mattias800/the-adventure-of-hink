@@ -150,9 +150,9 @@ public partial class GameManager : Node
         return null;
     }
 
-    public PortalArea? GetAnyAvailablePortal()
+    public IPortal? GetAnyAvailablePortal()
     {
-        return GetTree().GetFirstNodeInGroup("portals") as PortalArea;
+        return GetTree().GetFirstNodeInGroup("portals") as IPortal;
     }
 
     public void OnCutsceneManagerCutsceneStarted()

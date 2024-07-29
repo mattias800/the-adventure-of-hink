@@ -21,6 +21,11 @@ public class FallingState : PlayerState
         controller.Player.Velocity = new Vector2(controller.Player.Velocity.X, 
             Mathf.Min(controller.Player.Velocity.Y + controller.Gravity * (float)delta, controller.MaxFallSpeed));
 
+        if (controller.CoyoteTimeFromGroundLeft > 0)
+        {
+            controller.CoyoteTimeFromGroundLeft -= (float)delta;
+        }
+
         float direction = Input.GetAxis("move_left", "move_right");
 
         if (Input.IsActionJustPressed("jump") && controller.CoyoteTimeFromGroundLeft > 0.0f)

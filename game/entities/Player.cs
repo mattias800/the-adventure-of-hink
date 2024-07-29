@@ -150,7 +150,7 @@ public partial class Player : CharacterBody2D
 
     private void OnPlayerDashStarted(Vector2 direction)
     {
-        GetNode<AnimationPlayer>("DashAnimation").Play();
+        GetNode<AnimatedSprite2D>("DashAnimation").Play();
         EmitSignal(SignalName.PlayerDashStarted, direction);
     }
 

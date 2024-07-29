@@ -350,3 +350,9 @@ collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetection"]
 shape = SubResource("CircleShape2D_0c06m")
+
+[connection signal="PlayerDashStarted" from="." to="FootDust" method="_on_player_player_dash_started"]
+[connection signal="PlayerDashStopped" from="." to="FootDust" method="_on_player_player_dash_stopped"]
+[connection signal="PlayerDisabled" from="." to="FootDust" method="_on_player_player_disabled"]
+[connection signal="PlayerStartedMovingOnGround" from="." to="FootDust" method="_on_player_player_started_moving_on_ground"]
+[connection signal="PlayerStoppedMovingOnGround" from="." to="FootDust" method="_on_player_player_stopped_moving_on_ground"]
