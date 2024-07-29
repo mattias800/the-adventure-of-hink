@@ -44,7 +44,7 @@ public class WallSlidingState : PlayerState
             if (Input.IsActionJustPressed("jump") && playerSkillsState.CanWallJump.Value())
             {
                 controller.TriggerJump(PlatformController.JumpSource.Wall);
-                Vector2 jumpDirection = new Vector2(controller.Player.GetWallNormal().X, -1);
+                var jumpDirection = new Vector2(controller.Player.GetWallNormal().X, -1);
                 controller.Player.Velocity = jumpDirection.Normalized() * controller.JumpVelocity;
             }
 

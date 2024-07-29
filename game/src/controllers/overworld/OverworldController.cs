@@ -34,7 +34,6 @@ public partial class OverworldController : Node2D
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("Overworld _PhysicsProcess state=" + StateToString(_state));
         var direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         switch (_state)
