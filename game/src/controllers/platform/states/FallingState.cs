@@ -30,20 +30,24 @@ public class FallingState : PlayerState
             controller.CoyoteTimeFromGroundLeft -= (float)delta;
         }
 
+        if (controller.CoyoteTimeFromWallLeft > 0)
+        {
+            controller.CoyoteTimeFromWallLeft -= (float)delta;
+        }
+
         float direction = Input.GetAxis("move_left", "move_right");
 
         if (Input.IsActionJustPressed("jump") && controller.CoyoteTimeFromGroundLeft > 0.0f)
         {
             controller.TriggerJump(PlatformController.JumpSource.Ground);
             controller.Player.Velocity = new Vector2(direction * controller.Speed, -controller.JumpVelocity);
-            controller.ChangeState(new JumpingState(controller));
         }
-        else if (Input.IsActionJustPressed("jump") && controller.CoyoteTimeFromWallLeft > 0.0f)
+        else if (Input.IsActionJustPressed("jump") && controller.CoyoteTimeFromWallLeft > 0.0f &&
+                 playerSkillsState.CanWallJump.Value())
         {
+            controller.TriggerJump(PlatformController.JumpSource.Wall);
             controller.Player.Velocity = controller.GetWallJumpDirection(controller.NormalForLastWallTouched) *
                                          controller.JumpVelocity;
-            controller.TriggerJump(PlatformController.JumpSource.Wall);
-            controller.ChangeState(new JumpingState(controller));
         }
         else if (Input.IsActionJustPressed("jump") && controller.JumpsLeft > 0 &&
                  playerSkillsState.CanDoubleJump.Value()
@@ -51,7 +55,6 @@ public class FallingState : PlayerState
         {
             controller.TriggerJump(PlatformController.JumpSource.Air);
             controller.Player.Velocity = new Vector2(controller.Player.Velocity.X, -controller.JumpVelocity);
-            controller.ChangeState(new JumpingState(controller));
         }
         else if (Input.IsActionJustPressed("dash") && controller.DashesLeft > 0 && playerSkillsState.CanDash.Value())
         {

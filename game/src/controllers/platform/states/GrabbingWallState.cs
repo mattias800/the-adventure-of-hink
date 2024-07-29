@@ -37,7 +37,6 @@ public class GrabbingWallState : PlayerState
             controller.TriggerJump(PlatformController.JumpSource.Wall);
             controller.Player.Velocity = controller.GetWallJumpDirection(controller.Player.GetWallNormal()) * controller.JumpVelocity;
             controller.Player.MoveAndSlide();
-            controller.ChangeState(new JumpingState(controller));
         }
         else if (Input.IsActionPressed("move_up"))
         {

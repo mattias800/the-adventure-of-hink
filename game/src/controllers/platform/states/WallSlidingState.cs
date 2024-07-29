@@ -41,12 +41,11 @@ public class WallSlidingState : PlayerState
                 controller.ChangeState(new FallingState(controller));
             }
 
-            if (Input.IsActionJustPressed("jump"))
+            if (Input.IsActionJustPressed("jump") && playerSkillsState.CanWallJump.Value())
             {
                 controller.TriggerJump(PlatformController.JumpSource.Wall);
                 Vector2 jumpDirection = new Vector2(controller.Player.GetWallNormal().X, -1);
                 controller.Player.Velocity = jumpDirection.Normalized() * controller.JumpVelocity;
-                controller.ChangeState(new JumpingState(controller));
             }
 
             if (Input.IsActionJustPressed("grab_wall") && controller.WallGrabTimeLeft > 0 &&
