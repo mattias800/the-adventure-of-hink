@@ -256,7 +256,7 @@ texture_scale = 0.8
 [node name="WindowLight" parent="." instance=ExtResource("2_7f5f1")]
 position = Vector2(153, 59)
 color = Color(1, 1, 1, 1)
-energy = 1.0
+energy = 1.8
 texture_scale = 3.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

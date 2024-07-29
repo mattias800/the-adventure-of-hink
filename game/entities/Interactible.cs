@@ -7,10 +7,12 @@ public partial class Interactible : Area2D
     [Signal]
     public delegate void PlayerInteractedEventHandler();
 
+    [Export]
+    public bool IsActive = true;
+
     private Sprite2D _speechBubble;
 
     private bool _playerIsInside;
-    private bool _active = true;
 
     public override void _Ready()
     {
@@ -19,7 +21,7 @@ public partial class Interactible : Area2D
 
     public override void _Process(double delta)
     {
-        if (_playerIsInside && _active)
+        if (_playerIsInside && IsActive)
         {
             _speechBubble.Scale = Lerper.Lerp(_speechBubble.Scale, Vector2.One, 0.1f);
         }
@@ -28,7 +30,7 @@ public partial class Interactible : Area2D
             _speechBubble.Scale = Lerper.Lerp(_speechBubble.Scale, Vector2.Zero, 0.1f);
         }
 
-        if (_playerIsInside && Input.IsActionJustPressed("interact") && _active)
+        if (_playerIsInside && Input.IsActionJustPressed("interact") && IsActive)
         {
             Interact();
         }
@@ -36,13 +38,13 @@ public partial class Interactible : Area2D
 
     public void Interact()
     {
-        _active = false;
+        IsActive = false;
         EmitSignal(SignalName.PlayerInteracted);
     }
 
     public void Activate()
     {
-        _active = true;
+        IsActive = true;
     }
 
     public void OnBodyEntered(Node2D body)

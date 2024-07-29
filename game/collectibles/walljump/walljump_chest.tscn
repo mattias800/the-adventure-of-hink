@@ -9,7 +9,7 @@
 script = ExtResource("1_wgujw")
 
 [node name="Chest" parent="." instance=ExtResource("2_oeliu")]
-flipped = true
+Flipped = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 offset = Vector2(160, 90)
