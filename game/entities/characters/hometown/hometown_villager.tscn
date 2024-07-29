@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn31me2tk256i"]
 
 [ext_resource type="Script" path="res://entities/characters/hometown/HometownVillager.cs" id="1_how0v"]
-[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="1_ijiie"]
+[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://src/features/talkable/talkable.tscn" id="1_ijiie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2o5g"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/animals/dog/Dog.cs" id="1_61wsb"]
 [ext_resource type="Texture2D" uid="uid://cjjxyf3byq3ud" path="res://entities/animals/dog/FaithfulDogIdleSide.png" id="1_nvhie"]
-[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="2_dm4ys"]
+[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://src/features/talkable/talkable.tscn" id="2_dm4ys"]
 [ext_resource type="AudioStream" uid="uid://fd581e7k7uot" path="res://entities/animals/dog/dog_bark.mp3" id="4_q7bqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ulkp"]

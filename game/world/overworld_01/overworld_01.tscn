@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://world/overworld_01/Overworld01.cs" id="1_m2gna"]
 [ext_resource type="PackedScene" uid="uid://btey2n8ldsd37" path="res://world/overworld_01/overworld_water.tscn" id="1_n4jpo"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="2_ro3rw"]
-[ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://entities/portals/portal_area.tscn" id="3_uf8ks"]
+[ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="3_uf8ks"]
 [ext_resource type="AudioStream" uid="uid://cmyeumil4h2kj" path="res://assets/audio/ambience/windy.mp3" id="7_gswvf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvk1g"]

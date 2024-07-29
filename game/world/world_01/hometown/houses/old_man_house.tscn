@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cw6fgtnxu75ql" path="res://world/world_01/hometown/assets/VH_Viking house Tileset 16x16.png" id="1_re7wn"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://entities/camera/camera.tscn" id="1_yvq8o"]
 [ext_resource type="PackedScene" uid="uid://dxxkd8vw6t2dy" path="res://entities/lights/flickering-light/flickering_light.tscn" id="2_7f5f1"]
-[ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://entities/room.tscn" id="2_pnskt"]
+[ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="2_pnskt"]
 [ext_resource type="PackedScene" uid="uid://esminst5rh4s" path="res://collectibles/double_jump/double_jump_chest.tscn" id="6_rklan"]
-[ext_resource type="PackedScene" uid="uid://c868fnxn2lrek" path="res://entities/portals/portal_door.tscn" id="7_knxix"]
+[ext_resource type="PackedScene" uid="uid://c868fnxn2lrek" path="res://src/features/portals/portal_door.tscn" id="7_knxix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2ij2"]
 size = Vector2(320, 192)

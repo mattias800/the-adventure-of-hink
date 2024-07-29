@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/characters/little_mushroom/LittleMushroom.cs" id="1_mcl8r"]
 [ext_resource type="Texture2D" uid="uid://c6ieoghhd66vv" path="res://assets/Enchanted Forest Characters with animations.png" id="1_yfjj6"]
-[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://entities/talkable.tscn" id="2_qsnp8"]
+[ext_resource type="PackedScene" uid="uid://blr63onmgmp0m" path="res://src/features/talkable/talkable.tscn" id="2_qsnp8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ruus"]
 atlas = ExtResource("1_yfjj6")
