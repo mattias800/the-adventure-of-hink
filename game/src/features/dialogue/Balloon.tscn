@@ -95,6 +95,7 @@ MarginContainer/constants/margin_top = 8
 Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 RichTextLabel/colors/default_color = Color(0.353438, 0.353438, 0.353438, 1)
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.184314)
+RichTextLabel/constants/line_separation = 1
 
 [node name="ExampleBalloon" type="CanvasLayer"]
 layer = 100

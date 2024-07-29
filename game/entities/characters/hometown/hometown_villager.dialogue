@@ -1,7 +1,10 @@
 ~ blacksmith_start
 
 Blacksmith: Hi Hink! How was your day in the forest?
+Hink: Amazing, the forest is so beautiful!
+Blacksmith: Haha, yes it sure is!
 Blacksmith: Your grandpa is waiting for you at your house.
+Blacksmith: You should go see him!
 
 => END
 
@@ -51,10 +54,12 @@ Grandpa: I have something for you in the house. Please go get it for me.
 Grandpa: You found it!
 Grandpa: That emblem makes it possible to double jump!
 Hink: Oh, nice!
-Grandpa: Why don't you try it out? I'm sure there are places in the forest where it can be put to good use.
+Grandpa: Why don't you try it out? 
+Grandpa: I'm sure there are places in the forest where it can be put to good use.
 Hink: Thanks, grandpa! You're the best!
-Grandpa: Hoho, just be careful my boy. This might be a safe place, but you can still fall and hit your head.
-Hink: Yes yes, I know. I'll be careful, see you later!
+Grandpa: Hoho, just be careful my boy. 
+Grandpa: This might be a safe place, but you can still fall and hit your head.
+Hink: Yes yes, I know. I'll be careful. See you later!
 Grandpa: Have fun!
 
 => END
