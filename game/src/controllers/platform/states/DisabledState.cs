@@ -1,3 +1,5 @@
+using Theadventureofhink.game_state;
+
 public class DisabledState : PlayerState
 {
     public DisabledState(PlatformController controller) : base(controller, "Disabled")
@@ -18,7 +20,7 @@ public class DisabledState : PlayerState
         controller.AnimatedSprite.Play();
     }
 
-    public override void PhysicsProcess(double delta)
+    public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)
     {
         // Do nothing as the player is in a disabled state
     }

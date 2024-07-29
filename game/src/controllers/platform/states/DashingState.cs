@@ -1,4 +1,5 @@
 using Godot;
+using Theadventureofhink.game_state;
 
 public class DashingState : PlayerState
 {
@@ -28,7 +29,7 @@ public class DashingState : PlayerState
         controller.EmitSignal(PlatformController.SignalName.PlayerDashStopped);
     }
 
-    public override void PhysicsProcess(double delta)
+    public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)
     {
         controller.Player.Velocity = controller.DashDirection * controller.DashSpeed;
         controller.Player.MoveAndSlide();

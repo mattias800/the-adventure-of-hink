@@ -1,4 +1,5 @@
 using Godot;
+using Theadventureofhink.game_state;
 
 public class WallSlidingState : PlayerState
 {
@@ -11,7 +12,7 @@ public class WallSlidingState : PlayerState
 
     public override void Exit() { }
 
-    public override void PhysicsProcess(double delta)
+    public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)
     {
         float direction = Input.GetAxis("move_left", "move_right");
 

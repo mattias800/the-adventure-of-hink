@@ -1,4 +1,5 @@
 using Godot;
+using Theadventureofhink.game_state;
 
 public class FallingState : PlayerState
 {
@@ -11,7 +12,7 @@ public class FallingState : PlayerState
 
     public override void Exit() { }
 
-    public override void PhysicsProcess(double delta)
+    public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)
     {
         controller.TimeUntilJumpVelocityResetAllowed -= (float)delta;
         controller.TimeUntilJumpHorizontalControl -= (float)delta;

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.game_state;
 
 public partial class Player : CharacterBody2D
 {
@@ -50,6 +51,7 @@ public partial class Player : CharacterBody2D
     private bool _isRespawnTeleporting = false;
 
     private GameManager _gameManager;
+    private GameState _gameState;
 
     public enum CharacterControllerType
     {
@@ -69,6 +71,7 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
+        _gameState = GetNode<GameState>(Singletons.GameState);
         _playerDeathTeleportation = GetNode<PlayerDeathTeleportation>("PlayerDeathTeleportation");
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _playerJumpSound = GetNode<AudioStreamPlayer2D>("PlayerJumpSound");
@@ -91,6 +94,7 @@ public partial class Player : CharacterBody2D
         _platformController = new PlatformController(
             this,
             _animatedSprite,
+            _gameState.PlayerState.PlayerSkillsState,
             _playerJumpSound,
             _playerLandSound,
             _playerDashSound,

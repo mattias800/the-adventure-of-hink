@@ -1,3 +1,5 @@
+using Theadventureofhink.game_state;
+
 public abstract class PlayerState
 {
     protected PlatformController controller;
@@ -11,6 +13,5 @@ public abstract class PlayerState
 
     public abstract void Enter();
     public abstract void Exit();
-    public abstract void PhysicsProcess(double delta);
-
+    public abstract void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState);
 }

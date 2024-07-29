@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Godot.NativeInterop;
+using Theadventureofhink.game_state;
 
 public partial class PlatformController : Node
 {
@@ -77,11 +78,13 @@ public partial class PlatformController : Node
     public RayCast2D WallRayCastRight { get; private set; }
     public PackedScene? DustBoomScene { get; private set; }
 
-    private PlayerState currentState;
+    private PlayerState _currentState;
+    private PlayerSkillsState _playerSkillsState;
 
     public PlatformController(
         CharacterBody2D player,
         AnimatedSprite2D animatedSprite,
+        PlayerSkillsState playerSkillsState,
         AudioStreamPlayer2D jumpSound,
         AudioStreamPlayer2D landSound,
         AudioStreamPlayer2D dashSound,
@@ -92,6 +95,7 @@ public partial class PlatformController : Node
     {
         Player = player;
         AnimatedSprite = animatedSprite;
+        _playerSkillsState = playerSkillsState;
         JumpSound = jumpSound;
         LandSound = landSound;
         DashSound = dashSound;
@@ -112,15 +116,15 @@ public partial class PlatformController : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        currentState.PhysicsProcess(delta);
+        _currentState.PhysicsProcess(delta, _playerSkillsState);
         UpdatePlayerDirection();
     }
 
     public void ChangeState(PlayerState newState)
     {
-        currentState?.Exit();
-        currentState = newState;
-        currentState.Enter();
+        _currentState?.Exit();
+        _currentState = newState;
+        _currentState.Enter();
     }
 
     public void UpdatePlayerDirection()
@@ -132,6 +136,7 @@ public partial class PlatformController : Node
             {
                 EmitSignal(SignalName.PlayerTurned, "right");
             }
+
             CurrentPlayerDirection = PlayerDirection.Right;
         }
         else if (Player.Velocity.X < 0)
@@ -141,6 +146,7 @@ public partial class PlatformController : Node
             {
                 EmitSignal(SignalName.PlayerTurned, "left");
             }
+
             CurrentPlayerDirection = PlayerDirection.Left;
         }
     }
