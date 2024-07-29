@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://rfgg8gl078uo"]
+
+[ext_resource type="Script" path="res://src/features/player/dust_boom.gd" id="1_0fs13"]
+
+[sub_resource type="Curve" id="Curve_rwcys"]
+_data = [Vector2(0.0123839, 1), 0.0, 0.0, 0, 0, Vector2(0.727554, 1), 0.0, 0.0, 0, 0, Vector2(0.993808, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="DustBoom" type="Node2D"]
+script = ExtResource("1_0fs13")
+
+[node name="ParticlesRight" type="CPUParticles2D" parent="."]
+amount = 2
+lifetime = 0.4
+explosiveness = 1.0
+spread = 21.05
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_rwcys")
+
+[node name="ParticlesLeft" type="CPUParticles2D" parent="."]
+amount = 2
+lifetime = 0.4
+explosiveness = 1.0
+direction = Vector2(-1, 2.08165e-12)
+spread = 21.05
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_rwcys")

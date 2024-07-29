@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1dm5eit0mavg"]
+
+[ext_resource type="Script" path="res://src/features/rooms/Room.cs" id="1_2q8qk"]
+
+[node name="Room" type="Area2D" groups=["rooms"]]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("1_2q8qk")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]
