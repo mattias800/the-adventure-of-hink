@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dk1qi6ww1ujum" path="res://entities/moving_platform.tscn" id="12_1mwam"]
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="12_waw7x"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="14_ottqj"]
-[ext_resource type="PackedScene" uid="uid://boycm6ichnl6f" path="res://entities/fire/firepit.tscn" id="15_1d2oq"]
+[ext_resource type="PackedScene" uid="uid://boycm6ichnl6f" path="res://entities/fire/firepit/firepit.tscn" id="15_1d2oq"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="15_iv3w6"]
 [ext_resource type="PackedScene" uid="uid://bycs6ufwcpy5k" path="res://collectibles/walljump/walljump_chest.tscn" id="15_q5inp"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="16_qsdrt"]
