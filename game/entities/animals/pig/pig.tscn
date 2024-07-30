@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://b43noawc70inc"]
+
+[ext_resource type="Texture2D" uid="uid://b37s8h4o2wm6n" path="res://entities/animals/pig/DaintyPigIdleSide.png" id="1_srcbj"]
+[ext_resource type="Script" path="res://entities/animals/pig/Pig.cs" id="2_yjr6v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bys3m"]
+atlas = ExtResource("1_srcbj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrw2w"]
+atlas = ExtResource("1_srcbj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtv8r"]
+atlas = ExtResource("1_srcbj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q41s3"]
+atlas = ExtResource("1_srcbj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78t04"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bys3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrw2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtv8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q41s3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Pig" type="AnimatedSprite2D"]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_78t04")
+animation = &"idle"
+frame_progress = 0.888397
+script = ExtResource("2_yjr6v")

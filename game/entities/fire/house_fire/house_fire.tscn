@@ -36,7 +36,7 @@ loop_mode = 1
 loop_end = 400000
 mix_rate = 48000
 
-[node name="HouseFire" type="Node2D"]
+[node name="HouseFire" type="Node2D" groups=["fires"]]
 script = ExtResource("1_grk4s")
 
 [node name="Smoke" type="CPUParticles2D" parent="."]
