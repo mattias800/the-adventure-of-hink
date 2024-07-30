@@ -323,7 +323,6 @@ shape = SubResource("CircleShape2D_roamx")
 
 [node name="Well" parent="." instance=ExtResource("14_040f5")]
 position = Vector2(844, 192)
-IsOpen = true
 
 [node name="UndergroundWater" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
 position = Vector2(816, 330)

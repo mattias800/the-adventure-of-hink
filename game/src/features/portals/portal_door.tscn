@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://src/features/interactible/interactible.tscn" id="2_cbky2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w76q5"]
-size = Vector2(20, 31)
+size = Vector2(20, 34)
 
 [node name="PortalDoor" type="Node2D" groups=["portals"]]
 script = ExtResource("1_u8otm")
@@ -13,7 +13,7 @@ script = ExtResource("1_u8otm")
 position = Vector2(1, -30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
-position = Vector2(0, 22.5)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_w76q5")
 
 [connection signal="PlayerInteracted" from="Interactible" to="." method="OnPlayerEnteredDoor"]

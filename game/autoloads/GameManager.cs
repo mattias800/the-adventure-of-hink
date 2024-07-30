@@ -24,7 +24,6 @@ public partial class GameManager : Node
         _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         StartLevel();
-        // _cutsceneManager.TransitionIn()
     }
 
     public void StartLevel()
@@ -35,6 +34,11 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
+        if (Input.IsActionJustPressed("respawn"))
+        {
+            RespawnPlayer();
+        }
+        
         if (Input.IsActionJustPressed("exit_game"))
         {
             GD.Print("User pressed Esc, quitting game.");
