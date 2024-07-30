@@ -313,7 +313,7 @@ texture = ExtResource("3_g521m")
 offset = Vector2(2.08165e-12, 4)
 
 [node name="Bird" parent="." node_paths=PackedStringArray("PlayerFlyArea") instance=ExtResource("16_pmt6j")]
-position = Vector2(139, 256)
+position = Vector2(139, 240)
 PlayerFlyArea = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="Bird"]
@@ -485,6 +485,5 @@ Flipped = true
 position = Vector2(700, 220)
 NextScenePath = "res://world/world_01/hometown/houses/old_man_house.tscn"
 
-[connection signal="PlayerEnteredWell" from="Well" to="." method="OnPlayerEnteredWell"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]
 [connection signal="body_entered" from="Rooms/UndergroundCameraTrigger" to="." method="OnUndergroundCameraTriggered"]

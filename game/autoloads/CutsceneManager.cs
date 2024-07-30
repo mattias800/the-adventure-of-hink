@@ -31,7 +31,7 @@ public partial class CutsceneManager : Node
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Enabled)
+		if (Enabled && _cameraManager.Camera != null)
 		{
 			var focus = _gameManager.Player.GlobalPosition - _cameraManager.Camera.GlobalPosition;
 			_transitionRect.Material.Set("focus_pos", focus);

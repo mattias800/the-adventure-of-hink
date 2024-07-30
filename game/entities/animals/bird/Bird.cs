@@ -56,6 +56,11 @@ public partial class Bird : Node2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (_cameraManager.Camera == null)
+        {
+            return;
+        }
+        
         switch (State)
         {
             case BirdState.Idle:

@@ -44,7 +44,7 @@ public partial class GameManager : Node
 
         if (IsEnteringNewScene)
         {
-            GD.Print("enter new scene!");
+            GD.Print("Enter new scene.");
             IsEnteringNewScene = false;
             EnterNewScene();
         }
@@ -58,12 +58,12 @@ public partial class GameManager : Node
         await ToSignal(GetTree().CreateTimer(0.5), "timeout");
         IsEnteringNewScene = true;
         NewScenePortalName = portal.GetTargetPortalName();
-        
+
         GD.Print("Next portal: " + NewScenePortalName);
         GD.Print("Load next level?");
 
         var nextScenePath = portal.GetNextScenePath();
-        
+
         if (nextScenePath != null)
         {
             GD.Print("LOAD SCENE WOO");
@@ -73,35 +73,23 @@ public partial class GameManager : Node
 
     public void EnterNewScene()
     {
-        var portal = GetPortalByName(NewScenePortalName);
+        var portal = FindPortalInScene(NewScenePortalName);
 
         if (portal == null)
         {
-            GD.Print("Found no matching portal: " + NewScenePortalName);
-            portal = GetAnyAvailablePortal();
-        }
-
-        if (portal == null)
-        {
-            GD.Print("Found no portals at all.");
-            GD.Print("Panic!");
-            GetTree().Quit();
+            GD.Print("Found no portals at all. Player not spawned.");
             return;
         }
-
-        GD.Print("Found portal: " + portal.GetName());
 
         CurrentCheckpoint = null;
         Player.GlobalPosition = portal.GetSpawnPosition();
         LastSpawnpoint = portal.GetSpawnPosition();
 
-        GD.Print(Player.GlobalPosition);
         _cameraManager.SetCameraTarget(Player);
-        _cameraManager.Camera.JumpToTarget();
+        _cameraManager.Camera?.JumpToTarget();
         _cutsceneManager.TransitionIn();
-        // var camera = get_tree().get_first_node_in_group("cameras")
 
-        Player.Connect("player_turned", new Callable(this, nameof(OnPlayerTurned)));
+        Player.PlayerTurned += direction => _cameraManager.Camera?.OnPlayerTurned(direction);
 
         if (GetTree().CurrentScene.IsInGroup("platformers"))
         {
@@ -117,10 +105,9 @@ public partial class GameManager : Node
             GetTree().Quit();
         }
 
-        if (!_cutsceneManager.Get("cutscene_playing").AsBool())
+        if (!_cutsceneManager.CutscenePlaying)
         {
             // If cutscene was triggered by levels enter room event, it will have disabled the player.
-            GD.Print("gameManager enabling player!!");
             Player.Enable();
         }
 
@@ -130,9 +117,26 @@ public partial class GameManager : Node
         }
     }
 
-    private void OnPlayerTurned(string direction)
+    private IPortal? FindPortalInScene(string portalName)
     {
-        _cameraManager.Camera.OnPlayerTurned(direction);
+        if (!string.IsNullOrEmpty(portalName))
+        {
+            var portal = GetPortalByName(NewScenePortalName);
+            if (portal != null)
+            {
+                GD.Print("Found specified portal: " + portalName);
+                return portal;
+            }
+
+            GD.Print("Did not find specified portal: " + portalName);
+        }
+
+        return GetAnyAvailablePortal();
+    }
+
+    private bool CurrentSceneHasPortal()
+    {
+        return GetAnyAvailablePortal() != null;
     }
 
     private IPortal? GetPortalByName(string name)

@@ -4,7 +4,7 @@ using Theadventureofhink.autoloads;
 
 public partial class CameraManager : Node
 {
-    public Camera Camera;
+    public Camera? Camera;
 
     private GameManager _gameManager;
 
@@ -13,10 +13,13 @@ public partial class CameraManager : Node
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    
     public override void _Process(double delta)
     {
+        if (Camera == null)
+        {
+            return;
+        }
         var room = GetRoomContainingPlayer();
         if (room != null)
         {
@@ -54,7 +57,6 @@ public partial class CameraManager : Node
             var roomDetection = _gameManager.Player.GetNode<Area2D>("RoomDetection");
             if (roomDetection == null)
             {
-                GD.Print("_gameManager.Player=" + _gameManager.Player.Name);
                 GD.Print("CameraManager found no room_detection node on player.");
                 GetTree().Quit();
             }
