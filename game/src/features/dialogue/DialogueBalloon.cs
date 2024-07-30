@@ -20,7 +20,7 @@ namespace DialogueManagerRuntime
     bool willHideBalloon = false;
 
     DialogueLine dialogueLine;
-    DialogueLine DialogueLine
+    DialogueLine? DialogueLine
     {
       get => dialogueLine;
       set
