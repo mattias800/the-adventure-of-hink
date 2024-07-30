@@ -192,7 +192,6 @@ public partial class GameManager : Node
 
     public void LoadScene(string path)
     {
-        GD.Print("LOADING NEW SCENE!");
         GetTree().CurrentScene.QueueFree(); // Instead of free()
         var packedScene = ResourceLoader.Load(path) as PackedScene;
         if (packedScene == null)
