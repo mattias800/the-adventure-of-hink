@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0uar0b3qsdvd"]
+
+[ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_km11r"]
+[ext_resource type="Script" path="res://world/TitleScreen.cs" id="1_osef1"]
+[ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="2_83f73"]
+[ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="4_0fala"]
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_osef1")
+
+[node name="Camera" parent="." instance=ExtResource("1_km11r")]
+
+[node name="PaintedForest" parent="Camera" instance=ExtResource("2_83f73")]
+
+[node name="Title" type="Label" parent="."]
+offset_left = 254.0
+offset_top = 136.0
+offset_right = 461.0
+offset_bottom = 187.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_0fala")
+theme_override_font_sizes/font_size = 24
+text = "The Adventures 
+of Niklas"
+
+[node name="PressAnyKey" type="Label" parent="."]
+offset_left = 254.0
+offset_top = 212.0
+offset_right = 474.0
+offset_bottom = 235.0
+theme_override_fonts/font = ExtResource("4_0fala")
+theme_override_font_sizes/font_size = 16
+text = "Press any key to continue"

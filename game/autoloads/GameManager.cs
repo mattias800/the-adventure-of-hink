@@ -46,38 +46,41 @@ public partial class GameManager : Node
         {
             GD.Print("Enter new scene.");
             IsEnteringNewScene = false;
-            EnterNewScene();
+            AfterLoadingNewScene();
         }
     }
 
     public async void OnPlayerEnteredPortal(IPortal portal)
     {
-        GD.Print("on_player_entered_portal");
+        var nextScenePath = portal.GetNextScenePath();
+
+        if (nextScenePath == null)
+        {
+            GD.PrintErr("Portal has no scene path set.");
+            return;
+        }
+
+        LoadNextScene(nextScenePath, portal.GetTargetPortalName());
+    }
+
+    public async void LoadNextScene(string nextScenePath, string portalName)
+    {
         Player.Disable();
         await _cutsceneManager.TransitionOut();
         await ToSignal(GetTree().CreateTimer(0.5), "timeout");
         IsEnteringNewScene = true;
-        NewScenePortalName = portal.GetTargetPortalName();
-
-        GD.Print("Next portal: " + NewScenePortalName);
-        GD.Print("Load next level?");
-
-        var nextScenePath = portal.GetNextScenePath();
-
-        if (nextScenePath != null)
-        {
-            GD.Print("LOAD SCENE WOO");
-            LoadScene(nextScenePath);
-        }
+        NewScenePortalName = portalName;
+        LoadScene(nextScenePath);
     }
 
-    public void EnterNewScene()
+    public void AfterLoadingNewScene()
     {
         var portal = FindPortalInScene(NewScenePortalName);
 
         if (portal == null)
         {
             GD.Print("Found no portals at all. Player not spawned.");
+            _cutsceneManager.TransitionIn();
             return;
         }
 
