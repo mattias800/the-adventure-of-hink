@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0uar0b3qsdvd"]
+[gd_scene load_steps=6 format=3 uid="uid://b0uar0b3qsdvd"]
 
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_km11r"]
 [ext_resource type="Script" path="res://world/TitleScreen.cs" id="1_osef1"]
 [ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="2_83f73"]
 [ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="4_0fala"]
+[ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="5_w1tyl"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_osef1")
@@ -11,6 +12,23 @@ script = ExtResource("1_osef1")
 [node name="Camera" parent="." instance=ExtResource("1_km11r")]
 
 [node name="PaintedForest" parent="Camera" instance=ExtResource("2_83f73")]
+
+[node name="Bird" parent="." instance=ExtResource("5_w1tyl")]
+position = Vector2(175, 123)
+scale = Vector2(0.5, 0.5)
+State = 1
+FlyingDirection = Vector2(1, 0)
+FlyAwayStartSpeed = 30.0
+FlyMaxSpeed = 30.0
+
+[node name="Bird2" parent="." instance=ExtResource("5_w1tyl")]
+modulate = Color(0.56598, 0.599725, 1, 0.643137)
+position = Vector2(178, 141)
+scale = Vector2(0.3, 0.3)
+State = 1
+FlyingDirection = Vector2(1, 0)
+FlyAwayStartSpeed = 15.0
+FlyMaxSpeed = 15.0
 
 [node name="Title" type="Label" parent="."]
 offset_left = 254.0
@@ -20,8 +38,7 @@ offset_bottom = 187.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_0fala")
 theme_override_font_sizes/font_size = 24
-text = "The Adventures 
-of Niklas"
+text = "The Legend of Limpan"
 
 [node name="PressAnyKey" type="Label" parent="."]
 offset_left = 254.0

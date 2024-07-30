@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=52 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
@@ -256,6 +256,9 @@ size = Vector2(362, 303)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djfot"]
 size = Vector2(553, 289)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0m00w"]
+size = Vector2(15, 13)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wjyn"]
 size = Vector2(361, 263)
 
@@ -264,6 +267,8 @@ size = Vector2(925, 263)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcxpw"]
 size = Vector2(913, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64x4i"]
 
 [node name="Hometown" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_sfoep")
@@ -399,26 +404,29 @@ position = Vector2(576, 208)
 
 [node name="HouseFire" parent="States/AttackingState/House1Fire" instance=ExtResource("19_s8ljo")]
 position = Vector2(457, 199)
+State = 2
 
 [node name="HouseFire2" parent="States/AttackingState/House1Fire" instance=ExtResource("19_s8ljo")]
 position = Vector2(479, 173)
+State = 2
 
 [node name="HouseFire3" parent="States/AttackingState/House1Fire" instance=ExtResource("19_s8ljo")]
 position = Vector2(494, 204)
+State = 2
 
 [node name="House2Fire" type="Node2D" parent="States/AttackingState"]
 
 [node name="HouseFire" parent="States/AttackingState/House2Fire" instance=ExtResource("19_s8ljo")]
 position = Vector2(711, 177)
-State = 1
+State = 2
 
 [node name="HouseFire2" parent="States/AttackingState/House2Fire" instance=ExtResource("19_s8ljo")]
 position = Vector2(723, 210)
-State = 1
+State = 2
 
 [node name="HouseFire3" parent="States/AttackingState/House2Fire" instance=ExtResource("19_s8ljo")]
-position = Vector2(686, 194)
-State = 1
+position = Vector2(697, 208)
+State = 2
 
 [node name="StartPortal" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(24, 216)
@@ -434,7 +442,6 @@ tile_set = SubResource("TileSet_a3kw4")
 format = 2
 
 [node name="Rooms" type="Node2D" parent="."]
-visible = false
 
 [node name="Room" parent="Rooms" instance=ExtResource("6_7me56")]
 
@@ -455,6 +462,13 @@ position = Vector2(473, 349)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room1Underground"]
 position = Vector2(-196.5, -148.5)
 shape = SubResource("RectangleShape2D_djfot")
+
+[node name="HouseFireTrigger" type="Area2D" parent="Rooms/Room1Underground"]
+position = Vector2(280, -43)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room1Underground/HouseFireTrigger"]
+position = Vector2(-1.5, -1.5)
+shape = SubResource("RectangleShape2D_0m00w")
 
 [node name="Room2Underground" parent="Rooms" instance=ExtResource("6_7me56")]
 position = Vector2(541, 378)
@@ -484,5 +498,12 @@ Flipped = true
 position = Vector2(700, 220)
 NextScenePath = "res://world/world_01/hometown/houses/old_man_house.tscn"
 
+[node name="DevPortal" parent="." instance=ExtResource("4_0ce4s")]
+position = Vector2(782, 312)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal"]
+shape = SubResource("RectangleShape2D_64x4i")
+
+[connection signal="body_entered" from="Rooms/Room1Underground/HouseFireTrigger" to="." method="OnBodyEnteredFireTrigger"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]
 [connection signal="body_entered" from="Rooms/UndergroundCameraTrigger" to="." method="OnUndergroundCameraTriggered"]

@@ -10,10 +10,14 @@ public partial class MusicManager : Node
     private Tracks.Track? _currentlyPlayingTrack;
     private Tracks.Track? _queuedTrack;
 
+    private bool _isPlaying;
+
     public override void _Ready()
     {
         _player = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         _tracks = GetNode<Tracks>("Tracks");
+
+        _player.Finished += OnMusicStopped;
     }
     
     public override void _Process(double delta)
@@ -23,6 +27,22 @@ public partial class MusicManager : Node
             PlayQueuedTrack();
             _queuedTrack = null;
         }
+    }
+
+    private void OnMusicStopped()
+    {
+        if (_isPlaying)
+        {
+            _player.Play();
+        }
+    }
+
+    public void Stop()
+    {
+        _isPlaying = false;
+        _player.Stop();
+        _player.Stream = null;
+        _currentlyPlayingTrack = null;
     }
 
     public void PlayTrack(Tracks.Track track)
@@ -37,10 +57,10 @@ public partial class MusicManager : Node
 
     private void PlayQueuedTrack()
     {
-        if (_player.Playing)
+        if (_isPlaying)
         {
             // TODO Fade out
-            _player.Stop();
+            Stop();
         }
 
         _currentlyPlayingTrack = _queuedTrack;
@@ -50,6 +70,7 @@ public partial class MusicManager : Node
             if (audioStreamPlayer != null)
             {
                 PlayTrackNode(audioStreamPlayer);
+                _isPlaying = true;
             }
         }
     }

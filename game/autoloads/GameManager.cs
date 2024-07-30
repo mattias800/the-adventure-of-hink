@@ -28,8 +28,9 @@ public partial class GameManager : Node
 
     public void StartLevel()
     {
+        var hasDevPortal = GetPortalByName("DevPortal");
         IsEnteringNewScene = true;
-        NewScenePortalName = "StartPortal";
+        NewScenePortalName = hasDevPortal != null ? "DevPortal" : "StartPortal";
     }
 
     public override void _Process(double delta)
@@ -38,7 +39,7 @@ public partial class GameManager : Node
         {
             RespawnPlayer();
         }
-        
+
         if (Input.IsActionJustPressed("exit_game"))
         {
             GD.Print("User pressed Esc, quitting game.");

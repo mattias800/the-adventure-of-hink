@@ -15,7 +15,7 @@ public partial class TitleScreen : Node2D
 
     public override void _Process(double delta)
     {
-        if (_waiting && Input.IsAnythingPressed())
+        if (_waiting && Input.IsActionJustPressed("jump"))
         {
             _waiting = false;
             _gameManager.LoadNextScene("res://world/world_01/level_01/level_01.tscn", "StartPortal");

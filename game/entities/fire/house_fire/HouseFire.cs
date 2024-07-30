@@ -17,6 +17,8 @@ public partial class HouseFire : Node2D
     private int _maxValue = 1000000;
     private float _pitch = 1.0f;
 
+    private float _deltaSinceStarted = 0.0f;
+
     public override void _Ready()
     {
         _noise = new FastNoiseLite();
@@ -27,7 +29,7 @@ public partial class HouseFire : Node2D
 
         _value = new Random().Next() % 1000000;
         _pitch = new RandomNumberGenerator().RandfRange(0.8f, 1.2f);
-        
+
         _fire.Emitting = false;
         _smoke.Emitting = false;
         _light.Enabled = false;
@@ -35,29 +37,52 @@ public partial class HouseFire : Node2D
 
     public override void _Process(double delta)
     {
-        _fire.Emitting = State == FireState.OnFire;
-        _smoke.Emitting = State is FireState.OnFire or FireState.JustSmoke;
-        _light.Enabled = State == FireState.OnFire;
-        
         if (State == FireState.OnFire)
         {
+            _deltaSinceStarted += (float)delta;
+
             if (!_sound.Playing)
             {
                 _sound.PitchScale = _pitch;
+
+                // Sound volume tween
+                _sound.VolumeDb = -20f;
+                var tween = CreateTween();
+                tween.SetTrans(Tween.TransitionType.Sine);
+                tween.TweenProperty(_sound, "volume_db", 0.0f, 3f);
                 _sound.Play();
+
+                _fire.Amount = 0;
+                var fireTween = CreateTween();
+                fireTween.SetTrans(Tween.TransitionType.Sine);
+                fireTween.TweenProperty(_fire, "amount", 16.0f, 3f);
+                _sound.Play();
+
+                // Fire amount tween
             }
-            
+
+            _fire.Emitting = State == FireState.OnFire;
+            _smoke.Emitting = State is FireState.OnFire or FireState.JustSmoke;
+            _light.Enabled = State == FireState.OnFire;
+
             _value += (int)(delta * 200);
             _value %= _maxValue;
 
-            _light.Energy = 2 + _noise.GetNoise1D(_value) * LightStrength;
+            var power = GetRamp(_deltaSinceStarted, 3.0f);
+            _light.Energy = (2 + _noise.GetNoise1D(_value) * LightStrength) * power;
         }
         else
         {
+            _deltaSinceStarted = 0;
             if (_sound.Playing)
             {
                 _sound.Stop();
             }
         }
+    }
+
+    private float GetRamp(float timeLapsed, float timeLapsedForFull)
+    {
+        return Math.Min(1.0f, timeLapsed / timeLapsedForFull);
     }
 }
