@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://btey2n8ldsd37"]
 
-[ext_resource type="Shader" path="res://assets/water/Water.gdshader" id="1_1gdae"]
+[ext_resource type="Shader" path="res://world/overworld_01/Water.gdshader" id="1_1gdae"]
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="2_pxtxi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qjiiu"]
