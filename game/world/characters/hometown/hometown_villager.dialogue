@@ -80,3 +80,17 @@ Grandpa: Wow, that is unexpected, I'm happy for you!
 Grandpa: You sure are growing up fast!
 
 => END
+
+~ villager_man_level01
+
+Villager: Hi Hink, you're enjoying to forest too I see.
+Hink: Yes, I slept by a fire!
+Hink: What are you up to?
+Villager: I'm searching for berries!
+Villager: I heard there is interesting stuff deeper into the forest.
+Hink: Maybe, I couldn't get any further. The jump was too high.
+Villager: I see. Maybe I can make that jump.
+Hink: You should try! I gotta get back home now.
+Villager: See you later!
+
+=> END

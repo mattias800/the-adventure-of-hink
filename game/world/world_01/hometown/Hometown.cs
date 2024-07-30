@@ -29,7 +29,7 @@ public partial class Hometown : Node2D
         _musicManager.PlayTrack(Tracks.Track.SoftBall);
         if (!_gameState.WorldState.HometownState.IsUnderAttack.Value())
         {
-            // _attackingState.QueueFree();
+            _attackingState.QueueFree();
         }
     }
 

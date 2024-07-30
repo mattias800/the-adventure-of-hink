@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=16 format=4 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="Script" path="res://world/world_01/level_02/Level02.cs" id="1_4e7fq"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
@@ -9,10 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://b1dm5eit0mavg" path="res://src/features/rooms/room.tscn" id="4_aownt"]
 [ext_resource type="PackedScene" uid="uid://cpy6gsuu6lqq2" path="res://backgrounds/3d/mountains_background.tscn" id="4_c7yu5"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="10_x3p3d"]
-[ext_resource type="PackedScene" uid="uid://ctngb5ewgd3dh" path="res://entities/characters/little_mushroom/little_mushroom.tscn" id="11_30tbe"]
 [ext_resource type="PackedScene" uid="uid://bpm40kcqmyhmd" path="res://entities/jumpy-bat/jumpy_bat.tscn" id="12_qt5sq"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="13_r5e6r"]
-[ext_resource type="PackedScene" uid="uid://csiifwdk2oaqr" path="res://entities/chest/chest.tscn" id="14_51bis"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="15_3xd5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1smo6"]
@@ -63,16 +61,10 @@ shape = SubResource("RectangleShape2D_el4fd")
 [node name="JumpPad" parent="." instance=ExtResource("10_x3p3d")]
 position = Vector2(96, 208)
 
-[node name="LittleMushroom" parent="." instance=ExtResource("11_30tbe")]
-position = Vector2(40, 112)
-
 [node name="JumpyBat" parent="." instance=ExtResource("12_qt5sq")]
 position = Vector2(48, 216)
 
 [node name="Ambience" parent="." instance=ExtResource("13_r5e6r")]
-
-[node name="Chest" parent="." instance=ExtResource("14_51bis")]
-position = Vector2(128, 24)
 
 [node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("15_3xd5g")]
 collision_shape = NodePath("CollisionShape2D")

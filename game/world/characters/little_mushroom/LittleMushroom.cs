@@ -22,7 +22,7 @@ public partial class LittleMushroom : Node2D
         
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _talkable = GetNode<Talkable>("Talkable");
-        _resource = GD.Load("res://entities/characters/little_mushroom/little_mushroom.dialogue");
+        _resource = GD.Load("res://world/characters/little_mushroom/little_mushroom.dialogue");
 
         _animatedSprite2D.Play("idle");
     }

@@ -25,10 +25,18 @@ public partial class HometownVillager : Node2D
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
         _talkable = GetNode<Talkable>("Talkable");
-        _resource = GD.Load("res://entities/characters/hometown/hometown_villager.dialogue");
+        _resource = GD.Load("res://world/characters/hometown/hometown_villager.dialogue");
 
         _dialogueSwitcher = GetNode<DialogueSwitcher>(DialogueSwitcherPath);
-        
+
+        if (string.IsNullOrEmpty(Dialogue) && DialogueSwitcherPath == null)
+        {
+            GD.PrintErr("Villager has no dialogue starting point set.");
+        }
+        if (AnimatedSprite2D == null)
+        {
+            GD.PrintErr("Villager animated sprite field is not set.");
+        }
         if (_resource == null)
         {
             GD.PrintErr("Dialog .resource file is null for " + Name);

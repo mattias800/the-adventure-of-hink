@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://byo414j2t65up"
-path="res://.godot/imported/MiniBlacksmith.png-2b8a2d5825df022c21391dc71ef73ca1.ctex"
+path="res://.godot/imported/MiniBlacksmith.png-2a010a1f981bfd862742f86e10087f17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/characters/hometown/blacksmith/MiniBlacksmith.png"
-dest_files=["res://.godot/imported/MiniBlacksmith.png-2b8a2d5825df022c21391dc71ef73ca1.ctex"]
+source_file="res://world/characters/hometown/blacksmith/MiniBlacksmith.png"
+dest_files=["res://.godot/imported/MiniBlacksmith.png-2a010a1f981bfd862742f86e10087f17.ctex"]
 
 [params]
 

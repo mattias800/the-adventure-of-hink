@@ -161,13 +161,12 @@ throw={
 }
 respawn={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
-]
+"events": []
 }
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue", "res://entities/characters/little_mushroom/little_mushroom.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://entities/characters/hometown/hometown_villager.dialogue", "res://collectibles/double_jump/double_jump_dialogue.dialogue")
+locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://world/world_01/level_01/level_01.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://collectibles/double_jump/double_jump_dialogue.dialogue", "res://world/characters/hometown/hometown_villager.dialogue", "res://world/characters/little_mushroom/little_mushroom.dialogue")
 
 [layer_names]
 

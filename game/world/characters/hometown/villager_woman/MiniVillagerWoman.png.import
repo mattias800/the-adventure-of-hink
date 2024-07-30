@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vqgekly4rdrh"
-path="res://.godot/imported/MiniOldMan.png-a55432668e23f096b139f98a625c409b.ctex"
+uid="uid://xjmv6071nac8"
+path="res://.godot/imported/MiniVillagerWoman.png-407f3cd5df636e3f6f4faefd28c73d2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/characters/hometown/old_man/MiniOldMan.png"
-dest_files=["res://.godot/imported/MiniOldMan.png-a55432668e23f096b139f98a625c409b.ctex"]
+source_file="res://world/characters/hometown/villager_woman/MiniVillagerWoman.png"
+dest_files=["res://.godot/imported/MiniVillagerWoman.png-407f3cd5df636e3f6f4faefd28c73d2d.ctex"]
 
 [params]
 

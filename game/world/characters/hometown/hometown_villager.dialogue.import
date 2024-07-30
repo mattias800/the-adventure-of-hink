@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://dj47dj6kb1o0g"
+path="res://.godot/imported/hometown_villager.dialogue-58a0e667a2d66672fdb985e1510c82b9.tres"
+
+[deps]
+
+source_file="res://world/characters/hometown/hometown_villager.dialogue"
+dest_files=["res://.godot/imported/hometown_villager.dialogue-58a0e667a2d66672fdb985e1510c82b9.tres"]
+
+[params]
+
+defaults=true
