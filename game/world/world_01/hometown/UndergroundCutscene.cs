@@ -12,6 +12,7 @@ public partial class UndergroundCutscene : Node2D
 
     public override void _Process(double delta)
     {
+        SetAllEnemiesVisible(false);
     }
 
     public void OnBodyEnteredFireTrigger(Node2D body)
@@ -26,6 +27,17 @@ public partial class UndergroundCutscene : Node2D
             {
                 fire.State = FireState.OnFire;
             }
+
+            SetAllEnemiesVisible(true);
+        }
+    }
+
+    public void SetAllEnemiesVisible(bool visible)
+    {
+        var list = GetTree().GetNodesInGroup("enemies").OfType<HouseFire>().ToList();
+        foreach (var e in list)
+        {
+            e.Visible = visible;
         }
     }
 }
