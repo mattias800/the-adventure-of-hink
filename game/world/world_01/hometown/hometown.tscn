@@ -624,7 +624,7 @@ shape = SubResource("RectangleShape2D_64x4i")
 
 [node name="HometownVillager" parent="." node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
 position = Vector2(299, 240)
-Dialogue = "villager_woman_start"
+Dialogue = "villager_woman"
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HometownVillager"]

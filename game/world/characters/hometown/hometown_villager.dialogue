@@ -81,8 +81,9 @@ Grandpa: You sure are growing up fast!
 
 => END
 
-~ villager_man_level01
+~ villager_man
 
+do villagers.met_in_forest = true
 Villager: Hi Hink, you're enjoying to forest too I see.
 Hink: Yes, I slept by a fire!
 Hink: What are you up to?
@@ -91,17 +92,35 @@ Villager: I saw something deeper into the forest earlier.
 Hink: Oh, what?
 Villager: Not sure, I couldn't get high enough.
 Villager: Looked like a treasure chest though.
-Hink: Really?? Some day when I can jump higher, I'll go looking for it!
-Villager: Haha, yes you should!
-Hink: See you later!
+if player_can_double_jump():
+	Hink: Really?? Some day when I can jump higher, I'll go looking for it!
+	Villager: Haha, yes you should!
+	Hink: See you later!
+else:
+	Hink: Really?? I just got double jump from grandpa!
+	Villager: What a coincident! You should go look for it!
+	Hink: I will! See you later!
 
 => END
 
-~ villager_woman_start
+~ villager_woman
 
-Hink: Hi, I met your husband in the western forest!
-Woman: Yes, he's supposed to find truffles for the pigs, but I guess he's looking for treasure again.
-Hink: ... I wouldn't know anything about that.
-Woman: Haha, you wouldn't, huh?
+if villagers.get("met_woman_in_village") == true:
+	Woman: Hi Hink! Looking forward to the ceremony tomorrow?
+	Hink: Yeah, can't wait!
+	=> END
+
+do villagers.met_woman_in_village = true
+if villagers.get("met_in_forest") == true:
+	Hink: Hi, I met your husband in the western forest!
+	Woman: Yes, he's supposed to find truffles for the pigs, but I guess he's looking for treasure again.
+	Hink: ... I wouldn't know anything about that.
+	Woman: Haha, you wouldn't, huh?
+else:
+	Woman: Hi Hink! Did you talk to my husband?
+	Hink: No, but I saw him in the western forest.
+	Woman: Yes, he's supposed to find truffles for the pigs, but I guess he's looking for treasure again.
+	Hink: Treasure? Is there any?
+	Woman: I don't know, I just need the truffles.
 
 => END

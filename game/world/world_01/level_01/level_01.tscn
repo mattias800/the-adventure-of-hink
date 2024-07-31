@@ -117,7 +117,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qaqvh")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -355,12 +355,13 @@ position = Vector2(370, 112)
 
 [node name="VillagerMan" parent="." node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("18_cl44v")]
 position = Vector2(750, 48)
-Dialogue = "villager_man_level01"
+Dialogue = "villager_man"
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
 StartTurnedLeft = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VillagerMan"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t14uv")
+animation = &"idle"
 
 [connection signal="PlayerEnteredRoom" from="Rooms/Room1" to="." method="OnPlayerEnteredRoom1"]

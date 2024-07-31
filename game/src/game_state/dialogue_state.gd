@@ -2,6 +2,7 @@ extends Node
 
 var grandpa = {}
 var blacksmith = {}
+var villagers = {}
 var mushy = {}
 
 func player_can_double_jump():
