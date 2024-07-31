@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvd4x5djl88rj"]
+
+[ext_resource type="Script" path="res://src/game_state/DialogueStateHelper.cs" id="1_6xjas"]
+
+[node name="DialogueStateHelper" type="Node2D"]
+script = ExtResource("1_6xjas")

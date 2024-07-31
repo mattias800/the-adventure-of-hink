@@ -1,16 +1,17 @@
 extends Node
 
 var grandpa = {}
+var blacksmith = {}
 var mushy = {}
 
 func player_can_double_jump():
-	print("GameState")
-	print(str(GameState))
-	return GameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value()
+	return DialogueStateHelper.PlayerCanDoubleJump()
 	
 func player_can_wall_jump():
-	return true
+	return DialogueStateHelper.PlayerCanWallJump()
+	
 func player_can_climb_walls():
-	return true
+	return DialogueStateHelper.PlayerCanClimbWalls()
+	
 func player_can_dash():
-	return true
+	return DialogueStateHelper.PlayerCanDash()

@@ -18,12 +18,13 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://autoloads/game_manager.tscn"
+GameState="*res://src/game_state/game_state.tscn"
 CameraManager="*res://autoloads/camera_manager.tscn"
 CutsceneManager="*res://autoloads/cutscene_manager.tscn"
 MusicManager="*res://autoloads/music_manager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 UiManager="*res://autoloads/ui_manager.tscn"
-GameState="*res://src/game_state/GameState.cs"
+DialogueStateHelper="*res://src/game_state/DialogueStateHelper.cs"
 DialogueState="*res://src/game_state/dialogue_state.gd"
 
 [dialogic]

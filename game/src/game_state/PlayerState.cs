@@ -1,3 +1,5 @@
+using Godot;
+
 namespace Theadventureofhink.game_state;
 
 public class PlayerState
