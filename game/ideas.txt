@@ -4,6 +4,9 @@ Chest that can be opened, with nice animation when you receive the item/skill.
 Objects that can be pushed
 Levers that can be toggled, should affect the level
 
+Puzzle ideas:
+Navigate the boomerang by using teleports. Player enters teleports to make the boomerang follow it.
+	
 Boomerang ideas:
 Push boomerang, can push things
 Pull boomerang, can pull things

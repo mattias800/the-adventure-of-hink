@@ -24,6 +24,7 @@ MusicManager="*res://autoloads/music_manager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 UiManager="*res://autoloads/ui_manager.tscn"
 GameState="*res://src/game_state/GameState.cs"
+DialogueState="*res://src/game_state/dialogue_state.gd"
 
 [dialogic]
 
@@ -59,7 +60,7 @@ layout/default_style="res://dialog/dialog_style.tres"
 
 [dialogue_manager]
 
-general/states=["GameState"]
+general/states=["GameState", "DialogueState"]
 general/uses_dotnet=true
 general/balloon_path="res://src/features/dialogue/Balloon.tscn"
 

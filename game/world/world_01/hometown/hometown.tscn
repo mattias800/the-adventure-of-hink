@@ -431,6 +431,7 @@ shape = SubResource("CircleShape2D_roamx")
 
 [node name="Well" parent="." instance=ExtResource("14_040f5")]
 position = Vector2(844, 192)
+IsOpen = true
 
 [node name="UndergroundWater" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
 position = Vector2(816, 330)
@@ -615,10 +616,10 @@ Flipped = true
 position = Vector2(700, 220)
 NextScenePath = "res://world/world_01/hometown/houses/old_man_house.tscn"
 
-[node name="DevPortal" parent="." instance=ExtResource("4_0ce4s")]
+[node name="DevPortal1" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(782, 312)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal1"]
 shape = SubResource("RectangleShape2D_64x4i")
 
 [node name="HometownVillager" parent="." node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]

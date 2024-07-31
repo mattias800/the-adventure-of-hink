@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://coj6uli1lchbp"]
+[gd_scene load_steps=17 format=4 uid="uid://coj6uli1lchbp"]
 
 [ext_resource type="Script" path="res://world/world_01/level_02/Level02.cs" id="1_4e7fq"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_8ecia"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cpy6gsuu6lqq2" path="res://backgrounds/3d/mountains_background.tscn" id="4_c7yu5"]
 [ext_resource type="PackedScene" uid="uid://biqtwkwr7uutq" path="res://entities/jump-pad/jump_pad.tscn" id="10_x3p3d"]
 [ext_resource type="PackedScene" uid="uid://bpm40kcqmyhmd" path="res://entities/jumpy-bat/jumpy_bat.tscn" id="12_qt5sq"]
+[ext_resource type="PackedScene" uid="uid://ctngb5ewgd3dh" path="res://world/characters/little_mushroom/little_mushroom.tscn" id="13_3t17h"]
 [ext_resource type="PackedScene" uid="uid://cmf6f05e3f6wo" path="res://assets/audio/ambience/ambience.tscn" id="13_r5e6r"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="15_3xd5g"]
 
@@ -72,3 +73,6 @@ collision_shape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 position = Vector2(123.5, 86.5)
 shape = SubResource("RectangleShape2D_csetp")
+
+[node name="LittleMushroom" parent="." instance=ExtResource("13_3t17h")]
+position = Vector2(33, 112)

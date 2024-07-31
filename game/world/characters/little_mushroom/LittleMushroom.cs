@@ -1,7 +1,8 @@
 using Godot;
-using System;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.game_state;
+
+namespace Theadventureofhink.world.characters.little_mushroom;
 
 public partial class LittleMushroom : Node2D
 {
@@ -19,7 +20,7 @@ public partial class LittleMushroom : Node2D
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
         _gameState = GetNode<GameState>(Singletons.GameState);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
-        
+
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _talkable = GetNode<Talkable>("Talkable");
         _resource = GD.Load("res://world/characters/little_mushroom/little_mushroom.dialogue");
@@ -41,16 +42,7 @@ public partial class LittleMushroom : Node2D
 
     public async void OnTalk()
     {
-        if (GameState.Once(_gameState.CharactersState.LittleMushroomState.HasEverMet))
-        {
-            await _cutsceneManager.StartTimeline(_resource, "start");
-        }
-        else
-        {
-            await _cutsceneManager.StartTimeline(_resource, "second");
-        }
-
+        await _cutsceneManager.StartTimeline(_resource, "start");
         _talkable.Activate();
-
     }
 }
