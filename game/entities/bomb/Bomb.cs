@@ -12,6 +12,7 @@ public partial class Bomb : Node2D
     private AnimatedSprite2D _explosionAnimation;
     private CpuParticles2D _fire;
     private CpuParticles2D _smoke;
+    private AudioStreamPlayer2D _sound;
 
     private enum BombState
     {
@@ -30,6 +31,7 @@ public partial class Bomb : Node2D
         _explosionAnimation = GetNode<AnimatedSprite2D>("ExplosionAnimation");
         _fire = GetNode<CpuParticles2D>("Fire");
         _smoke = GetNode<CpuParticles2D>("Smoke");
+        _sound = GetNode<AudioStreamPlayer2D>("Sound");
         _explosionAnimation.Play("idle");
     }
 
@@ -79,5 +81,6 @@ public partial class Bomb : Node2D
         _explosionAnimation.Play("explode");
         _explosionAnimation.AnimationFinished += () => _explosionAnimation.Visible = false; 
         _explodeTimeLeft = 5.0f;
+        _sound.Play();
     }
 }

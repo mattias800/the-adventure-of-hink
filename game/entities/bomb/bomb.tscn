@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkmo5hqiftgog"]
+[gd_scene load_steps=31 format=3 uid="uid://dkmo5hqiftgog"]
 
 [ext_resource type="Texture2D" uid="uid://bda7nh36d3r3w" path="res://entities/bomb/Bomb On (52x56).png" id="1_1mqyi"]
 [ext_resource type="Script" path="res://entities/bomb/Bomb.cs" id="1_ws60r"]
 [ext_resource type="Texture2D" uid="uid://ck7ycmv6y5pnk" path="res://entities/bomb/Bomb Off.png" id="2_x01si"]
 [ext_resource type="Texture2D" uid="uid://cw52ku8p7h6ho" path="res://entities/bomb/Explosion SpriteSheet.png" id="4_752ec"]
+[ext_resource type="AudioStream" uid="uid://bftv1ghtuvj0l" path="res://entities/bomb/Dirt_Explosion_03.wav" id="5_kt8et"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nxobh"]
 atlas = ExtResource("1_1mqyi")
@@ -185,7 +186,7 @@ script = ExtResource("1_ws60r")
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_mc3hp")
 animation = &"idle"
-frame_progress = 0.212375
+frame_progress = 0.438702
 
 [node name="Fire" type="CPUParticles2D" parent="."]
 position = Vector2(0, -6)
@@ -241,3 +242,6 @@ color_ramp = SubResource("Gradient_lmm76")
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_kra7r")
 animation = &"idle"
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kt8et")
