@@ -1,6 +1,5 @@
 First priority:
-Not all walls should be climbable!
-Chest that can be opened, with nice animation when you receive the item/skill.
+Not all walls should be climbable! Do this with separate tilemap!
 Objects that can be pushed
 Levers that can be toggled, should affect the level
 
@@ -34,6 +33,7 @@ Platforms that appear and disappear on a timer, like Megaman.
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Chest that can be opened, with nice animation when you receive the item/skill.
 Add sounds to boomerang
 Boomerang!
 Particle effect when jumping, double jumping and landing

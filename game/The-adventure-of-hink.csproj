@@ -10,4 +10,7 @@
   <ItemGroup>
     <Folder Include="world\world_01\level_01\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ideas.txt" />
+  </ItemGroup>
 </Project>
