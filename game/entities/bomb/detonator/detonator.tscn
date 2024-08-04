@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=4 uid="uid://cgqhfjxclidwm"]
+
+[ext_resource type="Script" path="res://entities/bomb/detonator/Detonator.cs" id="1_g57vy"]
+[ext_resource type="Texture2D" uid="uid://cjdqm05jyd065" path="res://entities/bomb/detonator/FireBox.png" id="1_vu8t3"]
+[ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://src/features/interactible/interactible.tscn" id="3_go4fx"]
+[ext_resource type="AudioStream" uid="uid://3y4wm5cf3yrv" path="res://entities/bomb/detonator/toggle.wav" id="4_emnb0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0th6"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4qqw"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lq23"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix84g"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsd7l"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(160, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cwa7"]
+atlas = ExtResource("1_vu8t3")
+region = Rect2(112, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_02aig"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0th6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4qqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lq23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix84g")
+}],
+"loop": true,
+"name": &"arming",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsd7l")
+}],
+"loop": true,
+"name": &"done",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cwa7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l38do"]
+size = Vector2(20, 19)
+
+[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_wkper"]
+data = PackedByteArray("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")
+format = 1
+loop_end = 10000
+mix_rate = 22050
+
+[node name="Detonator" type="Node2D"]
+script = ExtResource("1_g57vy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_02aig")
+animation = &"done"
+
+[node name="Interactible" parent="." instance=ExtResource("3_go4fx")]
+position = Vector2(0, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_l38do")
+
+[node name="BeepSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamWAV_wkper")
+
+[node name="ToggleSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_emnb0")
+
+[connection signal="PlayerInteracted" from="Interactible" to="." method="OnInteract"]

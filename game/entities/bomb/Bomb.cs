@@ -45,7 +45,7 @@ public partial class Bomb : Node2D
             case BombState.FuseLit:
                 if (_fuseLeft <= 0)
                 {
-                    Explode();
+                    Detonate();
                 }
                 else
                 {
@@ -72,7 +72,7 @@ public partial class Bomb : Node2D
         _animatedSprite2D.Play("armed");
     }
 
-    public void Explode()
+    public void Detonate()
     {
         _state = BombState.Exploding;
         _animatedSprite2D.Visible = false;
@@ -82,5 +82,6 @@ public partial class Bomb : Node2D
         _explosionAnimation.AnimationFinished += () => _explosionAnimation.Visible = false; 
         _explodeTimeLeft = 5.0f;
         _sound.Play();
+        EmitSignal(SignalName.Exploded);
     }
 }
