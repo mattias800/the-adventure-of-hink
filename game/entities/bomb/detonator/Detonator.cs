@@ -62,6 +62,7 @@ public partial class Detonator : Node2D
 
     public void Arm()
     {
+        GD.Print("Arm!");
         _armTimeLeft = 2.0f;
         _sprite.Play("arming");
         _state = DetonatorState.Arming;
