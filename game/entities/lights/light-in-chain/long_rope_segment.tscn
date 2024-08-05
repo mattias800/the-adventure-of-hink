@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgg30r77v3f6u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w45kq"]
+size = Vector2(3, 9)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_toyv7"]
+load_path = "res://.godot/imported/Spear.png-60eb8a43b7f5c1b30188339ce847c32b.ctex"
+
+[node name="RopeSegment" type="RigidBody2D"]
+collision_layer = 16384
+collision_mask = 16384
+gravity_scale = 0.34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_w45kq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -1.5)
+texture = SubResource("CompressedTexture2D_toyv7")
+centered = false
+offset = Vector2(-1, 0)
+region_enabled = true
+region_rect = Rect2(87, 11, 3, 48)

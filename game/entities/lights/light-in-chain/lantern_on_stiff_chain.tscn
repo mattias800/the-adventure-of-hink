@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://00h6e3gpwhxq"]
+
+[ext_resource type="PackedScene" uid="uid://dgg30r77v3f6u" path="res://entities/lights/light-in-chain/long_rope_segment.tscn" id="2_hkrav"]
+[ext_resource type="Texture2D" uid="uid://calxqdjgt2xux" path="res://assets/packs/Trap/Matxich2.png" id="2_yloe4"]
+[ext_resource type="Texture2D" uid="uid://bb1iw4qlkyam8" path="res://entities/lights/light-in-chain/atlas_16x.png" id="4_af5f6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_26sii"]
+radius = 2.0
+
+[sub_resource type="Gradient" id="Gradient_re2rd"]
+offsets = PackedFloat32Array(0, 0.108187, 0.830409, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.294028, 0.294028, 0.294028, 1, 0.149474, 0.149475, 0.149474, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6qua3"]
+gradient = SubResource("Gradient_re2rd")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.502137, 0.485043)
+fill_to = Vector2(0.826923, 0.126068)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_25bhr"]
+radius = 4.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q3drl"]
+polygon = PackedVector2Array(-3, -2, -3, 7, -4, -5, 0, -6, 4, -5, 3, 7, 3, -2)
+
+[node name="LightInChain" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16384
+collision_mask = 16384
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_yloe4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_26sii")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../Rope/RopeSegment")
+
+[node name="Rope" type="Node2D" parent="."]
+
+[node name="RopeSegment" parent="Rope" instance=ExtResource("2_hkrav")]
+scale = Vector2(1, 1)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Rope"]
+position = Vector2(0, 46)
+node_a = NodePath("../RopeSegment")
+node_b = NodePath("../Lamp")
+
+[node name="Lamp" type="RigidBody2D" parent="Rope"]
+position = Vector2(0, 48)
+collision_layer = 16384
+collision_mask = 16384
+gravity_scale = 0.5
+
+[node name="Sprite2D2" type="Sprite2D" parent="Rope/Lamp"]
+position = Vector2(1, 4)
+texture = ExtResource("4_af5f6")
+centered = false
+offset = Vector2(-5, -8)
+flip_v = true
+region_enabled = true
+region_rect = Rect2(100, 245, 8, 10)
+
+[node name="PointLight2D" type="PointLight2D" parent="Rope/Lamp/Sprite2D2"]
+position = Vector2(-1, -1)
+color = Color(1, 0.566837, 0.474731, 1)
+energy = 4.0
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.4
+texture = SubResource("GradientTexture2D_6qua3")
+texture_scale = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope/Lamp"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_25bhr")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Rope/Lamp"]
+occluder = SubResource("OccluderPolygon2D_q3drl")

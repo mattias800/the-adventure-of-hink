@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dfa0felbn0vdp"]
+[gd_scene load_steps=28 format=4 uid="uid://dfa0felbn0vdp"]
 
 [ext_resource type="Script" path="res://world/world_01/underground_01/Underground01.cs" id="1_j25b6"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_t3kq4"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="10_068jx"]
 [ext_resource type="PackedScene" uid="uid://cgqhfjxclidwm" path="res://entities/bomb/detonator/detonator.tscn" id="12_pvctu"]
 [ext_resource type="PackedScene" uid="uid://d3jo5kavyck3w" path="res://entities/bomb/smoke.tscn" id="13_4x5pr"]
+[ext_resource type="PackedScene" uid="uid://00h6e3gpwhxq" path="res://entities/lights/light-in-chain/lantern_on_stiff_chain.tscn" id="14_1cwcf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jrog"]
 size = Vector2(64, 16)
@@ -176,10 +177,10 @@ position = Vector2(346, 260)
 position = Vector2(6, -22.5)
 shape = SubResource("RectangleShape2D_nl2qe")
 
-[node name="DevPortal" parent="." instance=ExtResource("4_e3slu")]
+[node name="DevPortalX" parent="." instance=ExtResource("4_e3slu")]
 position = Vector2(478, 310)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortalX"]
 shape = SubResource("RectangleShape2D_vg2fv")
 
 [node name="BombLogic" type="Node2D" parent="."]
@@ -202,6 +203,14 @@ position = Vector2(424, 360)
 
 [node name="Smoke" parent="BombLogic" groups=["bomb_smokes"] instance=ExtResource("13_4x5pr")]
 position = Vector2(424, 376)
+
+[node name="LightInChain" parent="." instance=ExtResource("14_1cwcf")]
+position = Vector2(212, 168)
+rotation = -0.263589
+
+[node name="LightInChain2" parent="." instance=ExtResource("14_1cwcf")]
+position = Vector2(439, -32)
+rotation = -0.24731
 
 [connection signal="Exploded" from="BombLogic/Bomb" to="." method="OnBombExplode"]
 [connection signal="PlayerInteracted" from="BombLogic/Detonator" to="." method="OnPlayerInteractWithBomb"]
