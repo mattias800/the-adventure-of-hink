@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwxiu0diufwmf"]
+
+[ext_resource type="Texture2D" uid="uid://dq3m3h5ayfg3" path="res://assets/packs/Trap/Spear.png" id="1_xda2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqe2x"]
+size = Vector2(3, 9)
+
+[node name="RopeSegment" type="RigidBody2D"]
+gravity_scale = 0.34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_hqe2x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -1.5)
+texture = ExtResource("1_xda2a")
+centered = false
+offset = Vector2(-1, 0)
+region_enabled = true
+region_rect = Rect2(87, 14, 3, 9)

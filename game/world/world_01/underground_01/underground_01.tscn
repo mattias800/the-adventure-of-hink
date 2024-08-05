@@ -97,6 +97,7 @@ tile_set = ExtResource("2_eojh5")
 position = Vector2(408, 168)
 
 [node name="Rooms" type="Node2D" parent="."]
+visible = false
 
 [node name="StartRoom" parent="Rooms" instance=ExtResource("3_wlf2g")]
 
