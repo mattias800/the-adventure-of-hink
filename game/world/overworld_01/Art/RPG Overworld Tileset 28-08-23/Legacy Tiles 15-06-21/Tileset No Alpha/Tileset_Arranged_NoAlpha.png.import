@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dvk3w862pumbh"
+path="res://.godot/imported/Tileset_Arranged_NoAlpha.png-542a9731ebd4ae4c58b8a4bfa575eaed.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://world/overworld_01/Art/RPG Overworld Tileset 28-08-23/Legacy Tiles 15-06-21/Tileset No Alpha/Tileset_Arranged_NoAlpha.png"
+dest_files=["res://.godot/imported/Tileset_Arranged_NoAlpha.png-542a9731ebd4ae4c58b8a4bfa575eaed.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
