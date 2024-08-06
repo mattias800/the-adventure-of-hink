@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d2422fwpoj4pm"]
+[gd_scene load_steps=15 format=4 uid="uid://d2422fwpoj4pm"]
 
 [ext_resource type="Texture2D" uid="uid://dl13flcej6p1d" path="res://assets/overworld_tileset_grass.png" id="1_2fcae"]
 [ext_resource type="Script" path="res://world/overworld_01/Overworld01.cs" id="1_m2gna"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://do8560lw7gjwe" path="res://backgrounds/overworld_clouds/overworld_clouds.tscn" id="3_hog5s"]
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="3_uf8ks"]
 [ext_resource type="AudioStream" uid="uid://cmyeumil4h2kj" path="res://assets/audio/ambience/windy.mp3" id="7_gswvf"]
+[ext_resource type="TileSet" uid="uid://c8y7t12eeilyx" path="res://world/overworld_01/overworld_01_alt_buildings.tres" id="8_my4qh"]
+[ext_resource type="TileSet" uid="uid://cpb4hl3dg6dk7" path="res://world/overworld_01/overworld_01_alt_trees.tres" id="9_m0e1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fvk1g"]
 texture = ExtResource("1_2fcae")
@@ -782,3 +784,11 @@ TargetPortalName = "StartPortal"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TownPortal"]
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_sae0b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAaAAUAAAABAAEAAAAaAAYAAAAAAAIAAAAaAAcAAAAAAAMAAAAhAAUAAAADAAEAAAAgAAUAAAACAAAAAAAfAAUAAAACAAAAAAAeAAUAAAACAAAAAAAdAAUAAAACAAAAAAAcAAUAAAACAAAAAAAbAAUAAAACAAAAAAAhAAcAAAADAAMAAAAhAAYAAAAAAAIAAAAgAAcAAAABAAEAAAAgAAgAAAAAAAMAAAAXAAoAAAAIAAUAAAA=")
+tile_set = ExtResource("8_my4qh")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAdAA8AAAAEAAIAAAAcAA4AAAAHAAEAAAAcAA8AAAAKAAIAAAAdAA4AAAAEAAEAAAAcAA0AAAACAAAAAAAbAA4AAAABAAAAAAAdAA0AAAAEAAAAAAA=")
+tile_set = ExtResource("9_m0e1v")
