@@ -2079,6 +2079,7 @@ texture = ExtResource("1_m8w16")
 43:25/0 = 0
 44:25/animation_columns = 4
 44:25/animation_speed = 3.0
+44:25/animation_mode = 1
 44:25/animation_frame_0/duration = 1.0
 44:25/animation_frame_1/duration = 1.0
 44:25/animation_frame_2/duration = 1.0

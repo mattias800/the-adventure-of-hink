@@ -1,10 +1,12 @@
 using Godot;
+using Theadventureofhink.world;
 
 namespace Theadventureofhink.entities.portals;
 
 public interface IPortal
 {
-    public string? GetNextScenePath();
+    public Stage GetNextStage();
+    
     public string GetTargetPortalName();
 
     public string GetName();

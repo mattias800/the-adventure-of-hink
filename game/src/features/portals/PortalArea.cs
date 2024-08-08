@@ -2,12 +2,12 @@ using Godot;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.entities.portals;
 using Theadventureofhink.utils;
+using Theadventureofhink.world;
 
 public partial class PortalArea : Area2D, IPortal
 {
-    [Export(PropertyHint.File, "*.tscn")]
-    public string NextScenePath;
-    
+    [Export] public Stage NextStage;
+
     [Export] public string TargetPortalName;
 
     [Signal]
@@ -23,7 +23,8 @@ public partial class PortalArea : Area2D, IPortal
     public void OnBodyEntered(Node2D body)
     {
         GD.Print("OnBodyEntered portal");
-        if (CollisionUtil.IsPlayer(body) && NextScenePath != null)
+
+        if (CollisionUtil.IsPlayer(body))
         {
             GD.Print("Entered portal: " + Name);
             _gameManager.OnPlayerEnteredPortal(this);
@@ -31,9 +32,9 @@ public partial class PortalArea : Area2D, IPortal
         }
     }
 
-    public string? GetNextScenePath()
+    public Stage GetNextStage()
     {
-        return NextScenePath;
+        return NextStage;
     }
 
     public string GetTargetPortalName()

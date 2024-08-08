@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Godot;
 using Theadventureofhink.entities.portals;
+using Theadventureofhink.world;
 
 namespace Theadventureofhink.autoloads;
 
@@ -55,16 +56,9 @@ public partial class GameManager : Node
         }
     }
 
-    public async void OnPlayerEnteredPortal(IPortal portal)
+    public void OnPlayerEnteredPortal(IPortal portal)
     {
-        var nextScenePath = portal.GetNextScenePath();
-
-        if (nextScenePath == null)
-        {
-            GD.PrintErr("Portal has no scene path set.");
-            return;
-        }
-
+        var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
         LoadNextScene(nextScenePath, portal.GetTargetPortalName());
     }
 

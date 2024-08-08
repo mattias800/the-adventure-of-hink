@@ -52,7 +52,6 @@ shape = SubResource("RectangleShape2D_1smo6")
 
 [node name="StartPortal" parent="." instance=ExtResource("3_c0nni")]
 position = Vector2(24, 120)
-NextScenePath = "res://world/overworld_01/overworld_01.tscn"
 TargetPortalName = "RightForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]

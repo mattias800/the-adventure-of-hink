@@ -2846,7 +2846,6 @@ tile_set = SubResource("TileSet_n6idn")
 
 [node name="ForestPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(143, 153)
-NextScenePath = "res://world/world_01/level_01/level_01.tscn"
 TargetPortalName = "ForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
@@ -2860,7 +2859,6 @@ autoplay = true
 
 [node name="RightForestPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(562, 183)
-NextScenePath = "res://world/world_01/level_02/level_02.tscn"
 TargetPortalName = "StartPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightForestPortal"]
@@ -2869,7 +2867,6 @@ shape = SubResource("RectangleShape2D_bjuaf")
 
 [node name="TownPortal" parent="." instance=ExtResource("3_uf8ks")]
 position = Vector2(376, 128)
-NextScenePath = "res://world/world_01/hometown/hometown.tscn"
 TargetPortalName = "StartPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TownPortal"]
