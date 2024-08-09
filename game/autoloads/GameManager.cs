@@ -84,6 +84,7 @@ public partial class GameManager : Node
         }
 
         CurrentCheckpoint = null;
+        Player.Velocity = Vector2.Zero;
         Player.GlobalPosition = portal.GetSpawnPosition();
         LastSpawnpoint = portal.GetSpawnPosition();
 

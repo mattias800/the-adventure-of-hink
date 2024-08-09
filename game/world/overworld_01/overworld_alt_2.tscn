@@ -52,7 +52,7 @@ shape = SubResource("RectangleShape2D_wkp4e")
 
 [node name="HometownEasternForestPortal" parent="Portals" instance=ExtResource("6_6vn6a")]
 position = Vector2(172, 95)
-NextStage = 3
+NextStage = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/HometownEasternForestPortal"]
 position = Vector2(20, 0)
