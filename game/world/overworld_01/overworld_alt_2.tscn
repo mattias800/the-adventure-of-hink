@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dwxvfn64khsas" path="res://src/features/portals/portal_area.tscn" id="6_6vn6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gas6"]
-size = Vector2(811, 600)
+size = Vector2(810, 646)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dt1l3"]
 size = Vector2(28, 30)
@@ -29,7 +29,7 @@ size = Vector2(28, 30)
 [node name="Room" parent="." instance=ExtResource("5_o2323")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room"]
-position = Vector2(133.5, 135)
+position = Vector2(133, 125)
 shape = SubResource("RectangleShape2D_4gas6")
 
 [node name="Portals" type="Node2D" parent="."]
