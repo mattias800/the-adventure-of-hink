@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv2eehbpj36h2"]
+
+[ext_resource type="Texture2D" uid="uid://c86t0ru85olab" path="res://world/overworld_01/Art/RPG Overworld Tileset 28-08-23/Tileset_Arranged.png" id="1_u5w36"]
+
+[node name="Pier" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u5w36")
+region_enabled = true
+region_rect = Rect2(514, 241, 13, 12)
