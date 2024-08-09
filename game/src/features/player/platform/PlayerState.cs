@@ -1,13 +1,15 @@
 using Theadventureofhink.game_state;
 
+namespace Theadventureofhink.features.player.platform;
+
 public abstract class PlayerState
 {
-    protected PlatformController controller;
+    protected PlatformController Controller;
     public string Name;
 
     public PlayerState(PlatformController controller, string name)
     {
-        this.controller = controller;
+        this.Controller = controller;
         this.Name = name;
     }
 

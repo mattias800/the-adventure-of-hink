@@ -1,23 +1,21 @@
 using Theadventureofhink.game_state;
 
-public class DisabledState : PlayerState
+namespace Theadventureofhink.features.player.platform.states;
+
+public class DisabledState(PlatformController controller) : PlayerState(controller, "Disabled")
 {
-    public DisabledState(PlatformController controller) : base(controller, "Disabled")
-    {
-    }
-    
     public override void Enter()
     {
         // Disable player physics processing and animations
-        controller.Player.SetPhysicsProcess(false);
-        controller.AnimatedSprite.Stop();
+        Controller.Player.SetPhysicsProcess(false);
+        Controller.AnimatedSprite.Stop();
     }
 
     public override void Exit()
     {
         // Re-enable player physics processing and animations
-        controller.Player.SetPhysicsProcess(true);
-        controller.AnimatedSprite.Play();
+        Controller.Player.SetPhysicsProcess(true);
+        Controller.AnimatedSprite.Play();
     }
 
     public override void PhysicsProcess(double delta, PlayerSkillsState playerSkillsState)

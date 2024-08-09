@@ -1,39 +1,47 @@
 using Godot;
-using System;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.features.player.platform;
 using Theadventureofhink.game_state;
+
+namespace Theadventureofhink.features.player;
 
 public partial class Player : CharacterBody2D
 {
-    [Export]
-    public PackedScene? DustBoomScene;
+    [Export] public PlatformController PlatformController;
+
+    [Export] public OverworldController OverworldController;
+
+
+    [Export] public PackedScene DustBoomScene;
 
     public bool Enabled;
 
     // Signals
     [Signal]
     public delegate void PlayerDisabledEventHandler();
+
     [Signal]
     public delegate void PlayerEnabledEventHandler();
+
     [Signal]
     public delegate void PlayerTurnedEventHandler(string direction);
+
     [Signal]
     public delegate void PlayerDashStartedEventHandler(Vector2 direction);
+
     [Signal]
     public delegate void PlayerDashStoppedEventHandler();
+
     [Signal]
     public delegate void PlayerStartedMovingOnGroundEventHandler();
+
     [Signal]
     public delegate void PlayerStoppedMovingOnGroundEventHandler();
 
     // Nodes
     private PlayerDeathTeleportation _playerDeathTeleportation;
     private AnimatedSprite2D _animatedSprite;
-    private AudioStreamPlayer2D _playerJumpSound;
-    private AudioStreamPlayer2D _playerLandSound;
-    private AudioStreamPlayer2D _playerGrabWallSound;
-    private AudioStreamPlayer2D _playerJumpFromWallSound;
-    private AudioStreamPlayer2D _playerDashSound;
+
     private AudioStreamPlayer2D _deathBoomSound;
     private AudioStreamPlayer2D _deathAppearSound;
     private CollisionShape2D _collisionShape;
@@ -42,14 +50,8 @@ public partial class Player : CharacterBody2D
     private RayCast2D _squishCastLeft;
     private RayCast2D _squishCastUp;
     private RayCast2D _squishCastDown;
-    private RayCast2D _wallRayCastLeft;
-    private RayCast2D _wallRayCastRight;
-    private Node2D _roomDetection;
 
-    private PlatformController _platformController;
-    private OverworldController _overworldController;
-
-    private bool _isRespawnTeleporting = false;
+    private bool _isRespawnTeleporting;
 
     private GameManager _gameManager;
     private GameState _gameState;
@@ -75,11 +77,7 @@ public partial class Player : CharacterBody2D
         _gameState = GetNode<GameState>(Singletons.GameState);
         _playerDeathTeleportation = GetNode<PlayerDeathTeleportation>("PlayerDeathTeleportation");
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        _playerJumpSound = GetNode<AudioStreamPlayer2D>("PlayerJumpSound");
-        _playerLandSound = GetNode<AudioStreamPlayer2D>("PlayerLandSound");
-        _playerGrabWallSound = GetNode<AudioStreamPlayer2D>("PlayerGrabWallSound");
-        _playerJumpFromWallSound = GetNode<AudioStreamPlayer2D>("PlayerJumpFromWallSound");
-        _playerDashSound = GetNode<AudioStreamPlayer2D>("PlayerDashSound");
+
         _deathBoomSound = GetNode<AudioStreamPlayer2D>("DeathBoomSound");
         _deathAppearSound = GetNode<AudioStreamPlayer2D>("DeathAppearSound");
         _collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
@@ -88,31 +86,12 @@ public partial class Player : CharacterBody2D
         _squishCastLeft = GetNode<RayCast2D>("SquishCastLeft");
         _squishCastUp = GetNode<RayCast2D>("SquishCastUp");
         _squishCastDown = GetNode<RayCast2D>("SquishCastDown");
-        _wallRayCastLeft = GetNode<RayCast2D>("WallRayCastLeft");
-        _wallRayCastRight = GetNode<RayCast2D>("WallRayCastRight");
-        _roomDetection = GetNode<Node2D>("RoomDetection");
-        
-        _platformController = new PlatformController(
-            this,
-            _animatedSprite,
-            _gameState.PlayerState.PlayerSkillsState,
-            _playerJumpSound,
-            _playerLandSound,
-            _playerDashSound,
-            _playerGrabWallSound,
-            _playerJumpFromWallSound,
-            GetNode<AudioStreamPlayer2D>("PlayerJumpFromAirSound"),
-            DustBoomScene
-        );
 
-        _platformController.PlayerTurned += OnPlayerTurned;
-        _platformController.PlayerDashStarted += OnPlayerDashStarted;
-        _platformController.PlayerDashStopped += OnPlayerDashStopped;
-        _platformController.PlayerStartedMovingOnGround += OnPlayerStartedMovingOnGround;
-        _platformController.PlayerStoppedMovingOnGround += OnPlayerStoppedMovingOnGround;
-        _platformController._Ready();
-        _overworldController = new OverworldController(this, _animatedSprite);
-        _overworldController._Ready();
+        PlatformController.PlayerTurned += OnPlayerTurned;
+        PlatformController.PlayerDashStarted += OnPlayerDashStarted;
+        PlatformController.PlayerDashStopped += OnPlayerDashStopped;
+        PlatformController.PlayerStartedMovingOnGround += OnPlayerStartedMovingOnGround;
+        PlatformController.PlayerStoppedMovingOnGround += OnPlayerStoppedMovingOnGround;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -124,15 +103,6 @@ public partial class Player : CharacterBody2D
         {
             case PlayerState.Active:
                 CheckSquish();
-                switch (_activeController)
-                {
-                    case CharacterControllerType.Platform:
-                        _platformController._PhysicsProcess(delta);
-                        break;
-                    case CharacterControllerType.Overworld:
-                        _overworldController._PhysicsProcess(delta);
-                        break;
-                }
                 break;
             case PlayerState.DeathTeleportation:
                 break;
@@ -167,7 +137,7 @@ public partial class Player : CharacterBody2D
         CallDeferred(nameof(TurnOffCollisions));
 
         _animatedSprite.Visible = false;
-        
+
         _playerDeathTeleportation.PlayTeleporting();
 
         var duration = GlobalPosition.DistanceTo(spawnWorldPos) / 200;
@@ -177,7 +147,7 @@ public partial class Player : CharacterBody2D
 
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
-        tween.SetParallel(true);
+        tween.SetParallel();
         tween.TweenProperty(this, "global_position", spawnWorldPos, duration);
         tween.TweenMethod(new Callable(fx, "SetCutoff"), 0, 500, duration).SetTrans(Tween.TransitionType.Circ);
         tween.TweenMethod(new Callable(fx, "SetResonance"), 2.0, 0.5, duration).SetTrans(Tween.TransitionType.Circ);
@@ -192,7 +162,7 @@ public partial class Player : CharacterBody2D
         fx.SetCutoff(20500);
         fx.SetResonance(0.5f);
         _deathAppearSound.Play();
-        
+
         _playerDeathTeleportation.PlayPlayerAppearing();
         CallDeferred(nameof(TurnOnCollisions));
         _animatedSprite.Visible = true;
@@ -207,13 +177,14 @@ public partial class Player : CharacterBody2D
         {
             case CharacterControllerType.Platform:
                 GD.Print("enable platform player");
-                _platformController.Enable();
+                PlatformController.Enable();
                 break;
             case CharacterControllerType.Overworld:
                 GD.Print("enable overworld player");
-                _overworldController.Enable();
+                OverworldController.Enable();
                 break;
         }
+
         SetPhysicsProcess(true);
         EmitSignal(SignalName.PlayerEnabled);
     }
@@ -234,8 +205,8 @@ public partial class Player : CharacterBody2D
     {
         GD.Print("disable player");
         Enabled = false;
-        _platformController.Disable();
-        _overworldController.Disable();
+        PlatformController.Disable();
+        OverworldController.Disable();
         EmitSignal(SignalName.PlayerDisabled);
     }
 
@@ -244,7 +215,7 @@ public partial class Player : CharacterBody2D
         switch (_activeController)
         {
             case CharacterControllerType.Platform:
-                _platformController.TriggerForce(force);
+                PlatformController.TriggerForce(force);
                 break;
         }
     }
@@ -254,7 +225,7 @@ public partial class Player : CharacterBody2D
         switch (_activeController)
         {
             case CharacterControllerType.Platform:
-                _platformController.OnHitJumpSource();
+                PlatformController.OnHitJumpSource();
                 break;
         }
     }

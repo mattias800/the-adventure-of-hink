@@ -14,14 +14,14 @@ public partial class GameManager : Node
     public bool IsEnteringNewScene;
     public string NewScenePortalName = "StartPortal";
 
-    public Player Player;
+    public features.player.Player Player;
 
     private CameraManager _cameraManager;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
     {
-        Player = GetNode<Player>("Player");
+        Player = GetNode<features.player.Player>("Player");
         _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         StartLevel();
@@ -44,7 +44,7 @@ public partial class GameManager : Node
         if (Input.IsActionJustPressed("exit_game"))
         {
             GD.Print("User pressed Esc, quitting game.");
-            GetTree().Quit();
+            CallDeferred(nameof(QuitGame));
             return;
         }
 
@@ -56,6 +56,10 @@ public partial class GameManager : Node
         }
     }
 
+    private void QuitGame()
+    {
+        GetTree().Quit(0);
+    }
     public void OnPlayerEnteredPortal(IPortal portal)
     {
         var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;

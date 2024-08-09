@@ -1,10 +1,36 @@
 using Godot;
-using System;
-using Godot.NativeInterop;
+using Theadventureofhink.autoloads;
+using Theadventureofhink.features.player.platform.states;
 using Theadventureofhink.game_state;
 
-public partial class PlatformController : Node
+namespace Theadventureofhink.features.player.platform;
+
+public partial class PlatformController : Node2D
 {
+    [Export] public CharacterBody2D Player { get; private set; }
+
+    [Export] public AnimatedSprite2D AnimatedSprite { get; private set; }
+
+    [Export] public AudioStreamPlayer2D JumpSound { get; private set; }
+
+    [Export] public AudioStreamPlayer2D LandSound { get; private set; }
+
+    [Export] public AudioStreamPlayer2D DashSound { get; private set; }
+
+    [Export] public AudioStreamPlayer2D GrabWallSound { get; private set; }
+
+    [Export] public AudioStreamPlayer2D JumpFromWallSound { get; private set; }
+
+    [Export] public AudioStreamPlayer2D JumpFromAirSound { get; private set; }
+
+    [Export] public RayCast2D WallRayCastLeft { get; private set; }
+
+    [Export] public RayCast2D WallRayCastRight { get; private set; }
+
+    [Export] public PackedScene DustBoomScene { get; private set; }
+
+    public bool Enabled;
+
     [Signal]
     public delegate void PlayerTurnedEventHandler(string direction);
 
@@ -47,76 +73,43 @@ public partial class PlatformController : Node
         Right
     }
 
-    public PlayerDirection CurrentPlayerDirection { get; set; } = PlayerDirection.Right;
-    public float TimeSinceNoGround { get; set; } = 0.0f;
-    public float TimeUntilWallGrabPossible { get; set; } = 0.0f;
-    public float WallGrabTimeLeft { get; set; } = 0.0f;
-    public float DashTimeLeft { get; set; } = 0.0f;
-    public Vector2 DashDirection { get; set; } = Vector2.Zero;
-    public float TimeUntilJumpVelocityResetAllowed { get; set; } = 0.0f;
-    public float TimeUntilJumpHorizontalControl { get; set; } = 0.0f;
-    public int JumpsLeft { get; set; } = 0;
-    public int DashesLeft { get; set; } = 0;
-    public int NumDoubleJumps { get; set; } = 1;
-    public int NumDashes { get; set; } = 1;
-    public bool IsAgainstWall { get; set; } = false;
-    public float CoyoteTimeFromGroundLeft { get; set; } = 0.0f;
-    public float CoyoteTimeFromWallLeft { get; set; } = 0.0f;
-    public Vector2 NormalForLastWallTouched { get; set; } = Vector2.Zero;
-    public float VelocityIntoWall { get; set; } = 0.0f;
-    public TileMap ActiveTileMap { get; set; } = null;
-
-    public CharacterBody2D Player { get; private set; }
-    public AnimatedSprite2D AnimatedSprite { get; private set; }
-    public AudioStreamPlayer2D JumpSound { get; private set; }
-    public AudioStreamPlayer2D LandSound { get; private set; }
-    public AudioStreamPlayer2D DashSound { get; private set; }
-    public AudioStreamPlayer2D GrabWallSound { get; private set; }
-    public AudioStreamPlayer2D JumpFromWallSound { get; private set; }
-    public AudioStreamPlayer2D JumpFromAirSound { get; private set; }
-    public RayCast2D WallRayCastLeft { get; private set; }
-    public RayCast2D WallRayCastRight { get; private set; }
-    public PackedScene? DustBoomScene { get; private set; }
+    public PlayerDirection CurrentPlayerDirection = PlayerDirection.Right;
+    public float TimeSinceNoGround;
+    public float TimeUntilWallGrabPossible;
+    public float WallGrabTimeLeft;
+    public float DashTimeLeft;
+    public Vector2 DashDirection = Vector2.Zero;
+    public float TimeUntilJumpVelocityResetAllowed;
+    public float TimeUntilJumpHorizontalControl;
+    public int JumpsLeft;
+    public int DashesLeft;
+    public int NumDoubleJumps = 1;
+    public int NumDashes = 1;
+    public bool IsAgainstWall = false;
+    public float CoyoteTimeFromGroundLeft;
+    public float CoyoteTimeFromWallLeft;
+    public Vector2 NormalForLastWallTouched = Vector2.Zero;
+    public float VelocityIntoWall;
 
     private PlayerState _currentState;
     private PlayerSkillsState _playerSkillsState;
 
-    public PlatformController(
-        CharacterBody2D player,
-        AnimatedSprite2D animatedSprite,
-        PlayerSkillsState playerSkillsState,
-        AudioStreamPlayer2D jumpSound,
-        AudioStreamPlayer2D landSound,
-        AudioStreamPlayer2D dashSound,
-        AudioStreamPlayer2D grabWallSound,
-        AudioStreamPlayer2D jumpFromWallSound,
-        AudioStreamPlayer2D jumpFromAirSound,
-        PackedScene? dustBoomScene)
-    {
-        Player = player;
-        AnimatedSprite = animatedSprite;
-        _playerSkillsState = playerSkillsState;
-        JumpSound = jumpSound;
-        LandSound = landSound;
-        DashSound = dashSound;
-        GrabWallSound = grabWallSound;
-        JumpFromWallSound = jumpFromWallSound;
-        JumpFromAirSound = jumpFromAirSound;
-        WallRayCastLeft = player.GetNode<RayCast2D>("WallRayCastLeft");
-        WallRayCastRight = player.GetNode<RayCast2D>("WallRayCastRight");
-        DustBoomScene = dustBoomScene;
-
-        Gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
-    }
-
     public override void _Ready()
     {
+        Gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
+        _playerSkillsState = GetNode<GameState>(Singletons.GameState).PlayerState.PlayerSkillsState;
         ChangeState(new IdleState(this));
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        _currentState.PhysicsProcess(delta, _playerSkillsState);
+        if (_playerSkillsState == null)
+        {
+            GD.PrintErr("PlatformController got _playerSkillsState that is null.");
+            return;
+        }
+
+        _currentState?.PhysicsProcess(delta, _playerSkillsState);
         UpdatePlayerDirection();
     }
 
@@ -249,12 +242,13 @@ public partial class PlatformController : Node
 
     public void Disable()
     {
+        Enabled = false;
         ChangeState(new DisabledState(this));
     }
 
     public bool IsNodeIsWallJumpable(Node2D node)
     {
-        return WallRayCastRight.GetCollider() is TileMap;
+        return WallRayCastRight.GetCollider() is TileMapLayer;
     }
 
     public Vector2 GetWallJumpDirection(Vector2 wallNormal)

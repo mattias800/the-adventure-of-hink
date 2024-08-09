@@ -3,6 +3,14 @@ using System;
 
 public partial class OverworldController : Node2D
 {
+    [Export]
+    public CharacterBody2D Player;
+    
+    [Export]
+    public AnimatedSprite2D AnimatedSprite;
+
+    public bool Enabled;
+    
     // Enums
     public enum State
     {
@@ -22,18 +30,14 @@ public partial class OverworldController : Node2D
     // Variables
     private State _state = State.Idle;
     private PlayerDirection _playerDirection = PlayerDirection.Right;
-
-    private CharacterBody2D _player;
-    private AnimatedSprite2D _animatedSprite;
-
-    public OverworldController(CharacterBody2D player, AnimatedSprite2D animatedSprite)
-    {
-        _player = player;
-        _animatedSprite = animatedSprite;
-    }
-
+    
     public override void _PhysicsProcess(double delta)
     {
+        if (!Enabled)
+        {
+            return;
+        }
+        
         var direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         switch (_state)
@@ -44,42 +48,42 @@ public partial class OverworldController : Node2D
             case State.Idle:
                 if (direction.Length() > 0.0)
                 {
-                    _animatedSprite.Play("walk");
+                    AnimatedSprite.Play("walk");
                 }
                 else
                 {
-                    _animatedSprite.Play("idle");
+                    AnimatedSprite.Play("idle");
                 }
 
                 if (direction.Length() > 0.0)
                 {
-                    _player.Velocity = _player.Velocity.Lerp(direction * _speed, 0.3f);
+                    Player.Velocity = Player.Velocity.Lerp(direction * _speed, 0.3f);
                 }
                 else
                 {
                     // Slide when stopping
-                    _player.Velocity = new Vector2(
-                        Mathf.MoveToward(_player.Velocity.X, 0, _speed),
-                        Mathf.MoveToward(_player.Velocity.Y, 0, _speed)
+                    Player.Velocity = new Vector2(
+                        Mathf.MoveToward(Player.Velocity.X, 0, _speed),
+                        Mathf.MoveToward(Player.Velocity.Y, 0, _speed)
                     );
                 }
 
-                _player.MoveAndSlide();
+                Player.MoveAndSlide();
                 break;
         }
 
-        if (_player.Velocity.X > 0)
+        if (Player.Velocity.X > 0)
         {
-            _animatedSprite.FlipH = false;
+            AnimatedSprite.FlipH = false;
             if (_playerDirection == PlayerDirection.Left)
             {
                 // Emit signal: player_turned("right")
             }
             _playerDirection = PlayerDirection.Right;
         }
-        else if (_player.Velocity.X < 0)
+        else if (Player.Velocity.X < 0)
         {
-            _animatedSprite.FlipH = true;
+            AnimatedSprite.FlipH = true;
             if (_playerDirection == PlayerDirection.Right)
             {
                 // Emit signal: player_turned("left")
@@ -94,11 +98,11 @@ public partial class OverworldController : Node2D
         switch (nextState)
         {
             case State.Disabled:
-                _animatedSprite.Play("idle");
+                AnimatedSprite.Play("idle");
                 break;
 
             case State.Idle:
-                _animatedSprite.Play("idle");
+                AnimatedSprite.Play("idle");
                 break;
         }
         _state = nextState;
