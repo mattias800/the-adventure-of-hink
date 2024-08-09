@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=4 uid="uid://cfeug64aouer"]
+[gd_scene load_steps=63 format=4 uid="uid://cfeug64aouer"]
 
 [ext_resource type="PackedScene" uid="uid://bb1280skluxxx" path="res://src/features/checkpoint/checkpoint.tscn" id="1_lcggy"]
 [ext_resource type="Script" path="res://world/world_01/hometown/Hometown.cs" id="1_sfoep"]
@@ -11,10 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://rtpft5oabs2b" path="res://assets/GrasslandAtlas.png" id="10_n4beb"]
 [ext_resource type="PackedScene" uid="uid://dn31me2tk256i" path="res://world/characters/hometown/hometown_villager.tscn" id="10_siccx"]
 [ext_resource type="Texture2D" uid="uid://byo414j2t65up" path="res://world/characters/hometown/blacksmith/MiniBlacksmith.png" id="11_c5tfa"]
-[ext_resource type="Script" path="res://world/characters/hometown/blacksmith/BlacksmithDialogueSwitcher.cs" id="12_a3xsh"]
 [ext_resource type="Texture2D" uid="uid://vqgekly4rdrh" path="res://world/characters/hometown/old_man/MiniOldMan.png" id="12_uko8f"]
 [ext_resource type="Texture2D" uid="uid://cefrb5ayjjgks" path="res://assets/packs/Umbral-Vault/Umbral-Vault-files/PNG/environment/tileset.png" id="13_4ao8o"]
-[ext_resource type="Script" path="res://world/characters/hometown/old_man/OldManDialogueSwitcher.cs" id="13_qoncd"]
 [ext_resource type="PackedScene" uid="uid://ba7h5wreyfr76" path="res://entities/well/well.tscn" id="14_040f5"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="14_n73m8"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="16_pmt6j"]
@@ -199,7 +197,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hrxc3")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -357,6 +355,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_om1s3"]
 size = Vector2(20, 68)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_066eh"]
+size = Vector2(26, 11)
+
 [node name="Hometown" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_sfoep")
 
@@ -447,7 +448,7 @@ shape = SubResource("RectangleShape2D_a7hi2")
 
 [node name="Blacksmith" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
 position = Vector2(450, 224)
-DialogueSwitcherPath = NodePath("DialogueSwitcher")
+Dialogue = "blacksmith"
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
 StartTurnedLeft = true
 
@@ -456,21 +457,16 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_u0bda")
 animation = &"idle"
 
-[node name="DialogueSwitcher" type="Node2D" parent="States/StartState/Blacksmith"]
-script = ExtResource("12_a3xsh")
-
 [node name="Grandpa" parent="States/StartState" node_paths=PackedStringArray("AnimatedSprite2D") instance=ExtResource("10_siccx")]
 position = Vector2(673, 224)
-DialogueSwitcherPath = NodePath("DialogueSwitcher")
+Dialogue = "grandpa"
 AnimatedSprite2D = NodePath("AnimatedSprite2D")
 StartTurnedLeft = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="States/StartState/Grandpa"]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_nwryw")
-
-[node name="DialogueSwitcher" type="Node2D" parent="States/StartState/Grandpa"]
-script = ExtResource("13_qoncd")
+animation = &"idle"
 
 [node name="AttackingState" type="Node2D" parent="States"]
 
@@ -666,6 +662,14 @@ position = Vector2(216, 239)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_om1s3")
+
+[node name="PortalArea" parent="." instance=ExtResource("4_0ce4s")]
+position = Vector2(50, 345)
+NextStage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalArea"]
+position = Vector2(2, 1.5)
+shape = SubResource("RectangleShape2D_066eh")
 
 [connection signal="body_entered" from="States/AttackingState/HouseFireTrigger" to="States/AttackingState/UndergroundCutscene" method="OnBodyEnteredFireTrigger"]
 [connection signal="body_entered" from="Rooms/OvergroundCameraTrigger" to="." method="OnOvergroundCameraTriggered"]

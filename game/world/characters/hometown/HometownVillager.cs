@@ -5,7 +5,6 @@ using Theadventureofhink.autoloads;
 public partial class HometownVillager : Node2D
 {
     [Export] public string Dialogue;
-    [Export] public NodePath? DialogueSwitcherPath;
     [Export] public AnimatedSprite2D AnimatedSprite2D;
     [Export] public bool SpriteTurnedLeft;
     [Export] public bool StartTurnedLeft;
@@ -14,8 +13,6 @@ public partial class HometownVillager : Node2D
     private Talkable _talkable;
     private CutsceneManager _cutsceneManager;
     private GameManager _gameManager;
-    
-    private DialogueSwitcher? _dialogueSwitcher;
     
     // State
     private bool _turnedLeft;
@@ -27,9 +24,7 @@ public partial class HometownVillager : Node2D
         _talkable = GetNode<Talkable>("Talkable");
         _resource = GD.Load("res://world/characters/hometown/hometown_villager.dialogue");
 
-        _dialogueSwitcher = GetNode<DialogueSwitcher>(DialogueSwitcherPath);
-
-        if (string.IsNullOrEmpty(Dialogue) && DialogueSwitcherPath == null)
+        if (string.IsNullOrEmpty(Dialogue))
         {
             GD.PrintErr("Villager has no dialogue starting point set.");
         }
@@ -41,7 +36,8 @@ public partial class HometownVillager : Node2D
         {
             GD.PrintErr("Dialog .resource file is null for " + Name);
         }
-        AnimatedSprite2D.Play("idle");
+        
+        AnimatedSprite2D?.Play("idle");
 
         _turnedLeft = StartTurnedLeft;
     }
@@ -61,12 +57,10 @@ public partial class HometownVillager : Node2D
 
     public async void OnTalk()
     {
-        var d = _dialogueSwitcher != null ? _dialogueSwitcher.GetDialogueStartPoint() : Dialogue;
-        
-        if (!string.IsNullOrEmpty(d))
+        if (!string.IsNullOrEmpty(Dialogue))
         {
             TurnTowardsPlayer();
-            await _cutsceneManager.StartTimeline(_resource, d);
+            await _cutsceneManager.StartTimeline(_resource, Dialogue);
             _talkable.Activate();
         }
         else

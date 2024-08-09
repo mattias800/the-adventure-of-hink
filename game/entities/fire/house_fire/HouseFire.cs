@@ -17,7 +17,7 @@ public partial class HouseFire : Node2D
     private int _maxValue = 1000000;
     private float _pitch = 1.0f;
 
-    private float _deltaSinceStarted = 0.0f;
+    private float _deltaSinceStarted;
 
     public override void _Ready()
     {
@@ -52,7 +52,7 @@ public partial class HouseFire : Node2D
                 tween.TweenProperty(_sound, "volume_db", 0.0f, 3f);
                 _sound.Play();
 
-                _fire.Amount = 0;
+                _fire.Amount = 1;
                 var fireTween = CreateTween();
                 fireTween.SetTrans(Tween.TransitionType.Sine);
                 fireTween.TweenProperty(_fire, "amount", 16.0f, 3f);
