@@ -8,6 +8,8 @@ public partial class Player : CharacterBody2D
     [Export]
     public PackedScene? DustBoomScene;
 
+    public bool Enabled;
+
     // Signals
     [Signal]
     public delegate void PlayerDisabledEventHandler();
@@ -47,7 +49,6 @@ public partial class Player : CharacterBody2D
     private PlatformController _platformController;
     private OverworldController _overworldController;
 
-    private bool _enabled = false;
     private bool _isRespawnTeleporting = false;
 
     private GameManager _gameManager;
@@ -116,7 +117,7 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (!_enabled)
+        if (!Enabled)
             return;
 
         switch (_state)
@@ -201,7 +202,7 @@ public partial class Player : CharacterBody2D
 
     public void Enable()
     {
-        _enabled = true;
+        Enabled = true;
         switch (_activeController)
         {
             case CharacterControllerType.Platform:
@@ -232,7 +233,7 @@ public partial class Player : CharacterBody2D
     public void Disable()
     {
         GD.Print("disable player");
-        _enabled = false;
+        Enabled = false;
         _platformController.Disable();
         _overworldController.Disable();
         EmitSignal(SignalName.PlayerDisabled);

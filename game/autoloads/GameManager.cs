@@ -72,7 +72,7 @@ public partial class GameManager : Node
         LoadScene(nextScenePath);
     }
 
-    public void AfterLoadingNewScene()
+    public async void AfterLoadingNewScene()
     {
         var portal = FindPortalInScene(NewScenePortalName);
 
@@ -107,15 +107,21 @@ public partial class GameManager : Node
             GetTree().Quit();
         }
 
-        if (!_cutsceneManager.CutscenePlaying)
-        {
-            // If cutscene was triggered by levels enter room event, it will have disabled the player.
-            Player.Enable();
-        }
+        // Player was just moved, so if we enable the player, it will trigger OnPlayerExitRoom, etc.
+        // We defer the call to allow the player to be moved first.
+        GetTree().CreateTimer(0.5f).Timeout += EnablePlayerIfNoCutscene;
 
         if (GetTree().CurrentScene.HasMethod("OnPlayerEnterScene"))
         {
             GetTree().CurrentScene.Call("OnPlayerEnterScene");
+        }
+    }
+
+    private void EnablePlayerIfNoCutscene()
+    {
+        if (!_cutsceneManager.CutscenePlaying)
+        {
+            Player.Enable();
         }
     }
 

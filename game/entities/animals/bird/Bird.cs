@@ -34,7 +34,7 @@ public partial class Bird : Node2D
         _currentSpeed = FlyAwayStartSpeed;
         if (PlayerFlyArea != null)
         {
-            PlayerFlyArea.BodyEntered += fly_away_if_player; 
+            PlayerFlyArea.BodyEntered += FlyAwayIfPlayer; 
         }
 
         _animatedSprite2D.Play("idle", _animationSpeed);
@@ -86,17 +86,17 @@ public partial class Bird : Node2D
         }
     }
 
-    private void fly_away_if_player(Node2D body)
+    private void FlyAwayIfPlayer(Node2D body)
     {
-        GD.Print("Player approached bird");
         if (CollisionUtil.IsPlayer(body))
         {
-            fly_away();
+            GD.Print("Player approached bird");
+            FlyAway();
         }
         
     }
 
-    public void fly_away()
+    public void FlyAway()
     {
         if (FlyingDirection.X < 0)
         {

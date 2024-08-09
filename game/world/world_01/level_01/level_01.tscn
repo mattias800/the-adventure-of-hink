@@ -290,7 +290,7 @@ position = Vector2(251, -1)
 
 [node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(1000, 39)
-TargetPortalName = "ForestPortal"
+TargetPortalName = "HometownWesternForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
 position = Vector2(26, -52)
@@ -298,6 +298,7 @@ shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
+Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, -6)

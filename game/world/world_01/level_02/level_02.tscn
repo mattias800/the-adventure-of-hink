@@ -52,7 +52,7 @@ shape = SubResource("RectangleShape2D_1smo6")
 
 [node name="StartPortal" parent="." instance=ExtResource("3_c0nni")]
 position = Vector2(24, 120)
-TargetPortalName = "RightForestPortal"
+TargetPortalName = "HometownEasternForestPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(-20, -44)

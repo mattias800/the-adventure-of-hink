@@ -6,6 +6,7 @@ public enum Stage
 {
     Overworld,
     Hometown,
+    HometownOldManHouseInterior,
     HometownWesternForest,
     HometownEasternForest,
 }
@@ -16,8 +17,18 @@ public static class Stages
     {
         { Stage.Overworld, new StageInfo("Overworld", "res://world/overworld_01/overworld_alt_2.tscn") },
         { Stage.Hometown, new StageInfo("Hometown", "res://world/world_01/hometown/hometown.tscn") },
-        { Stage.HometownWesternForest, new StageInfo("Hometown western forest", "res://world/world_01/level_01/level_01.tscn") },
-        { Stage.HometownEasternForest, new StageInfo("Hometown eastern forest", "res://world/world_01/level_02/level_02.tscn") }
+        {
+            Stage.HometownOldManHouseInterior,
+            new StageInfo("Hometown old man house", "res://world/world_01/hometown/houses/old_man_house.tscn")
+        },
+        {
+            Stage.HometownWesternForest,
+            new StageInfo("Hometown western forest", "res://world/world_01/level_01/level_01.tscn")
+        },
+        {
+            Stage.HometownEasternForest,
+            new StageInfo("Hometown eastern forest", "res://world/world_01/level_02/level_02.tscn")
+        }
     };
 
     public static StageInfo GetStateInfo(Stage stage)

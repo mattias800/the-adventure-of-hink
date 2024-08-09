@@ -613,9 +613,11 @@ Flipped = true
 
 [node name="OldManHousePortalDoor" parent="." instance=ExtResource("21_88ur6")]
 position = Vector2(700, 220)
+NextStage = 2
 
 [node name="DevPortal1" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(782, 312)
+Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal1"]
 shape = SubResource("RectangleShape2D_64x4i")

@@ -43,7 +43,7 @@ public partial class Room : Area2D
 
     public void OnAreaEntered(Area2D area)
     {
-        if (Enabled && CollisionUtil.IsPlayer(area.GetParent()))
+        if (Enabled && CollisionUtil.IsPlayer(area.GetParent()) && _gameManager.Player.Enabled)
         {
             GD.Print("Player entered room: " + Name);
             EmitSignal(SignalName.PlayerEnteredRoom);
@@ -52,7 +52,7 @@ public partial class Room : Area2D
 
     public void OnAreaExited(Area2D area)
     {
-        if (Enabled && CollisionUtil.IsPlayer(area.GetParent()))
+        if (Enabled && CollisionUtil.IsPlayer(area.GetParent()) && _gameManager.Player.Enabled)
         {
             GD.Print("Player exited room: " + Name);
             EmitSignal(SignalName.PlayerExitedRoom);

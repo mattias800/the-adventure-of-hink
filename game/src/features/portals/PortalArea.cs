@@ -6,6 +6,8 @@ using Theadventureofhink.world;
 
 public partial class PortalArea : Area2D, IPortal
 {
+    [Export] public bool Enabled = true;
+    
     [Export] public Stage NextStage;
 
     [Export] public string TargetPortalName;
@@ -22,9 +24,9 @@ public partial class PortalArea : Area2D, IPortal
 
     public void OnBodyEntered(Node2D body)
     {
-        GD.Print("OnBodyEntered portal");
+        GD.Print("OnBodyEntered portal: " + body.Name);
 
-        if (CollisionUtil.IsPlayer(body))
+        if (Enabled && CollisionUtil.IsPlayer(body))
         {
             GD.Print("Entered portal: " + Name);
             _gameManager.OnPlayerEnteredPortal(this);

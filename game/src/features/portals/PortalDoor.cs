@@ -6,6 +6,8 @@ using Theadventureofhink.world;
 
 public partial class PortalDoor : Node2D, IPortal
 {
+    [Export] public bool Enabled = true;
+    
     [Export] public Stage NextStage;
 
     [Export] public string TargetPortalName;
@@ -22,9 +24,12 @@ public partial class PortalDoor : Node2D, IPortal
 
     public void OnPlayerEnteredDoor()
     {
-        GD.Print("Entered portal: " + Name);
-        _gameManager.OnPlayerEnteredPortal(this);
-        EmitSignal(SignalName.PlayerEnteredPortal);
+        if (Enabled)
+        {
+            GD.Print("Entered portal: " + Name);
+            _gameManager.OnPlayerEnteredPortal(this);
+            EmitSignal(SignalName.PlayerEnteredPortal);
+        }
     }
 
     public Stage GetNextStage()

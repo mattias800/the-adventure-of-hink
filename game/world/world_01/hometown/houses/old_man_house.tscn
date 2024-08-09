@@ -273,4 +273,5 @@ position = Vector2(177, 160)
 
 [node name="StartPortal" parent="." instance=ExtResource("7_knxix")]
 position = Vector2(104, 163)
+NextStage = 1
 TargetPortalName = "OldManHousePortalDoor"
