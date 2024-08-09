@@ -111,11 +111,15 @@ public partial class Player : CharacterBody2D
 
     public void SwitchToPlatform()
     {
+        PlatformController.Enable();
+        OverworldController.Disable();
         _activeController = CharacterControllerType.Platform;
     }
 
     public void SwitchToOverworld()
     {
+        PlatformController.Disable();
+        OverworldController.Enable();
         _activeController = CharacterControllerType.Overworld;
     }
 
@@ -176,16 +180,17 @@ public partial class Player : CharacterBody2D
         switch (_activeController)
         {
             case CharacterControllerType.Platform:
-                GD.Print("enable platform player");
+                GD.Print("Enable PlatformController.");
                 PlatformController.Enable();
+                OverworldController.Disable();
                 break;
             case CharacterControllerType.Overworld:
-                GD.Print("enable overworld player");
+                GD.Print("Enable OverworldController.");
+                PlatformController.Disable();
                 OverworldController.Enable();
                 break;
         }
-
-        SetPhysicsProcess(true);
+        
         EmitSignal(SignalName.PlayerEnabled);
     }
 
@@ -203,7 +208,7 @@ public partial class Player : CharacterBody2D
 
     public void Disable()
     {
-        GD.Print("disable player");
+        GD.Print("Disable player.");
         Enabled = false;
         PlatformController.Disable();
         OverworldController.Disable();

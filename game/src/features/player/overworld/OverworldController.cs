@@ -123,11 +123,13 @@ public partial class OverworldController : Node2D
 
     public void Enable()
     {
+        Enabled = true;
         EnterState(State.Idle);
     }
 
     public void Disable()
     {
+        Enabled = false;
         EnterState(State.Disabled);
     }
 }

@@ -237,6 +237,7 @@ public partial class PlatformController : Node2D
 
     public void Enable()
     {
+        Enabled = true;
         ChangeState(new IdleState(this));
     }
 

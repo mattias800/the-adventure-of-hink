@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.world;
 
 public partial class TitleScreen : Node2D
 {
@@ -18,7 +19,7 @@ public partial class TitleScreen : Node2D
         if (_waiting && Input.IsActionJustPressed("jump"))
         {
             _waiting = false;
-            _gameManager.LoadNextScene("res://world/world_01/level_01/level_01.tscn", "StartPortal");
+            _gameManager.LoadNextStage(Stage.Overworld, "StartPortal");
         }
     }
 }

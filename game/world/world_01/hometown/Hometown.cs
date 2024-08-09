@@ -14,12 +14,12 @@ public partial class Hometown : Node2D
 	private Room _room2Underground;
 	private Node2D _attackingState;
 
-	private MusicManager _musicManager;
+	private Theadventureofhink.autoloads.MusicManager _musicManager;
 	private GameState _gameState;
 
 	public override void _Ready()
 	{
-		_musicManager = GetNode<MusicManager>(Singletons.MusicManager);
+		_musicManager = GetNode<Theadventureofhink.autoloads.MusicManager>(Singletons.MusicManager);
 		_gameState = GetNode<GameState>(Singletons.GameState);
 
 		_room = GetNode<Room>("Rooms/Room");

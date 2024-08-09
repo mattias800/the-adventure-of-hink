@@ -10,9 +10,6 @@
 [node name="MusicManager" type="Node"]
 script = ExtResource("1_1wv17")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
-
 [node name="Tracks" type="Node" parent="."]
 script = ExtResource("2_pn61j")
 

@@ -24,8 +24,6 @@ public partial class PortalArea : Area2D, IPortal
 
     public void OnBodyEntered(Node2D body)
     {
-        GD.Print("OnBodyEntered portal: " + body.Name);
-
         if (Enabled && CollisionUtil.IsPlayer(body))
         {
             GD.Print("Entered portal: " + Name);

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using Theadventureofhink.entities.portals;
 using Theadventureofhink.world;
@@ -58,15 +59,20 @@ public partial class GameManager : Node
 
     private void QuitGame()
     {
-        GetTree().Quit(0);
+        GetTree().Quit();
     }
-    public void OnPlayerEnteredPortal(IPortal portal)
+    public async void OnPlayerEnteredPortal(IPortal portal)
     {
         var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
-        LoadNextScene(nextScenePath, portal.GetTargetPortalName());
+        await LoadNextScene(nextScenePath, portal.GetTargetPortalName());
     }
 
-    public async void LoadNextScene(string nextScenePath, string portalName)
+    public async void LoadNextStage(Stage stage, string portalName)
+    {
+        await LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
+    }
+    
+    public async Task LoadNextScene(string nextScenePath, string portalName)
     {
         Player.Disable();
         await _cutsceneManager.TransitionOut();
@@ -76,7 +82,7 @@ public partial class GameManager : Node
         LoadScene(nextScenePath);
     }
 
-    public async void AfterLoadingNewScene()
+    public void AfterLoadingNewScene()
     {
         var portal = FindPortalInScene(NewScenePortalName);
 
@@ -116,9 +122,16 @@ public partial class GameManager : Node
         // We defer the call to allow the player to be moved first.
         GetTree().CreateTimer(0.5f).Timeout += EnablePlayerIfNoCutscene;
 
+        GD.PrintErr("Has OnPlayerEnterScene???");
+        GD.PrintErr(GetTree().CurrentScene.Name);
         if (GetTree().CurrentScene.HasMethod("OnPlayerEnterScene"))
         {
+            GD.PrintErr("yea");
             GetTree().CurrentScene.Call("OnPlayerEnterScene");
+        }
+        else
+        {
+            GD.Print("Nope");
         }
     }
 
@@ -130,7 +143,7 @@ public partial class GameManager : Node
         }
     }
 
-    private IPortal? FindPortalInScene(string portalName)
+    private IPortal FindPortalInScene(string portalName)
     {
         if (!string.IsNullOrEmpty(portalName))
         {

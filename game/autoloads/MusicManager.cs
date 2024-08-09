@@ -1,23 +1,19 @@
 using Godot;
-using System;
-using Theadventureofhink.autoloads;
+
+namespace Theadventureofhink.autoloads;
 
 public partial class MusicManager : Node
 {
-    private AudioStreamPlayer _player;
+    public bool IsPlaying;
+    
     private Tracks _tracks;
 
     private Tracks.Track? _currentlyPlayingTrack;
     private Tracks.Track? _queuedTrack;
-
-    private bool _isPlaying;
-
+    
     public override void _Ready()
     {
-        _player = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         _tracks = GetNode<Tracks>("Tracks");
-
-        _player.Finished += OnMusicStopped;
     }
     
     public override void _Process(double delta)
@@ -31,23 +27,23 @@ public partial class MusicManager : Node
 
     private void OnMusicStopped()
     {
-        if (_isPlaying)
+        if (IsPlaying && _currentlyPlayingTrack != null)
         {
-            _player.Play();
+            var audioStreamPlayer = _tracks.GetTrackNode(_currentlyPlayingTrack.Value);
+            audioStreamPlayer?.Play();
         }
     }
 
     public void Stop()
     {
-        _isPlaying = false;
-        _player.Stop();
-        _player.Stream = null;
+        IsPlaying = false;
+        StopCurrentlyPlaying();
         _currentlyPlayingTrack = null;
     }
 
     public void PlayTrack(Tracks.Track track)
     {
-        if (_currentlyPlayingTrack == track && _player.Playing)
+        if (_currentlyPlayingTrack == track && IsPlaying)
         {
             return;
         }
@@ -57,27 +53,36 @@ public partial class MusicManager : Node
 
     private void PlayQueuedTrack()
     {
-        if (_isPlaying)
+        StopCurrentlyPlaying();
+        
+        if (_queuedTrack != null)
         {
-            // TODO Fade out
-            Stop();
+            var audioStreamPlayer = _tracks.GetTrackNode(_queuedTrack.Value);
+            if (audioStreamPlayer != null)
+            {
+                audioStreamPlayer.Play();
+                audioStreamPlayer.Finished += OnMusicStopped;
+                IsPlaying = true;
+            }
+            else
+            {
+                IsPlaying = false;
+            }
         }
-
+        
         _currentlyPlayingTrack = _queuedTrack;
+    }
+
+    private void StopCurrentlyPlaying()
+    {
         if (_currentlyPlayingTrack != null)
         {
             var audioStreamPlayer = _tracks.GetTrackNode(_currentlyPlayingTrack.Value);
             if (audioStreamPlayer != null)
             {
-                PlayTrackNode(audioStreamPlayer);
-                _isPlaying = true;
+                audioStreamPlayer.Finished -= OnMusicStopped;
+                audioStreamPlayer.Stop();
             }
         }
-    }
-
-    private void PlayTrackNode(AudioStreamPlayer trackNode)
-    {
-        _player.Stream = trackNode.Stream;
-        _player.Play();
     }
 }

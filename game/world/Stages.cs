@@ -16,7 +16,7 @@ public static class Stages
 {
     private static Dictionary<Stage, StageInfo> _stageInfos = new()
     {
-        { Stage.Overworld, new StageInfo("Overworld", "res://world/overworld_01/overworld_alt_2.tscn") },
+        { Stage.Overworld, new StageInfo("Overworld", "res://world/overworld_01/overworld_01.tscn") },
         { Stage.Hometown, new StageInfo("Hometown", "res://world/world_01/hometown/hometown.tscn") },
         {
             Stage.HometownOldManHouseInterior,
