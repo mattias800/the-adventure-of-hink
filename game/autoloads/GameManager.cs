@@ -61,6 +61,7 @@ public partial class GameManager : Node
     {
         GetTree().Quit();
     }
+    
     public async void OnPlayerEnteredPortal(IPortal portal)
     {
         var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
@@ -122,16 +123,9 @@ public partial class GameManager : Node
         // We defer the call to allow the player to be moved first.
         GetTree().CreateTimer(0.5f).Timeout += EnablePlayerIfNoCutscene;
 
-        GD.PrintErr("Has OnPlayerEnterScene???");
-        GD.PrintErr(GetTree().CurrentScene.Name);
         if (GetTree().CurrentScene.HasMethod("OnPlayerEnterScene"))
         {
-            GD.PrintErr("yea");
             GetTree().CurrentScene.Call("OnPlayerEnterScene");
-        }
-        else
-        {
-            GD.Print("Nope");
         }
     }
 
