@@ -1,0 +1,28 @@
+
+=================================================================================
+Pocket Pix - Forest Platformer Asset Pack
+by Louie Jams
+
+https://louie-jams.itch.io/
+@LouieJams
+
+=================================================================================
+
+Pack contents:
+2x -------------- Character sprite sheet _______ 8 x 8
+1x -------------- Boar sprite sheet ____________ 8 x 8
+1x -------------- Bat + plant sprite sheet _____ 8 x 8
+1x -------------- Tiles sprite sheet ___________ 8 x 8
+1x -------------- UI sprite sheet ______________ 8 x 8
+1x -------------- Item sprite sheet ____________ 16 x 16
+1x -------------- Boss sprite sheet ____________ 400 x 200
+1x -------------- Background image _____________ 400 x 200
+1x -------------- Pico-8 version image _________ 128 x 128
+
+*Sizes are based on the largest sprite on the sheet
+
+=================================================================================
+
+Thank you for your purchase. 
+This pack uses the Creative Commons Attribution 4.0 International License.
+https://creativecommons.org/licenses/by/4.0/ 

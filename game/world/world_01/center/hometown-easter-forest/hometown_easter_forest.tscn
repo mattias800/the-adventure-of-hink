@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=4 uid="uid://b8qqyvnigdsrv"]
+
+[ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="1_l3yim"]
+
+[node name="HometownEasterForest" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAIAAAABAAEAAAAEAAMAAAAEAAcAAAAEAAQAAAAFAAcAAAAEAAUAAAACAAMAAAADAAUAAAABAAgAAAACAAUAAAAAAAMAAAACAAQAAAAEAAcAAAACAAMAAAAEAAcAAAACAAIAAAAAAAEAAAADAAIAAAABAAgAAAAFAAIAAAABAAgAAAAGAAIAAAACAAEAAAAGAAMAAAAFAAgAAAA=")
+tile_set = ExtResource("1_l3yim")
