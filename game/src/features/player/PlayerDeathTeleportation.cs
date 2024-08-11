@@ -19,6 +19,9 @@ public partial class PlayerDeathTeleportation : Node2D
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _state = State.Disabled;
         _animatedSprite.Visible = false;
+        
+        // Teleportation animation is looped, so this is triggered only by player appear animation.
+        _animatedSprite.AnimationFinished += OnPlayerAppearDone;
     }
 
     public override void _Process(double delta)
@@ -49,7 +52,6 @@ public partial class PlayerDeathTeleportation : Node2D
         _state = State.Appearing;
         _animatedSprite.Visible = true;
         _animatedSprite.Play("player_appearing");
-        _animatedSprite.AnimationFinished += OnPlayerAppearDone;
     }
 
     private void OnPlayerAppearDone()

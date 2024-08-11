@@ -138,7 +138,7 @@ public partial class Player : CharacterBody2D
         _isRespawnTeleporting = true;
         _deathBoomSound.Play();
         Disable();
-        CallDeferred(nameof(TurnOffCollisions));
+        Callable.From(TurnOffCollisions).CallDeferred();
 
         _animatedSprite.Visible = false;
 
@@ -168,7 +168,8 @@ public partial class Player : CharacterBody2D
         _deathAppearSound.Play();
 
         _playerDeathTeleportation.PlayPlayerAppearing();
-        CallDeferred(nameof(TurnOnCollisions));
+        Callable.From(TurnOnCollisions).CallDeferred();
+        
         _animatedSprite.Visible = true;
         Velocity = Vector2.Zero;
         Enable();

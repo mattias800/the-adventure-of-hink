@@ -9,8 +9,8 @@ namespace Theadventureofhink.autoloads;
 
 public partial class GameManager : Node
 {
-    public Node2D? CurrentCheckpoint; // TODO Use Checkpoint type.
-    public Vector2 LastSpawnpoint;
+    public Node2D CurrentCheckpoint; // TODO Use Checkpoint type.
+    public Vector2 LastSpawnPoint;
 
     public bool IsEnteringNewScene;
     public string NewScenePortalName = "StartPortal";
@@ -45,7 +45,7 @@ public partial class GameManager : Node
         if (Input.IsActionJustPressed("exit_game"))
         {
             GD.Print("User pressed Esc, quitting game.");
-            CallDeferred(nameof(QuitGame));
+            Callable.From(() => GetTree().Quit()).CallDeferred();
             return;
         }
 
@@ -57,11 +57,6 @@ public partial class GameManager : Node
         }
     }
 
-    private void QuitGame()
-    {
-        GetTree().Quit();
-    }
-    
     public async void OnPlayerEnteredPortal(IPortal portal)
     {
         var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
@@ -72,7 +67,7 @@ public partial class GameManager : Node
     {
         await LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
     }
-    
+
     public async Task LoadNextScene(string nextScenePath, string portalName)
     {
         Player.Disable();
@@ -97,7 +92,7 @@ public partial class GameManager : Node
         CurrentCheckpoint = null;
         Player.Velocity = Vector2.Zero;
         Player.GlobalPosition = portal.GetSpawnPosition();
-        LastSpawnpoint = portal.GetSpawnPosition();
+        LastSpawnPoint = portal.GetSpawnPosition();
 
         _cameraManager.SetCameraTarget(Player);
         _cameraManager.Camera?.JumpToTarget();
@@ -159,7 +154,7 @@ public partial class GameManager : Node
         return GetAnyAvailablePortal() != null;
     }
 
-    private IPortal? GetPortalByName(string name)
+    private IPortal GetPortalByName(string name)
     {
         var portals = GetTree().GetNodesInGroup("portals").OfType<IPortal>();
 
@@ -174,7 +169,7 @@ public partial class GameManager : Node
         return null;
     }
 
-    public IPortal? GetAnyAvailablePortal()
+    public IPortal GetAnyAvailablePortal()
     {
         return GetTree().GetFirstNodeInGroup("portals") as IPortal;
     }
@@ -196,9 +191,9 @@ public partial class GameManager : Node
         {
             Player.DeathTeleport(CurrentCheckpoint.GlobalPosition);
         }
-        else if (LastSpawnpoint != null)
+        else if (LastSpawnPoint != null)
         {
-            Player.DeathTeleport(LastSpawnpoint);
+            Player.DeathTeleport(LastSpawnPoint);
         }
         else
         {

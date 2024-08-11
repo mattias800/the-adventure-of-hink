@@ -16,7 +16,6 @@ public partial class Spikes : Sprite2D
         if (CollisionUtil.IsPlayer(body))
         {
             _gameManager.RespawnPlayer();
-            // CallDeferred(nameof(_gameManager.RespawnPlayer));
         }
     }
 }
