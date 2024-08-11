@@ -24,21 +24,6 @@ public partial class PlayerDeathTeleportation : Node2D
         _animatedSprite.AnimationFinished += OnPlayerAppearDone;
     }
 
-    public override void _Process(double delta)
-    {
-        switch (_state)
-        {
-            case State.Disabled:
-                // animatedSprite.Visible = false;
-                return;
-            case State.Teleporting:
-                _animatedSprite.Play("teleporting");
-                break;
-            case State.Appearing:
-                return;
-        }
-    }
-
     public void PlayTeleporting()
     {
         GD.Print("play_teleporting");

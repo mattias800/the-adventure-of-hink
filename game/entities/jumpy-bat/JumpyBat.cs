@@ -73,6 +73,5 @@ public partial class JumpyBat : Area2D
     private void OnHitAnimationDone()
     {
         _animatedSprite2D.Play("idle");
-        _animatedSprite2D.AnimationFinished -= OnHitAnimationDone;
     }
 }
