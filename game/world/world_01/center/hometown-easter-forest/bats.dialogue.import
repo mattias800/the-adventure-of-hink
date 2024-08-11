@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://b42x14c851jv6"
+path="res://.godot/imported/bats.dialogue-2085f49f1c888114c994f4b0e3c00089.tres"
+
+[deps]
+
+source_file="res://world/world_01/center/hometown-easter-forest/bats.dialogue"
+dest_files=["res://.godot/imported/bats.dialogue-2085f49f1c888114c994f4b0e3c00089.tres"]
+
+[params]
+
+defaults=true
