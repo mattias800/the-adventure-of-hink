@@ -3,7 +3,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class DashingState(PlatformController controller) : PlayerState(controller, "Dashing")
+public class DashingState(PlatformController controller) : PlayerState("Dashing", controller)
 {
     public override void Enter()
     {

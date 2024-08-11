@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://drk68qcgqocdt"]
+[gd_scene load_steps=53 format=3 uid="uid://drk68qcgqocdt"]
 
 [ext_resource type="Script" path="res://src/features/player/Player.cs" id="1_8tupy"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cu6ta5clwtw8a" path="res://assets/audio/sounds/player_jump.wav" id="4_hmqpj"]
 [ext_resource type="Script" path="res://src/features/player/PlayerDeathTeleportation.cs" id="5_afbpt"]
 [ext_resource type="AudioStream" uid="uid://buo3qly4p2sgn" path="res://assets/audio/sounds/player_explode.ogg" id="5_clhrg"]
+[ext_resource type="Script" path="res://src/features/player/platform/WallClimbableProvider.cs" id="5_of78u"]
 [ext_resource type="AudioStream" uid="uid://b8i4pernnhpqb" path="res://assets/audio/sounds/player_death_appear.ogg" id="6_mig32"]
 [ext_resource type="AudioStream" uid="uid://bntyvep6iqb4" path="res://assets/audio/sounds/player_land.wav" id="7_1sdbw"]
 [ext_resource type="AudioStream" uid="uid://dtvw6webtqw5y" path="res://assets/audio/sounds/player_dash_2.wav" id="8_gje3e"]
@@ -257,10 +258,17 @@ PlatformController = NodePath("PlatformController")
 OverworldController = NodePath("OverworldController")
 DustBoomScene = ExtResource("2_ykok0")
 
-[node name="PlatformController" type="Node2D" parent="." node_paths=PackedStringArray("Player", "AnimatedSprite", "JumpSound", "LandSound", "DashSound", "GrabWallSound", "JumpFromWallSound", "JumpFromAirSound", "WallRayCastLeft", "WallRayCastRight")]
+[node name="OverworldController" type="Node2D" parent="." node_paths=PackedStringArray("Player", "AnimatedSprite")]
+unique_name_in_owner = true
+script = ExtResource("4_1nwg4")
+Player = NodePath("..")
+AnimatedSprite = NodePath("../AnimatedSprite2D")
+
+[node name="PlatformController" type="Node2D" parent="." node_paths=PackedStringArray("Player", "WallClimbableProvider", "AnimatedSprite", "JumpSound", "LandSound", "DashSound", "GrabWallSound", "JumpFromWallSound", "JumpFromAirSound", "WallRayCastLeft", "WallRayCastRight")]
 unique_name_in_owner = true
 script = ExtResource("3_dhmwe")
 Player = NodePath("..")
+WallClimbableProvider = NodePath("../WallClimbableProvider")
 AnimatedSprite = NodePath("../AnimatedSprite2D")
 JumpSound = NodePath("../PlayerJumpSound")
 LandSound = NodePath("../PlayerLandSound")
@@ -272,11 +280,8 @@ WallRayCastLeft = NodePath("../WallRayCastLeft")
 WallRayCastRight = NodePath("../WallRayCastRight")
 DustBoomScene = ExtResource("2_ykok0")
 
-[node name="OverworldController" type="Node2D" parent="." node_paths=PackedStringArray("Player", "AnimatedSprite")]
-unique_name_in_owner = true
-script = ExtResource("4_1nwg4")
-Player = NodePath("..")
-AnimatedSprite = NodePath("../AnimatedSprite2D")
+[node name="WallClimbableProvider" type="Node2D" parent="."]
+script = ExtResource("5_of78u")
 
 [node name="BoomerangController" parent="." instance=ExtResource("15_c2qsn")]
 position = Vector2(0, 3)

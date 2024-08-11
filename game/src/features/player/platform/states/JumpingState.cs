@@ -5,7 +5,7 @@ namespace Theadventureofhink.features.player.platform.states;
 
 public class JumpingState : PlayerState
 {
-    public JumpingState(PlatformController controller) : base(controller, "Jumping")
+    public JumpingState(PlatformController controller) : base("Jumping", controller)
     {
     }
 
@@ -74,13 +74,21 @@ public class JumpingState : PlayerState
                 Input.IsActionPressed("grab_wall") && playerSkillsState.CanClimbWalls.Value())
             {
                 Controller.VelocityIntoWall = Controller.Player.GetWallNormal().X * -1;
-                if (Controller.WallGrabTimeLeft >= 0.0)
+
+                var ray = Controller.VelocityIntoWall > 0.0f
+                    ? Controller.WallRayCastRight
+                    : Controller.WallRayCastLeft;
+
+                if (Controller.WallClimbableProvider.IsWallClimbable(ray, Controller.VelocityIntoWall))
                 {
-                    Controller.ChangeState(new GrabbingWallState(Controller));
-                }
-                else
-                {
-                    Controller.ChangeState(new WallSlidingState(Controller));
+                    if (Controller.WallGrabTimeLeft >= 0.0)
+                    {
+                        Controller.ChangeState(new GrabbingWallState(Controller));
+                    }
+                    else
+                    {
+                        Controller.ChangeState(new WallSlidingState(Controller));
+                    }
                 }
             }
         }

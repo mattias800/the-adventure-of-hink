@@ -3,7 +3,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class GrabbingWallState(PlatformController controller) : PlayerState(controller, "GrabbingWall")
+public class GrabbingWallState(PlatformController controller) : PlayerState("GrabbingWall", controller)
 {
     public override void Enter()
     {
@@ -24,6 +24,17 @@ public class GrabbingWallState(PlatformController controller) : PlayerState(cont
 
         Controller.DashesLeft = Controller.NumDashes;
         Controller.WallGrabTimeLeft -= (float)delta;
+
+        var ray = Controller.VelocityIntoWall > 0.0f
+            ? Controller.WallRayCastRight
+            : Controller.WallRayCastLeft;
+
+        if (ray.IsColliding() && !Controller.WallClimbableProvider.IsWallClimbable(ray, Controller.VelocityIntoWall))
+        {
+            // Player is no longer in climbable wall.
+            Controller.ChangeState(new FallingState(Controller));
+            return;
+        }
 
         if (verticalDirection == 0)
         {

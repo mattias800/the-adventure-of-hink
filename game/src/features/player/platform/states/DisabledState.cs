@@ -2,7 +2,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class DisabledState(PlatformController controller) : PlayerState(controller, "Disabled")
+public class DisabledState(PlatformController controller) : PlayerState("Disabled", controller)
 {
     public override void Enter()
     {

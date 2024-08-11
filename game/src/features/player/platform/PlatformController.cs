@@ -7,27 +7,29 @@ namespace Theadventureofhink.features.player.platform;
 
 public partial class PlatformController : Node2D
 {
-    [Export] public CharacterBody2D Player { get; private set; }
+    [Export] public CharacterBody2D Player;
 
-    [Export] public AnimatedSprite2D AnimatedSprite { get; private set; }
+    [Export] public WallClimbableProvider WallClimbableProvider;
 
-    [Export] public AudioStreamPlayer2D JumpSound { get; private set; }
+    [Export] public AnimatedSprite2D AnimatedSprite;
 
-    [Export] public AudioStreamPlayer2D LandSound { get; private set; }
+    [Export] public AudioStreamPlayer2D JumpSound;
 
-    [Export] public AudioStreamPlayer2D DashSound { get; private set; }
+    [Export] public AudioStreamPlayer2D LandSound;
 
-    [Export] public AudioStreamPlayer2D GrabWallSound { get; private set; }
+    [Export] public AudioStreamPlayer2D DashSound;
 
-    [Export] public AudioStreamPlayer2D JumpFromWallSound { get; private set; }
+    [Export] public AudioStreamPlayer2D GrabWallSound;
 
-    [Export] public AudioStreamPlayer2D JumpFromAirSound { get; private set; }
+    [Export] public AudioStreamPlayer2D JumpFromWallSound;
 
-    [Export] public RayCast2D WallRayCastLeft { get; private set; }
+    [Export] public AudioStreamPlayer2D JumpFromAirSound;
 
-    [Export] public RayCast2D WallRayCastRight { get; private set; }
+    [Export] public RayCast2D WallRayCastLeft;
 
-    [Export] public PackedScene DustBoomScene { get; private set; }
+    [Export] public RayCast2D WallRayCastRight;
+
+    [Export] public PackedScene DustBoomScene;
 
     public bool Enabled;
 
@@ -58,7 +60,7 @@ public partial class PlatformController : Node2D
     public float WallClimbSpeed = 40.0f;
     public float CoyoteTimeLimit = 0.15f;
 
-    public float Gravity { get; private set; }
+    public float Gravity;
 
     public enum JumpSource
     {

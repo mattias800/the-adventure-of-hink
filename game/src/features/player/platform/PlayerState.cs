@@ -4,13 +4,13 @@ namespace Theadventureofhink.features.player.platform;
 
 public abstract class PlayerState
 {
-    protected PlatformController Controller;
     public string Name;
+    protected PlatformController Controller;
 
-    public PlayerState(PlatformController controller, string name)
+    public PlayerState(string name, PlatformController controller)
     {
-        this.Controller = controller;
-        this.Name = name;
+        Controller = controller;
+        Name = name;
     }
 
     public abstract void Enter();

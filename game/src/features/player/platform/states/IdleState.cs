@@ -3,7 +3,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class IdleState(PlatformController controller) : PlayerState(controller, "Idle")
+public class IdleState(PlatformController controller) : PlayerState("Idle", controller)
 {
     public override void Enter()
     {

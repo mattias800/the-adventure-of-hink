@@ -3,7 +3,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class WallSlidingState(PlatformController controller) : PlayerState(controller, "WallSliding")
+public class WallSlidingState(PlatformController controller) : PlayerState("WallSliding", controller)
 {
     public override void Enter()
     {

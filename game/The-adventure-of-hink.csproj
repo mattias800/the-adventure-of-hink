@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ideas.txt" />
+    <Content Include="world\title_screen.tscn" />
   </ItemGroup>
 </Project>

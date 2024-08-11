@@ -3,7 +3,7 @@ using Theadventureofhink.game_state;
 
 namespace Theadventureofhink.features.player.platform.states;
 
-public class FallingState(PlatformController controller) : PlayerState(controller, "Falling")
+public class FallingState(PlatformController controller) : PlayerState("Falling", controller)
 {
     public override void Enter()
     {
@@ -87,29 +87,21 @@ public class FallingState(PlatformController controller) : PlayerState(controlle
                     playerSkillsState.CanClimbWalls.Value())
                 {
                     Controller.VelocityIntoWall = Controller.Player.GetWallNormal().X * -1;
-                    
-                    var ray = Controller.VelocityIntoWall > 0.0f ? Controller.WallRayCastRight : Controller.WallRayCastLeft;
 
-                    if (ray.IsColliding())
+                    var ray = Controller.VelocityIntoWall > 0.0f
+                        ? Controller.WallRayCastRight
+                        : Controller.WallRayCastLeft;
+
+                    if (Controller.WallClimbableProvider.IsWallClimbable(ray, Controller.VelocityIntoWall))
                     {
-                        var collider = ray.GetCollider();
-                        if (collider is TileMapLayer)
+                        if (Controller.WallGrabTimeLeft >= 0.0f)
                         {
-                            var tileMapLayer = collider as TileMapLayer;
-
-                            var collisionPoint = ray.GetCollisionPoint();
-                            var tileCoords = tileMapLayer.LocalToMap(collisionPoint);
-                            var cellTileData = tileMapLayer.GetCellTileData(tileCoords);
-                            GD.Print("hit tile: " + cellTileData);
+                            Controller.ChangeState(new GrabbingWallState(Controller));
                         }
-                    }
-                    if (Controller.WallGrabTimeLeft >= 0.0f)
-                    {
-                        Controller.ChangeState(new GrabbingWallState(Controller));
-                    }
-                    else
-                    {
-                        Controller.ChangeState(new WallSlidingState(Controller));
+                        else
+                        {
+                            Controller.ChangeState(new WallSlidingState(Controller));
+                        }
                     }
                 }
                 else if (direction != 0)
