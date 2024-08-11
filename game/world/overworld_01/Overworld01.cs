@@ -7,13 +7,13 @@ public partial class Overworld01 : Node2D
 {
     private Resource resource = ResourceLoader.Load("res://world/overworld_01/overworld_01.dialogue");
 
-    private Theadventureofhink.autoloads.MusicManager _musicManager;
+    private MusicManager _musicManager;
     private GameState _gameState;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
     {
-        _musicManager = GetNode<Theadventureofhink.autoloads.MusicManager>(Singletons.MusicManager);
+        _musicManager = GetNode<MusicManager>(Singletons.MusicManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         _gameState = GetNode<GameState>(Singletons.GameState);
 

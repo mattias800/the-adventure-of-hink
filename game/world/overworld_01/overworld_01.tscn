@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_4gas6")
 [node name="Portals" type="Node2D" parent="."]
 
 [node name="HometownPortal" parent="Portals" instance=ExtResource("6_6vn6a")]
-position = Vector2(110, 124)
+position = Vector2(126, 124)
 NextStage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/HometownPortal"]
@@ -45,15 +45,15 @@ position = Vector2(1, -26)
 shape = SubResource("RectangleShape2D_dt1l3")
 
 [node name="HometownWesternForestPortal" parent="Portals" instance=ExtResource("6_6vn6a")]
-position = Vector2(72, 80)
-NextStage = 2
+position = Vector2(87, 80)
+NextStage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/HometownWesternForestPortal"]
 position = Vector2(-23.5, -1)
 shape = SubResource("RectangleShape2D_wkp4e")
 
 [node name="HometownEasternForestPortal" parent="Portals" instance=ExtResource("6_6vn6a")]
-position = Vector2(172, 95)
+position = Vector2(156, 110)
 NextStage = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/HometownEasternForestPortal"]

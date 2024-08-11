@@ -90,7 +90,7 @@ public partial class GameManager : Node
         if (portal == null)
         {
             GD.Print("Found no portals at all. Player not spawned.");
-            _cutsceneManager.TransitionIn();
+            _cutsceneManager.TransitionIn(CutsceneManager.TransitionFocus.Center);
             return;
         }
 
@@ -101,7 +101,7 @@ public partial class GameManager : Node
 
         _cameraManager.SetCameraTarget(Player);
         _cameraManager.Camera?.JumpToTarget();
-        _cutsceneManager.TransitionIn();
+        _cutsceneManager.TransitionIn(CutsceneManager.TransitionFocus.Player);
 
         Player.PlayerTurned += direction => _cameraManager.Camera?.OnPlayerTurned(direction);
 

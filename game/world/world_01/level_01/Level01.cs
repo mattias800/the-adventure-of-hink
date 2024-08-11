@@ -7,7 +7,7 @@ using Theadventureofhink.game_state;
 public partial class Level01 : Node2D
 {
     private CutsceneManager _cutsceneManager;
-    private Theadventureofhink.autoloads.MusicManager _musicManager;
+    private MusicManager _musicManager;
     private GameState _gameState;
     private Resource resource;
 
@@ -17,7 +17,7 @@ public partial class Level01 : Node2D
     public override void _Ready()
     {
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
-        _musicManager = GetNode<Theadventureofhink.autoloads.MusicManager>(Singletons.MusicManager);
+        _musicManager = GetNode<MusicManager>(Singletons.MusicManager);
         _gameState = GetNode<GameState>(Singletons.GameState);
         _firepit = GetNode<Firepit>("Rooms/Room1/Firepit");
         resource = GD.Load("res://world/world_01/level_01/level_01.dialogue");
