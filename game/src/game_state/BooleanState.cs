@@ -11,7 +11,7 @@ public class BooleanState
 
     public BooleanState(bool value)
     {
-        this._value = value;
+        _value = value;
     }
 
     public bool Value() => _value;
