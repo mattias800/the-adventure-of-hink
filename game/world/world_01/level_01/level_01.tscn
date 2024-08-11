@@ -126,11 +126,15 @@ script = ExtResource("1_7cpa0")
 
 [node name="Camera" parent="." instance=ExtResource("2_tl3u6")]
 
-[node name="PaintedForest" parent="Camera" instance=ExtResource("3_ig1ss")]
+[node name="Backgrounds" type="Node2D" parent="."]
 
-[node name="MountainsBackground" parent="Camera" instance=ExtResource("4_qtp14")]
+[node name="PaintedForest" parent="Backgrounds" instance=ExtResource("3_ig1ss")]
+position = Vector2(201, 96)
 
-[node name="Fog" parent="Camera" instance=ExtResource("5_xy6t2")]
+[node name="MountainsBackground" parent="Backgrounds" instance=ExtResource("4_qtp14")]
+position = Vector2(201, 96)
+
+[node name="Fog" parent="Backgrounds" instance=ExtResource("5_xy6t2")]
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -234,9 +238,8 @@ shape = SubResource("RectangleShape2D_t7pgj")
 [node name="JumpPad" parent="Rooms/LeftRoom2" instance=ExtResource("16_qsdrt")]
 position = Vector2(-279, 19)
 
-[node name="WaterRoom2" parent="Rooms/LeftRoom2" node_paths=PackedStringArray("collision_shape") instance=ExtResource("17_0pr2k")]
+[node name="WaterRoom2" parent="Rooms/LeftRoom2" instance=ExtResource("17_0pr2k")]
 position = Vector2(-268, 138)
-collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/LeftRoom2/WaterRoom2"]
 position = Vector2(37, 32)
@@ -256,9 +259,8 @@ position = Vector2(-12, -10)
 position = Vector2(6, -10.5)
 shape = SubResource("RectangleShape2D_eun0m")
 
-[node name="WaterRoom3" parent="Rooms/LeftRoom3" node_paths=PackedStringArray("collision_shape") instance=ExtResource("17_0pr2k")]
+[node name="WaterRoom3" parent="Rooms/LeftRoom3" instance=ExtResource("17_0pr2k")]
 position = Vector2(79, -12)
-collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/LeftRoom3/WaterRoom3"]
 position = Vector2(78, 48)
@@ -298,6 +300,7 @@ shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
+Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, -6)

@@ -28,9 +28,11 @@ script = ExtResource("1_ofccf")
 
 [node name="OverworldStage" parent="." instance=ExtResource("4_ck5mh")]
 
-[node name="Room" parent="." instance=ExtResource("5_o2323")]
+[node name="Rooms" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room"]
+[node name="FullWorld" parent="Rooms" instance=ExtResource("5_o2323")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/FullWorld"]
 position = Vector2(133, 125)
 shape = SubResource("RectangleShape2D_4gas6")
 

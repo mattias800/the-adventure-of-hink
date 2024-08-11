@@ -2,6 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://2iypvij4ofu6" path="res://assets/newBckgrnd.png" id="1_2u7o0"]
 
-[node name="PaintedForest" type="Sprite2D"]
+[node name="PaintedForest" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(400, 0)
+repeat_times = 10
+limit_begin = Vector2(-1e+07, 0)
+limit_end = Vector2(1e+07, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
 texture = ExtResource("1_2u7o0")
-centered = false

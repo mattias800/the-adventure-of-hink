@@ -1,5 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 func _process(_delta):
-	var t = $SubViewport.get_texture()
-	texture = t
+	%Sprite2D.texture = %SubViewport.get_texture()

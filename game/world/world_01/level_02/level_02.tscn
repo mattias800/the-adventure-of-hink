@@ -28,11 +28,15 @@ script = ExtResource("1_4e7fq")
 
 [node name="Camera" parent="." instance=ExtResource("2_hd861")]
 
-[node name="PaintedForest" parent="Camera" instance=ExtResource("3_iuwwc")]
+[node name="Background" type="Node2D" parent="."]
 
-[node name="MountainsBackground" parent="Camera" instance=ExtResource("4_c7yu5")]
+[node name="PaintedForest" parent="Background" instance=ExtResource("3_iuwwc")]
+position = Vector2(201, 96)
 
-[node name="Fog" parent="Camera" instance=ExtResource("4_836om")]
+[node name="MountainsBackground" parent="Background" instance=ExtResource("4_c7yu5")]
+position = Vector2(201, 96)
+
+[node name="Fog" parent="Background" instance=ExtResource("4_836om")]
 
 [node name="Ground" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -66,8 +70,7 @@ position = Vector2(48, 216)
 
 [node name="Ambience" parent="." instance=ExtResource("13_r5e6r")]
 
-[node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("15_3xd5g")]
-collision_shape = NodePath("CollisionShape2D")
+[node name="Water" parent="." instance=ExtResource("15_3xd5g")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 position = Vector2(123.5, 86.5)

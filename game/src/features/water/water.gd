@@ -17,12 +17,12 @@ var passes := 8
 # Surface
 @export var border_thickness = 1
 @onready var water_surface := $WaterSurface
+@onready var collision_shape := $CollisionShape2D
 
 # Layout, it is read from collision shape.
 var water_position := Vector2i(0, 0)
 var water_size := Vector2i(0, 0)
 
-@export var collision_shape: CollisionShape2D
 
 # Random waves
 var noise: FastNoiseLite

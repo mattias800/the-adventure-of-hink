@@ -1,6 +1,10 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dxwl81rtf4csb"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dxwl81rtf4csb"]
 
 [ext_resource type="Texture2D" uid="uid://cchbq5d3k7qnq" path="res://tilesets/platform01/GrasslandAtlas2.png" id="1_a1okw"]
+[ext_resource type="PackedScene" uid="uid://bd58x0uc7vkka" path="res://entities/spikes/spikes-down.tscn" id="2_shhus"]
+[ext_resource type="PackedScene" uid="uid://duwgwqstta0wb" path="res://entities/spikes/spikes-left.tscn" id="3_2uyor"]
+[ext_resource type="PackedScene" uid="uid://6ru6i6brjt6i" path="res://entities/spikes/spikes-right.tscn" id="4_0tbts"]
+[ext_resource type="PackedScene" uid="uid://ck4coqx71bgcs" path="res://entities/spikes/spikes-up.tscn" id="5_fqpto"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_spmat"]
 texture = ExtResource("1_a1okw")
@@ -602,6 +606,13 @@ texture_region_size = Vector2i(8, 8)
 7:12/0/terrains_peering_bit/top_right_corner = 0
 7:12/0/custom_data_0 = true
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_dtevb"]
+resource_name = "Spikes"
+scenes/1/scene = ExtResource("2_shhus")
+scenes/2/scene = ExtResource("3_2uyor")
+scenes/3/scene = ExtResource("4_0tbts")
+scenes/4/scene = ExtResource("5_fqpto")
+
 [resource]
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
@@ -611,3 +622,4 @@ terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 custom_data_layer_0/name = "climbable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_spmat")
+sources/1 = SubResource("TileSetScenesCollectionSource_dtevb")
