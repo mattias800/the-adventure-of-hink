@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=46 format=4 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/Level01.cs" id="1_7cpa0"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -81,9 +81,6 @@ radius = 36.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bu75"]
 size = Vector2(20, 63)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjucq"]
-size = Vector2(14, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rbmnb"]
 atlas = ExtResource("19_kbjw2")
@@ -290,19 +287,19 @@ position = Vector2(2.08165e-12, -64)
 [node name="WalljumpChest" parent="Rooms/LeftRoom4" instance=ExtResource("15_q5inp")]
 position = Vector2(251, -1)
 
-[node name="ForestPortal" parent="." instance=ExtResource("5_u4inf")]
+[node name="StartPotal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(1000, 39)
 TargetPortalName = "HometownWesternForestPortal"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ForestPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPotal"]
 position = Vector2(26, -52)
 shape = SubResource("RectangleShape2D_4v7wp")
 
-[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
+[node name="IntroPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
 Enabled = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IntroPortal"]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_v8hqc")
 
@@ -344,13 +341,6 @@ position = Vector2(-90, -122)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
 position = Vector2(0, -21.5)
 shape = SubResource("RectangleShape2D_4bu75")
-
-[node name="IntroPortal" parent="." instance=ExtResource("5_u4inf")]
-position = Vector2(-178, -155)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="IntroPortal"]
-position = Vector2(3, 0)
-shape = SubResource("RectangleShape2D_gjucq")
 
 [node name="LittleMushroom" parent="." instance=ExtResource("17_26lse")]
 position = Vector2(370, 112)

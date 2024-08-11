@@ -5,7 +5,7 @@ if player_can_wall_climb():
 	=> END
 if player_can_double_jump():
 	Blacksmith: Ooh, what have you got there?
-	Hink: Double jump! My grandpa have it to me!
+	Hink: Double jump! My grandpa gave it to me!
 	Blacksmith: Nice!
 	Blacksmith: There are some nice double jump spots in the forest!
 	=> END

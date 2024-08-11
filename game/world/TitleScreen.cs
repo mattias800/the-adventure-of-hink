@@ -19,7 +19,7 @@ public partial class TitleScreen : Node2D
         if (_waiting && Input.IsActionJustPressed("jump"))
         {
             _waiting = false;
-            _gameManager.LoadNextStage(Stage.Overworld, "StartPortal");
+            _gameManager.LoadNextStage(Stage.HometownWesternForest, "IntroPortal");
         }
     }
 }
