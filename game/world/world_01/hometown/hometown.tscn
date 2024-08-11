@@ -363,7 +363,10 @@ script = ExtResource("1_sfoep")
 
 [node name="Camera" parent="." instance=ExtResource("2_t484x")]
 
-[node name="PaintedForest" parent="Camera" instance=ExtResource("3_1pr8d")]
+[node name="Backgrounds" type="Node2D" parent="."]
+position = Vector2(201, 96)
+
+[node name="PaintedForest" parent="Backgrounds" instance=ExtResource("3_1pr8d")]
 
 [node name="Checkpoint" parent="." instance=ExtResource("1_lcggy")]
 position = Vector2(584, 216)
@@ -379,8 +382,7 @@ position = Vector2(832, -16)
 position = Vector2(0, -51)
 shape = SubResource("RectangleShape2D_71cr7")
 
-[node name="Water" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
-collision_shape = NodePath("CollisionShape2D")
+[node name="Water" parent="." instance=ExtResource("14_n73m8")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
 position = Vector2(136, 271)
@@ -434,9 +436,8 @@ shape = SubResource("CircleShape2D_roamx")
 position = Vector2(844, 192)
 IsOpen = true
 
-[node name="UndergroundWater" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("14_n73m8")]
+[node name="UndergroundWater" parent="." instance=ExtResource("14_n73m8")]
 position = Vector2(816, 330)
-collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundWater"]
 position = Vector2(28, 3.5)
@@ -613,6 +614,7 @@ NextStage = 2
 
 [node name="DevPortal1" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(782, 312)
+Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal1"]
 shape = SubResource("RectangleShape2D_64x4i")
