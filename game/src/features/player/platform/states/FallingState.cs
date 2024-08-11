@@ -87,6 +87,22 @@ public class FallingState(PlatformController controller) : PlayerState(controlle
                     playerSkillsState.CanClimbWalls.Value())
                 {
                     Controller.VelocityIntoWall = Controller.Player.GetWallNormal().X * -1;
+                    
+                    var ray = Controller.VelocityIntoWall > 0.0f ? Controller.WallRayCastRight : Controller.WallRayCastLeft;
+
+                    if (ray.IsColliding())
+                    {
+                        var collider = ray.GetCollider();
+                        if (collider is TileMapLayer)
+                        {
+                            var tileMapLayer = collider as TileMapLayer;
+
+                            var collisionPoint = ray.GetCollisionPoint();
+                            var tileCoords = tileMapLayer.LocalToMap(collisionPoint);
+                            var cellTileData = tileMapLayer.GetCellTileData(tileCoords);
+                            GD.Print("hit tile: " + cellTileData);
+                        }
+                    }
                     if (Controller.WallGrabTimeLeft >= 0.0f)
                     {
                         Controller.ChangeState(new GrabbingWallState(Controller));
@@ -98,7 +114,8 @@ public class FallingState(PlatformController controller) : PlayerState(controlle
                 }
                 else if (direction != 0)
                 {
-                    Controller.ChangeState(new WallSlidingState(Controller));
+                    // If this is enabled, player will slide down walls even when not holding grab button. 
+                    // Controller.ChangeState(new WallSlidingState(Controller));
                 }
             }
         }

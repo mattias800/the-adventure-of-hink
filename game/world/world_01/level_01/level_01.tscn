@@ -298,7 +298,6 @@ shape = SubResource("RectangleShape2D_4v7wp")
 
 [node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(104, 156)
-Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(0, -6)

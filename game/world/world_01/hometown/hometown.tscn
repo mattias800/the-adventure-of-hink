@@ -613,7 +613,6 @@ NextStage = 2
 
 [node name="DevPortal1" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(782, 312)
-Enabled = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal1"]
 shape = SubResource("RectangleShape2D_64x4i")
