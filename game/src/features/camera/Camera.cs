@@ -5,6 +5,9 @@ using Theadventureofhink.utils;
 
 public partial class Camera : Camera2D
 {
+    [Signal]
+    public delegate void CameraSwitchedRoomEventHandler(string nextRoomName, string previousRoomName);
+
     public enum CameraState
     {
         Idle,
@@ -13,7 +16,7 @@ public partial class Camera : Camera2D
         FollowingPlayer
     }
 
-    public Node2D? Target;
+    public Node2D Target;
     public CameraState State = CameraState.FollowingPlayer;
 
     private float _releaseFalloff = 35.0f;
@@ -33,7 +36,7 @@ public partial class Camera : Camera2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);
+        _cameraManager = GetNode<Theadventureofhink.autoloads.CameraManager>(Singletons.CameraManager);
         SetAnchorMode(AnchorModeEnum.FixedTopLeft);
         State = CameraState.FollowingPlayer;
         _cameraManager.SetCamera(this);
@@ -75,6 +78,11 @@ public partial class Camera : Camera2D
         ClampCameraToLimits();
     }
 
+    public void TriggerCameraSwitchedRoom(string nextRoomName, string previousRoomName)
+    {
+        EmitSignal(SignalName.CameraSwitchedRoom, nextRoomName, previousRoomName);
+    }
+    
     public override void _PhysicsProcess(double delta)
     {
         ClampCameraToLimits();

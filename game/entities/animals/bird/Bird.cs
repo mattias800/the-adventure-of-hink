@@ -24,11 +24,11 @@ public partial class Bird : Node2D
     private double _distanceFlown;
     private float _animationSpeed = RandomHelper.RandfRange(0.7f, 1.3f);
 
-    private CameraManager _cameraManager;
+    private Theadventureofhink.autoloads.CameraManager _cameraManager;
     
     public override void _Ready()
     {
-        _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);   
+        _cameraManager = GetNode<Theadventureofhink.autoloads.CameraManager>(Singletons.CameraManager);   
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         _currentSpeed = FlyAwayStartSpeed;

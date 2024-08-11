@@ -1,29 +1,40 @@
-using Godot;
 using System.Linq;
-using Theadventureofhink.autoloads;
+using Godot;
+
+namespace Theadventureofhink.autoloads;
 
 public partial class CameraManager : Node
 {
-    public Camera? Camera;
+    public Camera Camera;
 
     private GameManager _gameManager;
+
+    private string _currentRoomName = null;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
     }
-    
+
     public override void _Process(double delta)
     {
         if (Camera == null)
         {
             return;
         }
+
         var room = GetRoomContainingPlayer();
         if (room != null)
         {
             CameraLimiter.ApplyCollisionShapeToCameraLimits(Camera, room.CollisionShape);
+            
+            if (room.Name != _currentRoomName)
+            {
+                GD.Print("SEND THE EVENT");
+                Camera.TriggerCameraSwitchedRoom(room.Name, _currentRoomName);
+                _currentRoomName = room.Name;
+            }
         }
         else
         {
@@ -60,6 +71,7 @@ public partial class CameraManager : Node
                 GD.Print("CameraManager found no room_detection node on player.");
                 GetTree().Quit();
             }
+
             if (roomDetection != null && room.Enabled && roomDetection.OverlapsArea(room))
             {
                 return room;
