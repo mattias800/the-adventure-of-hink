@@ -30,8 +30,16 @@ public partial class JumpyBat : Area2D
     {
         if (area.IsInGroup("player_bounce") && active)
         {
-            _animatedSprite2D.Play("hit");
-            _animatedSprite2D.AnimationLooped += OnHitAnimationDone;
+            if (_animatedSprite2D.Animation == "hit")
+            {
+                _animatedSprite2D.Frame = 0;
+            }
+            else
+            {
+                _animatedSprite2D.Play("hit");
+                _animatedSprite2D.AnimationLooped += OnHitAnimationDone;
+            }
+            
             if (area.GlobalPosition.Y > GlobalPosition.Y)
             {
                 _gameManager.RespawnPlayer();

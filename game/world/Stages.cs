@@ -10,6 +10,7 @@ public enum Stage
     HometownWesternForest,
     HometownEasternForest,
     HometownUnderground,
+    TestStage
 }
 
 public static class Stages
@@ -28,11 +29,15 @@ public static class Stages
         },
         {
             Stage.HometownEasternForest,
-            new StageInfo("Hometown eastern forest", "res://world/world_01/level_02/level_02.tscn")
+            new StageInfo("Hometown eastern forest", "res://world/world_01/center/hometown-easter-forest/hometown_easter_forest.tscn")
         },
         {
             Stage.HometownUnderground,
             new StageInfo("Hometown underground", "res://world/world_01/underground_01/underground_01.tscn")
+        },
+        {
+            Stage.TestStage,
+            new StageInfo("Hometown eastern forest", "res://world/world_01/level_02/level_02.tscn")
         }
     };
 
