@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckgfcymamakcf"]
+
+[ext_resource type="Script" path="res://collectibles/emerald/Collectible.cs" id="1_wefo0"]
+[ext_resource type="AudioStream" uid="uid://ck58b2ukfom7h" path="res://collectibles/emerald/FX_Click_Positive_Arpeggiated_Fast_High.wav" id="2_tdlg5"]
+
+[node name="Collectible" type="Area2D"]
+script = ExtResource("1_wefo0")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tdlg5")
+volume_db = -5.448
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

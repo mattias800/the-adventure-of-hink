@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpg4qgyph2ef8"]
+[gd_scene load_steps=5 format=3 uid="uid://bpg4qgyph2ef8"]
 
 [ext_resource type="Script" path="res://src/features/water/water_spring.gd" id="1_7f85q"]
 [ext_resource type="PackedScene" uid="uid://b7ctu21wu07k0" path="res://src/features/water/splash.tscn" id="2_p52er"]
+[ext_resource type="PackedScene" uid="uid://dxe6u4rydkn38" path="res://src/features/water/splash_sound.tscn" id="3_xmopw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jaiw"]
 
 [node name="WaterSpring" type="Node2D"]
 script = ExtResource("1_7f85q")
 splash_particles = ExtResource("2_p52er")
+splash_sound = ExtResource("3_xmopw")
 
 [node name="Area2D" type="Area2D" parent="."]
 

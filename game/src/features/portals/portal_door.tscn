@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c868fnxn2lrek"]
+[gd_scene load_steps=5 format=3 uid="uid://c868fnxn2lrek"]
 
 [ext_resource type="Script" path="res://src/features/portals/PortalDoor.cs" id="1_u8otm"]
 [ext_resource type="PackedScene" uid="uid://cj84forl8253o" path="res://src/features/interactible/interactible.tscn" id="2_cbky2"]
+[ext_resource type="AudioStream" uid="uid://dg5hbsofglfr0" path="res://src/features/portals/SFX/Household_Door_Wood_Open_Stereo.wav" id="3_obp82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w76q5"]
 size = Vector2(20, 34)
@@ -15,5 +16,10 @@ position = Vector2(1, -30)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_w76q5")
+
+[node name="OpenDoorSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_obp82")
+volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="PlayerInteracted" from="Interactible" to="." method="OnPlayerEnteredDoor"]

@@ -24,7 +24,7 @@ public partial class Level01 : Node2D
 
         _musicManager.PlayTrack(Tracks.Track.EarlyMorning);
 
-        if (!_gameState.WorldState.Level01State.HasEverVisitedRoom1.Value())
+        if (!_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1.Value())
         {
             _firepit.State = FireState.OnFire;
         }
@@ -36,7 +36,7 @@ public partial class Level01 : Node2D
 
     public async void OnPlayerEnteredRoom1()
     {
-        if (GameState.Once(_gameState.WorldState.Level01State.HasEverVisitedRoom1))
+        if (GameState.Once(_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
         {
             await _cutsceneManager.StartTimeline(resource, "room1_entry", 1.0f);
         }

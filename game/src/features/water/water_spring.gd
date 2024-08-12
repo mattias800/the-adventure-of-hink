@@ -2,6 +2,7 @@ extends Node2D
 class_name WaterSpring
 
 @export var splash_particles: PackedScene
+@export var splash_sound: PackedScene
 @onready var collision_shape_2d = $Area2D/CollisionShape2D
 
 var velocity := 0.0
@@ -47,7 +48,9 @@ func _on_area_2d_body_entered(body):
 	if "velocity" in body:
 		var speed = body.velocity.y * motion_factor
 		var s = splash_particles.instantiate()
+		var sound = splash_sound.instantiate()
 		add_child(s)
+		add_child(sound)
 		s.emitting = true
 		splash.emit(index, speed)
 	

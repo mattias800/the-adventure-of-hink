@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxe6u4rydkn38"]
+
+[ext_resource type="AudioStream" uid="uid://b3rniy4cihbvm" path="res://src/features/water/SFX/Footsteps_WaterV1_Walk_08.wav" id="1_13tx2"]
+[ext_resource type="AudioStream" uid="uid://c7h4ruqcl57uh" path="res://src/features/water/SFX/Footsteps_WaterV1_Walk_09.wav" id="2_4oltc"]
+[ext_resource type="Script" path="res://src/features/water/SplashSound.cs" id="2_g7d6h"]
+[ext_resource type="AudioStream" uid="uid://v1kpgqhnjd47" path="res://src/features/water/SFX/Footsteps_WaterV1_Walk_10.wav" id="3_vewww"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_irwla"]
+streams_count = 3
+stream_0/stream = ExtResource("1_13tx2")
+stream_1/stream = ExtResource("2_4oltc")
+stream_2/stream = ExtResource("3_vewww")
+
+[node name="SplashSound" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamRandomizer_irwla")
+max_polyphony = 3
+bus = &"SFX"
+script = ExtResource("2_g7d6h")
