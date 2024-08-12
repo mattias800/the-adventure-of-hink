@@ -42,7 +42,7 @@ public partial class LittleMushroom : Node2D
 
     public async void OnTalk()
     {
-        await _cutsceneManager.StartTimeline(_resource, "start");
+        await _cutsceneManager.PlayFullDialogue(_resource, "start");
         _talkable.Activate();
     }
 }

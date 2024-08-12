@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://cftipwvf0y2jk"]
+[gd_scene load_steps=46 format=4 uid="uid://cftipwvf0y2jk"]
 
 [ext_resource type="Script" path="res://world/world_01/level_01/Level01.cs" id="1_7cpa0"]
 [ext_resource type="TileSet" uid="uid://ppgp41y1bsbf" path="res://tilesets/Platform01.tres" id="2_7l16g"]
@@ -18,8 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ctngb5ewgd3dh" path="res://world/characters/little_mushroom/little_mushroom.tscn" id="17_26lse"]
 [ext_resource type="PackedScene" uid="uid://dn31me2tk256i" path="res://world/characters/hometown/hometown_villager.tscn" id="18_cl44v"]
 [ext_resource type="Texture2D" uid="uid://dn8c2jfbrhskw" path="res://world/characters/hometown/villager_man/MiniVillagerMan.png" id="19_kbjw2"]
-[ext_resource type="PackedScene" uid="uid://ckgfcymamakcf" path="res://collectibles/emerald/collectible.tscn" id="20_uinp5"]
-[ext_resource type="PackedScene" uid="uid://d35m8swfkm2m4" path="res://collectibles/emerald/emerald.tscn" id="21_2ft26"]
+[ext_resource type="PackedScene" uid="uid://l40yfwbr5r57" path="res://collectibles/emerald/emerald.tscn" id="19_pajey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oi8ud"]
 size = Vector2(320, 200)
@@ -72,9 +71,6 @@ size = Vector2(320, 180)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jtvwt"]
 size = Vector2(20, 115)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w6tqt"]
-radius = 4.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v7wp"]
 size = Vector2(23, 130)
 
@@ -121,9 +117,6 @@ animations = [{
 "name": &"idle",
 "speed": 5.0
 }]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ewaf1"]
-radius = 4.0
 
 [node name="Level01" type="Node2D" groups=["platformers"]]
 script = ExtResource("1_7cpa0")
@@ -291,15 +284,6 @@ end_position = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="Rooms/LeftRoom4/MovingPlatform"]
 position = Vector2(2.08165e-12, -64)
 
-[node name="Collectible" parent="Rooms/LeftRoom4" instance=ExtResource("20_uinp5")]
-position = Vector2(245, -1)
-Instance = 1
-
-[node name="Emerald" parent="Rooms/LeftRoom4/Collectible" instance=ExtResource("21_2ft26")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/LeftRoom4/Collectible"]
-shape = SubResource("CircleShape2D_w6tqt")
-
 [node name="StartPotal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(1000, 39)
 TargetPortalName = "HometownWesternForestPortal"
@@ -369,10 +353,9 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_t14uv")
 animation = &"idle"
 
-[node name="Collectible" parent="." instance=ExtResource("20_uinp5")]
-position = Vector2(711, 87)
+[node name="Emerald" parent="." instance=ExtResource("19_pajey")]
+position = Vector2(712, 86)
 
-[node name="Emerald" parent="Collectible" instance=ExtResource("21_2ft26")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectible"]
-shape = SubResource("CircleShape2D_ewaf1")
+[node name="Emerald2" parent="." instance=ExtResource("19_pajey")]
+position = Vector2(-53, -131)
+Instance = 1

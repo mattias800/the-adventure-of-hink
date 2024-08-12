@@ -24,7 +24,7 @@ public partial class Overworld01 : Node2D
     {
         if (GameState.Once(_gameState.WorldState.Overworld01State.HasEverVisited))
         {
-            await _cutsceneManager.StartTimeline(resource, "first_entry", 1.0f);
+            await _cutsceneManager.PlayFullDialogue(resource, "first_entry", 1.0f);
         }
     }
 }

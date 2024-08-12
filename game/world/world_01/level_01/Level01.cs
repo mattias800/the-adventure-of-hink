@@ -38,7 +38,7 @@ public partial class Level01 : Node2D
     {
         if (GameState.Once(_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
         {
-            await _cutsceneManager.StartTimeline(resource, "room1_entry", 1.0f);
+            await _cutsceneManager.PlayFullDialogue(resource, "room1_entry", 1.0f);
         }
     }
 }

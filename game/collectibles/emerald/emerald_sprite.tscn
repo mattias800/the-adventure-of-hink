@@ -1,0 +1,102 @@
+[gd_scene load_steps=16 format=3 uid="uid://bbn8dpq7bm7lm"]
+
+[ext_resource type="Texture2D" uid="uid://cnd1t2yhgeekj" path="res://collectibles/emerald/8x8 Plat-Items32-sheet.png" id="1_ni0m5"]
+[ext_resource type="Script" path="res://collectibles/emerald/EmeraldSprite.cs" id="2_m6ntj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_024ea"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(4, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_381bg"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(20, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sbt8"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(36, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koja8"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(52, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51x57"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(68, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7dl6"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(84, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0evbj"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(100, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv4wh"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(116, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3im2i"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(132, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40r7e"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(148, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko7hf"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(164, 116, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85q52"]
+atlas = ExtResource("1_ni0m5")
+region = Rect2(180, 116, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtepb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_024ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_381bg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sbt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koja8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51x57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7dl6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0evbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv4wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3im2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40r7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko7hf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85q52")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="EmeraldSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_wtepb")
+animation = &"idle"
+frame_progress = 0.0716617
+script = ExtResource("2_m6ntj")

@@ -60,7 +60,7 @@ public partial class HometownVillager : Node2D
         if (!string.IsNullOrEmpty(Dialogue))
         {
             TurnTowardsPlayer();
-            await _cutsceneManager.StartTimeline(_resource, Dialogue);
+            await _cutsceneManager.PlayFullDialogue(_resource, Dialogue);
             _talkable.Activate();
         }
         else

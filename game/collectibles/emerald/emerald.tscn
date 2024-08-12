@@ -1,102 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://d35m8swfkm2m4"]
+[gd_scene load_steps=5 format=3 uid="uid://l40yfwbr5r57"]
 
-[ext_resource type="Texture2D" uid="uid://cnd1t2yhgeekj" path="res://collectibles/emerald/8x8 Plat-Items32-sheet.png" id="1_nvytu"]
 [ext_resource type="Script" path="res://collectibles/emerald/Emerald.cs" id="2_f3cwu"]
+[ext_resource type="PackedScene" uid="uid://ckgfcymamakcf" path="res://collectibles/collectible/collectible.tscn" id="2_unc2g"]
+[ext_resource type="PackedScene" uid="uid://bbn8dpq7bm7lm" path="res://collectibles/emerald/emerald_sprite.tscn" id="3_gn3s1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_150rp"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(4, 116, 16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvweg"]
+radius = 4.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4xnku"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(20, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glj1a"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(36, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6lbfe"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(52, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rsuyc"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(68, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v04dn"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(84, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mfs0m"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(100, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_forqy"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(116, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8bibc"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(132, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u34k4"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(148, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ikdr"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(164, 116, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yqlut"]
-atlas = ExtResource("1_nvytu")
-region = Rect2(180, 116, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k6hyj"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_150rp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4xnku")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glj1a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6lbfe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rsuyc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v04dn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mfs0m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_forqy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8bibc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u34k4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2ikdr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yqlut")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
-
-[node name="Emerald" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_k6hyj")
-animation = &"idle"
-frame_progress = 0.901328
+[node name="Emerald" type="Node2D"]
 script = ExtResource("2_f3cwu")
+
+[node name="Collectible" parent="." instance=ExtResource("2_unc2g")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectible"]
+shape = SubResource("CircleShape2D_gvweg")
+
+[node name="EmeraldSprite" parent="Collectible" instance=ExtResource("3_gn3s1")]
+
+[connection signal="Collected" from="Collectible" to="." method="OnCollected"]

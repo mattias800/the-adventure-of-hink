@@ -34,7 +34,7 @@ public partial class Dog : Node2D
     {
         _animatedSprite2D.Play("duck");
         _barkSound.Play();
-        await _cutsceneManager.StartTimeline(_resource, "start");
+        await _cutsceneManager.PlayFullDialogue(_resource, "start");
         _animatedSprite2D.Play("idle");
         _barkSound.Play();
         _talkable.Activate();

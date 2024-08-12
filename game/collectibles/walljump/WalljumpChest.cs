@@ -35,7 +35,7 @@ public partial class WalljumpChest : Node2D
 
         _achievementEffect.Start();
 
-        await _cutsceneManager.StartTimeline(dialog, "start", 1);
+        await _cutsceneManager.PlayFullDialogue(dialog, "start", 1);
         
         _achievementEffect.Stop();
 

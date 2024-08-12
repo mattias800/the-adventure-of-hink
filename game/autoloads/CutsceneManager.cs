@@ -46,28 +46,67 @@ public partial class CutsceneManager : Node
         }
     }
 
-    public async Task StartTimeline(Resource resource, string start, float delay = 0.0f)
+    public void StartDialogue()
     {
-        var dialogueManager = GetNode(Singletons.DialogueManager);
-
-        GD.Print("start_timeline");
         CutscenePlaying = true;
         EmitSignal(SignalName.CutsceneStarted);
         _gameManager.Player.Disable();
+    }
+
+    public void EndDialogue()
+    {
+        EmitSignal(SignalName.CutsceneEnded);
+        _gameManager.Player.Enable();
+        CutscenePlaying = false;
+    }
+
+    public async Task PlaySingleCharacterLine(string characterName, string dialogue)
+    {
+        StartDialogue();
+        await PlayDialogueCharacterLine(characterName, dialogue);
+        EndDialogue();
+    }
+
+    public async Task PlayDialogueCharacterLine(string characterName, string dialogue)
+    {
+        GD.Print("Lets make a resource");
+        var resourceString = $"~ start\n{characterName}: {dialogue}";
+        var dialogueManager = (Node)Engine.GetSingleton("DialogueManager");
+        GD.Print("dialogueManager");
+        GD.Print(dialogueManager);
+        var variant = dialogueManager.Call("create_resource_from_text", resourceString);
+        GD.Print("variant");
+        GD.Print(variant);
+        var resource = variant.As<Resource>();
+        GD.Print("resource");
+        GD.Print(resource);
+        await PlayDialogue(resource, "start");
+    }
+
+    public async Task PlayDialogue(Resource resource, string start)
+    {
+        var dialogueManager = GetNode(Singletons.DialogueManager);
+
+        DialogueManager.ShowDialogueBalloon(resource, start);
+        await ToSignal(dialogueManager, "dialogue_ended");
+
+        // Prevent last input to be sent to player.cutscene_ended.emit()
+        GetViewport().SetInputAsHandled();
+        await ToSignal(GetTree().CreateTimer(0.1), "timeout");
+    }
+
+    public async Task PlayFullDialogue(Resource resource, string start, float delay = 0.0f)
+    {
+        StartDialogue();
 
         if (delay > 0.0)
         {
             await ToSignal(GetTree().CreateTimer(delay), "timeout");
         }
 
-        DialogueManager.ShowDialogueBalloon(resource, start);
-        await ToSignal(dialogueManager, "dialogue_ended");
-        // Prevent last input to be sent to player.cutscene_ended.emit()
-        await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+        await PlayDialogue(resource, start);
 
-        EmitSignal(SignalName.CutsceneEnded);
-        _gameManager.Player.Enable();
-        CutscenePlaying = false;
+        EndDialogue();
     }
 
     public void TransitionIn(TransitionFocus transitionFocus)

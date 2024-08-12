@@ -28,7 +28,7 @@ public partial class HometownEasterForest : Node2D
         
         if (nextRoomName == "Room4" && !_hasSeenDialogue)
         {
-            await _cutsceneManager.StartTimeline(_resource, "start");
+            await _cutsceneManager.PlayFullDialogue(_resource, "start");
             _hasSeenDialogue = true;
         }
     }
