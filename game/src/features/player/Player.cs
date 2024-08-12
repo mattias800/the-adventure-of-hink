@@ -51,8 +51,10 @@ public partial class Player : CharacterBody2D
     private RayCast2D _squishCastUp;
     private RayCast2D _squishCastDown;
 
+    private float _timeUntilDelayedRespawn;
     private bool _isRespawnTeleporting;
 
+    private AudioEffectLowPassFilter _lowPassFilter;
     private GameManager _gameManager;
     private GameState _gameState;
 
@@ -87,11 +89,25 @@ public partial class Player : CharacterBody2D
         _squishCastUp = GetNode<RayCast2D>("SquishCastUp");
         _squishCastDown = GetNode<RayCast2D>("SquishCastDown");
 
+        // _lowPassFilter = (AudioEffectLowPassFilter)AudioServer.GetBusEffect(AudioServer.GetBusIndex("Music"), 0);
+
         PlatformController.PlayerTurned += OnPlayerTurned;
         PlatformController.PlayerDashStarted += OnPlayerDashStarted;
         PlatformController.PlayerDashStopped += OnPlayerDashStopped;
         PlatformController.PlayerStartedMovingOnGround += OnPlayerStartedMovingOnGround;
         PlatformController.PlayerStoppedMovingOnGround += OnPlayerStoppedMovingOnGround;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_timeUntilDelayedRespawn > 0.0f)
+        {
+            _timeUntilDelayedRespawn -= (float)delta;
+            if (_timeUntilDelayedRespawn <= 0.0f)
+            {
+                Callable.From(() => _gameManager.RespawnPlayer()).CallDeferred();
+            }
+        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -146,15 +162,19 @@ public partial class Player : CharacterBody2D
 
         var duration = GlobalPosition.DistanceTo(spawnWorldPos) / 200;
         duration = Mathf.Clamp(duration, 1.0f, 2.0f);
-
-        var fx = (AudioEffectLowPassFilter)AudioServer.GetBusEffect(AudioServer.GetBusIndex("Music"), 0);
-
+// 
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetParallel();
         tween.TweenProperty(this, "global_position", spawnWorldPos, duration);
-        tween.TweenMethod(new Callable(fx, "SetCutoff"), 0, 500, duration).SetTrans(Tween.TransitionType.Circ);
-        tween.TweenMethod(new Callable(fx, "SetResonance"), 2.0, 0.5, duration).SetTrans(Tween.TransitionType.Circ);
+        if (_lowPassFilter != null)
+        {
+            tween.TweenMethod(new Callable(_lowPassFilter, "SetCutoff"), 0, 500, duration)
+                .SetTrans(Tween.TransitionType.Circ);
+            tween.TweenMethod(new Callable(_lowPassFilter, "SetResonance"), 2.0, 0.5, duration)
+                .SetTrans(Tween.TransitionType.Circ);
+        }
+
         tween.Finished += OnDeathTeleportationDone;
     }
 
@@ -162,14 +182,18 @@ public partial class Player : CharacterBody2D
     {
         GD.Print("death tele done");
         _isRespawnTeleporting = false;
-        var fx = (AudioEffectLowPassFilter)AudioServer.GetBusEffect(AudioServer.GetBusIndex("Music"), 0);
-        fx.SetCutoff(20500);
-        fx.SetResonance(0.5f);
+
+        if (_lowPassFilter != null)
+        {
+            _lowPassFilter.SetCutoff(20500);
+            _lowPassFilter.SetResonance(0.5f);
+        }
+
         _deathAppearSound.Play();
 
         _playerDeathTeleportation.PlayPlayerAppearing();
         Callable.From(TurnOnCollisions).CallDeferred();
-        
+
         _animatedSprite.Visible = true;
         Velocity = Vector2.Zero;
         Enable();
@@ -191,7 +215,7 @@ public partial class Player : CharacterBody2D
                 OverworldController.Enable();
                 break;
         }
-        
+
         EmitSignal(SignalName.PlayerEnabled);
     }
 
@@ -236,15 +260,26 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private async void CheckSquish()
+    private void CheckSquish()
     {
-        bool squishSides = _squishCastLeft.IsColliding() && _squishCastRight.IsColliding();
-        bool squishUpdown = _squishCastUp.IsColliding() && _squishCastDown.IsColliding();
-        if (squishSides || squishUpdown)
+        var squishSides = _squishCastLeft.IsColliding() && _squishCastRight.IsColliding();
+        var squishUpDown = _squishCastUp.IsColliding() && _squishCastDown.IsColliding();
+
+        if (squishSides || squishUpDown)
         {
-            await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
-            GD.Print("Player squished!");
-            _gameManager.RespawnPlayer();
+            _timeUntilDelayedRespawn = 0.05f;
+
+            if (squishSides)
+            {
+                GD.Print("Player squished between " + (_squishCastLeft.GetCollider() as Node)?.Name + " and " +
+                         (_squishCastRight.GetCollider() as Node)?.Name);
+            }
+
+            if (squishUpDown)
+            {
+                GD.Print("Player squished between " + (_squishCastUp.GetCollider() as Node)?.Name + " and " +
+                         (_squishCastDown.GetCollider() as Node)?.Name);
+            }
         }
     }
 

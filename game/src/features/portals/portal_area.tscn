@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/features/portals/PortalArea.cs" id="1_wixc1"]
 
 [node name="PortalArea" type="Area2D" groups=["portals"]]
+collision_layer = 16384
 script = ExtResource("1_wixc1")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
