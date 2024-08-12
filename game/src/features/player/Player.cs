@@ -162,7 +162,7 @@ public partial class Player : CharacterBody2D
 
         var duration = GlobalPosition.DistanceTo(spawnWorldPos) / 200;
         duration = Mathf.Clamp(duration, 1.0f, 2.0f);
-// 
+        
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetParallel();
