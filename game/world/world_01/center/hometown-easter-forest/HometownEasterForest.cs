@@ -10,7 +10,8 @@ public partial class HometownEasterForest : Node2D
 
     private GameState _gameState;
 
-    private bool _hasSeenDialogue;
+    private bool _hasSeenBatSwarmDialogue;
+    private bool _hasSeenSingleBatDialogue;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
@@ -22,14 +23,16 @@ public partial class HometownEasterForest : Node2D
 
     public async void OnPlayerEnterRoom(string nextRoomName, string previousRoomName)
     {
-        GD.Print("OnPlayerEnterRoom");
-        GD.Print(nextRoomName);
-        GD.Print(previousRoomName);
-        
-        if (nextRoomName == "Room4" && !_hasSeenDialogue)
+        if (nextRoomName == "Room2" && !_hasSeenSingleBatDialogue)
+        {
+            await _cutsceneManager.PlaySingleCharacterLine("Batian", "Holy shit, who is that?");
+            await _cutsceneManager.PlaySingleCharacterLine("Batian", "I hope he doesn't jump on me..");
+            _hasSeenSingleBatDialogue = true;
+        }
+        if (nextRoomName == "Room4" && !_hasSeenBatSwarmDialogue)
         {
             await _cutsceneManager.PlayFullDialogue(_resource, "start");
-            _hasSeenDialogue = true;
+            _hasSeenBatSwarmDialogue = true;
         }
     }
 }
