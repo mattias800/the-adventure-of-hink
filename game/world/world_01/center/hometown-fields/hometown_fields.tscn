@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c3b6tadkse5yq"]
+[gd_scene load_steps=16 format=4 uid="uid://c3b6tadkse5yq"]
 
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_14a2w"]
 [ext_resource type="PackedScene" uid="uid://btb4u10blup5x" path="res://backgrounds/2d/clouds/clouds.tscn" id="2_b110b"]
@@ -14,9 +14,16 @@
 size = Vector2(10, 152)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ilojx"]
-size = Vector2(609, 180)
+size = Vector2(759, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rq8vo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v14ci"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t82oh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bw7r2"]
 
 [node name="HometownFields" type="Node2D" groups=["platformers"]]
 
@@ -40,7 +47,7 @@ shape = SubResource("RectangleShape2D_h57ff")
 [node name="Room" parent="." instance=ExtResource("2_m0muw")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room"]
-position = Vector2(304.5, 90)
+position = Vector2(379.5, 90)
 shape = SubResource("RectangleShape2D_ilojx")
 
 [node name="Checkpoint" parent="Room" instance=ExtResource("5_uymhq")]
@@ -64,6 +71,25 @@ Instance = 4
 position = Vector2(445, 38)
 Instance = 5
 
-[node name="DevPortal" parent="." instance=ExtResource("5_07gnr")]
+[node name="DevPortal1" parent="." instance=ExtResource("5_07gnr")]
 position = Vector2(580, 90)
 Enabled = false
+
+[node name="Checkpoint3" parent="." instance=ExtResource("5_uymhq")]
+position = Vector2(437, 136)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_v14ci")
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_uymhq")]
+position = Vector2(444, 41)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+shape = SubResource("RectangleShape2D_t82oh")
+
+[node name="Checkpoint2" parent="." instance=ExtResource("5_uymhq")]
+position = Vector2(572, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
+shape = SubResource("RectangleShape2D_bw7r2")
