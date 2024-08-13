@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://c3gkc578iymam"
+path="res://.godot/imported/level_01.dialogue-b6bfcd822d449f86fe271b85d3079637.tres"
+
+[deps]
+
+source_file="res://world/world_01/center/hometown-western-forest/level_01.dialogue"
+dest_files=["res://.godot/imported/level_01.dialogue-b6bfcd822d449f86fe271b85d3079637.tres"]
+
+[params]
+
+defaults=true

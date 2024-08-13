@@ -6,6 +6,8 @@ public enum CollectibleInstance
     EmeraldHometownWesternForestTop,
     EmeraldHometownEasterForestTop,
     EmeraldHometownEasterForestRight,
+    EmeraldHometownFieldsLeft,
+    EmeraldHometownFieldsRight,
 }
 
 public class CollectiblesState
@@ -14,6 +16,8 @@ public class CollectiblesState
     public BooleanState EmeraldHometownWesternForestTop = new();
     public BooleanState EmeraldHometownEasterForestTop = new();
     public BooleanState EmeraldHometownEasterForestRight = new();
+    public BooleanState EmeraldHometownFieldsLeft = new();
+    public BooleanState EmeraldHometownFieldsRight = new();
 
     public bool HasBeenCollected(CollectibleInstance collectibleInstance)
     {
@@ -27,6 +31,10 @@ public class CollectiblesState
                 return EmeraldHometownEasterForestTop.Value();
             case CollectibleInstance.EmeraldHometownEasterForestRight:
                 return EmeraldHometownEasterForestRight.Value();
+            case CollectibleInstance.EmeraldHometownFieldsLeft:
+                return EmeraldHometownFieldsLeft.Value();
+            case CollectibleInstance.EmeraldHometownFieldsRight:
+                return EmeraldHometownFieldsRight.Value();
         }
 
         return false;
@@ -47,6 +55,12 @@ public class CollectiblesState
                 return;
             case CollectibleInstance.EmeraldHometownEasterForestRight:
                 EmeraldHometownEasterForestRight.SetValue(collected);
+                return;
+            case CollectibleInstance.EmeraldHometownFieldsLeft:
+                EmeraldHometownFieldsLeft.SetValue(collected);
+                return;
+            case CollectibleInstance.EmeraldHometownFieldsRight:
+                EmeraldHometownFieldsRight.SetValue(collected);
                 return;
         }
     }

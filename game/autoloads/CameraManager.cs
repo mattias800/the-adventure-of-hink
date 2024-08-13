@@ -9,7 +9,7 @@ public partial class CameraManager : Node
 
     private GameManager _gameManager;
 
-    private string _currentRoomName = null;
+    private string _currentRoomName;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -28,17 +28,12 @@ public partial class CameraManager : Node
         if (room != null)
         {
             CameraLimiter.ApplyCollisionShapeToCameraLimits(Camera, room.CollisionShape);
-            
+
             if (room.Name != _currentRoomName)
             {
-                GD.Print("SEND THE EVENT");
                 Camera.TriggerCameraSwitchedRoom(room.Name, _currentRoomName);
                 _currentRoomName = room.Name;
             }
-        }
-        else
-        {
-            Camera.ClearCameraLimits();
         }
     }
 
