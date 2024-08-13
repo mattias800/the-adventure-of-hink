@@ -4,7 +4,10 @@ Levers that can be toggled, should affect the level
 
 Puzzle ideas:
 Navigate the boomerang by using teleports. Player enters teleports to make the boomerang follow it.
-	
+
+Level element ideas:
+Boundaries (such as laser) that kills you unless you dash through it. Forces the player to spend a dash.
+
 Boomerang ideas:
 Push boomerang, can push things
 Pull boomerang, can pull things
@@ -13,7 +16,6 @@ Cling boomerang, can be walked on after it gets stuck
 Hookshot boomerang, what it sounds like :)
 Bounce boomerang, bounces on surfaces.
 Maybe single use boomerangs, that can be used mid-air when collected, like Celeste extra jumps.
-Try add a chain with joint2d?
 
 Secondary:
 
@@ -32,6 +34,7 @@ Platforms that appear and disappear on a timer, like Megaman.
 Need some environmental stuff that affects movement, not just causes death.
 
 DONE
+Try add a chain with joint2d?
 Not all walls should be climbable! Do this with separate tilemap!
 Chest that can be opened, with nice animation when you receive the item/skill.
 Add sounds to boomerang
