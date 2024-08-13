@@ -20,4 +20,9 @@ public partial class GameState : Node
         
         return false;
     }
+
+    public void IncreaseNumberOfPlayerDeaths()
+    {
+        PlayerState.PlayerStatsState.NumberOfDeaths++;
+    }
 }

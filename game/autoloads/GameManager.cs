@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Theadventureofhink.entities.portals;
+using Theadventureofhink.game_state;
 using Theadventureofhink.world;
 
 namespace Theadventureofhink.autoloads;
@@ -186,6 +187,8 @@ public partial class GameManager : Node
 
     public void RespawnPlayer()
     {
+        GetNode<GameState>(Singletons.GameState).IncreaseNumberOfPlayerDeaths();
+
         GD.Print("RespawnPlayer");
         if (CurrentCheckpoint != null)
         {
