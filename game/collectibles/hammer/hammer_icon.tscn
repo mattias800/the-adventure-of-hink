@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfwkvxmhde1j1"]
+
+[ext_resource type="Texture2D" uid="uid://x1lqm4id8xix" path="res://collectibles/hammer/Art/Item__13.png" id="1_556io"]
+
+[node name="HammerIcon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_556io")

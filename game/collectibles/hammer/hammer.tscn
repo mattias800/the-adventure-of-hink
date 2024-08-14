@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4ypw1aq2qmjy"]
+
+[ext_resource type="Script" path="res://collectibles/hammer/Hammer.cs" id="1_4u6eq"]
+[ext_resource type="PackedScene" uid="uid://d0qsuxg3506n5" path="res://effects/achievement_effect/achievement_effect.tscn" id="1_hp8cs"]
+[ext_resource type="PackedScene" uid="uid://dfwkvxmhde1j1" path="res://collectibles/hammer/hammer_icon.tscn" id="2_pumvs"]
+
+[node name="Hammer" type="Node2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_4u6eq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(160, 90)
+transform = Transform2D(1, 0, 0, 1, 160, 90)
+
+[node name="AchievementEffect" parent="CanvasLayer" instance=ExtResource("1_hp8cs")]
+position = Vector2(0, 1)
+AchievementIcon = ExtResource("2_pumvs")
