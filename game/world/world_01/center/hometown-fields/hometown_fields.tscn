@@ -125,10 +125,6 @@ Instance = 4
 position = Vector2(445, 38)
 Instance = 5
 
-[node name="DevPortal" parent="." instance=ExtResource("5_07gnr")]
-position = Vector2(580, 90)
-Enabled = false
-
 [node name="Hammer" parent="." instance=ExtResource("2_f55hl")]
 
 [node name="Checkpoint3" parent="." instance=ExtResource("5_uymhq")]
