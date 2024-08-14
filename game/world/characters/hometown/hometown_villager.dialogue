@@ -2,12 +2,24 @@
 
 if player_can_wall_climb():
 	Blacksmith: Wow, you found wall climb! Nice!
+	if villagers.get("was_asked_to_get_hammer") != true:
+		do villagers.was_asked_to_get_hammer = true
+		Blacksmith: Hey, would you mind going to the fields and get my hammer?
+		Blacksmith: I'm gonna build something cool!
+		Hink: Sure thing!
+		Blacksmith: Thanks little man!
 	=> END
 if player_can_double_jump():
 	Blacksmith: Ooh, what have you got there?
 	Hink: Double jump! My grandpa gave it to me!
 	Blacksmith: Nice!
 	Blacksmith: There are some nice double jump spots in the forest!
+	if villagers.get("was_asked_to_get_hammer") != true:
+		do villagers.was_asked_to_get_hammer = true
+		Blacksmith: Also, I left my hammer in the fields. If you go there, could you pick it up for me?
+		Blacksmith: I'm gonna build something cool!
+		Hink: Sure thing!
+		Blacksmith: Thanks little man!
 	=> END
 	
 if villagers.get("met_blacksmith") == true:
@@ -114,3 +126,24 @@ else:
 	Woman: I don't know, I just need the truffles.
 
 => END
+
+~ peasant
+
+if villagers.get("met_peasant_in_fields") != true:
+	do villagers.met_peasant_in_fields = true
+	Peasant: Oh, hi Hink! What are you up to?
+	Hink: Exploring!
+	Peasant: Nice :D
+
+if player_has_blacksmiths_hammer():
+	Peasant: Did you get back to the blacksmith?
+else:
+	if villagers.get("was_asked_to_get_hammer") != true:
+		Hink: Oh, I almost forgot, the blacksmith asked me to bring his hammer back.
+		Peasant: Ah, yes, he'll be happy to have it back.
+		Peasant: Here you go.
+	else:
+		Peasant: Oh, by the way, the blacksmith forgot his hammer here.
+		Peasant: Maybe you can bring it back to him?
+		Hink: No problem, happy to help!
+	

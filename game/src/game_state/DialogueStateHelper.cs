@@ -31,4 +31,8 @@ public partial class DialogueStateHelper : Node2D
     {
         return _gameState.PlayerState.PlayerSkillsState.CanClimbWalls.Value();
     }
+    public bool PlayerHasBlacksmithsHammer()
+    {
+        return _gameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value();
+    }
 }

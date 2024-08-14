@@ -1,14 +1,15 @@
-First priority:
-Objects that can be pushed
-Levers that can be toggled, should affect the level
+# First priority
+Cutscene!
+Water sound should trigger from sample 0 first time, then random 5000-10000 sample.
 
-Puzzle ideas:
+# Puzzle ideas
 Navigate the boomerang by using teleports. Player enters teleports to make the boomerang follow it.
 
-Level element ideas:
+# Level element ideas:
 Boundaries (such as laser) that kills you unless you dash through it. Forces the player to spend a dash.
 
-Boomerang ideas:
+# Boomerang ideas:
+
 Push boomerang, can push things
 Pull boomerang, can pull things
 Freeze boomerang, can create ice blocks on water
@@ -16,9 +17,10 @@ Cling boomerang, can be walked on after it gets stuck
 Hookshot boomerang, what it sounds like :)
 Bounce boomerang, bounces on surfaces.
 Maybe single use boomerangs, that can be used mid-air when collected, like Celeste extra jumps.
+Railing that player can hang from and ride with the boomerang.
 
-Secondary:
-
+# Secondary
+Objects that can be pushed
 Surfaces that the boomerang bounce off of and get redirected.
 Floor with spikes that appear 1 sec after player steps on it
 Add a little cape to the player, that is physical with Joint2D

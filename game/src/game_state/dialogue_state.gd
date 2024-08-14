@@ -23,3 +23,6 @@ func player_can_wall_climb():
 	
 func player_can_dash():
 	return DialogueStateHelper.PlayerCanDash()
+
+func player_has_blacksmiths_hammer():
+	return DialogueStateHelper.PlayerHasBlacksmithsHammer()
