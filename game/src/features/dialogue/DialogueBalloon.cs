@@ -143,7 +143,7 @@ namespace DialogueManagerRuntime
     {
       if (!IsNodeReady())
       {
-        await ToSignal(this, SignalName.Ready);
+        await ToSignal(this, Node.SignalName.Ready);
       }
 
       // Set up the character name

@@ -14,7 +14,7 @@ public partial class Bird : Node2D
     [Export] public BirdState State = BirdState.Idle;
     [Export] public Vector2 FlyingDirection = new(1, -1);
 
-    [Export] public Area2D? PlayerFlyArea;
+    [Export] public Area2D PlayerFlyArea;
     [Export] public float FlyAwayStartSpeed = 40.0f;
     [Export] public float FlyMaxSpeed = 100.0f;
 
@@ -24,11 +24,11 @@ public partial class Bird : Node2D
     private double _distanceFlown;
     private float _animationSpeed = RandomHelper.RandfRange(0.7f, 1.3f);
 
-    private Theadventureofhink.autoloads.CameraManager _cameraManager;
+    private CameraManager _cameraManager;
     
     public override void _Ready()
     {
-        _cameraManager = GetNode<Theadventureofhink.autoloads.CameraManager>(Singletons.CameraManager);   
+        _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);   
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         _currentSpeed = FlyAwayStartSpeed;

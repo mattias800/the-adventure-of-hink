@@ -23,7 +23,6 @@ public partial class Emerald : Node2D
     {
         if (ShowDialogue)
         {
-            GD.Print("Colleeeeee");
             await _cutsceneManager.PlaySingleCharacterLine("Hink", "Ooh, shiny!");
         }
 

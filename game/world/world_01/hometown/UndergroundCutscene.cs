@@ -41,16 +41,26 @@ public partial class UndergroundCutscene : Node2D
     }
 
 
+    private async Task Blacksmith(string say)
+    {
+        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", say);
+    }
+
+    private async Task Hink(string say)
+    {
+        await _cutsceneManager.PlayDialogueCharacterLine("Hink", say);
+    }
+
     public async void StartCutscene()
     {
         GD.Print("Start cutscene!");
         _cutsceneManager.StartDialogue();
 
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Oh, you got my hammer?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "Yes, here you go!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith",
+        await Blacksmith("Oh, you got my hammer?");
+        await Hink("Yes, here you go!");
+        await Blacksmith(
             "Thanks! Hold on, I'm gonna build the coolest thing!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", ".. OK.");
+        await Hink(".. OK.");
         _blacksmithSprite.Play("working");
         await ToSignal(GetTree().CreateTimer(2.0), "timeout");
 
@@ -61,30 +71,30 @@ public partial class UndergroundCutscene : Node2D
         _cutsceneManager.TransitionIn();
         await ToSignal(GetTree().CreateTimer(1.0), "timeout");
 
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Tada!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "Wha... is that a fireplace?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Yeah! Sweet, huh?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "Yes. But... it is outdoors..?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Yeah! Sweet, huh? Huh? Huh?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "Why not build it indoors?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith",
+        await Blacksmith("Tada!");
+        await Hink("Wha... is that a fireplace?");
+        await Blacksmith("Yeah! Sweet, huh?");
+        await Hink("Yes. But... it is outdoors..?");
+        await Blacksmith("Yeah! Sweet, huh? Huh? Huh?");
+        await Hink("Why not build it indoors?");
+        await Blacksmith(
             "Oh, I see. Somebody doesn't wanna enjoy this sweet, cozy fireplace!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith",
+        await Blacksmith(
             "I get it, everybody enjoy it, except for Hink!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "...");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "You suck!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "Sorry.");
+        await Hink("...");
+        await Blacksmith("You suck!");
+        await Hink("Sorry.");
         await _cutsceneManager.PlayDialogueCharacterLine("Woman", "Someone is attacking the village!!");
 
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Huh? What are you talking about?");
+        await Blacksmith("Huh? What are you talking about?");
         await ShootFireArrows();
         _fireplace.StartFire();
         await ToSignal(GetTree().CreateTimer(1.0), "timeout");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Holy shit! What the hell!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "Hink, hurry! Get need to get to safety!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "I have opened the well, get in it, fast!");
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", "But, what about you guys?");
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", "No time for that Hink, get down the well NOW!");
+        await Blacksmith("Holy shit! What the hell!");
+        await Blacksmith("Hink, hurry! Get need to get to safety!");
+        await Blacksmith("I have opened the well, get in it, fast!");
+        await Hink("But, what about you guys?");
+        await Blacksmith("No time for that Hink, get down the well NOW!");
         _well.Open();
         _cutsceneManager.EndDialogue();
     }
