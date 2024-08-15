@@ -26,7 +26,7 @@ public static class Stages
         },
         {
             Stage.HometownWesternForest,
-            new StageInfo("Hometown western forest", "res://world/world_01/level_01/level_01.tscn")
+            new StageInfo("Hometown western forest", "res://world/world_01/center/hometown-western-forest/level_01.tscn")
         },
         {
             Stage.HometownEasternForest,

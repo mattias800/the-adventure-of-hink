@@ -20,7 +20,7 @@ public partial class Level01 : Node2D
         _musicManager = GetNode<MusicManager>(Singletons.MusicManager);
         _gameState = GetNode<GameState>(Singletons.GameState);
         _firepit = GetNode<Firepit>("Rooms/Room1/Firepit");
-        resource = GD.Load("res://world/world_01/level_01/level_01.dialogue");
+        resource = GD.Load("res://world/world_01/center/hometown-western-forest/level_01.dialogue");
 
         _musicManager.PlayTrack(Tracks.Track.EarlyMorning);
 
@@ -34,11 +34,15 @@ public partial class Level01 : Node2D
         }
     }
 
-    public async void OnPlayerEnteredRoom1()
+    public async void OnPlayerEnteredRoom(string nextRoom, string previousRoom)
     {
-        if (GameState.Once(_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
+        if (nextRoom == "Room1")
         {
-            await _cutsceneManager.PlayFullDialogue(resource, "room1_entry", 1.0f);
+            GD.Print("OnPlayerEnteredRoom1");
+            if (GameState.Once(_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
+            {
+                await _cutsceneManager.PlayFullDialogue(resource, "room1_entry", 1.0f);
+            }
         }
     }
 }

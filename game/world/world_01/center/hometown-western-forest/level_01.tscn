@@ -284,11 +284,11 @@ end_position = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="Rooms/LeftRoom4/MovingPlatform"]
 position = Vector2(2.08165e-12, -64)
 
-[node name="StartPotal" parent="." instance=ExtResource("5_u4inf")]
+[node name="StartPortal" parent="." instance=ExtResource("5_u4inf")]
 position = Vector2(1000, 39)
 TargetPortalName = "HometownWesternForestPortal"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPotal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
 position = Vector2(26, -52)
 shape = SubResource("RectangleShape2D_4v7wp")
 
@@ -359,3 +359,5 @@ position = Vector2(712, 86)
 [node name="Emerald2" parent="." instance=ExtResource("19_pajey")]
 position = Vector2(-53, -131)
 Instance = 1
+
+[connection signal="CameraSwitchedRoom" from="Camera" to="." method="OnPlayerEnteredRoom"]
