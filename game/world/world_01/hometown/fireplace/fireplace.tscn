@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1r0syag4ury1"]
+
+[ext_resource type="Texture2D" uid="uid://p4pvsmgtp87s" path="res://world/world_01/hometown/fireplace/furniture8.png" id="1_kkcph"]
+[ext_resource type="Script" path="res://world/world_01/hometown/fireplace/Fireplace.cs" id="2_h8yg3"]
+[ext_resource type="PackedScene" uid="uid://klqjplldgtu5" path="res://entities/fire/house_fire/house_fire.tscn" id="3_64a2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovr8x"]
+size = Vector2(20, 100)
+
+[node name="Fireplace" type="Sprite2D"]
+texture = ExtResource("1_kkcph")
+script = ExtResource("2_h8yg3")
+
+[node name="HouseFire" parent="." instance=ExtResource("3_64a2d")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -38)
+shape = SubResource("RectangleShape2D_ovr8x")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnEnterFire"]

@@ -69,17 +69,10 @@ public partial class CutsceneManager : Node
 
     public async Task PlayDialogueCharacterLine(string characterName, string dialogue)
     {
-        GD.Print("Lets make a resource");
         var resourceString = $"~ start\n{characterName}: {dialogue}";
         var dialogueManager = (Node)Engine.GetSingleton("DialogueManager");
-        GD.Print("dialogueManager");
-        GD.Print(dialogueManager);
         var variant = dialogueManager.Call("create_resource_from_text", resourceString);
-        GD.Print("variant");
-        GD.Print(variant);
         var resource = variant.As<Resource>();
-        GD.Print("resource");
-        GD.Print(resource);
         await PlayDialogue(resource, "start");
     }
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7yd7vkvqio0"]
+
+[ext_resource type="PackedScene" uid="uid://dqe2afoskjqtj" path="res://entities/arrow/arrow.tscn" id="1_1p4nl"]
+[ext_resource type="PackedScene" uid="uid://boycm6ichnl6f" path="res://entities/fire/firepit/firepit.tscn" id="2_8naka"]
+
+[node name="FireArrow" type="Node2D"]
+
+[node name="Arrow" parent="." instance=ExtResource("1_1p4nl")]
+
+[node name="Firepit" parent="." instance=ExtResource("2_8naka")]
+position = Vector2(7, 0)

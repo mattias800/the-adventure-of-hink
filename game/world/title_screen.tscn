@@ -31,9 +31,9 @@ FlyAwayStartSpeed = 15.0
 FlyMaxSpeed = 15.0
 
 [node name="Title" type="Label" parent="."]
-offset_left = 254.0
+offset_left = 225.0
 offset_top = 136.0
-offset_right = 461.0
+offset_right = 497.0
 offset_bottom = 187.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_0fala")
@@ -41,10 +41,10 @@ theme_override_font_sizes/font_size = 24
 text = "The Legend of Limpan"
 
 [node name="PressAnyKey" type="Label" parent="."]
-offset_left = 254.0
+offset_left = 250.0
 offset_top = 212.0
-offset_right = 474.0
+offset_right = 470.0
 offset_bottom = 235.0
 theme_override_fonts/font = ExtResource("4_0fala")
 theme_override_font_sizes/font_size = 16
-text = "Press any key to continue"
+text = "Press space to continue"

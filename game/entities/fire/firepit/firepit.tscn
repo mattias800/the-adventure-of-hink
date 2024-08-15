@@ -34,7 +34,7 @@ fill_from = Vector2(0.5, 0.5)
 script = ExtResource("1_q08bh")
 
 [node name="Smoke" type="CPUParticles2D" parent="."]
-position = Vector2(88, 151)
+position = Vector2(0, -5)
 lifetime = 5.0
 spread = 72.27
 gravity = Vector2(1, -10)
@@ -45,7 +45,6 @@ color = Color(0.226707, 0.226707, 0.226707, 1)
 color_ramp = SubResource("Gradient_q76bg")
 
 [node name="Fire" type="CPUParticles2D" parent="."]
-position = Vector2(88, 156)
 lifetime = 1.2
 randomness = 0.07
 lifetime_randomness = 0.91
@@ -67,12 +66,13 @@ scale_amount_curve = SubResource("Curve_dxh4x")
 color_ramp = SubResource("Gradient_p8rua")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(88, 152)
+position = Vector2(0, -4)
 color = Color(1, 1, 0, 1)
 energy = 0.8
 texture = SubResource("GradientTexture2D_frsl4")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-88, -156)
 stream = ExtResource("2_g8bsx")
 volume_db = 11.243
 max_distance = 320.0
