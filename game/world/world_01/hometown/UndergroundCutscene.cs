@@ -41,19 +41,11 @@ public partial class UndergroundCutscene : Node2D
     }
 
 
-    private async Task Blacksmith(string say)
-    {
-        await _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", say);
-    }
-
-    private async Task Hink(string say)
-    {
-        await _cutsceneManager.PlayDialogueCharacterLine("Hink", say);
-    }
+    private Task Blacksmith(string say) => _cutsceneManager.PlayDialogueCharacterLine("Blacksmith", say);
+    private Task Hink(string say) => _cutsceneManager.PlayDialogueCharacterLine("Hink", say);
 
     public async void StartCutscene()
     {
-        GD.Print("Start cutscene!");
         _cutsceneManager.StartDialogue();
 
         await Blacksmith("Oh, you got my hammer?");
@@ -125,12 +117,10 @@ public partial class UndergroundCutscene : Node2D
 
     public void OnBodyEnteredFireTrigger(Node2D body)
     {
-        GD.Print("FIRE");
         if (CollisionUtil.IsPlayer(body))
         {
-            var fires = GetTree().GetNodesInGroup("fires").OfType<HouseFire>().ToList();
-
-            GD.Print("found " + fires.Count() + " fires");
+            var fires = GetTree().GetNodesInGroup("fires").OfType<HouseFire>();
+            
             foreach (var fire in fires)
             {
                 fire.State = FireState.OnFire;
@@ -142,7 +132,7 @@ public partial class UndergroundCutscene : Node2D
 
     public void SetAllEnemiesVisible(bool visible)
     {
-        var list = GetTree().GetNodesInGroup("enemies").OfType<Node2D>().ToList();
+        var list = GetTree().GetNodesInGroup("enemies").OfType<Node2D>();
         foreach (var e in list)
         {
             e.Visible = visible;
