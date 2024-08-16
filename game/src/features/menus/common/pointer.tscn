@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxydx6bdi8dce"]
+
+[ext_resource type="Texture2D" uid="uid://c13lwbolnx5rk" path="res://src/features/menus/common/Art/UI assets Demo (1x).png" id="1_o5cco"]
+[ext_resource type="Script" path="res://src/features/menus/common/Pointer.cs" id="1_v7tys"]
+[ext_resource type="AudioStream" uid="uid://dix16qmwcbocl" path="res://src/features/menus/common/SFX/Modern10.mp3" id="3_pymj3"]
+[ext_resource type="AudioStream" uid="uid://dj546ovojfy6p" path="res://src/features/menus/common/SFX/Coffee1.mp3" id="4_vqlyl"]
+
+[node name="Pointer" type="Node2D"]
+script = ExtResource("1_v7tys")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-10, 5)
+texture = ExtResource("1_o5cco")
+region_enabled = true
+region_rect = Rect2(83, 100, 11, 8)
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pymj3")
+
+[node name="AcceptSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vqlyl")
