@@ -39,7 +39,7 @@ public class WallSlidingState(PlatformController controller) : PlayerState("Wall
                 Controller.ChangeState(new FallingState(Controller));
             }
 
-            if (Input.IsActionJustPressed("jump") && playerSkillsState.CanWallJump.Value())
+            if (Input.IsActionJustPressed("jump") && playerSkillsState.CanWallJump.Value)
             {
                 Controller.TriggerJump(PlatformController.JumpSource.Wall);
                 var jumpDirection = new Vector2(Controller.Player.GetWallNormal().X, -1);
@@ -47,7 +47,7 @@ public class WallSlidingState(PlatformController controller) : PlayerState("Wall
             }
 
             if (Input.IsActionJustPressed("grab_wall") && Controller.WallGrabTimeLeft > 0 &&
-                playerSkillsState.CanClimbWalls.Value())
+                playerSkillsState.CanClimbWalls.Value)
             {
                 Controller.ChangeState(new GrabbingWallState(Controller));
             }

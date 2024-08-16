@@ -3,7 +3,7 @@ namespace Theadventureofhink.game_state;
 
 public class PlayerPositionState
 {
-    public string? LastLevelName = null;
-    public string? LastPortalName = null;
-    public string? LastCheckpointName = null;
+    public string? LastLevelName  { get; set; }  = null;
+    public string? LastPortalName  { get; set; }  = null;
+    public string? LastCheckpointName  { get; set; }  = null;
 }

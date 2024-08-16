@@ -99,7 +99,7 @@ public partial class PlatformController : Node2D
     public override void _Ready()
     {
         Gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
-        _playerSkillsState = GetNode<GameState>(Singletons.GameState).PlayerState.PlayerSkillsState;
+        _playerSkillsState = GetNode<GameStateManager>(Singletons.GameStateManager).GameState.PlayerState.PlayerSkillsState;
         ChangeState(new IdleState(this));
     }
 

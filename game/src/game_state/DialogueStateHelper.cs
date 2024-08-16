@@ -5,34 +5,34 @@ using Theadventureofhink.game_state;
 
 public partial class DialogueStateHelper : Node2D
 {
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public override void _Ready()
     {
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
     }
 
     public bool PlayerCanDoubleJump()
     {
-        return _gameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value();
+        return _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value;
     }
 
     public bool PlayerCanWallJump()
     {
-        return _gameState.PlayerState.PlayerSkillsState.CanWallJump.Value();
+        return _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanWallJump.Value;
     }
 
     public bool PlayerCanDash()
     {
-        return _gameState.PlayerState.PlayerSkillsState.CanDash.Value();
+        return _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDash.Value;
     }
     
     public bool PlayerCanClimbWalls()
     {
-        return _gameState.PlayerState.PlayerSkillsState.CanClimbWalls.Value();
+        return _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanClimbWalls.Value;
     }
     public bool PlayerHasBlacksmithsHammer()
     {
-        return _gameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value();
+        return _gameStateManager.GameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value;
     }
 }

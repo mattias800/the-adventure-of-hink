@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using Theadventureofhink.entities.portals;
+using Theadventureofhink.game_saves;
 using Theadventureofhink.game_state;
 using Theadventureofhink.world;
 
@@ -20,12 +21,17 @@ public partial class GameManager : Node
 
     private CameraManager _cameraManager;
     private CutsceneManager _cutsceneManager;
+    private GameStateManager _gameStateManager;
+    private GameSaveSlotManager _gameSaveSlotManager;
 
     public override void _Ready()
     {
         Player = GetNode<features.player.Player>("Player");
         _cameraManager = GetNode<CameraManager>(Singletons.CameraManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
+        _gameSaveSlotManager = GetNode<GameSaveSlotManager>(Singletons.GameSaveSlotManager);
+
         StartLevel();
     }
 
@@ -61,6 +67,7 @@ public partial class GameManager : Node
     public async void OnPlayerEnteredPortal(IPortal portal)
     {
         var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
+        _gameSaveSlotManager.SaveGameToCurrentSlot();
         await LoadNextScene(nextScenePath, portal.GetTargetPortalName());
     }
 
@@ -187,7 +194,7 @@ public partial class GameManager : Node
 
     public void RespawnPlayer()
     {
-        GetNode<GameState>(Singletons.GameState).IncreaseNumberOfPlayerDeaths();
+        GetNode<GameStateManager>(Singletons.GameStateManager).IncreaseNumberOfPlayerDeaths();
 
         GD.Print("RespawnPlayer");
         if (CurrentCheckpoint != null)

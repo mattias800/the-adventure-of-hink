@@ -1,28 +1,10 @@
-using Godot;
-
 namespace Theadventureofhink.game_state;
 
-public partial class GameState : Node
+public class GameState
 {
-    public WorldState WorldState = new();
-    public PlayerState PlayerState = new();
-    public CollectiblesState CollectiblesState = new();
-    public PlayerPositionState PlayerPositionState = new();
-    public CharactersState CharactersState = new();
-
-    public static bool Once(BooleanState s)
-    {
-        if (!s.Value())
-        {
-            s.SetValue(true);
-            return true;
-        }
-        
-        return false;
-    }
-
-    public void IncreaseNumberOfPlayerDeaths()
-    {
-        PlayerState.PlayerStatsState.NumberOfDeaths++;
-    }
+    public WorldState WorldState { get; set; } = new();
+    public PlayerState PlayerState  { get; set; } = new();
+    public CollectiblesState CollectiblesState  { get; set; } = new();
+    public PlayerPositionState PlayerPositionState  { get; set; } = new();
+    public CharactersState CharactersState  { get; set; } = new();
 }

@@ -8,7 +8,7 @@ public partial class HometownEasterForest : Node2D
     private Resource _resource =
         ResourceLoader.Load("res://world/world_01/center/hometown-easter-forest/bats.dialogue");
 
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     private bool _hasSeenBatSwarmDialogue;
     private bool _hasSeenSingleBatDialogue;
@@ -16,9 +16,9 @@ public partial class HometownEasterForest : Node2D
 
     public override void _Ready()
     {
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
-        _gameState.PlayerState.PlayerSkillsState.CanClimbWalls.SetValue(true);
+        _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanClimbWalls.SetValue(true);
     }
 
     public async void OnPlayerEnterRoom(string nextRoomName, string previousRoomName)

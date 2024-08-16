@@ -7,11 +7,11 @@ public partial class HometownFields : Node2D
 {
     [Export] public Hammer Hammer;
 
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public override void _Ready()
     {
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
     }
 
     public override void _Process(double delta)
@@ -20,7 +20,7 @@ public partial class HometownFields : Node2D
 
     public async void OnDialogueFinished()
     {
-        if (!_gameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value())
+        if (!_gameStateManager.GameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value)
         {
             await Hammer.CollectHammer();
         }

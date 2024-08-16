@@ -6,20 +6,20 @@ using Theadventureofhink.game_state;
 
 public partial class Underground01 : Node2D
 {
-	private GameState _gameState;
+	private GameStateManager _gameStateManager;
 	private Detonator _detonator;
 	private TileMapLayer _bombBlockGround;
 	
 	public override void _Ready()
 	{
-		_gameState = GetNode<GameState>(Singletons.GameState);
+		_gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
 		_detonator = GetNode<Detonator>("BombLogic/Detonator");
 		_bombBlockGround = GetNode<TileMapLayer>("BombBlockGround");
 		
 		// Prevent player from getting stuck, if this was reached too early for some reason.
-		_gameState.PlayerState.PlayerSkillsState.CanDoubleJump.SetValue(true);
-		_gameState.PlayerState.PlayerSkillsState.CanWallJump.SetValue(true);
-		_gameState.PlayerState.PlayerSkillsState.CanClimbWalls.SetValue(true);
+		_gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDoubleJump.SetValue(true);
+		_gameStateManager.GameState.PlayerState.PlayerSkillsState.CanWallJump.SetValue(true);
+		_gameStateManager.GameState.PlayerState.PlayerSkillsState.CanClimbWalls.SetValue(true);
 	}
 	
 	public void OnPlayerInteractWithBomb()

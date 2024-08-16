@@ -2,22 +2,20 @@ namespace Theadventureofhink.game_state;
 
 public class BooleanState
 {
-    private bool _value;
+    public bool Value;
 
     public BooleanState()
     {
-        _value = false;
+        Value = false;
     }
 
     public BooleanState(bool value)
     {
-        _value = value;
+        Value = value;
     }
-
-    public bool Value() => _value;
 
     public void SetValue(bool v)
     {
-        _value = v;
+        Value = v;
     }
 }

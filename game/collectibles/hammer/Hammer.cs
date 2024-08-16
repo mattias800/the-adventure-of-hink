@@ -9,13 +9,13 @@ public partial class Hammer : Node2D
 {
     private AchievementEffect _achievementEffect;
     private CutsceneManager _cutsceneManager;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public override void _Ready()
     {
         _achievementEffect = GetNode<AchievementEffect>("CanvasLayer/AchievementEffect");
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
     }
 
     public async Task CollectHammer()
@@ -28,6 +28,6 @@ public partial class Hammer : Node2D
 
         _achievementEffect.Stop();
 
-        _gameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.SetValue(true);
+        _gameStateManager.GameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.SetValue(true);
     }
 }

@@ -12,13 +12,13 @@ public partial class LittleMushroom : Node2D
     private Resource _resource;
 
     private GameManager _gameManager;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
 
         _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");

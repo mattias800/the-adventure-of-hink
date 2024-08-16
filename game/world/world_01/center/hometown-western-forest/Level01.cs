@@ -8,7 +8,7 @@ public partial class Level01 : Node2D
 {
     private CutsceneManager _cutsceneManager;
     private MusicManager _musicManager;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
     private Resource resource;
 
     private Firepit _firepit;
@@ -18,13 +18,13 @@ public partial class Level01 : Node2D
     {
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         _musicManager = GetNode<MusicManager>(Singletons.MusicManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _firepit = GetNode<Firepit>("Rooms/Room1/Firepit");
         resource = GD.Load("res://world/world_01/center/hometown-western-forest/level_01.dialogue");
 
         _musicManager.PlayTrack(Tracks.Track.EarlyMorning);
 
-        if (!_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1.Value())
+        if (!_gameStateManager.GameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1.Value)
         {
             _firepit.State = FireState.OnFire;
         }
@@ -39,7 +39,7 @@ public partial class Level01 : Node2D
         if (nextRoom == "Room1")
         {
             GD.Print("OnPlayerEnteredRoom1");
-            if (GameState.Once(_gameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
+            if (GameStateManager.Once(_gameStateManager.GameState.WorldState.HometownWesternForestState.HasEverVisitedRoom1))
             {
                 await _cutsceneManager.PlayFullDialogue(resource, "room1_entry", 1.0f);
             }

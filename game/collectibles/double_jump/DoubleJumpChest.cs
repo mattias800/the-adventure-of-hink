@@ -11,18 +11,18 @@ public partial class DoubleJumpChest : Node2D
     private AchievementEffect _achievementEffect;
 
     private Chest _chest;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
     private CutsceneManager _cutsceneManager;
 
     public override void _Ready()
     {
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _canvasLayer = GetNode<CanvasLayer>("CanvasLayer");
         _chest = GetNode<Chest>("Chest");
         _achievementEffect = GetNode<AchievementEffect>("CanvasLayer/AchievementEffect");
 
-        if (_gameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value())
+        if (_gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value)
         {
             _chest.IsOpen = true;
         }
@@ -38,6 +38,6 @@ public partial class DoubleJumpChest : Node2D
 
         _achievementEffect.Stop();
 
-        _gameState.PlayerState.PlayerSkillsState.CanDoubleJump.SetValue(true);
+        _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDoubleJump.SetValue(true);
     }
 }

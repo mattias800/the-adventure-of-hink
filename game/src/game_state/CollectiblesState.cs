@@ -12,29 +12,29 @@ public enum CollectibleInstance
 
 public class CollectiblesState
 {
-    public BooleanState EmeraldHometownWesternForestMiddle = new();
-    public BooleanState EmeraldHometownWesternForestTop = new();
-    public BooleanState EmeraldHometownEasterForestTop = new();
-    public BooleanState EmeraldHometownEasterForestRight = new();
-    public BooleanState EmeraldHometownFieldsLeft = new();
-    public BooleanState EmeraldHometownFieldsRight = new();
+    public BooleanState EmeraldHometownWesternForestMiddle  { get; set; } = new();
+    public BooleanState EmeraldHometownWesternForestTop  { get; set; } = new();
+    public BooleanState EmeraldHometownEasterForestTop  { get; set; } = new();
+    public BooleanState EmeraldHometownEasterForestRight  { get; set; } = new();
+    public BooleanState EmeraldHometownFieldsLeft  { get; set; } = new();
+    public BooleanState EmeraldHometownFieldsRight  { get; set; } = new();
 
     public bool HasBeenCollected(CollectibleInstance collectibleInstance)
     {
         switch (collectibleInstance)
         {
             case CollectibleInstance.EmeraldHometownWesternForestMiddle:
-                return EmeraldHometownWesternForestMiddle.Value();
+                return EmeraldHometownWesternForestMiddle.Value;
             case CollectibleInstance.EmeraldHometownWesternForestTop:
-                return EmeraldHometownWesternForestTop.Value();
+                return EmeraldHometownWesternForestTop.Value;
             case CollectibleInstance.EmeraldHometownEasterForestTop:
-                return EmeraldHometownEasterForestTop.Value();
+                return EmeraldHometownEasterForestTop.Value;
             case CollectibleInstance.EmeraldHometownEasterForestRight:
-                return EmeraldHometownEasterForestRight.Value();
+                return EmeraldHometownEasterForestRight.Value;
             case CollectibleInstance.EmeraldHometownFieldsLeft:
-                return EmeraldHometownFieldsLeft.Value();
+                return EmeraldHometownFieldsLeft.Value;
             case CollectibleInstance.EmeraldHometownFieldsRight:
-                return EmeraldHometownFieldsRight.Value();
+                return EmeraldHometownFieldsRight.Value;
         }
 
         return false;

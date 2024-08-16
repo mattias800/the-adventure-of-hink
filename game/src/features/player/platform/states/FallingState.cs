@@ -41,20 +41,20 @@ public class FallingState(PlatformController controller) : PlayerState("Falling"
             Controller.Player.Velocity = new Vector2(direction * Controller.Speed, -Controller.JumpVelocity);
         }
         else if (Input.IsActionJustPressed("jump") && Controller.CoyoteTimeFromWallLeft > 0.0f &&
-                 playerSkillsState.CanWallJump.Value())
+                 playerSkillsState.CanWallJump.Value)
         {
             Controller.TriggerJump(PlatformController.JumpSource.Wall);
             Controller.Player.Velocity = Controller.GetWallJumpDirection(Controller.NormalForLastWallTouched) *
                                          Controller.JumpVelocity;
         }
         else if (Input.IsActionJustPressed("jump") && Controller.JumpsLeft > 0 &&
-                 playerSkillsState.CanDoubleJump.Value()
+                 playerSkillsState.CanDoubleJump.Value
                 )
         {
             Controller.TriggerJump(PlatformController.JumpSource.Air);
             Controller.Player.Velocity = new Vector2(Controller.Player.Velocity.X, -Controller.JumpVelocity);
         }
-        else if (Input.IsActionJustPressed("dash") && Controller.DashesLeft > 0 && playerSkillsState.CanDash.Value())
+        else if (Input.IsActionJustPressed("dash") && Controller.DashesLeft > 0 && playerSkillsState.CanDash.Value)
         {
             Controller.TriggerDash();
         }
@@ -84,7 +84,7 @@ public class FallingState(PlatformController controller) : PlayerState("Falling"
             else if (Controller.Player.IsOnWall())
             {
                 if (Input.IsActionPressed("grab_wall") && Controller.TimeUntilWallGrabPossible <= 0.0f &&
-                    playerSkillsState.CanClimbWalls.Value())
+                    playerSkillsState.CanClimbWalls.Value)
                 {
                     Controller.VelocityIntoWall = Controller.Player.GetWallNormal().X * -1;
 

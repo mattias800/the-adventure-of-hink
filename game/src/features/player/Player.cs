@@ -56,7 +56,7 @@ public partial class Player : CharacterBody2D
 
     private AudioEffectLowPassFilter _lowPassFilter;
     private GameManager _gameManager;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public enum CharacterControllerType
     {
@@ -76,7 +76,7 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _playerDeathTeleportation = GetNode<PlayerDeathTeleportation>("PlayerDeathTeleportation");
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 

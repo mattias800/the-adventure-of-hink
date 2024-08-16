@@ -13,12 +13,12 @@ public partial class Hometown : Node2D
     private HometownVillager _blacksmith;
 
     private MusicManager _musicManager;
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public override void _Ready()
     {
         _musicManager = GetNode<MusicManager>(Singletons.MusicManager);
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
 
         _room = GetNode<Room>("Rooms/Room");
         _room2 = GetNode<Room>("Rooms/Room2");
@@ -27,7 +27,7 @@ public partial class Hometown : Node2D
         _undergroundCutscene = GetNode<UndergroundCutscene>("States/UndergroundCutscene");
         _blacksmith = GetNode<HometownVillager>("States/StartState/Blacksmith");
 
-        if (!_gameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value())
+        if (!_gameStateManager.GameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value)
         {
             _undergroundCutscene.QueueFree();
         }

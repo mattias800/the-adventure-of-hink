@@ -14,14 +14,14 @@ public partial class Collectible : Area2D
 
     private AudioStreamPlayer2D _sound;
 
-    private GameState _gameState;
+    private GameStateManager _gameStateManager;
 
     public override void _Ready()
     {
-        _gameState = GetNode<GameState>(Singletons.GameState);
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _sound = GetNode<AudioStreamPlayer2D>("Sound");
 
-        if (_gameState.CollectiblesState.HasBeenCollected(Instance))
+        if (_gameStateManager.GameState.CollectiblesState.HasBeenCollected(Instance))
         {
             QueueFree();
         }
@@ -29,11 +29,11 @@ public partial class Collectible : Area2D
 
     public void OnBodyEntered(Node2D body)
     {
-        var collected = _gameState.CollectiblesState.HasBeenCollected(Instance);
+        var collected = _gameStateManager.GameState.CollectiblesState.HasBeenCollected(Instance);
         
         if (!collected && CollisionUtil.IsPlayer(body))
         {
-            _gameState.CollectiblesState.SetCollected(Instance);
+            _gameStateManager.GameState.CollectiblesState.SetCollected(Instance);
             Visible = false;
             _sound.Play();
             EmitSignal(SignalName.Collected);
