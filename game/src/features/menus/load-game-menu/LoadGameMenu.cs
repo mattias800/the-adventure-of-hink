@@ -7,6 +7,9 @@ namespace Theadventureofhink.features.menus.load_game_menu;
 
 public partial class LoadGameMenu : Node2D
 {
+    [Signal]
+    public delegate void LoadGameMenuExitedEventHandler();
+
     private GameManager _gameManager;
     private GameSaveSlotManager _gameSaveSlotManager;
 
@@ -58,7 +61,12 @@ public partial class LoadGameMenu : Node2D
 
         if (readyForInput)
         {
-            if (Input.IsActionJustPressed("jump"))
+            if (Input.IsActionJustPressed("ui_cancel"))
+            {
+                EmitSignal(SignalName.LoadGameMenuExited);
+            }
+
+            if (Input.IsActionJustPressed("ui_accept"))
             {
                 _waiting = false;
                 _gameSaveSlotManager.CurrentSlotIndex = _selectedControlIndex;
@@ -77,7 +85,7 @@ public partial class LoadGameMenu : Node2D
 
             if (Input.IsActionJustPressed("ui_down"))
             {
-                if (_selectedControlIndex <= 2)
+                if (_selectedControlIndex < 2)
                 {
                     _selectedControlIndex++;
                     MovePointerToSelected();
@@ -93,6 +101,11 @@ public partial class LoadGameMenu : Node2D
         _timeUntilInputAllowed = 0.1f;
         _selectedControlIndex = 0;
         MovePointerToSelected();
+    }
+
+    public void Disable()
+    {
+        _enabled = false;
     }
 
     private void MovePointerToSelected()

@@ -59,3 +59,4 @@ horizontal_alignment = 1
 [node name="LoadGameMenu" parent="." instance=ExtResource("7_fuk3t")]
 
 [connection signal="LoadGameMenuSelected" from="MainMenu" to="." method="OnSelectLoadGameMenu"]
+[connection signal="LoadGameMenuExited" from="LoadGameMenu" to="." method="OnLoadGameMenuExited"]

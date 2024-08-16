@@ -7,7 +7,7 @@ using Theadventureofhink.world;
 public partial class TitleScreen : Node2D
 {
     private GameManager _gameManager;
-    private MainMenu _mainMenu;
+    private Theadventureofhink.features.menus.main_menu.MainMenu _mainMenu;
     private LoadGameMenu _loadGameMenu;
     private Label _pressAnyKey;
     private Label _title;
@@ -17,7 +17,7 @@ public partial class TitleScreen : Node2D
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
-        _mainMenu = GetNode<MainMenu>("MainMenu");
+        _mainMenu = GetNode<Theadventureofhink.features.menus.main_menu.MainMenu>("MainMenu");
         _loadGameMenu = GetNode<LoadGameMenu>("LoadGameMenu");
 
         _pressAnyKey = GetNode<Label>("PressAnyKey");
@@ -29,6 +29,11 @@ public partial class TitleScreen : Node2D
 
     public override void _Process(double delta)
     {
+        if (_waiting && Input.IsActionJustPressed("ui_cancel"))
+        {
+            Callable.From(() => GetTree().Quit()).CallDeferred();
+        }
+
         if (_waiting && Input.IsActionJustPressed("jump"))
         {
             _pressAnyKey.Visible = false;
@@ -47,5 +52,14 @@ public partial class TitleScreen : Node2D
         _title.Visible = false;
         _loadGameMenu.Visible = true;
         _loadGameMenu.Enable();
+    }
+
+    public void OnLoadGameMenuExited()
+    {
+        _loadGameMenu.Visible = false;
+        _loadGameMenu.Disable();
+        _title.Visible = true;
+        _mainMenu.Visible = true;
+        _mainMenu.Enable();
     }
 }

@@ -1,8 +1,10 @@
-using Godot;
 using System.Collections.Generic;
+using Godot;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.game_saves;
 using Theadventureofhink.world;
+
+namespace Theadventureofhink.features.menus.main_menu;
 
 public partial class MainMenu : Node2D
 {
@@ -24,7 +26,6 @@ public partial class MainMenu : Node2D
     private int _selectedControlIndex;
 
     private bool _enabled;
-    private bool _waiting = true;
     private float _timeUntilInputAllowed;
 
 
@@ -38,9 +39,8 @@ public partial class MainMenu : Node2D
     public void Enable()
     {
         GD.Print("Enable main menu");
-        _enabled = true;
         _timeUntilInputAllowed = 0.1f;
-        _selectedControlIndex = 0;
+        _enabled = true;
         MovePointerToSelected();
         _pointer.Visible = true;
     }
@@ -65,14 +65,17 @@ public partial class MainMenu : Node2D
             _timeUntilInputAllowed -= (float)delta;
         }
 
-        var readyForInput = _enabled && _waiting && _timeUntilInputAllowed <= 0.0f;
+        var readyForInput = _enabled && _timeUntilInputAllowed <= 0.0f;
 
         if (readyForInput)
         {
-            if (Input.IsActionJustPressed("jump"))
+            if (Input.IsActionJustPressed("ui_cancel"))
             {
-                _waiting = false;
+                Callable.From(() => GetTree().Quit()).CallDeferred();
+            }
 
+            if (Input.IsActionJustPressed("ui_accept"))
+            {
                 if (_selectedControlIndex == 0)
                 {
                     _gameSaveSlotManager.CurrentSlotIndex = 0;
