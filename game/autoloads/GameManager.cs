@@ -44,6 +44,8 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
+        _gameStateManager.IncreaseTimePlayed(delta);
+
         if (Input.IsActionJustPressed("respawn"))
         {
             RespawnPlayer();
