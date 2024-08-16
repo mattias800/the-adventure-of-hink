@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Godot;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.game_state;
@@ -40,9 +41,42 @@ public partial class LittleMushroom : Node2D
         }
     }
 
+    public async Task Mushy(string s)
+    {
+        await _cutsceneManager.PlayDialogueCharacterLine("Mushy", s);
+    }
+
+    public async Task Hink(string s)
+    {
+        await _cutsceneManager.PlayDialogueCharacterLine("Hink", s);
+    }
+
     public async void OnTalk()
     {
-        await _cutsceneManager.PlayFullDialogue(_resource, "start");
+        _cutsceneManager.StartDialogue();
+
+        if (_gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDoubleJump.Value)
+        {
+            await Mushy("Wow, you can double jump?!");
+            await Mushy("That might help against those [shake rate=20 level=5]SPIKES[/shake]!");
+        }
+        else if (!_gameStateManager.GameState.CharactersState.LittleMushroomState.HasEverMet.Value)
+        {
+            _gameStateManager.GameState.CharactersState.LittleMushroomState.HasEverMet.SetValue(true);
+            await Mushy("Ahh, I have you seen the [shake rate=20 level=5]SPIKES[/shake]?!");
+            await Hink("Yeah, I noticed.");
+            await Hink("Are they yours?");
+            await Mushy("Oh, no, I do [shake rate=20 level=5]NOT[/shake] like spikes.");
+            await Hink("Well ok then, take care!");
+            await Mushy("I [shake rate=20 level=5]HATE[/shake] spikes.");
+        }
+        else
+        {
+            await Mushy("Holy shit, [shake rate=20 level=5]SPIKES[/shake]!");
+        }
+
+        _cutsceneManager.EndDialogue();
+
         _talkable.Activate();
     }
 }

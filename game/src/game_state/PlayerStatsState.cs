@@ -2,7 +2,7 @@ namespace Theadventureofhink.game_state;
 
 public class PlayerStatsState
 {
-    public string LastSaveDateTimeIso { get; set; }
-    public float SecondsPlayed { get; set; } 
-    public int NumberOfDeaths { get; set; } 
+    public string LastSaveDateTimeIso = "";
+    public float SecondsPlayed = 0.0f; 
+    public int NumberOfDeaths = 0; 
 }

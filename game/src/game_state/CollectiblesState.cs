@@ -12,12 +12,12 @@ public enum CollectibleInstance
 
 public class CollectiblesState
 {
-    public BooleanState EmeraldHometownWesternForestMiddle  { get; set; } = new();
-    public BooleanState EmeraldHometownWesternForestTop  { get; set; } = new();
-    public BooleanState EmeraldHometownEasterForestTop  { get; set; } = new();
-    public BooleanState EmeraldHometownEasterForestRight  { get; set; } = new();
-    public BooleanState EmeraldHometownFieldsLeft  { get; set; } = new();
-    public BooleanState EmeraldHometownFieldsRight  { get; set; } = new();
+    public BooleanState EmeraldHometownWesternForestMiddle = new();
+    public BooleanState EmeraldHometownWesternForestTop = new();
+    public BooleanState EmeraldHometownEasterForestTop = new();
+    public BooleanState EmeraldHometownEasterForestRight = new();
+    public BooleanState EmeraldHometownFieldsLeft = new();
+    public BooleanState EmeraldHometownFieldsRight = new();
 
     public bool HasBeenCollected(CollectibleInstance collectibleInstance)
     {

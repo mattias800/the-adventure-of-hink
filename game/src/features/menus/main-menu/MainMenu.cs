@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Theadventureofhink.autoloads;
+using Theadventureofhink.game_saves;
 using Theadventureofhink.world;
 
 public partial class MainMenu : Node2D
@@ -9,6 +10,7 @@ public partial class MainMenu : Node2D
     private bool _enabled;
 
     private GameManager _gameManager;
+    private GameSaveSlotManager _gameSaveSlotManager;
     private Pointer _pointer;
 
     private readonly List<string> _controlNames =
@@ -28,6 +30,7 @@ public partial class MainMenu : Node2D
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
+        _gameSaveSlotManager = GetNode<GameSaveSlotManager>(Singletons.GameSaveSlotManager);
         _pointer = GetNode<Pointer>("Pointer");
     }
 
@@ -62,7 +65,19 @@ public partial class MainMenu : Node2D
             if (Input.IsActionJustPressed("jump"))
             {
                 _waiting = false;
-                _gameManager.LoadNextStageWithoutSave(Stage.HometownWesternForest, "IntroPortal");
+
+                if (_selectedControlIndex == 0)
+                {
+                    _gameSaveSlotManager.CurrentSlotIndex = 0;
+                    _gameSaveSlotManager.LoadGameFromCurrentSlot();
+                    _gameManager.LoadNextStageStoredInGameState();
+                }
+
+                if (_selectedControlIndex == 1)
+                {
+                    _gameSaveSlotManager.CurrentSlotIndex = 0;
+                    _gameManager.LoadNextStageAndSave(Stage.HometownWesternForest, "IntroPortal");
+                }
             }
 
             if (Input.IsActionJustPressed("ui_up"))

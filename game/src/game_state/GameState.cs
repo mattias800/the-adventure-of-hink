@@ -2,9 +2,9 @@ namespace Theadventureofhink.game_state;
 
 public class GameState
 {
-    public WorldState WorldState { get; set; } = new();
-    public PlayerState PlayerState  { get; set; } = new();
-    public CollectiblesState CollectiblesState  { get; set; } = new();
-    public PlayerPositionState PlayerPositionState  { get; set; } = new();
-    public CharactersState CharactersState  { get; set; } = new();
+    public WorldState WorldState = new();
+    public PlayerState PlayerState = new();
+    public CollectiblesState CollectiblesState = new();
+    public PlayerPositionState PlayerPositionState = new();
+    public CharactersState CharactersState = new();
 }

@@ -40,7 +40,11 @@ public partial class GameSaveSlotManager : Node
     {
         if (CurrentSlotIndex is >= 0 and <= 2)
         {
-            _gameStateManager.GameState = GameSaveFileReader.LoadFileToGameState(Slots[CurrentSlotIndex].FileName);
+            var gameState = GameSaveFileReader.LoadFileToGameState(Slots[CurrentSlotIndex].FileName);
+            if (gameState != null)
+            {
+                _gameStateManager.GameState = gameState;
+            }
         }
     }
 

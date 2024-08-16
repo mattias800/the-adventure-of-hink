@@ -71,7 +71,7 @@ public partial class GameManager : Node
     {
         LoadNextStageAndSave(portal.GetNextStage(), portal.GetTargetPortalName());
     }
-    
+
     public void LoadNextStageAndSave(Stage stage, string portalName)
     {
         SetStageAndPortalInGameState(stage, portalName);
@@ -79,11 +79,14 @@ public partial class GameManager : Node
         _ = LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
     }
 
-    public void LoadNextStageWithoutSave(Stage stage, string portalName)
+    public void LoadNextStageStoredInGameState()
     {
-        _ = LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
+        var scenePortalName = _gameStateManager.GameState.PlayerPositionState.LastStage;
+        var portalName = _gameStateManager.GameState.PlayerPositionState.LastPortalName;
+        NewCheckpointName = _gameStateManager.GameState.PlayerPositionState.LastCheckpointName;
+        _ = LoadNextScene(Stages.GetStateInfo((Stage)scenePortalName).FilePath, portalName);
     }
-    
+
     public void SetCurrentCheckpointAndSave(Checkpoint checkpoint)
     {
         CurrentCheckpoint = checkpoint;
@@ -93,9 +96,9 @@ public partial class GameManager : Node
 
     public void SetStageAndPortalInGameState(Stage stage, string portalName)
     {
-        _gameStateManager.GameState.PlayerPositionState.LastStage = stage;
+        _gameStateManager.GameState.PlayerPositionState.LastStage = (int)stage;
         _gameStateManager.GameState.PlayerPositionState.LastPortalName = portalName;
-        _gameStateManager.GameState.PlayerPositionState.LastCheckpointName = null;
+        _gameStateManager.GameState.PlayerPositionState.LastCheckpointName = "";
     }
 
     private async Task LoadNextScene(string nextScenePath, string portalName)
