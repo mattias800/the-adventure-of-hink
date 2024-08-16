@@ -16,6 +16,7 @@ public partial class GameManager : Node
 
     public bool IsEnteringNewScene;
     public string NewScenePortalName = "StartPortal";
+    public string NewCheckpointName = null;
 
     public features.player.Player Player;
 
@@ -66,19 +67,38 @@ public partial class GameManager : Node
         }
     }
 
-    public async void OnPlayerEnteredPortal(IPortal portal)
+    public void OnPlayerEnteredPortal(IPortal portal)
     {
-        var nextScenePath = Stages.GetStateInfo(portal.GetNextStage()).FilePath;
+        LoadNextStageAndSave(portal.GetNextStage(), portal.GetTargetPortalName());
+    }
+    
+    public void LoadNextStageAndSave(Stage stage, string portalName)
+    {
+        SetStageAndPortalInGameState(stage, portalName);
         _gameSaveSlotManager.SaveGameToCurrentSlot();
-        await LoadNextScene(nextScenePath, portal.GetTargetPortalName());
+        _ = LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
     }
 
-    public async void LoadNextStage(Stage stage, string portalName)
+    public void LoadNextStageWithoutSave(Stage stage, string portalName)
     {
-        await LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
+        _ = LoadNextScene(Stages.GetStateInfo(stage).FilePath, portalName);
+    }
+    
+    public void SetCurrentCheckpointAndSave(Checkpoint checkpoint)
+    {
+        CurrentCheckpoint = checkpoint;
+        _gameStateManager.GameState.PlayerPositionState.LastCheckpointName = checkpoint.Name;
+        _gameSaveSlotManager.SaveGameToCurrentSlot();
     }
 
-    public async Task LoadNextScene(string nextScenePath, string portalName)
+    public void SetStageAndPortalInGameState(Stage stage, string portalName)
+    {
+        _gameStateManager.GameState.PlayerPositionState.LastStage = stage;
+        _gameStateManager.GameState.PlayerPositionState.LastPortalName = portalName;
+        _gameStateManager.GameState.PlayerPositionState.LastCheckpointName = null;
+    }
+
+    private async Task LoadNextScene(string nextScenePath, string portalName)
     {
         Player.Disable();
         await _cutsceneManager.TransitionOut();
@@ -99,10 +119,15 @@ public partial class GameManager : Node
             return;
         }
 
-        CurrentCheckpoint = null;
+        var checkpoint = NewCheckpointName != null ? GetCheckpointByName(NewCheckpointName) : null;
+
+        var nextPlayerPosition = checkpoint?.GlobalPosition ?? portal.GetSpawnPosition();
+
+        CurrentCheckpoint = checkpoint;
         Player.Velocity = Vector2.Zero;
-        Player.GlobalPosition = portal.GetSpawnPosition();
-        LastSpawnPoint = portal.GetSpawnPosition();
+        Player.GlobalPosition = nextPlayerPosition;
+        LastSpawnPoint = nextPlayerPosition;
+        NewCheckpointName = null;
 
         _cameraManager.SetCameraTarget(Player);
         _cameraManager.Camera?.JumpToTarget();
@@ -169,6 +194,21 @@ public partial class GameManager : Node
         var portals = GetTree().GetNodesInGroup("portals").OfType<IPortal>();
 
         foreach (var p in portals)
+        {
+            if (p.GetName() == name)
+            {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    private Checkpoint GetCheckpointByName(string name)
+    {
+        var checkpoints = GetTree().GetNodesInGroup("checkpoints").OfType<Checkpoint>();
+
+        foreach (var p in checkpoints)
         {
             if (p.GetName() == name)
             {

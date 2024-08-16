@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/features/checkpoint/Checkpoint.cs" id="1_hsmcu"]
 
-[node name="Checkpoint" type="Area2D"]
+[node name="Checkpoint" type="Area2D" groups=["checkpoints"]]
 collision_layer = 8192
 script = ExtResource("1_hsmcu")
 

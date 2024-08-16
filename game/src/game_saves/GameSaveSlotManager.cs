@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using Theadventureofhink.autoloads;
@@ -47,7 +48,15 @@ public partial class GameSaveSlotManager : Node
     {
         if (CurrentSlotIndex is >= 0 and <= 2)
         {
+            _gameStateManager.GameState.PlayerState.PlayerStatsState.LastSaveDateTimeIso =
+                FormatIsoDateString(new DateTime());
+            
             GameSaveFileReader.SaveGameStateToFile(_gameStateManager.GameState, Slots[CurrentSlotIndex].FileName);
         }
+    }
+
+    public string FormatIsoDateString(DateTime dateTime)
+    {
+        return dateTime.ToString("o");
     }
 }

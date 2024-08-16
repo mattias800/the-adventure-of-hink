@@ -96,6 +96,7 @@ cameras="Cameras"
 fires="Fires in the scene"
 enemies="Any enemy nodes in the scene"
 rooms="Rooms in the scene"
+checkpoints="Checkpoints"
 
 [input]
 

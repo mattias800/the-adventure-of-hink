@@ -16,7 +16,7 @@ public partial class Checkpoint : Area2D
         if (CollisionUtil.IsPlayer(body))
         {
             GD.Print("Reached checkpoint.");
-            _gameManager.CurrentCheckpoint = this;
+            _gameManager.SetCurrentCheckpointAndSave(this);
         }
     }
 }

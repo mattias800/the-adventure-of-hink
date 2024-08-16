@@ -62,7 +62,7 @@ public partial class MainMenu : Node2D
             if (Input.IsActionJustPressed("jump"))
             {
                 _waiting = false;
-                _gameManager.LoadNextStage(Stage.HometownWesternForest, "IntroPortal");
+                _gameManager.LoadNextStageWithoutSave(Stage.HometownWesternForest, "IntroPortal");
             }
 
             if (Input.IsActionJustPressed("ui_up"))
