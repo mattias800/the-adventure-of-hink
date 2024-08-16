@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using Godot;
@@ -36,15 +37,22 @@ public partial class GameSaveSlotManager : Node
         _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
     }
 
+    public GameState? ReadGameStateForSlot(int slotIndex)
+    {
+        if (slotIndex is < 0 or > 2)
+        {
+            return null;
+        }
+
+        return GameSaveFileReader.LoadFileToGameState(Slots[slotIndex].FileName);
+    }
+
     public void LoadGameFromCurrentSlot()
     {
-        if (CurrentSlotIndex is >= 0 and <= 2)
+        var gameState = ReadGameStateForSlot(CurrentSlotIndex);
+        if (gameState != null)
         {
-            var gameState = GameSaveFileReader.LoadFileToGameState(Slots[CurrentSlotIndex].FileName);
-            if (gameState != null)
-            {
-                _gameStateManager.GameState = gameState;
-            }
+            _gameStateManager.GameState = gameState;
         }
     }
 
@@ -54,7 +62,7 @@ public partial class GameSaveSlotManager : Node
         {
             _gameStateManager.GameState.PlayerState.PlayerStatsState.LastSaveDateTimeIso =
                 FormatIsoDateString(new DateTime());
-            
+
             GameSaveFileReader.SaveGameStateToFile(_gameStateManager.GameState, Slots[CurrentSlotIndex].FileName);
         }
     }

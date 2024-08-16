@@ -1,3 +1,4 @@
+#nullable enable
 using System.Text.Json;
 using Godot;
 using Theadventureofhink.game_state;
@@ -21,7 +22,7 @@ public static class GameSaveFileReader
         saveFile.StoreString(jsonString);
     }
 
-    public static GameState LoadFileToGameState(string filename)
+    public static GameState? LoadFileToGameState(string filename)
     {
         using var saveFile = FileAccess.Open($"user://{filename}.save", FileAccess.ModeFlags.Read);
         if (saveFile != null)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://beebe6laulsob"]
+
+[ext_resource type="Script" path="res://src/features/menus/load-game-menu/LoadGameMenu.cs" id="1_2br76"]
+[ext_resource type="PackedScene" uid="uid://b4lsqh3m04vmf" path="res://src/features/menus/load-game-menu/save_slot_panel.tscn" id="2_6j6h4"]
+[ext_resource type="PackedScene" uid="uid://bxydx6bdi8dce" path="res://src/features/menus/common/pointer.tscn" id="2_67kyp"]
+
+[node name="LoadGameMenu" type="Node2D"]
+script = ExtResource("1_2br76")
+
+[node name="Pointer" parent="." instance=ExtResource("2_67kyp")]
+position = Vector2(60, 27)
+
+[node name="SaveSlotPanel0" parent="." instance=ExtResource("2_6j6h4")]
+position = Vector2(65, 5)
+
+[node name="SaveSlotPanel1" parent="." instance=ExtResource("2_6j6h4")]
+position = Vector2(65, 62)
+
+[node name="SaveSlotPanel2" parent="." instance=ExtResource("2_6j6h4")]
+position = Vector2(65, 119)

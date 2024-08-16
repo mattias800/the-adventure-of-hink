@@ -11,15 +11,21 @@ public partial class Pointer : Node2D
         _acceptSound = GetNode<AudioStreamPlayer>("AcceptSound");
     }
 
-    public void PointAt(Control target)
-    {
-        GlobalPosition = target.GlobalPosition + new Vector2(-50, 10);
-    }
-
     public void PointAtAndPlaySound(Control target)
     {
-        PointAt(target);
-        GlobalPosition = target.GlobalPosition + new Vector2(0, 0);
+        GlobalPosition = target.GlobalPosition;
+        _moveSound.Play();
+    }
+
+    public void PointAtAndPlaySound(Node2D target)
+    {
+        GlobalPosition = target.GlobalPosition;
+        _moveSound.Play();
+    }
+    
+    public void PointAtAndPlaySound(Vector2 target)
+    {
+        GlobalPosition = target;
         _moveSound.Play();
     }
 }

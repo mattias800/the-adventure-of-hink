@@ -1,27 +1,28 @@
-using Godot;
 using System.Collections.Generic;
+using Godot;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.game_saves;
-using Theadventureofhink.world;
 
-public partial class MainMenu : Node2D
+namespace Theadventureofhink.features.menus.load_game_menu;
+
+public partial class LoadGameMenu : Node2D
 {
-    [Signal]
-    public delegate void LoadGameMenuSelectedEventHandler();
-
     private GameManager _gameManager;
     private GameSaveSlotManager _gameSaveSlotManager;
+
     private Pointer _pointer;
+    private SaveSlotPanel _saveSlotPanel0;
+    private SaveSlotPanel _saveSlotPanel1;
+    private SaveSlotPanel _saveSlotPanel2;
+
+    private int _selectedControlIndex;
 
     private readonly List<string> _controlNames =
     [
-        "Continue",
-        "NewGame",
-        "LoadGame",
-        "Settings"
+        "SaveSlotPanel0",
+        "SaveSlotPanel1",
+        "SaveSlotPanel2"
     ];
-
-    private int _selectedControlIndex;
 
     private bool _enabled;
     private bool _waiting = true;
@@ -32,30 +33,18 @@ public partial class MainMenu : Node2D
     {
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
         _gameSaveSlotManager = GetNode<GameSaveSlotManager>(Singletons.GameSaveSlotManager);
+
         _pointer = GetNode<Pointer>("Pointer");
-    }
+        _saveSlotPanel0 = GetNode<SaveSlotPanel>("SaveSlotPanel0");
+        _saveSlotPanel1 = GetNode<SaveSlotPanel>("SaveSlotPanel1");
+        _saveSlotPanel2 = GetNode<SaveSlotPanel>("SaveSlotPanel2");
 
-    public void Enable()
-    {
-        GD.Print("Enable main menu");
-        _enabled = true;
-        _timeUntilInputAllowed = 0.1f;
         _selectedControlIndex = 0;
-        MovePointerToSelected();
-        _pointer.Visible = true;
-    }
-
-    public void Disable()
-    {
         _enabled = false;
-        _pointer.Visible = false;
-    }
 
-    private void MovePointerToSelected()
-    {
-        var control = GetNode<Control>("VBoxContainer/" + _controlNames[_selectedControlIndex]);
-        GD.Print("moving pointer to " + control.Name);
-        _pointer.PointAtAndPlaySound(control);
+        _saveSlotPanel0.PopulateWithSaveGame(0);
+        _saveSlotPanel1.PopulateWithSaveGame(1);
+        _saveSlotPanel2.PopulateWithSaveGame(2);
     }
 
     public override void _Process(double delta)
@@ -72,24 +61,9 @@ public partial class MainMenu : Node2D
             if (Input.IsActionJustPressed("jump"))
             {
                 _waiting = false;
-
-                if (_selectedControlIndex == 0)
-                {
-                    _gameSaveSlotManager.CurrentSlotIndex = 0;
-                    _gameSaveSlotManager.LoadGameFromCurrentSlot();
-                    _gameManager.LoadNextStageStoredInGameState();
-                }
-
-                if (_selectedControlIndex == 1)
-                {
-                    _gameSaveSlotManager.CurrentSlotIndex = 0;
-                    _gameManager.LoadNextStageAndSave(Stage.HometownWesternForest, "IntroPortal");
-                }
-
-                if (_selectedControlIndex == 2)
-                {
-                    EmitSignal(SignalName.LoadGameMenuSelected);
-                }
+                _gameSaveSlotManager.CurrentSlotIndex = _selectedControlIndex;
+                _gameSaveSlotManager.LoadGameFromCurrentSlot();
+                _gameManager.LoadNextStageStoredInGameState();
             }
 
             if (Input.IsActionJustPressed("ui_up"))
@@ -110,5 +84,21 @@ public partial class MainMenu : Node2D
                 }
             }
         }
+    }
+
+    public void Enable()
+    {
+        GD.Print("Enable main menu");
+        _enabled = true;
+        _timeUntilInputAllowed = 0.1f;
+        _selectedControlIndex = 0;
+        MovePointerToSelected();
+    }
+
+    private void MovePointerToSelected()
+    {
+        var control = GetNode<Node2D>(_controlNames[_selectedControlIndex]);
+        GD.Print("moving pointer to " + control.Name);
+        _pointer.PointAtAndPlaySound(control.GlobalPosition + new Vector2(-8, 22));
     }
 }

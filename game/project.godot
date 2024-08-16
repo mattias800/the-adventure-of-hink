@@ -187,7 +187,7 @@ respawn={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://collectibles/double_jump/double_jump_dialogue.dialogue", "res://world/characters/hometown/hometown_villager.dialogue", "res://world/characters/little_mushroom/little_mushroom.dialogue", "res://world/world_01/center/hometown-easter-forest/bats.dialogue", "res://world/world_01/center/hometown-western-forest/level_01.dialogue")
+locale/translations_pot_files=PackedStringArray("res://world/overworld_01/overworld_01.dialogue", "res://collectibles/walljump/walljump_dialogue.dialogue", "res://entities/animals/dog/dog.dialogue", "res://collectibles/double_jump/double_jump_dialogue.dialogue", "res://world/characters/hometown/hometown_villager.dialogue", "res://world/world_01/center/hometown-easter-forest/bats.dialogue", "res://world/world_01/center/hometown-western-forest/level_01.dialogue")
 
 [layer_names]
 
