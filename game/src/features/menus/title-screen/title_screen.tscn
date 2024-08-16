@@ -1,16 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0uar0b3qsdvd"]
+[gd_scene load_steps=7 format=3 uid="uid://b0uar0b3qsdvd"]
 
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_km11r"]
 [ext_resource type="Script" path="res://src/features/menus/title-screen/TitleScreen.cs" id="1_osef1"]
 [ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="2_83f73"]
 [ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="4_0fala"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="5_w1tyl"]
-[ext_resource type="Script" path="res://src/features/menus/main-menu/MainMenu.cs" id="6_e57gp"]
-[ext_resource type="PackedScene" uid="uid://bxydx6bdi8dce" path="res://src/features/menus/common/pointer.tscn" id="7_0ypep"]
-
-[sub_resource type="Theme" id="Theme_apd2r"]
-default_font = ExtResource("4_0fala")
-default_font_size = 12
+[ext_resource type="PackedScene" uid="uid://diprvw0bdbr3u" path="res://src/features/menus/main-menu/main_menu.tscn" id="6_u1a47"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_osef1")
@@ -58,32 +53,4 @@ theme_override_font_sizes/font_size = 14
 text = "Press space to continue"
 horizontal_alignment = 1
 
-[node name="MainMenu" type="Node2D" parent="."]
-position = Vector2(124, 88)
-script = ExtResource("6_e57gp")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme = SubResource("Theme_apd2r")
-metadata/_edit_lock_ = true
-
-[node name="Continue" type="Label" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Continue
-"
-
-[node name="NewGame" type="Label" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "New game"
-
-[node name="LoadGame" type="Label" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Load game"
-
-[node name="Settings" type="Label" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
-text = "Settings
-"
-
-[node name="Pointer" parent="MainMenu" instance=ExtResource("7_0ypep")]
+[node name="MainMenu" parent="." instance=ExtResource("6_u1a47")]
