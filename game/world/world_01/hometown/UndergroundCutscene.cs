@@ -31,7 +31,6 @@ public partial class UndergroundCutscene : Node2D
         _blacksmith = GetNode<Interactible>("BlacksmithCutscene");
         _blacksmithSprite = GetNode<AnimatedSprite2D>("BlacksmithCutscene/AnimatedSprite2D");
 
-        _well.Open();
         _fireplace.Visible = false;
         _fireArrow.Visible = false;
         _fireArrow2.Visible = false;
@@ -87,7 +86,7 @@ public partial class UndergroundCutscene : Node2D
         await Blacksmith("I have opened the well, get in it, fast!");
         await Hink("But, what about you guys?");
         await Blacksmith("No time for that Hink, get down the well NOW!");
-        _well.Open();
+        _well.IsOpen = true;
         _cutsceneManager.EndDialogue();
     }
 

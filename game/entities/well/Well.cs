@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using Theadventureofhink.utils;
 
 public partial class Well : Node2D
@@ -14,26 +13,11 @@ public partial class Well : Node2D
     public override void _Ready()
     {
         _collisionShape2D = GetNode<CollisionShape2D>("OpeningBody/CollisionShape2D");
-        if (IsOpen)
-        {
-            Open();
-        }
-        else
-        {
-            Close();
-        }
     }
 
-    public void Open()
+    public override void _PhysicsProcess(double delta)
     {
-        IsOpen = true;
-        _collisionShape2D.Disabled = true;
-    }
-
-    public void Close()
-    {
-        IsOpen = false;
-        _collisionShape2D.Disabled = false;
+        _collisionShape2D.Disabled = IsOpen;
     }
 
     public void OnArea2dBodyEntered(Node2D body)
