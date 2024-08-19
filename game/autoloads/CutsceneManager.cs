@@ -73,10 +73,19 @@ public partial class CutsceneManager : Node
         var dialogueManager = (Node)Engine.GetSingleton("DialogueManager");
         var variant = dialogueManager.Call("create_resource_from_text", resourceString);
         var resource = variant.As<Resource>();
-        await PlayDialogue(resource, "start");
+        await PlayDialogueResource(resource, "start");
     }
 
-    public async Task PlayDialogue(Resource resource, string start)
+    public async Task PlayDialogue(string dialogue)
+    {
+        var resourceString = $"~ start\n{dialogue}";
+        var dialogueManager = (Node)Engine.GetSingleton("DialogueManager");
+        var variant = dialogueManager.Call("create_resource_from_text", resourceString);
+        var resource = variant.As<Resource>();
+        await PlayDialogueResource(resource, "start");
+    }
+
+    public async Task PlayDialogueResource(Resource resource, string start)
     {
         var dialogueManager = GetNode(Singletons.DialogueManager);
 
@@ -97,7 +106,7 @@ public partial class CutsceneManager : Node
             await ToSignal(GetTree().CreateTimer(delay), "timeout");
         }
 
-        await PlayDialogue(resource, start);
+        await PlayDialogueResource(resource, start);
 
         EndDialogue();
     }

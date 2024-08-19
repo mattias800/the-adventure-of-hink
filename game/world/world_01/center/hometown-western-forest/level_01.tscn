@@ -152,6 +152,7 @@ position = Vector2(160, 100)
 shape = SubResource("RectangleShape2D_oi8ud")
 
 [node name="Firepit" parent="Rooms/Room1" instance=ExtResource("15_1d2oq")]
+position = Vector2(88, 156)
 
 [node name="Room2" parent="Rooms" instance=ExtResource("7_silrh")]
 

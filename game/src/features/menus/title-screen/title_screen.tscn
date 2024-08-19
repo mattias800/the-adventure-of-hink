@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0uar0b3qsdvd"]
+[gd_scene load_steps=9 format=3 uid="uid://b0uar0b3qsdvd"]
 
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_km11r"]
 [ext_resource type="Script" path="res://src/features/menus/title-screen/TitleScreen.cs" id="1_osef1"]
 [ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="2_83f73"]
+[ext_resource type="PackedScene" uid="uid://doaxlulkg3s0x" path="res://backgrounds/2d/title_screen/title_screen_background.tscn" id="3_1rjgt"]
 [ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="4_0fala"]
 [ext_resource type="PackedScene" uid="uid://cmmc12dmay5lp" path="res://entities/animals/bird/bird.tscn" id="5_w1tyl"]
 [ext_resource type="PackedScene" uid="uid://diprvw0bdbr3u" path="res://src/features/menus/main-menu/main_menu.tscn" id="6_u1a47"]
@@ -14,7 +15,11 @@ script = ExtResource("1_osef1")
 [node name="Camera" parent="." instance=ExtResource("1_km11r")]
 position = Vector2(0, 0)
 
+[node name="TitleScreenBackground" parent="." instance=ExtResource("3_1rjgt")]
+position = Vector2(-32, -20)
+
 [node name="PaintedForest" parent="." instance=ExtResource("2_83f73")]
+visible = false
 position = Vector2(0, 90)
 
 [node name="Bird" parent="." instance=ExtResource("5_w1tyl")]
@@ -36,9 +41,9 @@ FlyMaxSpeed = 15.0
 
 [node name="Title" type="Label" parent="."]
 offset_left = 24.0
-offset_top = 38.0
+offset_top = 57.0
 offset_right = 296.0
-offset_bottom = 89.0
+offset_bottom = 108.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_0fala")
 theme_override_font_sizes/font_size = 24
@@ -46,17 +51,19 @@ text = "The Legend of Limpan"
 
 [node name="PressAnyKey" type="Label" parent="."]
 offset_left = 1.0
-offset_top = 98.0
+offset_top = 94.0
 offset_right = 321.0
-offset_bottom = 121.0
+offset_bottom = 117.0
 theme_override_fonts/font = ExtResource("4_0fala")
 theme_override_font_sizes/font_size = 14
 text = "Press space to continue"
 horizontal_alignment = 1
 
 [node name="MainMenu" parent="." instance=ExtResource("6_u1a47")]
+visible = false
 
 [node name="LoadGameMenu" parent="." instance=ExtResource("7_fuk3t")]
+visible = false
 
 [connection signal="LoadGameMenuSelected" from="MainMenu" to="." method="OnSelectLoadGameMenu"]
 [connection signal="LoadGameMenuExited" from="LoadGameMenu" to="." method="OnLoadGameMenuExited"]
