@@ -25,7 +25,7 @@ public partial class OverworldController : Node2D
     }
 
     // Constants
-    private float _speed = 80.0f;
+    private float _speed = 50.0f;
 
     // Variables
     private State _state = State.Idle;
