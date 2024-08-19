@@ -23,7 +23,6 @@ public class GrabbingWallState(PlatformController controller) : PlayerState("Gra
         float verticalDirection = Input.GetAxis("move_up", "move_down");
 
         Controller.DashesLeft = Controller.NumDashes;
-        Controller.WallGrabTimeLeft -= (float)delta;
 
         var ray = Controller.VelocityIntoWall > 0.0f
             ? Controller.WallRayCastRight
@@ -58,14 +57,20 @@ public class GrabbingWallState(PlatformController controller) : PlayerState("Gra
             {
                 Controller.AnimatedSprite.Play("grabbing_wall");
             }
-            else if (!Input.IsActionJustPressed("move_up"))
+            else
             {
+                Controller.WallGrabTimeLeft -= (float)delta;
                 Controller.AnimatedSprite.Play("climbing");
             }
 
-            Controller.Player.Velocity = new Vector2(Controller.VelocityIntoWall * Controller.JumpVelocity,
-                verticalDirection * Controller.WallClimbSpeed);
+            Controller.Player.Velocity =
+                new Vector2(
+                    Controller.VelocityIntoWall * Controller.JumpVelocity,
+                    verticalDirection * Controller.WallClimbSpeed
+                );
+
             Controller.Player.MoveAndSlide();
+
             if (!Controller.Player.IsOnWall())
             {
                 Controller.Player.Velocity = new Vector2(Controller.VelocityIntoWall * Controller.Speed * 0.5f,
@@ -76,6 +81,8 @@ public class GrabbingWallState(PlatformController controller) : PlayerState("Gra
         }
         else if (Input.IsActionPressed("move_down"))
         {
+            Controller.WallGrabTimeLeft -= (float)delta;
+            
             Controller.AnimatedSprite.Play("climbing");
             Controller.Player.Velocity = new Vector2(Controller.VelocityIntoWall * Controller.JumpVelocity,
                 verticalDirection * Controller.WallClimbSpeed);

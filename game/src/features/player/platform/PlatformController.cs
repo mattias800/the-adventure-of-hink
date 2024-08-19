@@ -56,7 +56,7 @@ public partial class PlatformController : Node2D
     public float MaxHorizontalSpeed = 80.0f;
     public float JumpVelocity = 150.0f;
     public float JumpReleaseVelocity = 100.0f;
-    public float WallGrabTimeLimit = 5.0f;
+    public float WallGrabTimeLimit = 2.0f;
     public float WallClimbSpeed = 40.0f;
     public float CoyoteTimeLimit = 0.15f;
 
