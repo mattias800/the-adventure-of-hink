@@ -94,7 +94,7 @@ Villager: I saw something deeper into the forest earlier.
 Hink: Oh, what?
 Villager: Not sure, I couldn't get high enough.
 Villager: Looked like a treasure chest though.
-if player_can_double_jump():
+if not player_can_double_jump():
 	Hink: Really?? Some day when I can jump higher, I'll go looking for it!
 	Villager: Haha, yes you should!
 	Hink: See you later!
