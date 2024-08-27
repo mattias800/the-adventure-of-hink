@@ -5,6 +5,10 @@ Water sound should trigger from sample 0 first time, then random 5000-10000 samp
 
 # Puzzle ideas
 Navigate the boomerang by using teleports. Player enters teleports to make the boomerang follow it.
+Jump pads that are activated by triggers.
+- Simple, just throw the boomerang, fly away.
+- Harder, boomerang must hit switch in the way back.
+- Hardest, boomerang must go back in certain direction.
 
 # Level element ideas:
 Boundaries (such as laser) that kills you unless you dash through it. Forces the player to spend a dash.
