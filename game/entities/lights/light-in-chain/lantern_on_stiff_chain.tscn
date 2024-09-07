@@ -44,7 +44,6 @@ node_b = NodePath("../Rope/RopeSegment")
 [node name="Rope" type="Node2D" parent="."]
 
 [node name="RopeSegment" parent="Rope" instance=ExtResource("2_hkrav")]
-scale = Vector2(1, 1)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="Rope"]
 position = Vector2(0, 46)

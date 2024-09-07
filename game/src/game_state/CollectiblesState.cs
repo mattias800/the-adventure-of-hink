@@ -9,6 +9,7 @@ public enum CollectibleInstance
     EmeraldHometownFieldsLeft,
     EmeraldHometownFieldsRight,
     EmeraldHometownUndergroundLeft,
+    EmeraldHometownUndergroundBottomRight,
 }
 
 public class CollectiblesState
@@ -20,6 +21,7 @@ public class CollectiblesState
     public BooleanState EmeraldHometownFieldsLeft = new();
     public BooleanState EmeraldHometownFieldsRight = new();
     public BooleanState EmeraldHometownUndergroundLeft = new();
+    public BooleanState EmeraldHometownUndergroundBottomRight = new();
 
     public bool HasBeenCollected(CollectibleInstance collectibleInstance)
     {
@@ -39,6 +41,8 @@ public class CollectiblesState
                 return EmeraldHometownFieldsRight.Value;
             case CollectibleInstance.EmeraldHometownUndergroundLeft:
                 return EmeraldHometownUndergroundLeft.Value;
+            case CollectibleInstance.EmeraldHometownUndergroundBottomRight:
+                return EmeraldHometownUndergroundBottomRight.Value;
         }
 
         return false;
@@ -68,6 +72,9 @@ public class CollectiblesState
                 return;
             case CollectibleInstance.EmeraldHometownUndergroundLeft:
                 EmeraldHometownUndergroundLeft.SetValue(collected);
+                return;
+            case CollectibleInstance.EmeraldHometownUndergroundBottomRight:
+                EmeraldHometownUndergroundBottomRight.SetValue(collected);
                 return;
         }
     }

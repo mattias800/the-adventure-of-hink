@@ -1,4 +1,5 @@
 # First priority
+TileMapLayer with no collision, that becomes opaque when player is behind/over it.
 Tutorial levels should be easier.
 Make tutorial levels circular, so the player doesn't have to go back.
 Water sound should trigger from sample 0 first time, then random 5000-10000 sample.
