@@ -571,7 +571,6 @@ position = Vector2(-36, -6.5)
 shape = SubResource("RectangleShape2D_66dcp")
 
 [node name="StartPortal" parent="." instance=ExtResource("4_e3slu")]
-visible = false
 position = Vector2(159, -82)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartPortal"]
@@ -585,11 +584,11 @@ position = Vector2(346, 260)
 position = Vector2(6, -22.5)
 shape = SubResource("RectangleShape2D_nl2qe")
 
-[node name="DevPortal" parent="." instance=ExtResource("4_e3slu")]
+[node name="DevPortal1" parent="." instance=ExtResource("4_e3slu")]
 position = Vector2(-463, 597)
 Enabled = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DevPortal1"]
 shape = SubResource("RectangleShape2D_vg2fv")
 
 [node name="BombLogic" type="Node2D" parent="."]

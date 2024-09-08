@@ -784,6 +784,7 @@ region_rect = Rect2(226, 66, 44, 14)
 [node name="UndergroundPortal" parent="." instance=ExtResource("4_0ce4s")]
 position = Vector2(50, 345)
 NextStage = 6
+TargetPortalName = "StartPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UndergroundPortal"]
 position = Vector2(2, 1.5)

@@ -38,8 +38,7 @@ shape = SubResource("RectangleShape2D_icv34")
 
 [node name="ExteriorPortal" parent="." instance=ExtResource("4_2p6x7")]
 position = Vector2(135, 151)
-NextStage = 7
-TargetPortalName = "WindMillDoorPortal"
+TargetPortalName = "WindmillPortal"
 
 [node name="UndergroundPortal" parent="." instance=ExtResource("6_rd57b")]
 position = Vector2(280, 150)
