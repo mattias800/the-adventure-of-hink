@@ -11,6 +11,7 @@ public partial class Hometown : Node2D
     private Room _room2Underground;
     private UndergroundCutscene _undergroundCutscene;
     private HometownVillager _blacksmith;
+    private Well _well;
 
     private MusicManager _musicManager;
     private GameStateManager _gameStateManager;
@@ -26,7 +27,10 @@ public partial class Hometown : Node2D
         _room2Underground = GetNode<Room>("Rooms/Room2Underground");
         _undergroundCutscene = GetNode<UndergroundCutscene>("States/UndergroundCutscene");
         _blacksmith = GetNode<HometownVillager>("States/StartState/Blacksmith");
+        _well = GetNode<Well>("Well");
 
+        _well.IsOpen = _gameStateManager.GameState.WorldState.HometownState.WellIsOpen.Value;
+        
         if (!_gameStateManager.GameState.PlayerState.PlayerItemsState.GotBlacksmithsHammers.Value)
         {
             _undergroundCutscene.QueueFree();

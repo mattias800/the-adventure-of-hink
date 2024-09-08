@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.entities.fire;
+using Theadventureofhink.game_state;
 using Theadventureofhink.utils;
 using Theadventureofhink.world.world_01.hometown.fireplace;
 
@@ -11,6 +12,7 @@ public partial class UndergroundCutscene : Node2D
 {
     private Resource _resource = ResourceLoader.Load("res://world/characters/hometown/hometown_villager.dialogue");
 
+    private GameStateManager _gameStateManager;
     private CutsceneManager _cutsceneManager;
     private Fireplace _fireplace;
     private Node2D _fireArrow;
@@ -22,6 +24,7 @@ public partial class UndergroundCutscene : Node2D
 
     public override void _Ready()
     {
+        _gameStateManager = GetNode<GameStateManager>(Singletons.GameStateManager);
         _cutsceneManager = GetNode<CutsceneManager>(Singletons.CutsceneManager);
         _fireplace = GetNode<Fireplace>("Fireplace");
         _fireArrow = GetNode<Node2D>("FireArrow");
@@ -86,8 +89,10 @@ public partial class UndergroundCutscene : Node2D
         await Blacksmith("I have opened the well, get in it, fast!");
         await Hink("But, what about you guys?");
         await Blacksmith("No time for that Hink, get down the well NOW!");
-        _well.IsOpen = true;
         _cutsceneManager.EndDialogue();
+        
+        _well.IsOpen = true;
+        _gameStateManager.GameState.WorldState.HometownState.WellIsOpen.SetValue(true);
     }
 
     public async Task ShootFireArrows()
@@ -119,7 +124,7 @@ public partial class UndergroundCutscene : Node2D
         if (CollisionUtil.IsPlayer(body))
         {
             var fires = GetTree().GetNodesInGroup("fires").OfType<HouseFire>();
-            
+
             foreach (var fire in fires)
             {
                 fire.State = FireState.OnFire;

@@ -2,5 +2,5 @@ namespace Theadventureofhink.game_state.world;
 
 public class HometownState
 {
-    public BooleanState IsUnderAttack = new();
+    public BooleanState WellIsOpen = new();
 }
