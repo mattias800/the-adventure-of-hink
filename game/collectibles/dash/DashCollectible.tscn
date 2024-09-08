@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf813dein54nb"]
+
+[ext_resource type="Texture2D" uid="uid://dljf0x731fvj4" path="res://collectibles/dash/Item__26.png" id="1_2kr3o"]
+[ext_resource type="Script" path="res://collectibles/dash/DashCollectible.cs" id="1_bwc8s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jihss"]
+
+[node name="DashCollectible" type="Node2D"]
+script = ExtResource("1_bwc8s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2kr3o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jihss")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
