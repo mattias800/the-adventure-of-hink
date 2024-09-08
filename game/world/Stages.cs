@@ -11,6 +11,8 @@ public enum Stage
     HometownEasternForest,
     HometownFields,
     HometownUnderground,
+    WesternWindMill,
+    WesternWindMillInterior,
     TestStage
 }
 
@@ -39,6 +41,14 @@ public static class Stages
         {
             Stage.HometownUnderground,
             new StageInfo("Hometown underground", "res://world/world_01/underground_01/underground_01.tscn")
+        },
+        {
+            Stage.WesternWindMill,
+            new StageInfo("Hometown underground", "res://world/world_01/left/western_windmill/western_windmill.tscn")
+        },
+        {
+            Stage.WesternWindMillInterior,
+            new StageInfo("Hometown underground", "res://world/world_01/left/western_windmill/western_windmill_indoors.tscn")
         },
         {
             Stage.TestStage,
