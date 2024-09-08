@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://00h6e3gpwhxq"]
+[gd_scene load_steps=10 format=3 uid="uid://00h6e3gpwhxq"]
 
 [ext_resource type="PackedScene" uid="uid://dgg30r77v3f6u" path="res://entities/lights/light-in-chain/long_rope_segment.tscn" id="2_hkrav"]
 [ext_resource type="Texture2D" uid="uid://calxqdjgt2xux" path="res://assets/packs/Trap/Matxich2.png" id="2_yloe4"]
 [ext_resource type="Texture2D" uid="uid://bb1iw4qlkyam8" path="res://entities/lights/light-in-chain/atlas_16x.png" id="4_af5f6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a6id3"]
+friction = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_26sii"]
 radius = 2.0
@@ -30,6 +33,7 @@ polygon = PackedVector2Array(-3, -2, -3, 7, -4, -5, 0, -6, 4, -5, 3, 7, 3, -2)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 16384
 collision_mask = 16384
+physics_material_override = SubResource("PhysicsMaterial_a6id3")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 texture = ExtResource("2_yloe4")
