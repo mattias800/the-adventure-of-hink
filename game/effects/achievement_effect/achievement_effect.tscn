@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://d0qsuxg3506n5"]
+[gd_scene load_steps=41 format=3 uid="uid://d0qsuxg3506n5"]
 
 [ext_resource type="Script" path="res://effects/achievement_effect/AchievementEffect.cs" id="1_to6mp"]
+[ext_resource type="PackedScene" uid="uid://bp14fo0jypejt" path="res://effects/achievement_effect/more_sparkles.tscn" id="2_58dte"]
 [ext_resource type="Texture2D" uid="uid://dqekw8fcj4xc2" path="res://effects/achievement_effect/GlowingBall Blue 22frames RPG.png" id="2_fgjpe"]
 [ext_resource type="Texture2D" uid="uid://djviejidjbglt" path="res://effects/achievement_effect/00.png" id="3_avbhn"]
 [ext_resource type="AudioStream" uid="uid://dr8xwcsac4wgd" path="res://effects/achievement_effect/achievement_effect.wav" id="4_714p5"]
@@ -16,17 +17,6 @@ height = 128
 fill = 1
 fill_from = Vector2(0.502294, 0.502294)
 fill_to = Vector2(0.81422, 0.165138)
-
-[sub_resource type="Curve" id="Curve_8juhy"]
-_data = [Vector2(0, 0.975297), 0.0, 0.0, 0, 0, Vector2(0.620112, 0.638717), 0.0, 0.0, 0, 0, Vector2(0.988827, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_smcyl"]
-offsets = PackedFloat32Array(0, 0.986667)
-colors = PackedColorArray(1, 0.960784, 0.768627, 0.713726, 1, 1, 0, 0.223529)
-
-[sub_resource type="Gradient" id="Gradient_0aj4n"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2mpx"]
 atlas = ExtResource("2_fgjpe")
@@ -267,18 +257,7 @@ script = ExtResource("1_to6mp")
 [node name="WhiteBackground" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_5lhwv")
 
-[node name="MoreSparkles" type="CPUParticles2D" parent="."]
-amount = 16
-lifetime = 0.25
-emission_shape = 1
-emission_sphere_radius = 32.0
-gravity = Vector2(0, 0)
-scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_8juhy")
-color_ramp = SubResource("Gradient_smcyl")
-color_initial_ramp = SubResource("Gradient_0aj4n")
-hue_variation_min = -0.99
-hue_variation_max = 1.0
+[node name="MoreSparkles" parent="." instance=ExtResource("2_58dte")]
 
 [node name="BlueLight" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

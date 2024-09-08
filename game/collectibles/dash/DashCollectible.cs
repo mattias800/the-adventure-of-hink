@@ -31,6 +31,8 @@ public partial class DashCollectible : Node2D
         if (CollisionUtil.IsPlayer(body))
         {
             await _cutsceneManager.PlaySingleCharacterLine("Hink", "Holy shit!");
+            await _cutsceneManager.PlaySingleCharacterLine("Hink", "The dash orb! I found it!");
+            await _cutsceneManager.PlaySingleCharacterLine("Hink", "Maybe this thing can get me out of here.");
             _gameStateManager.GameState.PlayerState.PlayerSkillsState.CanDash.SetValue(true);
             QueueFree();
         }

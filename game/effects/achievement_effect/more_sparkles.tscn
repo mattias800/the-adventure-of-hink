@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp14fo0jypejt"]
+
+[sub_resource type="Curve" id="Curve_8juhy"]
+_data = [Vector2(0, 0.975297), 0.0, 0.0, 0, 0, Vector2(0.620112, 0.638717), 0.0, 0.0, 0, 0, Vector2(0.988827, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_smcyl"]
+offsets = PackedFloat32Array(0, 0.986667)
+colors = PackedColorArray(1, 0.960784, 0.768627, 0.713726, 1, 1, 0, 0.223529)
+
+[sub_resource type="Gradient" id="Gradient_0aj4n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1)
+
+[node name="MoreSparkles" type="CPUParticles2D"]
+amount = 16
+lifetime = 0.25
+emission_shape = 1
+emission_sphere_radius = 32.0
+gravity = Vector2(0, 0)
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_8juhy")
+color_ramp = SubResource("Gradient_smcyl")
+color_initial_ramp = SubResource("Gradient_0aj4n")
+hue_variation_min = -0.99
+hue_variation_max = 1.0
