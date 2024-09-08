@@ -27,7 +27,7 @@ public partial class JumpPad : Node2D
         {
             animated_sprite.Stop();
             animated_sprite.Play("blam");
-            animated_sprite.AnimationLooped += on_hit_animation_done;
+            animated_sprite.AnimationLooped += OnHitAnimationDone;
             // animated_sprite.Connect(AnimatedSprite2D.SignalName.AnimationLooped, Callable.From(on_hit_animation_done));
             _gameManager.Player.TriggerForce(new Vector2(0, -power));
             // active = false
@@ -36,9 +36,9 @@ public partial class JumpPad : Node2D
         }
     }
 
-    public void on_hit_animation_done()
+    public void OnHitAnimationDone()
     {
         animated_sprite.Play("idle");
-        animated_sprite.AnimationFinished -= on_hit_animation_done;
+        animated_sprite.AnimationFinished -= OnHitAnimationDone;
     }
 }
