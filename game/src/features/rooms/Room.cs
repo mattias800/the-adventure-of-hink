@@ -41,7 +41,7 @@ public partial class Room : Area2D
         }
     }
 
-    public void OnAreaEntered(Area2D area)
+    public new void OnAreaEntered(Area2D area)
     {
         if (Enabled && CollisionUtil.IsPlayer(area.GetParent()) && _gameManager.Player.Enabled)
         {
@@ -50,7 +50,7 @@ public partial class Room : Area2D
         }
     }
 
-    public void OnAreaExited(Area2D area)
+    public new void OnAreaExited(Area2D area)
     {
         if (Enabled && CollisionUtil.IsPlayer(area.GetParent()) && _gameManager.Player.Enabled)
         {

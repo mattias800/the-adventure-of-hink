@@ -91,11 +91,11 @@ public partial class Player : CharacterBody2D
 
         // _lowPassFilter = (AudioEffectLowPassFilter)AudioServer.GetBusEffect(AudioServer.GetBusIndex("Music"), 0);
 
-        PlatformController.PlayerTurned += OnPlayerTurned;
-        PlatformController.PlayerDashStarted += OnPlayerDashStarted;
-        PlatformController.PlayerDashStopped += OnPlayerDashStopped;
-        PlatformController.PlayerStartedMovingOnGround += OnPlayerStartedMovingOnGround;
-        PlatformController.PlayerStoppedMovingOnGround += OnPlayerStoppedMovingOnGround;
+        PlatformController.PlayerTurned += OnPlayerTurned2;
+        PlatformController.PlayerDashStarted += OnPlayerDashStarted2;
+        PlatformController.PlayerDashStopped += OnPlayerDashStopped2;
+        PlatformController.PlayerStartedMovingOnGround += OnPlayerStartedMovingOnGround2;
+        PlatformController.PlayerStoppedMovingOnGround += OnPlayerStoppedMovingOnGround2;
     }
 
     public override void _Process(double delta)
@@ -139,7 +139,7 @@ public partial class Player : CharacterBody2D
         _activeController = CharacterControllerType.Overworld;
     }
 
-    private void OnPlayerDashStarted(Vector2 direction)
+    private void OnPlayerDashStarted2(Vector2 direction)
     {
         GetNode<AnimatedSprite2D>("DashAnimation").Play();
         EmitSignal(SignalName.PlayerDashStarted, direction);
@@ -283,22 +283,22 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void OnPlayerTurned(string direction)
+    private void OnPlayerTurned2(string direction)
     {
         EmitSignal(SignalName.PlayerTurned, direction);
     }
 
-    private void OnPlayerDashStopped()
+    private void OnPlayerDashStopped2()
     {
         EmitSignal(SignalName.PlayerDashStopped);
     }
 
-    private void OnPlayerStartedMovingOnGround()
+    private void OnPlayerStartedMovingOnGround2()
     {
         EmitSignal(SignalName.PlayerStartedMovingOnGround);
     }
 
-    private void OnPlayerStoppedMovingOnGround()
+    private void OnPlayerStoppedMovingOnGround2()
     {
         EmitSignal(SignalName.PlayerStoppedMovingOnGround);
     }

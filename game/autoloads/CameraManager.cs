@@ -48,7 +48,7 @@ public partial class CameraManager : Node
         Camera = c;
     }
 
-    public Room? GetRoomContainingPlayer()
+    public Room GetRoomContainingPlayer()
     {
         var rooms = GetTree().GetNodesInGroup("rooms").OfType<Room>();
 

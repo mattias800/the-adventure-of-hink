@@ -9,7 +9,7 @@ public partial class BoomerangController : Node2D
     private Vector2 _positionOffsetFromPlayerFeet = new(0, -4);
     private Vector2 _directionWhenPlayerIdle = new(1, 0);
 
-    private Node2D? _boomerangInstance;
+    private Node2D _boomerangInstance;
 
     public override void _Ready()
     {

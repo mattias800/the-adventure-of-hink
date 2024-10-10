@@ -22,7 +22,7 @@ public partial class PortalArea : Area2D, IPortal
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
     }
 
-    public void OnBodyEntered(Node2D body)
+    public new void OnBodyEntered(Node2D body)
     {
         if (Enabled && CollisionUtil.IsPlayer(body))
         {
@@ -42,7 +42,7 @@ public partial class PortalArea : Area2D, IPortal
         return TargetPortalName;
     }
 
-    public string GetName()
+    public new string GetName()
     {
         return Name;
     }

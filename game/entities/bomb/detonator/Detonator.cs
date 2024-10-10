@@ -10,7 +10,7 @@ public partial class Detonator : Node2D
     public delegate void PlayerInteractedEventHandler();
 
     [Export] public bool DetonateOnInteract;
-    [Export] public Bomb? Bomb;
+    [Export] public Bomb Bomb;
 
     public enum DetonatorState
     {

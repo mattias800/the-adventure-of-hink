@@ -46,7 +46,7 @@ public partial class PortalDoor : Node2D, IPortal
         return TargetPortalName;
     }
 
-    public string GetName()
+    public new string GetName()
     {
         return Name;
     }

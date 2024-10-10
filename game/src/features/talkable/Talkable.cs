@@ -44,7 +44,7 @@ public partial class Talkable : Area2D
         _active = true;
     }
 
-    public void OnBodyEntered(Node2D body)
+    public new void OnBodyEntered(Node2D body)
     {
         if (CollisionUtil.IsPlayer(body))
         {
@@ -53,7 +53,7 @@ public partial class Talkable : Area2D
     }
 
 
-    public void OnBodyExited(Node2D body)
+    public new void OnBodyExited(Node2D body)
     {
         if (CollisionUtil.IsPlayer(body))
         {

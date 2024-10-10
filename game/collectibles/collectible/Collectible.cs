@@ -27,7 +27,7 @@ public partial class Collectible : Area2D
         }
     }
 
-    public void OnBodyEntered(Node2D body)
+    public new void OnBodyEntered(Node2D body)
     {
         var collected = _gameStateManager.GameState.CollectiblesState.HasBeenCollected(Instance);
         

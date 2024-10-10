@@ -11,7 +11,7 @@ public partial class Checkpoint : Area2D
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
     }
 
-    public void OnBodyEntered(Node2D body)
+    public new void OnBodyEntered(Node2D body)
     {
         if (CollisionUtil.IsPlayer(body))
         {
