@@ -11,7 +11,6 @@ public partial class Player : CharacterBody2D
 
     [Export] public OverworldController OverworldController;
 
-
     [Export] public PackedScene DustBoomScene;
 
     public bool Enabled;
@@ -50,6 +49,7 @@ public partial class Player : CharacterBody2D
     private RayCast2D _squishCastLeft;
     private RayCast2D _squishCastUp;
     private RayCast2D _squishCastDown;
+    private Area2D _blockingPortalDetector;
 
     private float _timeUntilDelayedRespawn;
     private bool _isRespawnTeleporting;
@@ -88,6 +88,7 @@ public partial class Player : CharacterBody2D
         _squishCastLeft = GetNode<RayCast2D>("SquishCastLeft");
         _squishCastUp = GetNode<RayCast2D>("SquishCastUp");
         _squishCastDown = GetNode<RayCast2D>("SquishCastDown");
+        _blockingPortalDetector = GetNode<Area2D>("BlockingPortalDetector");
 
         // _lowPassFilter = (AudioEffectLowPassFilter)AudioServer.GetBusEffect(AudioServer.GetBusIndex("Music"), 0);
 
@@ -162,7 +163,7 @@ public partial class Player : CharacterBody2D
 
         var duration = GlobalPosition.DistanceTo(spawnWorldPos) / 200;
         duration = Mathf.Clamp(duration, 1.0f, 2.0f);
-        
+
         var tween = CreateTween();
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetParallel();
@@ -301,5 +302,15 @@ public partial class Player : CharacterBody2D
     private void OnPlayerStoppedMovingOnGround2()
     {
         EmitSignal(SignalName.PlayerStoppedMovingOnGround);
+    }
+    
+    public void OnBodyEnteredBlockingPortalDetector(Node2D body)
+    {
+        if (body is BlockingPortal blockingPortal)
+        {
+            GD.Print("OnBodyEnteredBlockingPortalDetector");
+            GD.Print(blockingPortal.TargetPortalName);
+        }
+        
     }
 }

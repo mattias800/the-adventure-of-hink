@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj0cp8s01gead"]
+
+[ext_resource type="Script" path="res://src/features/portals/BlockingPortal.cs" id="1_raclg"]
+
+[node name="BlockingPortal" type="StaticBody2D" groups=["portals"]]
+collision_layer = 8193
+collision_mask = 0
+script = ExtResource("1_raclg")
