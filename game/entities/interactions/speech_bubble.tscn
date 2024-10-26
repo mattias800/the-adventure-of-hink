@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjlgsupeewgqf"]
+
+[ext_resource type="Texture2D" uid="uid://d6htqs1n6yqb" path="res://assets/Hinktiles.png" id="1_mcce7"]
+
+[node name="SpeechBubble" type="Sprite2D"]
+texture = ExtResource("1_mcce7")
+region_enabled = true
+region_rect = Rect2(16, 2.08165e-12, 16, 16)

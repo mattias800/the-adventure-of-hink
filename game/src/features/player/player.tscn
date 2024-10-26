@@ -398,3 +398,4 @@ shape = SubResource("CircleShape2D_lo8xt")
 [connection signal="PlayerStoppedMovingOnGround" from="." to="FootDust" method="_on_player_player_stopped_moving_on_ground"]
 [connection signal="PlayerTurned" from="." to="BoomerangController" method="OnPlayerPlayerTurned"]
 [connection signal="body_entered" from="BlockingPortalDetector" to="." method="OnBodyEnteredBlockingPortalDetector"]
+[connection signal="body_exited" from="BlockingPortalDetector" to="." method="OnBodyExitedBlockingPortalDetector"]

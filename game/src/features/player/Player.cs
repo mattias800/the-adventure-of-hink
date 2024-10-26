@@ -303,14 +303,20 @@ public partial class Player : CharacterBody2D
     {
         EmitSignal(SignalName.PlayerStoppedMovingOnGround);
     }
-    
+
     public void OnBodyEnteredBlockingPortalDetector(Node2D body)
     {
         if (body is BlockingPortal blockingPortal)
         {
-            GD.Print("OnBodyEnteredBlockingPortalDetector");
-            GD.Print(blockingPortal.TargetPortalName);
+            blockingPortal.OnPlayerStartTouching();
         }
-        
+    }
+
+    public void OnBodyExitedBlockingPortalDetector(Node2D body)
+    {
+        if (body is BlockingPortal blockingPortal)
+        {
+            blockingPortal.OnPlayerStopTouching();
+        }
     }
 }

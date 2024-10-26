@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj0cp8s01gead"]
+[gd_scene load_steps=3 format=3 uid="uid://bj0cp8s01gead"]
 
 [ext_resource type="Script" path="res://src/features/portals/BlockingPortal.cs" id="1_raclg"]
+[ext_resource type="PackedScene" uid="uid://c3jdq1vemt4ex" path="res://entities/interactions/context_bubble.tscn" id="2_fxrw6"]
 
 [node name="BlockingPortal" type="StaticBody2D" groups=["portals"]]
 collision_layer = 8193
 collision_mask = 0
 script = ExtResource("1_raclg")
+
+[node name="ContextBubble" parent="." instance=ExtResource("2_fxrw6")]
