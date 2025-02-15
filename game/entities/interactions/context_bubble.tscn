@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3jdq1vemt4ex"]
 
 [ext_resource type="Texture2D" uid="uid://d6htqs1n6yqb" path="res://assets/Hinktiles.png" id="1_1noln"]
-[ext_resource type="Script" path="res://entities/interactions/ContextBubble.cs" id="1_syfmd"]
+[ext_resource type="Script" uid="uid://b87n08f2x1bqd" path="res://entities/interactions/ContextBubble.cs" id="1_syfmd"]
 [ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="3_8q62r"]
 
 [node name="ContextBubble" type="Node2D"]

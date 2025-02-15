@@ -1,7 +1,6 @@
 using Godot;
 using Theadventureofhink.autoloads;
 using Theadventureofhink.entities.portals;
-using Theadventureofhink.utils;
 using Theadventureofhink.world;
 
 public partial class BlockingPortal : StaticBody2D, IPortal
@@ -22,13 +21,11 @@ public partial class BlockingPortal : StaticBody2D, IPortal
         _gameManager = GetNode<GameManager>(Singletons.GameManager);
         _contextBubble = GetNode<ContextBubble>("ContextBubble");
         _contextBubble.Scale = Vector2.Zero;
+        _contextBubble.SetLabel(Stages.GetStateInfo(NextStage).MapLabel);
     }
 
     public override void _Process(double delta)
     {
-        _contextBubble.GlobalPosition =
-            _gameManager.Player.GlobalPosition + new Vector2(0, -24);
-
         var targetSize = _playerIsTouching ? Vector2.One : Vector2.Zero;
 
         _contextBubble.Scale = _contextBubble.Scale.Lerp(targetSize, (float)delta * 20);

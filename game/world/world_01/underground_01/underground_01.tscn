@@ -1,6 +1,6 @@
 [gd_scene load_steps=56 format=4 uid="uid://dfa0felbn0vdp"]
 
-[ext_resource type="Script" path="res://world/world_01/underground_01/Underground01.cs" id="1_j25b6"]
+[ext_resource type="Script" uid="uid://cvgmw5uxsf3bg" path="res://world/world_01/underground_01/Underground01.cs" id="1_j25b6"]
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_t3kq4"]
 [ext_resource type="TileSet" uid="uid://1vo24aisdrie" path="res://world/world_01/underground_01/underground_01_bg.tres" id="2_8q0i2"]
 [ext_resource type="PackedScene" uid="uid://574kkfimrgct" path="res://src/features/water/water.tscn" id="2_b6dop"]

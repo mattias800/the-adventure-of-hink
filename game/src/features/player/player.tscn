@@ -1,16 +1,16 @@
 [gd_scene load_steps=54 format=3 uid="uid://drk68qcgqocdt"]
 
-[ext_resource type="Script" path="res://src/features/player/Player.cs" id="1_8tupy"]
+[ext_resource type="Script" uid="uid://cmbph3at2er8i" path="res://src/features/player/Player.cs" id="1_8tupy"]
 [ext_resource type="Texture2D" uid="uid://cxcjsodnr2bd4" path="res://assets/8x8 Plat-Char32-sheet.png" id="1_tii7m"]
 [ext_resource type="PackedScene" uid="uid://bq22jxj2ct62h" path="res://src/features/player/player_death_teleportation.tscn" id="2_eobix"]
 [ext_resource type="PackedScene" uid="uid://rfgg8gl078uo" path="res://src/features/player/dust_boom.tscn" id="2_ykok0"]
 [ext_resource type="PackedScene" uid="uid://cf2adb7i38jj6" path="res://src/features/boomerang/boomerang.tscn" id="3_7yl8v"]
-[ext_resource type="Script" path="res://src/features/player/platform/PlatformController.cs" id="3_dhmwe"]
-[ext_resource type="Script" path="res://src/features/player/overworld/OverworldController.cs" id="4_1nwg4"]
+[ext_resource type="Script" uid="uid://3ijio60b6oqq" path="res://src/features/player/platform/PlatformController.cs" id="3_dhmwe"]
+[ext_resource type="Script" uid="uid://5s7eyf23op1d" path="res://src/features/player/overworld/OverworldController.cs" id="4_1nwg4"]
 [ext_resource type="AudioStream" uid="uid://cu6ta5clwtw8a" path="res://assets/audio/sounds/player_jump.wav" id="4_hmqpj"]
-[ext_resource type="Script" path="res://src/features/player/PlayerDeathTeleportation.cs" id="5_afbpt"]
+[ext_resource type="Script" uid="uid://n3vua24tv035" path="res://src/features/player/PlayerDeathTeleportation.cs" id="5_afbpt"]
 [ext_resource type="AudioStream" uid="uid://buo3qly4p2sgn" path="res://assets/audio/sounds/player_explode.ogg" id="5_clhrg"]
-[ext_resource type="Script" path="res://src/features/player/platform/WallClimbableProvider.cs" id="5_of78u"]
+[ext_resource type="Script" uid="uid://dr6t2xbd56r8d" path="res://src/features/player/platform/WallClimbableProvider.cs" id="5_of78u"]
 [ext_resource type="AudioStream" uid="uid://b8i4pernnhpqb" path="res://assets/audio/sounds/player_death_appear.ogg" id="6_mig32"]
 [ext_resource type="AudioStream" uid="uid://bntyvep6iqb4" path="res://assets/audio/sounds/player_land.wav" id="7_1sdbw"]
 [ext_resource type="AudioStream" uid="uid://dtvw6webtqw5y" path="res://assets/audio/sounds/player_dash_2.wav" id="8_gje3e"]
@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://dq452v6yxstvd" path="res://assets/audio/sounds/player_jump_from_wall.wav" id="9_mfmyp"]
 [ext_resource type="AudioStream" uid="uid://c2w7sa2nxnh0e" path="res://assets/audio/sounds/player_jump_from_air.wav" id="9_xp7d3"]
 [ext_resource type="Texture2D" uid="uid://cvokx6lcwid3x" path="res://assets/player-death/SpriteSheetWhite.png" id="11_gv2e8"]
-[ext_resource type="Script" path="res://src/features/player/foot_dust.gd" id="13_f7fw7"]
+[ext_resource type="Script" uid="uid://dgpqgkwchhxty" path="res://src/features/player/foot_dust.gd" id="13_f7fw7"]
 [ext_resource type="PackedScene" uid="uid://c7vvtoj345h67" path="res://src/features/boomerang/boomerang_controller.tscn" id="15_c2qsn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w7pu"]
@@ -216,8 +216,7 @@ point_count = 2
 curve_x = SubResource("Curve_ct773")
 
 [sub_resource type="Curve" id="Curve_naoo6"]
-min_value = -200.0
-max_value = 200.0
+_limits = [-200.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -225,7 +224,7 @@ point_count = 2
 curve = SubResource("Curve_naoo6")
 
 [sub_resource type="Curve" id="Curve_xt4dm"]
-max_value = 0.1
+_limits = [0.0, 0.1, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.726667, 0.0582418), 0.0, 0.0, 0, 0, Vector2(0.993333, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -339,8 +338,8 @@ frame_progress = 1.0
 [node name="FootDust" type="GPUParticles2D" parent="."]
 position = Vector2(2.08165e-12, 4)
 amount_ratio = 0.4667
-lifetime = 0.5
 texture = SubResource("GradientTexture2D_6k3tp")
+lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_35di3")
 script = ExtResource("13_f7fw7")
 

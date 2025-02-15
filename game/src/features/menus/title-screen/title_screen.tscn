@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b0uar0b3qsdvd"]
 
 [ext_resource type="PackedScene" uid="uid://bidfps3q756ep" path="res://src/features/camera/camera.tscn" id="1_km11r"]
-[ext_resource type="Script" path="res://src/features/menus/title-screen/TitleScreen.cs" id="1_osef1"]
+[ext_resource type="Script" uid="uid://cuvf12uve3y3g" path="res://src/features/menus/title-screen/TitleScreen.cs" id="1_osef1"]
 [ext_resource type="PackedScene" uid="uid://cei31y2nm4o8n" path="res://backgrounds/2d/painted_forest.tscn" id="2_83f73"]
 [ext_resource type="PackedScene" uid="uid://doaxlulkg3s0x" path="res://backgrounds/2d/title_screen/title_screen_background.tscn" id="3_1rjgt"]
 [ext_resource type="FontFile" uid="uid://dqfpq3w21kvjp" path="res://assets/fonts/PeaberryBase.ttf" id="4_0fala"]
