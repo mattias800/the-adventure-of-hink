@@ -1,0 +1,16 @@
+<Project Sdk="Godot.NET.Sdk/4.4.0-dev.3">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net8.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>Theadventureofhink</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="world\world_01\level_01\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ideas.txt" />
+    <Content Include="world\title_screen.tscn" />
+  </ItemGroup>
+</Project>
